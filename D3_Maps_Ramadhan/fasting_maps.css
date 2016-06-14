@@ -1,0 +1,25 @@
+svg {
+  background: #404040;
+}
+
+.axis path,
+.axis line {
+                fill: none;
+                stroke: lightgray;
+                stroke-width:1px;
+                stroke-opacity: 0.1;
+                shape-rendering: crispEdges;
+            }
+
+path {
+  stroke: black;
+  stroke-width: 0.1px;
+  fill: grey;
+  fill-opacity:0.9;
+}
+
+text {
+                font-family: "Roboto Condensed", Helvetica, Arial, sans-serif;
+                fill: white;
+		pointer-events: none;
+            }
