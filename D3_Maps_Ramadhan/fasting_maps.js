@@ -52,9 +52,21 @@ var projection = d3.geo.mercator()
 var svg = d3.select('.post-content').append('svg')
     .attr('width', width)
     .attr('height', height);
+    
+svg.append("text") //dummytext for font-sizing
+        .attr("y","-20")
+	.text("Osaka")
+        .style("font-size","13px")
+	.each(function(){
+	      textheight = d3.select(this).node().getBoundingClientRect().height;
+	});
         
 var barHeight = (0.9*height-3*padding)/dataset.length-padding/8;
+<<<<<<< HEAD
 var fontSize = '0.9em';
+=======
+var fontSize = barHeight/textheight*14;
+>>>>>>> parent of 494c3c5... change fontSize
 
 var path = d3.geo.path()
     .projection(projection);
