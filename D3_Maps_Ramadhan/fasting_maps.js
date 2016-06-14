@@ -88,7 +88,7 @@ svgt.append("text")
             .attr("alignment-baseline","bottom")
             .text("Durasi Puasa (jam)");
         
-svga.selectAll("text").attr("font-size", fontSize);
+svga.selectAll("text").attr("font-size", 0.9*fontSize);
 
 // load and display the World
 d3.json("http://damarberlari.github.io/D3_Maps_Ramadhan/world-110m2.json", function(error, topology) {
@@ -207,7 +207,7 @@ var mouseover = function(d,m) {
               .attr("x",padding*1.2+barScale(d.duration))
               .attr("y",m*(barHeight+padding/8)+padding+barHeight/2)
               .attr("transform","translate("+0.55*width+" "+0.05*height+")")
-              .attr("font-size", fontSize)
+              .attr("font-size", 0.9*fontSize)
               .attr("opacity", 1)
               .attr("text-anchor","start")
               .attr("alignment-baseline","central")
