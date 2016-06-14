@@ -91,7 +91,7 @@ svgt.append("text")
 svga.selectAll("text").attr("font-size", 0.9*fontSize);
 
 // load and display the World
-d3.json("world-110m2.json", function(error, topology) {
+d3.json("http://damarberlari.github.io/D3_Maps_Ramadhan/world-110m2.json", function(error, topology) {
     svgm.selectAll("path")
       .data(topojson.object(topology, topology.objects.countries)
           .geometries)
