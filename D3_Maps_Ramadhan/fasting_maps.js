@@ -26,7 +26,7 @@ var dataset =
 {country: "Australia", city: "Hobart", start: 5.93333333333333, end: 16.7333333333333, duration: 10.8, lat: -42.88, lon: 147.33}
 ]
 
-var width = 710*1.2,
+var width = 1.12*d3.select(".post-content").node().getBoundingClientRect().width,
     height = 720/1280*width
     padding = width/1280*15;
 
