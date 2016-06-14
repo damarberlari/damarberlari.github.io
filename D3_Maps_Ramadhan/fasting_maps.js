@@ -62,11 +62,7 @@ svg.append("text") //dummytext for font-sizing
 	});
         
 var barHeight = (0.9*height-3*padding)/dataset.length-padding/8;
-<<<<<<< HEAD
-var fontSize = '0.9em';
-=======
 var fontSize = barHeight/textheight*14;
->>>>>>> parent of 494c3c5... change fontSize
 
 var path = d3.geo.path()
     .projection(projection);
