@@ -132,6 +132,7 @@ svgc.selectAll("circle.dotbase")
            .attr("id",function(d,m){return "dot_"+m})
            .style("opacity",0.7)
            .attr('fill', function(d){return barColor[Math.round(d.duration)-10]})
+           .attr('cursor','pointer')
            .on("mouseover",function(d,m){
             mouseover(d,m);
             })
@@ -173,6 +174,7 @@ var bar = svgb.selectAll('.bar')
             .attr('fill', function(d){return barColor[Math.round(d.duration)-10]})
             .attr('opacity',0.7)
             .attr("transform","translate("+0.55*width+" "+0.05*height+")")
+            .attr('cursor','pointer')
             .on("mouseover",function(d,m){
               mouseover(d,m);
               })
