@@ -268,5 +268,6 @@ svgm
 svgc.selectAll("circle")
 .transition()
 .duration(500)
+.attr("r",5/k)
 .attr("transform", "translate(" + 0.55*width / 2 + "," + height / 2 + ")scale("+k+")translate(" + -x + "," + -y + ")");
 }
