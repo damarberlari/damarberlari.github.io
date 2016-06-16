@@ -27,8 +27,9 @@ var dataset =
 ]
 
 var width = 1.12*d3.select(".post-content").node().getBoundingClientRect().width,
-    height = 720/1280*width
-    padding = width/1280*15;
+    height = 720/1280*width,
+    padding = width/1280*15,
+    centered;
 
 var barColor = ["#FFC107", "#FEB70A", "#FDAD0E", "#FCA311", "#FB9A15", "#FA9019", "#F9861C", "#F97D20", "#F87323", "#F76927", "#F6602B", "#F5562E", "#F44C32", "#F44336"];
 var barScale = d3.scale.linear()
@@ -97,7 +98,8 @@ d3.json("http://damarberlari.github.io/D3_Maps_Ramadhan/world-110m2.json", funct
           .geometries)
     .enter()
       .append("path")
-      .attr("d", path) 
+      .attr("d", path)
+      .on("click",function(){clicked()})
 });
 
 svgc.selectAll("circle.dotbase")
@@ -138,6 +140,9 @@ svgc.selectAll("circle.dotbase")
             })
            .on("mouseout",function(d,m){
             mouseout(d,m);
+            })
+           .on("click", function(d){
+            clicked(d);
             });
 
 svgr
@@ -180,7 +185,10 @@ var bar = svgb.selectAll('.bar')
               })
             .on("mouseout",function(d,m){
               mouseout(d,m);
-              });
+              })
+            .on("click", function(d){
+            clicked(d);
+            });
 
 var city = svgt.selectAll('.city')
             .data(dataset)
@@ -189,11 +197,10 @@ var city = svgt.selectAll('.city')
             .attr('id',function(d,m){return 'city_'+m})
             .attr("x",function(d){return padding*1.5})
             .attr("y",function(d,m){return m*(barHeight+padding/8)+padding+barHeight/2})
-            .attr("transform","translate("+0.55*width+" "+0.05*height+")")
+            .attr("transform","translate("+0.55*width+" "+(0.05*height+barHeight/4)+")")
             .attr("font-size", fontSize)
             .attr("opacity", 0.7)
             .attr("text-anchor","start")
-            .attr("alignment-baseline","central")
             .text(function(d){return d.city});
 
 var mouseover = function(d,m) {
@@ -208,11 +215,10 @@ var mouseover = function(d,m) {
               .attr("id","duration_"+m)
               .attr("x",padding*1.2+barScale(d.duration))
               .attr("y",m*(barHeight+padding/8)+padding+barHeight/2)
-              .attr("transform","translate("+0.55*width+" "+0.05*height+")")
+              .attr("transform","translate("+0.55*width+" "+(0.05*height+barHeight/4)+")")
               .attr("font-size", 0.9*fontSize)
               .attr("opacity", 1)
               .attr("text-anchor","start")
-              .attr("alignment-baseline","central")
               .text(Math.round(d.duration*100)/100);
               
            //   svgt.append("text")
@@ -239,4 +245,28 @@ var mouseout = function(d,m) {
               .attr("stroke-width",0);
               svgt.select("#duration_"+m).remove();
               //svgt.select("#country_"+m).remove();
+}
+
+var clicked = function(d) {
+if (d && centered !== d) {
+    x = projection([d.lon, d.lat])[0];
+    y = projection([d.lon, d.lat])[1];
+    k = 10;
+    centered = d;
+  } else {
+    x = 0.55*width / 2 ;
+    y = height / 2;
+    k = 1;
+    centered = null;
+  }
+  
+svgm
+.transition()
+.duration(500)
+.attr("transform", "translate(" + 0.55*width / 2 + "," + height / 2 + ")scale("+k+")translate(" + -x + "," + -y + ")")
+
+svgc.selectAll("circle")
+.transition()
+.duration(500)
+.attr("transform", "translate(" + 0.55*width / 2 + "," + height / 2 + ")scale("+k+")translate(" + -x + "," + -y + ")");
 }
