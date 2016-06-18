@@ -26,8 +26,25 @@ var dataset =
 {country: "Australia", city: "Hobart", start: "05:56", end: "16:44", duration: 10.8, lat: -42.88, lon: 147.33}
 ]
 
-var width = 1.12*d3.select(".post-content").node().getBoundingClientRect().width,
-    height = 720/1280*width,
+var topology;
+// load and display the World
+d3.json("http://damarberlari.github.io/D3_Maps_Ramadhan/world-110m2.json", function(error, map) {
+    topology=map;
+    draw();
+});
+
+window.onresize = function(){
+		var newW = 1.12*d3.select(".post-content").node().getBoundingClientRect().width;
+		console.log(newW);
+		if(newW!=width){
+			svg.remove();
+			draw();
+		}
+	}
+
+function draw(){
+width = 1.12*d3.select(".post-content").node().getBoundingClientRect().width
+var    height = 720/1280*width,
     padding = width/1280*15,
     centered,
     scale = 1;
@@ -51,7 +68,7 @@ var projection = d3.geo.mercator()
     .translate([width / 2, 1.15*height / 2])
     .precision(.1);   
 
-var svg = d3.select('.post-content').append('svg')
+svg = d3.select('.post-content').append('svg')
     .attr('width', width)
     .attr('height', height)
     
@@ -76,6 +93,13 @@ var svgb = svg.append('g').attr('id','bars');
 var svga = svg.append('g').attr('id','axis');
 var svgt = svg.append('g').attr('id','text');
 
+svgm.selectAll("path")
+      .data(topojson.object(topology, topology.objects.countries)
+          .geometries)
+    .enter()
+      .append("path")
+      .attr("d", path)
+
 svga.attr("class", "axis")
 	.attr("transform","translate("+(0.55*width+padding)+" "+(0.95*height-2*padding)+")")
 	.call(xAxis);
@@ -91,16 +115,6 @@ svgt.append("text")
             .text("Durasi Puasa (jam)");
         
 svga.selectAll("text").attr("font-size", 0.9*fontSize);
-
-// load and display the World
-d3.json("http://damarberlari.github.io/D3_Maps_Ramadhan/world-110m2.json", function(error, topology) {
-    svgm.selectAll("path")
-      .data(topojson.object(topology, topology.objects.countries)
-          .geometries)
-    .enter()
-      .append("path")
-      .attr("d", path)
-});
 
 svgc.selectAll("circle.dotbase")
            .data(dataset)
@@ -238,4 +252,5 @@ var mouseout = function(d,m) {
               .attr("stroke-width",0);
               svgt.select("#duration_"+m).remove();
               //svgt.select("#country_"+m).remove();
-}
+};
+};
