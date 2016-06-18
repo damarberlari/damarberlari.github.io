@@ -64,7 +64,7 @@ svg.append("text") //dummytext for font-sizing
 	});
         
 var barHeight = (0.9*height-3*padding)/dataset.length-padding/8;
-var fontSize = 12;
+var fontSize = barHeight/textheight*13;
 
 var path = d3.geo.path()
     .projection(projection);
@@ -85,6 +85,9 @@ svgd
 .attr("height",height)
 .attr("fill-opacity",0)
 .on("click",function(){clicked()})
+.on("touchend", function(){
+            clicked();
+            })
 
 svga.attr("class", "axis")
 	.attr("transform","translate("+(0.55*width+padding)+" "+(0.95*height-2*padding)+")")
@@ -111,6 +114,9 @@ d3.json("http://damarberlari.github.io/D3_Maps_Ramadhan/world-110m2.json", funct
       .append("path")
       .attr("d", path)
       .on("click",function(){clicked()})
+      .on("touchend", function(){
+            clicked();
+            })
 });
 
 svgc.selectAll("circle.dotbase")
@@ -157,6 +163,9 @@ svgc.selectAll("circle.dotbase")
             })
            .on("click", function(d,m){
             clicked(d,m);
+            })
+           .on("touchend", function(d,m){
+            clicked(d,m);
             });
 
 svgr
@@ -201,6 +210,9 @@ var bar = svgb.selectAll('.bar')
               mouseout(d,m);
               })
             .on("click", function(d,m){
+            clicked(d,m);
+            })
+            .on("touchend", function(d,m){
             clicked(d,m);
             });
 
