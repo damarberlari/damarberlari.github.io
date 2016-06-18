@@ -47,7 +47,8 @@ width = 1.12*d3.select(".post-content").node().getBoundingClientRect().width
 var    height = 720/1280*width,
     padding = width/1280*15,
     centered,
-    scale = 1;
+    scale = 1
+    r=8/1280*width;
 
 var barColor = ["#FFC107", "#FEB70A", "#FDAD0E", "#FCA311", "#FB9A15", "#FA9019", "#F9861C", "#F97D20", "#F87323", "#F76927", "#F6602B", "#F5562E", "#F44C32", "#F44336"];
 var barScale = d3.scale.linear()
@@ -145,8 +146,8 @@ svgc.selectAll("circle.dotbase")
            })
            .attr("r", function(){
             if(scale==1)
-            return 5
-            else return 10/scale})
+            return r
+            else return 2*r/scale})
            .attr("class","dot")
            .attr("id",function(d,m){return "dot_"+m})
            .style("opacity",0.7)
@@ -218,14 +219,14 @@ var mouseover = function(d,m) {
               svgb.select("#bar_"+m).attr("opacity", 1);
               svgc.select("#dot_"+m).attr("r", function(){
             if(scale==1)
-            return 7
-            else return 14/scale}).style("opacity",1);
+            return 1.4*r
+            else return 2.8*r/scale}).style("opacity",1);
               svgt.select("#city_"+m).attr("opacity", 1);
               svgc.select("#dotbase_"+m)
               .attr("r", function(){
             if(scale==1)
-            return 15
-            else return 30/scale})
+            return 3*r
+            else return 6*r/scale})
               .attr("stroke-width",1/scale);
               
               svgt.append("text")
@@ -244,8 +245,8 @@ var mouseout = function(d,m) {
               svgb.select("#bar_"+m).attr("opacity", 0.7)
               svgc.select("#dot_"+m).attr("r", function(){
             if(scale==1)
-            return 5
-            else return 10/scale}).style("opacity",0.7);
+            return r
+            else return 2*r/scale}).style("opacity",0.7);
               svgt.select("#city_"+m).attr("opacity", 0.7)
               svgc.select("#dotbase_"+m)
               .attr("r",0)
