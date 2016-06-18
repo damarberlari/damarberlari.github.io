@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+                <meta charset="utf-8">
+                <title>MCU</title>
+                <script src='http://d3js.org/d3.v3.min.js'></script>
+                <link href='https://fonts.googleapis.com/css?family=Roboto:400' rel='stylesheet' type='text/css'>
+                <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:300' rel='stylesheet' type='text/css'>
+        </head>
+        <body>
+<style>
+            .post-content{
+                width:650px;
+            }
+
+            svg{
+                opacity: 0.9;
+                font-family: "Roboto", Helvetica, Arial, sans-serif;
+                background: #404040;
+		margin-left: 1%;
+            }
+
+
+</style>
+<div class="post-content"></div>
+
+<script type="text/javascript">
+        
+	init();
+	
+	window.onresize = function(){
+		var newW = 1.12*d3.select(".post-content").node().getBoundingClientRect().width;
+		if(newW!=w){
+			svg.remove();
+			init();
+		}
+	}
+        
+	function init() {
+	//set initial variable
+	w = 1.12*d3.select(".post-content").node().getBoundingClientRect().width;
+	h = 0.6*w;
+        
+        var c10 = ["#4CAF50", "#65B74D", "#7FC04A", "#98C847", "#B2D144", "#CBD941", "#E5E23E", "#FFEB3B", "#FDCF3A", "#FBB339", "#F99738", "#F77B37", "#F55F36", "#F44336"];
+        dataset = [3,7]
+        
+        arc = d3.svg.arc()
+        .innerRadius(function(d,m){return (m+3)*30})
+        .outerRadius(function(d,m){return (m+3)*30+27})
+        .startAngle(0)
+        .endAngle(Math.PI*2);
+        
+        arc2 = d3.svg.arc()
+        .innerRadius(function(d,m){return (m+3)*30})
+        .outerRadius(function(d,m){return (m+3)*30+27})
+        .startAngle(0)
+        .endAngle(function(d) {
+          return (d)*Math.PI/5;
+          });
+        
+	//create svg
+	svg = d3.select(".post-content")
+	.append("svg")
+	.attr("width", w)
+	.attr("height", h);
+	
+	svgc=svg.append("g").attr("transform", "translate(" + w / 3 + "," + h / 2 + ")");//holder for circle
+        svgcs=svg.append("g").attr("transform", "translate(" + w / 3 + "," + h / 2 + ")");//holder for circle
+        
+
+	    barc = svgc.selectAll(".barc")
+                .data(dataset)
+                .enter()
+		.append("path")
+                .attr("class","barc")
+		.attr("fill", "dimgray")
+		.attr("fill-opacity",0.4)
+                .attr("d",function(d,m){return arc(d,m)});
+                
+            farc = svgcs.selectAll(".farc")
+		.data(dataset)
+                .enter()
+                .append("path")
+                .attr("class","farc")
+		.attr("fill", function(d,m){return c10[d+3]})
+		.attr("fill-opacity",0.8)
+                .attr("d",arc2)
+                .on("mouseover", function(d){
+                  d3.select(this)
+                  .attr("fill-opacity", 1);
+                })
+                .on("mouseout", function(d){
+                  d3.select(this)
+                  .attr("fill-opacity", 0.8);
+                });
+                
+        num=0;
+	draw();//draw the arc!
+        //function(d) {return Math.PI/5*(d+1)}
+	};
+	
+	function draw(){
+            farc
+            .transition()
+            .duration(1000)
+            .attrTween("d", function(d,m) {
+            var interpolate = d3.interpolate(0, d);
+            var interpolate2 = d3.interpolate(num, num+1);
+            return function(t) {
+              tmp=interpolate(t);
+              return arc2(tmp,m)
+            }
+            })
+	};
+	
+	
+</script>
+        </body>
+</html>
