@@ -23,4 +23,5 @@ text {
                 font-family: "Roboto Condensed", Helvetica, Arial, sans-serif;
                 fill: white;
 		pointer-events: none;
+		text-size-adjust: none;
             }
