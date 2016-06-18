@@ -92,6 +92,7 @@ var svgc = svg.append('g').attr('id','dots');
 var svgr = svg.append('g').attr('id','rect');
 var svgb = svg.append('g').attr('id','bars');
 var svga = svg.append('g').attr('id','axis');
+var svgl = svg.append('g').attr('id','line');
 var svgt = svg.append('g').attr('id','text');
 
 svgm.selectAll("path")
@@ -170,18 +171,6 @@ svgr
 .attr("fill-opacity",0.2)
 .attr("transform","translate("+0.55*width+" "+0.05*height+")")
 
-//var barBase = svgb.selectAll('.barbase')
-//            .data(dataset)
-//            .enter().append('rect')
-//            .attr('class','barbase')
-//            .attr('x', padding)
-//            .attr('y', function(d,m){return m*(barHeight+padding/8)+padding})
-//            .attr('width', function(d){return barScale(24)+'px'})
-//            .attr('height', barHeight+'px')
-//            .attr('fill','dimgray')
-//            .style('opacity',0.2)
-//            .attr("transform","translate("+0.55*width+" "+0.25*height+")")
-
 var bar = svgb.selectAll('.bar')
             .data(dataset)
             .enter().append('rect')
@@ -229,6 +218,27 @@ var mouseover = function(d,m) {
             else return 6*r/scale})
               .attr("stroke-width",1/scale);
               
+              svgl.append("line")
+              .attr("class","line")
+              .attr("x1",function() {
+                  if (d.lon>=135.5) {
+                        return projection([d.lon, d.lat])[0] - 1.41*1.5*r
+                  }else {
+                        return projection([d.lon, d.lat])[0] + 1.41*1.5*r
+                  }
+              })
+              .attr("y1",projection([d.lon, d.lat])[1] - 1.41*1.5*r)
+              .attr("x2",function() {
+                  if (d.lon>=135.5) {
+                        return projection([d.lon, d.lat])[0] - 2.8*padding
+                  }else {
+                        return projection([d.lon, d.lat])[0] + 2.8*padding
+                  }
+              })
+              .attr("y2",projection([d.lon, d.lat])[1] - 2.8*padding)
+              .attr('stroke', function(){return barColor[Math.round(d.duration)-10]})
+              .attr('stroke-width',1)
+              
               svgt.append("text")
               .attr("id","duration_"+m)
               .attr("x",padding*1.2+barScale(d.duration))
@@ -238,6 +248,50 @@ var mouseover = function(d,m) {
               .attr("opacity", 1)
               .attr("text-anchor","start")
               .text(Math.round(d.duration*100)/100);
+              
+              var textDetail = svgt.append("text")
+              .attr("id","country_"+m)
+              .attr("x", function() {
+                  if (d.lon>=135.5) {
+                        return projection([d.lon, d.lat])[0] - 3*padding
+                  }else {
+                        return projection([d.lon, d.lat])[0] + 3*padding
+                  }
+              })
+              .attr("y", projection([d.lon, d.lat])[1] - 4*padding)
+              .attr("font-size", fontSize)
+              .attr("opacity", 1)
+              .attr("text-anchor",function() {
+                  if (d.lon>=135.5) {
+                        return "end"
+                  }else {
+                        return "start"
+                  }
+              });
+              
+              textDetail
+              .append("tspan")
+              .attr("x", function() {
+                  if (d.lon>=135.5) {
+                        return projection([d.lon, d.lat])[0] - 3*padding
+                  }else {
+                        return projection([d.lon, d.lat])[0] + 3*padding
+                  }
+              })
+	      .text(d.city+", "+d.country.toUpperCase());
+              
+              textDetail
+              .append("tspan")
+              .attr("x", function() {
+                  if (d.lon>=135.5) {
+                        return projection([d.lon, d.lat])[0] - 3*padding
+                  }else {
+                        return projection([d.lon, d.lat])[0] + 3*padding
+                  }
+              })
+	      .attr("dy","1.1em")
+	      .text(d.start+" - "+d.end);
+              
             
 };
 
@@ -252,6 +306,7 @@ var mouseout = function(d,m) {
               .attr("r",0)
               .attr("stroke-width",0);
               svgt.select("#duration_"+m).remove();
-              //svgt.select("#country_"+m).remove();
+              svgt.select("#country_"+m).remove();
+              svgl.selectAll(".line").remove();
 };
 };
