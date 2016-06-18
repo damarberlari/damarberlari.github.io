@@ -68,23 +68,13 @@ var fontSize = barHeight/textheight*13;
 
 var path = d3.geo.path()
     .projection(projection);
-
-var svgd = svg.append('g').attr('id','dummy');   
+ 
 var svgm = svg.append('g').attr('id','maps');
 var svgc = svg.append('g').attr('id','dots');
 var svgr = svg.append('g').attr('id','rect');
 var svgb = svg.append('g').attr('id','bars');
 var svga = svg.append('g').attr('id','axis');
 var svgt = svg.append('g').attr('id','text');
-
-svgd
-.append("rect")
-.attr("x", 0)
-.attr("y", 0)
-.attr("width", width)
-.attr("height",height)
-.attr("fill-opacity",0)
-.on("click",function(){clicked()});
 
 svga.attr("class", "axis")
 	.attr("transform","translate("+(0.55*width+padding)+" "+(0.95*height-2*padding)+")")
@@ -110,7 +100,6 @@ d3.json("http://damarberlari.github.io/D3_Maps_Ramadhan/world-110m2.json", funct
     .enter()
       .append("path")
       .attr("d", path)
-      .on("click",function(){clicked()})
 });
 
 svgc.selectAll("circle.dotbase")
