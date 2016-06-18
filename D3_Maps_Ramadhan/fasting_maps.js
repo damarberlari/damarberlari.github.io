@@ -199,6 +199,7 @@ var city = svgt.selectAll('.city')
             .attr("font-size", fontSize)
             .attr("opacity", 0.7)
             .attr("text-anchor","start")
+            .attr("max-height",1000000)
             .text(function(d){return d.city});
 
 var mouseover = function(d,m) {
