@@ -221,7 +221,7 @@ var mouseover = function(d,m) {
               svgl.append("line")
               .attr("class","line")
               .attr("x1",function() {
-                  if (d.lon>=135.5) {
+                  if (d.lon>=100) {
                         return projection([d.lon, d.lat])[0] - 1.41*1.5*r
                   }else {
                         return projection([d.lon, d.lat])[0] + 1.41*1.5*r
@@ -229,7 +229,7 @@ var mouseover = function(d,m) {
               })
               .attr("y1",projection([d.lon, d.lat])[1] - 1.41*1.5*r)
               .attr("x2",function() {
-                  if (d.lon>=135.5) {
+                  if (d.lon>=100) {
                         return projection([d.lon, d.lat])[0] - 2.8*padding
                   }else {
                         return projection([d.lon, d.lat])[0] + 2.8*padding
@@ -252,7 +252,7 @@ var mouseover = function(d,m) {
               var textDetail = svgt.append("text")
               .attr("id","country_"+m)
               .attr("x", function() {
-                  if (d.lon>=135.5) {
+                  if (d.lon>=100) {
                         return projection([d.lon, d.lat])[0] - 3*padding
                   }else {
                         return projection([d.lon, d.lat])[0] + 3*padding
@@ -262,7 +262,7 @@ var mouseover = function(d,m) {
               .attr("font-size", fontSize)
               .attr("opacity", 1)
               .attr("text-anchor",function() {
-                  if (d.lon>=135.5) {
+                  if (d.lon>=100) {
                         return "end"
                   }else {
                         return "start"
@@ -272,7 +272,7 @@ var mouseover = function(d,m) {
               textDetail
               .append("tspan")
               .attr("x", function() {
-                  if (d.lon>=135.5) {
+                  if (d.lon>=100) {
                         return projection([d.lon, d.lat])[0] - 3*padding
                   }else {
                         return projection([d.lon, d.lat])[0] + 3*padding
@@ -283,7 +283,7 @@ var mouseover = function(d,m) {
               textDetail
               .append("tspan")
               .attr("x", function() {
-                  if (d.lon>=135.5) {
+                  if (d.lon>=100) {
                         return projection([d.lon, d.lat])[0] - 3*padding
                   }else {
                         return projection([d.lon, d.lat])[0] + 3*padding
