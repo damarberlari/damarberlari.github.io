@@ -64,7 +64,7 @@ svg.append("text") //dummytext for font-sizing
 	});
         
 var barHeight = (0.9*height-3*padding)/dataset.length-padding/8;
-var fontSize = barHeight/textheight*14;
+var fontSize = 12;
 
 var path = d3.geo.path()
     .projection(projection);
@@ -298,7 +298,7 @@ svgm
             svgt.append("text")
               .attr("class","country")
               .attr("y", function() {
-                   return projection([d.lon, d.lat])[1] + 5*padding/scale;
+                   return projection([d.lon, d.lat])[1] + 4.7*padding/scale;
                   })
               .text("Maghrib: "+d.end)
               
@@ -306,7 +306,7 @@ svgm
               .attr("x", function() {
                    return projection([d.lon, d.lat])[0];
                   })
-              .attr("font-size", 1.5*fontSize/scale)
+              .attr("font-size", 1.1*fontSize/scale)
               .attr("opacity", 1)
               .attr("text-anchor","middle")
               .attr("alignment-baseline","central")
