@@ -64,8 +64,7 @@ svg.append("text") //dummytext for font-sizing
 	});
         
 var barHeight = (0.9*height-3*padding)/dataset.length-padding/8;
-//var fontSize = barHeight/textheight*13;
-var fontSize = 12;
+var fontSize = barHeight/textheight*13;
 
 var path = d3.geo.path()
     .projection(projection);
@@ -199,7 +198,6 @@ var city = svgt.selectAll('.city')
             .attr("font-size", fontSize)
             .attr("opacity", 0.7)
             .attr("text-anchor","start")
-            .attr("max-height",1000000)
             .text(function(d){return d.city});
 
 var mouseover = function(d,m) {
