@@ -52,7 +52,7 @@ var    height = 720/1280*width,
 
 var barColor = ["#FFC107", "#FEB70A", "#FDAD0E", "#FCA311", "#FB9A15", "#FA9019", "#F9861C", "#F97D20", "#F87323", "#F76927", "#F6602B", "#F5562E", "#F44C32", "#F44336"];
 var barScale = d3.scale.linear()
-    .range([0, 0.42*width-2*padding])
+    .range([0, 0.42*width-3*padding])
     .domain([0,24]);
 
 var xAxis = d3.svg.axis()
@@ -109,7 +109,7 @@ svga.attr("class", "axis")
 svgt.append("text")
 .attr("x",0)
             .attr("y",0)
-            .attr("transform","translate("+(0.95*width+padding)+" "+(0.95*height-2.5*padding)+")")
+            .attr("transform","translate("+(0.95*width)+" "+(0.95*height-2.5*padding)+")")
             .attr("font-size", fontSize)
             .attr("opacity", 0.7)
             .attr("text-anchor","end")
@@ -241,7 +241,7 @@ var mouseover = function(d,m) {
               
               svgt.append("text")
               .attr("id","duration_"+m)
-              .attr("x",padding*1.2+barScale(d.duration))
+              .attr("x",padding*1.5+barScale(d.duration))
               .attr("y",m*(barHeight+padding/8)+padding+barHeight/2)
               .attr("transform","translate("+0.55*width+" "+(0.05*height+barHeight/4)+")")
               .attr("font-size", 0.9*fontSize)
