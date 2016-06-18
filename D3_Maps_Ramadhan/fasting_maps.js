@@ -85,7 +85,7 @@ svgd
 .attr("height",height)
 .attr("fill-opacity",0)
 .on("click",function(){clicked()})
-.on("touchend", function(){
+.on("touchstart", function(){
             clicked();
             })
 
@@ -114,7 +114,7 @@ d3.json("http://damarberlari.github.io/D3_Maps_Ramadhan/world-110m2.json", funct
       .append("path")
       .attr("d", path)
       .on("click",function(){clicked()})
-      .on("touchend", function(){
+      .on("touchstart", function(){
             clicked();
             })
 });
@@ -164,7 +164,7 @@ svgc.selectAll("circle.dotbase")
            .on("click", function(d,m){
             clicked(d,m);
             })
-           .on("touchend", function(d,m){
+           .on("touchstart", function(d,m){
             clicked(d,m);
             });
 
@@ -212,7 +212,7 @@ var bar = svgb.selectAll('.bar')
             .on("click", function(d,m){
             clicked(d,m);
             })
-            .on("touchend", function(d,m){
+            .on("touchstart", function(d,m){
             clicked(d,m);
             });
 
