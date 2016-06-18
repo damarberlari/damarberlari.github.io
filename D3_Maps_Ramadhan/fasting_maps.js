@@ -82,7 +82,7 @@ svg.append("text") //dummytext for font-sizing
 	});
         
 var barHeight = (0.9*height-3*padding)/dataset.length-padding/8;
-var fontSize = barHeight/textheight*13;
+var fontSize = barHeight/textheight*12;
 
 var path = d3.geo.path()
     .projection(projection);

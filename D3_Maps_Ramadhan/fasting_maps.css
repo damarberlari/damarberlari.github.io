@@ -20,8 +20,9 @@ path {
 }
 
 text {
-                font-family: "Roboto Condensed", Helvetica, Arial, sans-serif;
+                font-family: "Lato", Helvetica, Arial, sans-serif;
                 fill: white;
+		font-weight: 300;
 		pointer-events: none;
 		letter-spacing: normal;
 		-webkit-text-size-adjust: none;
