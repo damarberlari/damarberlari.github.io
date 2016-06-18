@@ -84,10 +84,7 @@ svgd
 .attr("width", width)
 .attr("height",height)
 .attr("fill-opacity",0)
-.on("click",function(){clicked()})
-.on("touchstart", function(){
-            clicked();
-            })
+.on("click",function(){clicked()});
 
 svga.attr("class", "axis")
 	.attr("transform","translate("+(0.55*width+padding)+" "+(0.95*height-2*padding)+")")
@@ -114,9 +111,6 @@ d3.json("http://damarberlari.github.io/D3_Maps_Ramadhan/world-110m2.json", funct
       .append("path")
       .attr("d", path)
       .on("click",function(){clicked()})
-      .on("touchstart", function(){
-            clicked();
-            })
 });
 
 svgc.selectAll("circle.dotbase")
@@ -164,9 +158,6 @@ svgc.selectAll("circle.dotbase")
            .on("click", function(d,m){
             clicked(d,m);
             })
-           .on("touchstart", function(d,m){
-            clicked(d,m);
-            });
 
 svgr
 .append("rect")
@@ -212,9 +203,6 @@ var bar = svgb.selectAll('.bar')
             .on("click", function(d,m){
             clicked(d,m);
             })
-            .on("touchstart", function(d,m){
-            clicked(d,m);
-            });
 
 var city = svgt.selectAll('.city')
             .data(dataset)
