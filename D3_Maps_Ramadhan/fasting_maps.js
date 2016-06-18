@@ -64,7 +64,8 @@ svg.append("text") //dummytext for font-sizing
 	});
         
 var barHeight = (0.9*height-3*padding)/dataset.length-padding/8;
-var fontSize = barHeight/textheight*13;
+//var fontSize = barHeight/textheight*13;
+var fontSize = 12;
 
 var path = d3.geo.path()
     .projection(projection);
@@ -144,9 +145,6 @@ svgc.selectAll("circle.dotbase")
            .on("mouseout",function(d,m){
             mouseout(d,m);
             })
-           .on("click", function(d,m){
-            clicked(d,m);
-            })
 
 svgr
 .append("rect")
@@ -188,10 +186,7 @@ var bar = svgb.selectAll('.bar')
               })
             .on("mouseout",function(d,m){
               mouseout(d,m);
-              })
-            .on("click", function(d,m){
-            clicked(d,m);
-            })
+              });
 
 var city = svgt.selectAll('.city')
             .data(dataset)
@@ -244,75 +239,4 @@ var mouseout = function(d,m) {
               .attr("stroke-width",0);
               svgt.select("#duration_"+m).remove();
               //svgt.select("#country_"+m).remove();
-}
-
-var clicked = function(d,m) {
-      svgt.selectAll(".country").remove();
-if (d && centered !== d) {
-    x = projection([d.lon, d.lat])[0];
-    y = projection([d.lon, d.lat])[1];
-    scale = 10;
-    r = 1;
-    rb = 0;
-    centered = d;
-  } else {
-    x = 0.55*width / 2 ;
-    y = height / 2;
-    scale = 1;
-    r = 5;
-    rb = 0;
-    centered = null;
-  }
-  
-svgm
-.transition()
-.duration(500)
-.attr("transform", "translate(" + 0.55*width / 2 + "," + height / 2 + ")scale("+scale+")translate(" + -x + "," + -y + ")")
-.each("end", function(){
-      if (centered == d) {
-            svgt.append("text")
-              .attr("class","country")
-              .attr("y", function() {
-                   return projection([d.lon, d.lat])[1] - 3*padding/scale;
-                  })
-              .text(d.city+", "+d.country);
-              
-            svgt.append("text")
-              .attr("class","country")
-              .attr("y", function() {
-                   return projection([d.lon, d.lat])[1] + 3*padding/scale;
-                  })
-              .text("Fajr: "+d.start)
-              
-            svgt.append("text")
-              .attr("class","country")
-              .attr("y", function() {
-                   return projection([d.lon, d.lat])[1] + 4.7*padding/scale;
-                  })
-              .text("Maghrib: "+d.end)
-              
-            svgt.selectAll(".country")
-              .attr("x", function() {
-                   return projection([d.lon, d.lat])[0];
-                  })
-              .attr("font-size", 1.1*fontSize/scale)
-              .attr("opacity", 1)
-              .attr("text-anchor","middle")
-              .attr("alignment-baseline","central")
-              .attr("transform", "translate(" + 0.55*width / 2 + "," + height / 2 + ")scale("+scale+")translate(" + -x + "," + -y + ")");
-      }
-})
-
-svgc.selectAll("circle.dot")
-.transition()
-.duration(500)
-.attr("r",r)
-.attr("transform", "translate(" + 0.55*width / 2 + "," + height / 2 + ")scale("+scale+")translate(" + -x + "," + -y + ")");
-
-svgc.selectAll("circle.dotbase")
-.transition()
-.duration(500)
-.attr("r",rb)
-.attr("stroke-width",1/scale)
-.attr("transform", "translate(" + 0.55*width / 2 + "," + height / 2 + ")scale("+scale+")translate(" + -x + "," + -y + ")");
 }
