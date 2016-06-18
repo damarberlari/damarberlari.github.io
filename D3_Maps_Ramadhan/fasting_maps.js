@@ -1,35 +1,36 @@
 var dataset =
 [
-{country: "Iceland", city: "Akureyri", start: 1.53333333333333, end: 0.283333333333333, duration: 22.75, lat: 65.68, lon: -18.11},
-{country: "Iceland", city: "Reykjavik", start: 2.08333333333333, end: 23.8166666666667, duration: 21.7333333333333, lat: 64.13, lon: -21.89},
-{country: "Sweden", city: "Stockholm", start: 1.86666666666667, end: 21.9833333333333, duration: 20.1166666666667, lat: 59.33, lon: 18.06},
-{country: "Russia", city: "Moscow", start: 1.75, end: 21.1833333333333, duration: 19.4333333333333, lat: 55.75, lon: 37.62},
-{country: "Netherlands", city: "Amsterdam", start: 3.06666666666667, end: 22, duration: 18.9333333333333, lat: 52.37, lon: 4.89},
-{country: "France", city: "Paris", start: 3.35, end: 21.8666666666667, duration: 18.5166666666667, lat: 48.85, lon: 2.35},
-{country: "Romania", city: "Bucharest", start: 3.1, end: 20.9833333333333, duration: 17.8833333333333, lat: 44.43, lon: 26.12},
-{country: "Turkey", city: "Istanbul", start: 3.43333333333333, end: 20.5833333333333, duration: 17.15, lat: 41.01, lon: 28.97},
-{country: "China", city: "Beijing", start: 2.75, end: 19.6833333333333, duration: 16.9333333333333, lat: 39.9, lon: 116.4},
-{country: "Japan", city: "Osaka", start: 2.76666666666667, end: 19.1166666666667, duration: 16.35, lat: 34.69, lon: 135.5},
-{country: "Pakistan", city: "Islamabad", start: 3.25, end: 19.2833333333333, duration: 16.0333333333333, lat: 33.72, lon: 73.06},
-{country: "Egypt", city: "Cairo", start: 3.3, end: 18.9166666666667, duration: 15.6166666666667, lat: 30.06, lon: 31.25},
-{country: "United Arab Emirates", city: "Abu Dhabi", start: 4.1, end: 19.1833333333333, duration: 15.0833333333333, lat: 24.47, lon: 54.37},
-{country: "India", city: "Mumbai", start: 4.63333333333333, end: 19.2666666666667, duration: 14.6333333333333, lat: 19.01, lon: 72.85},
-{country: "Cambodia", city: "Phnom Penh", start: 4.3, end: 18.4, duration: 14.1, lat: 11.56, lon: 104.92},
-{country: "Nigeria", city: "Lagos", start: 5.25, end: 19.0166666666667, duration: 13.7666666666667, lat: 6.44, lon: 3.42},
-{country: "Malaysia", city: "Kuala Lumpur", start: 5.8, end: 19.35, duration: 13.55, lat: 3.23, lon: 101.7},
-{country: "Kenya", city: "Nairobi", start: 5.26666666666667, end: 18.5666666666667, duration: 13.3, lat: -1.27, lon: 36.81},
-{country: "Indonesia", city: "Jakarta", start: 4.73333333333333, end: 17.75, duration: 13.0166666666667, lat: -6.21, lon: 106.84},
-{country: "Zambia", city: "Lusaka", start: 5.21666666666667, end: 17.7166666666667, duration: 12.5, lat: -15.41, lon: 28.28},
-{country: "Madagascar", city: "Toamasina", start: 4.88333333333333, end: 17.2333333333333, duration: 12.35, lat: -18.15, lon: 49.4},
-{country: "Mozambique", city: "Chibuto", start: 5.08333333333333, end: 17.0833333333333, duration: 12, lat: -24.68, lon: 33.53},
-{country: "Australia", city: "Perth", start: 5.75, end: 17.3333333333333, duration: 11.5833333333333, lat: -31.9, lon: 115.86},
-{country: "Australia", city: "Hobart", start: 5.93333333333333, end: 16.7333333333333, duration: 10.8, lat: -42.88, lon: 147.33}
+{country: "Iceland", city: "Akureyri", start: "01:32", end: "00:17", duration: 22.75, lat: 65.68, lon: -18.11},
+{country: "Iceland", city: "Reykjavik", start: "02:05", end: "23:49", duration: 21.7333333333333, lat: 64.13, lon: -21.89},
+{country: "Sweden", city: "Stockholm", start: "01:52", end: "21:59", duration: 20.1166666666667, lat: 59.33, lon: 18.06},
+{country: "Russia", city: "Moscow", start: "01:45", end: "21:11", duration: 19.4333333333333, lat: 55.75, lon: 37.62},
+{country: "Netherlands", city: "Amsterdam", start: "03:04", end: "22:00", duration: 18.9333333333333, lat: 52.37, lon: 4.89},
+{country: "France", city: "Paris", start: "03:21", end: "21:52", duration: 18.5166666666667, lat: 48.85, lon: 2.35},
+{country: "Romania", city: "Bucharest", start: "03:06", end: "20:59", duration: 17.8833333333333, lat: 44.43, lon: 26.12},
+{country: "Turkey", city: "Istanbul", start: "03:26", end: "20:35", duration: 17.15, lat: 41.01, lon: 28.97},
+{country: "China", city: "Beijing", start: "02:45", end: "19:41", duration: 16.9333333333333, lat: 39.9, lon: 116.4},
+{country: "Japan", city: "Osaka", start: "02:46", end: "19:07", duration: 16.35, lat: 34.69, lon: 135.5},
+{country: "Pakistan", city: "Islamabad", start: "03:15", end: "19:17", duration: 16.0333333333333, lat: 33.72, lon: 73.06},
+{country: "Egypt", city: "Cairo", start: "03:18", end: "18:55", duration: 15.6166666666667, lat: 30.06, lon: 31.25},
+{country: "United Arab Emirates", city: "Abu Dhabi", start: "04:06", end: "19:11", duration: 15.0833333333333, lat: 24.47, lon: 54.37},
+{country: "India", city: "Mumbai", start: "04:38", end: "19:16", duration: 14.6333333333333, lat: 19.01, lon: 72.85},
+{country: "Cambodia", city: "Phnom Penh", start: "04:18", end: "18:24", duration: 14.1, lat: 11.56, lon: 104.92},
+{country: "Nigeria", city: "Lagos", start: "05:15", end: "19:01", duration: 13.7666666666667, lat: 6.44, lon: 3.42},
+{country: "Malaysia", city: "Kuala Lumpur", start: "05:48", end: "19:21", duration: 13.55, lat: 3.23, lon: 101.7},
+{country: "Kenya", city: "Nairobi", start: "05:16", end: "18:34", duration: 13.3, lat: -1.27, lon: 36.81},
+{country: "Indonesia", city: "Jakarta", start: "04:44", end: "17:45", duration: 13.0166666666667, lat: -6.21, lon: 106.84},
+{country: "Zambia", city: "Lusaka", start: "05:13", end: "17:43", duration: 12.5, lat: -15.41, lon: 28.28},
+{country: "Madagascar", city: "Toamasina", start: "04:53", end: "17:14", duration: 12.35, lat: -18.15, lon: 49.4},
+{country: "Mozambique", city: "Chibuto", start: "05:05", end: "17:05", duration: 12, lat: -24.68, lon: 33.53},
+{country: "Australia", city: "Perth", start: "05:45", end: "17:20", duration: 11.5833333333333, lat: -31.9, lon: 115.86},
+{country: "Australia", city: "Hobart", start: "05:56", end: "16:44", duration: 10.8, lat: -42.88, lon: 147.33}
 ]
 
 var width = 1.12*d3.select(".post-content").node().getBoundingClientRect().width,
     height = 720/1280*width,
     padding = width/1280*15,
-    centered;
+    centered,
+    scale = 1;
 
 var barColor = ["#FFC107", "#FEB70A", "#FDAD0E", "#FCA311", "#FB9A15", "#FA9019", "#F9861C", "#F97D20", "#F87323", "#F76927", "#F6602B", "#F5562E", "#F44C32", "#F44336"];
 var barScale = d3.scale.linear()
@@ -52,7 +53,7 @@ var projection = d3.geo.mercator()
 
 var svg = d3.select('.post-content').append('svg')
     .attr('width', width)
-    .attr('height', height);
+    .attr('height', height)
     
 svg.append("text") //dummytext for font-sizing
         .attr("y","-20")
@@ -67,13 +68,23 @@ var fontSize = barHeight/textheight*14;
 
 var path = d3.geo.path()
     .projection(projection);
-    
+
+var svgd = svg.append('g').attr('id','dummy');   
 var svgm = svg.append('g').attr('id','maps');
 var svgc = svg.append('g').attr('id','dots');
 var svgr = svg.append('g').attr('id','rect');
 var svgb = svg.append('g').attr('id','bars');
 var svga = svg.append('g').attr('id','axis');
 var svgt = svg.append('g').attr('id','text');
+
+svgd
+.append("rect")
+.attr("x", 0)
+.attr("y", 0)
+.attr("width", width)
+.attr("height",height)
+.attr("fill-opacity",0)
+.on("click",function(){clicked()})
 
 svga.attr("class", "axis")
 	.attr("transform","translate("+(0.55*width+padding)+" "+(0.95*height-2*padding)+")")
@@ -112,7 +123,7 @@ svgc.selectAll("circle.dotbase")
            .attr("cy", function(d) {
                    return projection([d.lon, d.lat])[1];
            })
-           .attr("r", 5)
+           .attr("r", 0)
            .attr("class","dotbase")
            .attr("id",function(d,m){return "dotbase_"+m})
            .style("fill-opacity",0)
@@ -129,7 +140,10 @@ svgc.selectAll("circle.dotbase")
            .attr("cy", function(d) {
                    return projection([d.lon, d.lat])[1];
            })
-           .attr("r", 5)
+           .attr("r", function(){
+            if(scale==1)
+            return 5
+            else return 10/scale})
            .attr("class","dot")
            .attr("id",function(d,m){return "dot_"+m})
            .style("opacity",0.7)
@@ -141,8 +155,8 @@ svgc.selectAll("circle.dotbase")
            .on("mouseout",function(d,m){
             mouseout(d,m);
             })
-           .on("click", function(d){
-            clicked(d);
+           .on("click", function(d,m){
+            clicked(d,m);
             });
 
 svgr
@@ -186,8 +200,8 @@ var bar = svgb.selectAll('.bar')
             .on("mouseout",function(d,m){
               mouseout(d,m);
               })
-            .on("click", function(d){
-            clicked(d);
+            .on("click", function(d,m){
+            clicked(d,m);
             });
 
 var city = svgt.selectAll('.city')
@@ -205,11 +219,17 @@ var city = svgt.selectAll('.city')
 
 var mouseover = function(d,m) {
               svgb.select("#bar_"+m).attr("opacity", 1);
-              svgc.select("#dot_"+m).attr("r",7).style("opacity",1);
+              svgc.select("#dot_"+m).attr("r", function(){
+            if(scale==1)
+            return 7
+            else return 14/scale}).style("opacity",1);
               svgt.select("#city_"+m).attr("opacity", 1);
               svgc.select("#dotbase_"+m)
-              .attr("r",15)
-              .attr("stroke-width",1);
+              .attr("r", function(){
+            if(scale==1)
+            return 15
+            else return 30/scale})
+              .attr("stroke-width",1/scale);
               
               svgt.append("text")
               .attr("id","duration_"+m)
@@ -220,25 +240,15 @@ var mouseover = function(d,m) {
               .attr("opacity", 1)
               .attr("text-anchor","start")
               .text(Math.round(d.duration*100)/100);
-              
-           //   svgt.append("text")
-           //   .attr("id","country_"+m)
-           //   .attr("x", function() {
-           //        return projection([d.lon, d.lat])[0];
-           //})
-           //.attr("y", function() {
-           //        return projection([d.lon, d.lat])[1] - 2*padding;
-           //})
-           //   .attr("font-size", fontSize)
-           //   .attr("opacity", 1)
-           //   .attr("text-anchor","middle")
-           //   .attr("alignment-baseline","central")
-           //   .text(d.city+", "+d.country);
+            
 };
 
 var mouseout = function(d,m) {
               svgb.select("#bar_"+m).attr("opacity", 0.7)
-              svgc.select("#dot_"+m).attr("r",5).style("opacity",0.7);
+              svgc.select("#dot_"+m).attr("r", function(){
+            if(scale==1)
+            return 5
+            else return 10/scale}).style("opacity",0.7);
               svgt.select("#city_"+m).attr("opacity", 0.7)
               svgc.select("#dotbase_"+m)
               .attr("r",0)
@@ -247,27 +257,73 @@ var mouseout = function(d,m) {
               //svgt.select("#country_"+m).remove();
 }
 
-var clicked = function(d) {
+var clicked = function(d,m) {
+      svgt.selectAll(".country").remove();
 if (d && centered !== d) {
     x = projection([d.lon, d.lat])[0];
     y = projection([d.lon, d.lat])[1];
-    k = 10;
+    scale = 10;
+    r = 1;
+    rb = 0;
     centered = d;
   } else {
     x = 0.55*width / 2 ;
     y = height / 2;
-    k = 1;
+    scale = 1;
+    r = 5;
+    rb = 0;
     centered = null;
   }
   
 svgm
 .transition()
 .duration(500)
-.attr("transform", "translate(" + 0.55*width / 2 + "," + height / 2 + ")scale("+k+")translate(" + -x + "," + -y + ")")
+.attr("transform", "translate(" + 0.55*width / 2 + "," + height / 2 + ")scale("+scale+")translate(" + -x + "," + -y + ")")
+.each("end", function(){
+      if (centered == d) {
+            svgt.append("text")
+              .attr("class","country")
+              .attr("y", function() {
+                   return projection([d.lon, d.lat])[1] - 3*padding/scale;
+                  })
+              .text(d.city+", "+d.country);
+              
+            svgt.append("text")
+              .attr("class","country")
+              .attr("y", function() {
+                   return projection([d.lon, d.lat])[1] + 3*padding/scale;
+                  })
+              .text("Fajr: "+d.start)
+              
+            svgt.append("text")
+              .attr("class","country")
+              .attr("y", function() {
+                   return projection([d.lon, d.lat])[1] + 5*padding/scale;
+                  })
+              .text("Maghrib: "+d.end)
+              
+            svgt.selectAll(".country")
+              .attr("x", function() {
+                   return projection([d.lon, d.lat])[0];
+                  })
+              .attr("font-size", 1.5*fontSize/scale)
+              .attr("opacity", 1)
+              .attr("text-anchor","middle")
+              .attr("alignment-baseline","central")
+              .attr("transform", "translate(" + 0.55*width / 2 + "," + height / 2 + ")scale("+scale+")translate(" + -x + "," + -y + ")");
+      }
+})
 
-svgc.selectAll("circle")
+svgc.selectAll("circle.dot")
 .transition()
 .duration(500)
-.attr("r",5/k)
-.attr("transform", "translate(" + 0.55*width / 2 + "," + height / 2 + ")scale("+k+")translate(" + -x + "," + -y + ")");
+.attr("r",r)
+.attr("transform", "translate(" + 0.55*width / 2 + "," + height / 2 + ")scale("+scale+")translate(" + -x + "," + -y + ")");
+
+svgc.selectAll("circle.dotbase")
+.transition()
+.duration(500)
+.attr("r",rb)
+.attr("stroke-width",1/scale)
+.attr("transform", "translate(" + 0.55*width / 2 + "," + height / 2 + ")scale("+scale+")translate(" + -x + "," + -y + ")");
 }
