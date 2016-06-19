@@ -107,7 +107,7 @@ var   title = svgt.append("text") //dummytext for font-sizing
       title
       .append("tspan")
       .attr("x", 0.55*width-padding)
-      .attr("dy","0.85em")
+      .attr("dy","0.9em")
       .text("LAMA");
 
 var   subtitle = svgt.append("text") //dummytext for font-sizing
