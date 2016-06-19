@@ -34,3 +34,8 @@ text#title {
   font-family: "Roboto Condensed", Helvetica, Arial, sans-serif;
   font-weight: 400;
 }
+
+p.d3-caption{
+  font-size:1em;
+  text-align: center;
+}
