@@ -95,7 +95,7 @@ var   fontSize = barHeight/textheight*12;
 var   title = svgt.append("text") //dummytext for font-sizing
       .attr("id","title")
       .attr("x", 0.55*width-padding)
-      .attr("y",0.05*height + 3.6*padding)
+      .attr("y",0.05*height + 3.8*padding)
       .attr("text-anchor","end")
       .attr("font-size",fontSize*3.2);
         
