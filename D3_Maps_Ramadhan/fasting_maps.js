@@ -82,12 +82,22 @@ var svgt = svg.append('g').attr('id','text');
    
 var barHeight = (0.9*height-3*padding)/dataset.length-padding/8;
 
+svg.append("text") //dummytext for font-sizing
+        .attr("y","-20")
+	.text("Osaka")
+        .style("font-size","13px")
+        .each(function(){
+	      textheight = d3.select(this).node().getBoundingClientRect().height;
+	});
+        
+var fontSize = barHeight/textheight*12;
+
 var title = svgt.append("text") //dummytext for font-sizing
         .attr("id","title")
         .attr("x", 0.55*width-padding)
         .attr("y",0.05*height + 3.6*padding)
         .attr("text-anchor","end")
-        .attr("font-size",13)
+        .attr("font-size",fontSize*3.3);
         
         title
         .append("tspan")
@@ -98,14 +108,7 @@ var title = svgt.append("text") //dummytext for font-sizing
         .append("tspan")
         .attr("x", 0.55*width-padding)
         .attr("dy","0.85em")
-	.text("LAMA")
-        .each(function(){
-	      textheight = d3.select(this).node().getBoundingClientRect().height;
-	});
-        
-var fontSize = barHeight/textheight*12;
-
-svgt.select("#title").attr("font-size",fontSize*3.5);
+	.text("LAMA");
 
 var subtitle = svgt.append("text") //dummytext for font-sizing
         .attr("id","subtitle")
