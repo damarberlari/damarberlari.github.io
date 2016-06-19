@@ -43,305 +43,298 @@ window.onresize = function(){
 
 function draw(){
 width = 1.12*d3.select(".post-content").node().getBoundingClientRect().width
-var    height = 720/1280*width,
-    padding = width/1280*15,
-    centered,
-    scale = 1
-    r=8/1280*width;
+var   height = 720/1280*width,
+      padding = width/1280*15,
+      centered,
+      r=8/1280*width;
 
-var barColor = ["#FFC107", "#FEB70A", "#FDAD0E", "#FCA311", "#FB9A15", "#FA9019", "#F9861C", "#F97D20", "#F87323", "#F76927", "#F6602B", "#F5562E", "#F44C32", "#F44336"];
-var barScale = d3.scale.linear()
-    .range([0, 0.42*width-3*padding])
-    .domain([0,24]);
+var   barColor = ["#FFC107", "#FEB70A", "#FDAD0E", "#FCA311", "#FB9A15", "#FA9019", "#F9861C", "#F97D20", "#F87323", "#F76927", "#F6602B", "#F5562E", "#F44C32", "#F44336"];
+var   barScale = d3.scale.linear()
+      .range([0, 0.42*width-3*padding])
+      .domain([0,24]);
 
-var xAxis = d3.svg.axis()
-	.scale(barScale)
-	.orient("bottom")
-        .tickValues(d3.range(0, 25, 3))
-	.tickFormat(d3.format("1"))
-	.tickPadding(padding/2)
-        .innerTickSize(-0.9*height+3*padding);
+var   xAxis = d3.svg.axis()
+      .scale(barScale)
+      .orient("bottom")
+      .tickValues(d3.range(0, 25, 3))
+      .tickFormat(d3.format("1"))
+      .tickPadding(padding/2)
+      .innerTickSize(-0.9*height+3*padding);
 
-var projection = d3.geo.mercator()
-    .scale((width + 1) / 2 / Math.PI)
-    .rotate([210,0])
-    .translate([width / 2, 1.15*height / 2])
-    .precision(.1);   
+var   projection = d3.geo.mercator()
+      .scale((width + 1) / 2 / Math.PI)
+      .rotate([210,0])
+      .translate([width / 2, 1.15*height / 2])
+      .precision(.1);   
 
-svg = d3.select('.post-content').append('svg')
-    .attr('width', width)
-    .attr('height', height)
+      svg = d3.select('.post-content').append('svg')
+      .attr('width', width)
+      .attr('height', height)
 
-var svgm = svg.append('g').attr('id','maps');
-var svgc = svg.append('g').attr('id','dots');
-var svgr = svg.append('g').attr('id','rect');
-var svgb = svg.append('g').attr('id','bars');
-var svga = svg.append('g').attr('id','axis');
-var svgl = svg.append('g').attr('id','line');
-var svgt = svg.append('g').attr('id','text');
+var   svgm = svg.append('g').attr('id','maps');
+var   svgc = svg.append('g').attr('id','dots');
+var   svgr = svg.append('g').attr('id','rect');
+var   svgb = svg.append('g').attr('id','bars');
+var   svga = svg.append('g').attr('id','axis');
+var   svgl = svg.append('g').attr('id','line');
+var   svgt = svg.append('g').attr('id','text');
    
-var barHeight = (0.9*height-3*padding)/dataset.length-padding/8;
+var   barHeight = (0.9*height-3*padding)/dataset.length-padding/8;
 
-svg.append("text") //dummytext for font-sizing
-        .attr("y","-20")
-	.text("Osaka")
-        .style("font-size","13px")
-        .each(function(){
+      svg
+      .append("text") //dummytext for font-sizing
+      .attr("y","-20")
+      .text("Osaka")
+      .style("font-size","13px")
+      .each(function(){
 	      textheight = d3.select(this).node().getBoundingClientRect().height;
-	});
+            });
         
-var fontSize = barHeight/textheight*12;
+var   fontSize = barHeight/textheight*12;
 
-var title = svgt.append("text") //dummytext for font-sizing
-        .attr("id","title")
-        .attr("x", 0.55*width-padding)
-        .attr("y",0.05*height + 3.6*padding)
-        .attr("text-anchor","end")
-        .attr("font-size",fontSize*3.2);
+var   title = svgt.append("text") //dummytext for font-sizing
+      .attr("id","title")
+      .attr("x", 0.55*width-padding)
+      .attr("y",0.05*height + 3.6*padding)
+      .attr("text-anchor","end")
+      .attr("font-size",fontSize*3.2);
         
-        title
-        .append("tspan")
-        .attr("x", 0.55*width-padding)
-	.text("LAMA PUASA");
+      title
+      .append("tspan")
+      .attr("x", 0.55*width-padding)
+      .text("LAMA PUASA");
         
-        title
-        .append("tspan")
-        .attr("x", 0.55*width-padding)
-        .attr("dy","0.85em")
-	.text("LAMA");
+      title
+      .append("tspan")
+      .attr("x", 0.55*width-padding)
+      .attr("dy","0.85em")
+      .text("LAMA");
 
-var subtitle = svgt.append("text") //dummytext for font-sizing
-        .attr("id","subtitle")
-        .attr("x", -padding)
-        .attr("y",4*(barHeight+padding/8)+padding+barHeight/2)
-        .attr("transform","translate("+0.55*width+" "+(0.05*height+barHeight/4)+")")
-        .attr("text-anchor","end")
-        .attr("font-size",fontSize)
-        .text("Sumber: beta.islamicfinder.org")
+var   subtitle = svgt.append("text") //dummytext for font-sizing
+      .attr("id","subtitle")
+      .attr("x", -padding)
+      .attr("y",4*(barHeight+padding/8)+padding+barHeight/2)
+      .attr("transform","translate("+0.55*width+" "+(0.05*height+barHeight/4)+")")
+      .attr("text-anchor","end")
+      .attr("font-size",fontSize)
+      .text("Sumber: beta.islamicfinder.org")
         
       subtitle
       .append("tspan")
-        .attr("x", -padding)
-        .attr("dy","1.2em")
-        .text("3 Ramadhan 1437H")
+      .attr("x", -padding)
+      .attr("dy","1.2em")
+      .text("3 Ramadhan 1437H")
 
-var path = d3.geo.path()
-    .projection(projection);
+var   path = d3.geo.path()
+      .projection(projection);
  
-
-
-svgm.selectAll("path")
-      .data(topojson.object(topology, topology.objects.countries)
-          .geometries)
-    .enter()
+      svgm.selectAll("path")
+      .data(topojson.object(topology, topology.objects.countries).geometries)
+      .enter()
       .append("path")
       .attr("d", path)
 
-svga.attr("class", "axis")
-	.attr("transform","translate("+(0.55*width+padding)+" "+(0.95*height-2*padding)+")")
-	.call(xAxis);
+      svga
+      .attr("class", "axis")
+      .attr("transform","translate("+(0.55*width+padding)+" "+(0.95*height-2*padding)+")")
+      .call(xAxis);
 
-svgt.append("text")
-.attr("x",0)
-            .attr("y",0)
-            .attr("transform","translate("+(0.95*width)+" "+(0.95*height-2.5*padding)+")")
-            .attr("font-size", fontSize)
-            .attr("opacity", 1)
-            .attr("text-anchor","end")
-            .attr("alignment-baseline","bottom")
-            .text("Durasi Puasa (jam)");
+      svga.selectAll("text").attr("font-size", 0.9*fontSize);
+      
+      svgt.append("text")
+      .attr("x",0)
+      .attr("y",0)
+      .attr("transform","translate("+(0.95*width)+" "+(0.95*height-2.5*padding)+")")
+      .attr("font-size", fontSize)
+      .attr("opacity", 1)
+      .attr("text-anchor","end")
+      .attr("alignment-baseline","bottom")
+      .text("Durasi Puasa (jam)");
         
-svga.selectAll("text").attr("font-size", 0.9*fontSize);
-
-svgc.selectAll("circle.dotbase")
-           .data(dataset)
-           .enter()
-           .append("circle")
-           .attr("cx", function(d) {
-                   return projection([d.lon, d.lat])[0];
-           })
-           .attr("cy", function(d) {
-                   return projection([d.lon, d.lat])[1];
-           })
-           .attr("r", 0)
-           .attr("class","dotbase")
-           .attr("id",function(d,m){return "dotbase_"+m})
-           .style("fill-opacity",0)
-           .attr('stroke', function(d){return barColor[Math.round(d.duration)-10]})
-           .attr('stroke-width',0)
-
-        svgc.selectAll("circle.dot")
-           .data(dataset)
-           .enter()
-           .append("circle")
-           .attr("cx", function(d) {
-                   return projection([d.lon, d.lat])[0];
-           })
-           .attr("cy", function(d) {
-                   return projection([d.lon, d.lat])[1];
-           })
-           .attr("r", function(){
-            if(scale==1)
-            return r
-            else return 2*r/scale})
-           .attr("class","dot")
-           .attr("id",function(d,m){return "dot_"+m})
-           .style("opacity",0.7)
-           .attr('fill', function(d){return barColor[Math.round(d.duration)-10]})
-           .attr('cursor','pointer')
-           .on("mouseover",function(d,m){
-            mouseover(d,m);
+      svgc.selectAll("circle.dotbase")
+      .data(dataset)
+      .enter()
+      .append("circle")
+      .attr("cx", function(d) {
+              return projection([d.lon, d.lat])[0];
             })
-           .on("mouseout",function(d,m){
-            mouseout(d,m);
+      .attr("cy", function(d) {
+              return projection([d.lon, d.lat])[1];
             })
+      .attr("r", 0)
+      .attr("class","dotbase")
+      .attr("id",function(d,m){
+            return "dotbase_"+m
+            })
+      .style("fill-opacity",0)
+      .attr('stroke', function(d){
+            return barColor[Math.round(d.duration)-10]
+            })
+      .attr('stroke-width',0)
 
-svgr
-.append("rect")
-.attr("x", 0)
-.attr("y", 0)
-.attr("width", 0.45*width-0.05*height)
-.attr("height",0.9*height)
-.attr("fill","black")
-.attr("fill-opacity",0.2)
-.attr("transform","translate("+0.55*width+" "+0.05*height+")")
+      svgc.selectAll("circle.dot")
+      .data(dataset)
+      .enter()
+      .append("circle")
+      .attr("cx", function(d) {
+              return projection([d.lon, d.lat])[0];
+      })
+      .attr("cy", function(d) {
+              return projection([d.lon, d.lat])[1];
+      })
+      .attr("r", r)
+      .attr("class","dot")
+      .attr("id",function(d,m){return "dot_"+m})
+      .style("opacity",0.7)
+      .attr('fill', function(d){return barColor[Math.round(d.duration)-10]})
+      .attr('cursor','pointer')
+      .on("mouseover",function(d,m){
+       mouseover(d,m);
+       })
+      .on("mouseout",function(d,m){
+       mouseout(d,m);
+       })
 
-var bar = svgb.selectAll('.bar')
-            .data(dataset)
-            .enter().append('rect')
-            .attr('class','bar')
-            .attr('id', function(d,m){return "bar_"+m})
-            .attr('x', padding)
-            .attr('y', function(d,m){return m*(barHeight+padding/8)+padding})
-            .attr('width', function(d){return barScale(d.duration)+'px'})
-            .attr('height', barHeight+'px')
-            .attr('fill', function(d){return barColor[Math.round(d.duration)-10]})
-            .attr('opacity',0.7)
-            .attr("transform","translate("+0.55*width+" "+0.05*height+")")
-            .attr('cursor','pointer')
-            .on("mouseover",function(d,m){
-              mouseover(d,m);
-              })
-            .on("mouseout",function(d,m){
-              mouseout(d,m);
-              });
+      svgr
+      .append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", 0.45*width-0.05*height)
+      .attr("height",0.9*height)
+      .attr("fill","black")
+      .attr("fill-opacity",0.2)
+      .attr("transform","translate("+0.55*width+" "+0.05*height+")")
 
-var city = svgt.selectAll('.city')
-            .data(dataset)
-            .enter().append('text')
-            .attr('class', 'city')
-            .attr('id',function(d,m){return 'city_'+m})
-            .attr("x",function(d){return padding*1.5})
-            .attr("y",function(d,m){return m*(barHeight+padding/8)+padding+barHeight/2})
-            .attr("transform","translate("+0.55*width+" "+(0.05*height+barHeight/4)+")")
-            .attr("font-size", fontSize)
-            .attr("opacity", 0.7)
-            .attr("text-anchor","start")
-            .text(function(d){return d.city});
+var   bar = svgb.selectAll('.bar')
+      .data(dataset)
+      .enter().append('rect')
+      .attr('class','bar')
+      .attr('id', function(d,m){return "bar_"+m})
+      .attr('x', padding)
+      .attr('y', function(d,m){return m*(barHeight+padding/8)+padding})
+      .attr('width', function(d){return barScale(d.duration)+'px'})
+      .attr('height', barHeight+'px')
+      .attr('fill', function(d){return barColor[Math.round(d.duration)-10]})
+      .attr('opacity',0.7)
+      .attr("transform","translate("+0.55*width+" "+0.05*height+")")
+      .attr('cursor','pointer')
+      .on("mouseover",function(d,m){
+        mouseover(d,m);
+        })
+      .on("mouseout",function(d,m){
+        mouseout(d,m);
+        });
 
-var mouseover = function(d,m) {
-              svgb.select("#bar_"+m).attr("opacity", 1);
-              svgc.select("#dot_"+m).attr("r", function(){
-            if(scale==1)
-            return 1.4*r
-            else return 2.8*r/scale}).style("opacity",1);
-              svgt.select("#city_"+m).attr("opacity", 1);
-              svgc.select("#dotbase_"+m)
-              .attr("r", function(){
-            if(scale==1)
-            return 3*r
-            else return 6*r/scale})
-              .attr("stroke-width",1/scale);
+var   city = svgt.selectAll('.city')
+      .data(dataset)
+      .enter().append('text')
+      .attr('class', 'city')
+      .attr('id',function(d,m){return 'city_'+m})
+      .attr("x",function(d){return padding*1.5})
+      .attr("y",function(d,m){return m*(barHeight+padding/8)+padding+barHeight/2})
+      .attr("transform","translate("+0.55*width+" "+(0.05*height+barHeight/4)+")")
+      .attr("font-size", fontSize)
+      .attr("opacity", 0.7)
+      .attr("text-anchor","start")
+      .text(function(d){return d.city});
+
+var   mouseover = function(d,m) {
+                  svgb.select("#bar_"+m).attr("opacity", 1);
+                  
+                  svgc.select("#dot_"+m).attr("r", 1.4*r)
+                  .style("opacity",1);
+                  
+                  svgt.select("#city_"+m).attr("opacity", 1);
+                  
+                  svgc.select("#dotbase_"+m)
+                  .attr("r", 3*r)
+                  .attr("stroke-width",1);
               
-              svgl.append("line")
-              .attr("class","line")
-              .attr("x1",function() {
-                  if (d.lon>=100) {
-                        return projection([d.lon, d.lat])[0] - 1.41*1.5*r
-                  }else {
-                        return projection([d.lon, d.lat])[0] + 1.41*1.5*r
-                  }
-              })
-              .attr("y1",projection([d.lon, d.lat])[1] - 1.41*1.5*r)
-              .attr("x2",function() {
-                  if (d.lon>=100) {
+                  svgl.append("line")
+                  .attr("class","line")
+                  .attr("x1",function() {
+                        if (d.lon>=100) {
+                              return projection([d.lon, d.lat])[0] - 1.41*1.5*r
+                        }else {
+                              return projection([d.lon, d.lat])[0] + 1.41*1.5*r
+                        }
+                        })
+                  .attr("y1",projection([d.lon, d.lat])[1] - 1.41*1.5*r)
+                  .attr("x2",function() {
+                        if (d.lon>=100) {
                         return projection([d.lon, d.lat])[0] - 2.8*padding
-                  }else {
+                        }else {
                         return projection([d.lon, d.lat])[0] + 2.8*padding
-                  }
-              })
-              .attr("y2",projection([d.lon, d.lat])[1] - 2.8*padding)
-              .attr('stroke', function(){return barColor[Math.round(d.duration)-10]})
-              .attr('stroke-width',1)
+                        }
+                        })
+                  .attr("y2",projection([d.lon, d.lat])[1] - 2.8*padding)
+                  .attr('stroke', function(){return barColor[Math.round(d.duration)-10]})
+                  .attr('stroke-width',1)
               
-              svgt.append("text")
-              .attr("id","duration_"+m)
-              .attr("x",padding*1.5+barScale(d.duration))
-              .attr("y",m*(barHeight+padding/8)+padding+barHeight/2)
-              .attr("transform","translate("+0.55*width+" "+(0.05*height+barHeight/4)+")")
-              .attr("font-size", 0.9*fontSize)
-              .attr("opacity", 1)
-              .attr("text-anchor","start")
-              .text(Math.round(d.duration*100)/100);
+                  svgt.append("text")
+                  .attr("id","duration_"+m)
+                  .attr("x",padding*1.5+barScale(d.duration))
+                  .attr("y",m*(barHeight+padding/8)+padding+barHeight/2)
+                  .attr("transform","translate("+0.55*width+" "+(0.05*height+barHeight/4)+")")
+                  .attr("font-size", 0.9*fontSize)
+                  .attr("opacity", 1)
+                  .attr("text-anchor","start")
+                  .text(Math.round(d.duration*100)/100);
               
-              var textDetail = svgt.append("text")
-              .attr("id","country_"+m)
-              .attr("x", function() {
-                  if (d.lon>=100) {
-                        return projection([d.lon, d.lat])[0] - 3*padding
-                  }else {
-                        return projection([d.lon, d.lat])[0] + 3*padding
-                  }
-              })
-              .attr("y", projection([d.lon, d.lat])[1] - 4*padding)
-              .attr("font-size", fontSize)
-              .attr("opacity", 1)
-              .attr("text-anchor",function() {
-                  if (d.lon>=100) {
-                        return "end"
-                  }else {
-                        return "start"
-                  }
-              });
+                  var   textDetail = svgt.append("text")
+                        .attr("id","country_"+m)
+                        .attr("x", function() {
+                              if (d.lon>=100) {
+                                    return projection([d.lon, d.lat])[0] - 3*padding
+                              }else {
+                                    return projection([d.lon, d.lat])[0] + 3*padding
+                        }
+                        })
+                        .attr("y", projection([d.lon, d.lat])[1] - 4*padding)
+                        .attr("font-size", fontSize)
+                        .attr("opacity", 1)
+                        .attr("text-anchor",function() {
+                              if (d.lon>=100) {
+                                    return "end"
+                              }else {
+                                    return "start"
+                              }
+                              });
               
-              textDetail
-              .append("tspan")
-              .attr("x", function() {
-                  if (d.lon>=100) {
-                        return projection([d.lon, d.lat])[0] - 3*padding
-                  }else {
-                        return projection([d.lon, d.lat])[0] + 3*padding
-                  }
-              })
-	      .text(d.city+", "+d.country.toUpperCase());
+                        textDetail
+                        .append("tspan")
+                        .attr("x", function() {
+                            if (d.lon>=100) {
+                                  return projection([d.lon, d.lat])[0] - 3*padding
+                            }else {
+                                  return projection([d.lon, d.lat])[0] + 3*padding
+                            }
+                        })
+                        .text(d.city+", "+d.country.toUpperCase());
               
-              textDetail
-              .append("tspan")
-              .attr("x", function() {
-                  if (d.lon>=100) {
-                        return projection([d.lon, d.lat])[0] - 3*padding
-                  }else {
-                        return projection([d.lon, d.lat])[0] + 3*padding
-                  }
-              })
-	      .attr("dy","1.1em")
-	      .text(d.start+" - "+d.end);
-              
-            
-};
+                        textDetail
+                        .append("tspan")
+                        .attr("x", function() {
+                            if (d.lon>=100) {
+                                  return projection([d.lon, d.lat])[0] - 3*padding
+                            }else {
+                                  return projection([d.lon, d.lat])[0] + 3*padding
+                            }
+                        })
+                        .attr("dy","1.1em")
+                        .text(d.start+" - "+d.end);           
+                  }; //end of mouseover
 
-var mouseout = function(d,m) {
-              svgb.select("#bar_"+m).attr("opacity", 0.7);
-              svgc.select("#dot_"+m).attr("r", function(){
-            if(scale==1)
-            return r
-            else return 2*r/scale}).style("opacity",0.7);
-              svgt.select("#city_"+m).attr("opacity", 0.7);
-              svgc.select("#dotbase_"+m)
-              .attr("r",0)
-              .attr("stroke-width",0);
-              svgt.select("#duration_"+m).remove();
-              svgt.select("#country_"+m).remove();
-              svgl.selectAll(".line").remove();
-};
-};
+var   mouseout =  function(d,m) {
+                  svgb.select("#bar_"+m).attr("opacity", 0.7);
+                  svgc.select("#dot_"+m).attr("r", r)
+                  .style("opacity",0.7);
+                  svgt.select("#city_"+m).attr("opacity", 0.7);
+                  svgc.select("#dotbase_"+m)
+                  .attr("r",0)
+                  .attr("stroke-width",0);
+                  svgt.select("#duration_"+m).remove();
+                  svgt.select("#country_"+m).remove();
+                  svgl.selectAll(".line").remove();
+                  }; //end of mouseout
+}; //end of draw
