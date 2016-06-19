@@ -92,17 +92,16 @@ var title = svgt.append("text") //dummytext for font-sizing
         title
         .append("tspan")
         .attr("x", 0.55*width-padding)
-	.text("LAMA PUASA")
-	.each(function(){
-	      textheight = d3.select(this).node().getBoundingClientRect().height;
-	});
+	.text("LAMA PUASA");
         
         title
         .append("tspan")
         .attr("x", 0.55*width-padding)
         .attr("dy","0.85em")
 	.text("LAMA")
-        
+        .each(function(){
+	      textheight = d3.select(this).node().getBoundingClientRect().height;
+	});
         
 var fontSize = barHeight/textheight*12;
 
