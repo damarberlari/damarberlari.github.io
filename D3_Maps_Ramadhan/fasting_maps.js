@@ -97,7 +97,7 @@ var title = svgt.append("text") //dummytext for font-sizing
         .attr("x", 0.55*width-padding)
         .attr("y",0.05*height + 3.6*padding)
         .attr("text-anchor","end")
-        .attr("font-size",fontSize*3.5);
+        .attr("font-size",fontSize*3.2);
         
         title
         .append("tspan")
