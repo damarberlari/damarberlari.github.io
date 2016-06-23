@@ -1,0 +1,154 @@
+body {
+  background: white;
+  box-sizing: border-box;
+  margin:0;
+  color: white;
+}
+
+a {
+  text-decoration: none;
+}
+
+.nav{
+  width:100%;
+  height: 50px;
+  background: black;
+  position: fixed;
+  box-sizing: inherit;
+  padding: 0 10px;
+  color: white;
+  z-index: 1;
+}
+
+.nav p{
+  position: absolute;
+  width: 900px;
+  height: 45%;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: right;
+  padding: 0 20px;
+  margin: auto;
+  font-size: 1em;
+  box-sizing: border-box;
+}
+
+.wrapper{
+  width: 90%;
+  min-height: 600px;
+  padding-top:50px;
+  margin: auto;
+  background: white;
+  box-sizing: inherit;
+}
+
+.box_1 {
+  width: 50%;
+  height: 400px;
+  display: inline-block;
+  box-sizing: inherit;
+  vertical-align: top;
+  padding: 5px;
+}
+
+.box_2 {
+  width: 25%;
+  height: 400px;
+  display: inline-block;
+  box-sizing: inherit;
+  vertical-align: top;
+  padding: 5px;
+}
+
+.box_3 {
+  width: 300px;
+  height: 200px;
+  display: inline-block;
+  box-sizing: inherit;
+  vertical-align: top;
+  padding: 5px;
+}
+
+.box_wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-image: url("DSC08719.jpg");
+  background-size:cover;
+  background-position: center;
+  transition: all 0.3s ease 0s; 
+  -webkit-transition: all 0.3s ease 0s; 
+}
+
+.box_wrapper::before {
+  content: "";
+  position: absolute;
+  width:100%;
+  height: 100%;
+  background: black;
+  transition: all 0.5s ease 0s; 
+  -webkit-transition: all 0.5s ease 0s; 
+  opacity: 0.2;
+}
+
+.box_wrapper:hover{
+  background-size: auto 150%;
+}
+
+.box_wrapper:hover::before{
+  opacity: 0;
+}
+
+
+p.title{
+  color: white;
+  font-size: 1.8em;
+  position: absolute;
+  bottom: 0px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+p {
+  margin:0;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+}
+
+@media screen and (max-width: 900px) {
+    .wrapper{
+      width: 800px;
+    }
+    
+    .nav p{
+      width: 800px;
+    }
+    
+    .box_1 {
+      width: 800px;
+      height: 400px;
+    }
+    
+    .box_2 {
+      width: 400px;
+      height: 400px;
+    }
+    
+    .box_3 {
+      width: 400px;
+      height: 200px;
+    }
+    
+}
+
+@media screen and (max-width: 800px) {
+    .wrapper, .box_1, .box_2{
+    width: 100%;
+    height: 400px;
+    }
+    
+    .nav p {
+      width: 100%;
+    }
+}
