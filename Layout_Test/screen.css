@@ -25,11 +25,25 @@ a {
   top: 13px;
   text-align: right;
   list-style: none;
-  font-family: "Montserrat", Helvetica, Arial, sans-serif;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
   vertical-align: middle;
   margin: auto;
   padding: 0 10px;
-  font-size: 1em;
+  font-size: 1.1em;
+  font-weight: 300;
+  box-sizing: border-box;
+}
+
+.nav .site-title{
+  position: absolute;
+  top: 13px;
+  text-align: right;
+  list-style: none;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  vertical-align: middle;
+  margin: auto;
+  padding: 0 10px;
+  font-size: 1.1em;
   font-weight: 300;
   box-sizing: border-box;
 }
@@ -155,17 +169,6 @@ p {
       width: 100%;
     }
     
-    .nav {
-      height:60px
-    }
-    .nav ul{
-      top: 20px;
-    }
-    
-    .wrapper{
-      top: 60px;
-    }
-    
     .box:nth-child(1){
       width: calc(99.99% - 5px);
       padding-top: 50%;
@@ -186,9 +189,6 @@ p {
 }
 
 @media screen and (max-width: 800px) {
-    p.title{
-    }
-  
     .wrapper{
     width: 100%;
     }
@@ -217,7 +217,7 @@ p {
 }
 
 @media screen and (max-device-width: 480px) {
-    p.title{
+    p.title {
     font-size: 4.5em;
     }
   
@@ -237,9 +237,10 @@ p {
       top: -1px;
     }
     
-    .nav p {
-      width: 100%;
-      font-size: 4em;
+    .nav .site-title {
+      font-size: 3.5em;
+      margin-top: 14px;
+      margin-left: 20px;
     }
     
         .nav ul {
@@ -252,7 +253,7 @@ p {
     
     .menu-box {
       margin-top: 40px;
-      margin-right: 30px;
+      margin-right: 20px;
       width: 60px;
       height: 60px;
     }
