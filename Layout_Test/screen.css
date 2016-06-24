@@ -137,23 +137,24 @@ a {
   height: 100%;
   box-sizing: border-box;
   background: black; /* For browsers that do not support gradients */
-  background: -webkit-radial-gradient(rgba(0,0,0,0),rgba(0,0,0,0.6)); /* Safari 5.1 to 6.0 */
-  background: -o-radial-gradient(rgba(0,0,0,0),rgba(0,0,0,0.6)); /* For Opera 11.6 to 12.0 */
-  background: -moz-radial-gradient(rgba(0,0,0,0),rgba(0,0,0,0.6)); /* For Firefox 3.6 to 15 */
-  background: radial-gradient(rgba(0,0,0,0),rgba(0,0,0,0.6)); /* Standard syntax */
+  background: -webkit-radial-gradient(rgba(32,32,32,0.2),rgba(32,32,32,0.6)); /* Safari 5.1 to 6.0 */
+  background: -o-radial-gradient(rgba(32,32,32,0.2),rgba(32,32,32,0.6)); /* For Opera 11.6 to 12.0 */
+  background: -moz-radial-gradient(rgba(32,32,32,0.2),rgba(32,32,32,0.6)); /* For Firefox 3.6 to 15 */
+  background: radial-gradient(rgba(32,32,32,0.2),rgba(32,32,32,0.6)); /* Standard syntax */
   transition: all 0.5s ease 0s; 
   -webkit-transition: all 0.5s ease 0s;
 }
 
 .box_wrapper:hover::before {
-  opacity: 0.1;
+  opacity: 0.2;
 }
 
 
 p.title{
+  width: 100%;
   color: white;
   position: absolute;
-  font-size: 1.4em;
+  font-size: 2em;
   text-transform: uppercase;
   bottom: 0px;
   padding: 20px;
@@ -162,7 +163,8 @@ p.title{
 
 p {
   margin:0;
-  font-family: "Montserrat", Helvetica, Arial, sans-serif;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-weight: 400;
 }
 
 @media screen and (max-width: 1024px) {
@@ -187,9 +189,34 @@ p {
     .box:nth-child(3), .box:nth-child(4){
       width: calc(66.66% - 5px);
     }
+    
+    p.title {
+      font-size: 1.6em;
+    }
 }
 
 @media screen and (max-width: 800px) {
+    .wrapper{
+    width: 100%;
+    }
+    
+    .box, .box:nth-child(2), .box:nth-child(3), .box:nth-child(5), .box:nth-child(6), .box:nth-child(8) {
+    width: calc(50% - 5px);
+    padding-top: 50%;
+    }
+    
+    box:nth-child(1), .box:nth-child(4) {
+    width: calc(100% - 5px);
+    padding-top: 50%;
+    }
+    
+    p.title {
+      font-size: 1.8em;
+    }
+
+}
+
+@media screen and (max-width: 576px) {
     .wrapper{
     width: 100%;
     }
@@ -210,5 +237,9 @@ p {
     
     .menu-box, .menu-box::before {
       display: block;
+    }
+    
+    p.title {
+      font-size: 1.5em;
     }
 }
