@@ -11,10 +11,10 @@ a {
 
 .nav{
   width:100%;
+  height: 50px;
   background: black;
   position: fixed;
   box-sizing: inherit;
-  padding-top:4%;
   color: white;
   z-index: 1;
 }
@@ -37,24 +37,25 @@ a {
 .wrapper{
   width: 100%;
   position: relative;
-  padding-top:4%;
+  top: 50px;
   margin: auto;
   background: white;
 }
 
 .box {
-  width: 24.5%;
-  margin:0.25%;
+  width: calc(25% - 5px);
+  margin:2.5px;
   display: inline-block;
   box-sizing: inherit;
   vertical-align: top;
   padding-top: 25%;
   position:relative;
   border-radius: 25px;
+  box-sizing: border-box;
 }
 
 .box:nth-child(1) {
-  width: 74.5%;
+  width: calc(75% - 5px);
   padding-top: 40%;
 }
 
@@ -63,7 +64,7 @@ a {
 }
 
 .box:nth-child(4), .box:nth-child(6) {
-  width: 49.5%;
+  width: calc(50% - 5px);
 }
 
 .box_wrapper {
@@ -116,18 +117,18 @@ p {
     }
     
     .nav {
-      padding-top: 6%;
+      height:60px
     }
     .nav p{
       width: 100%;
     }
     
     .wrapper{
-      padding-top: 6%;
+      top: 60px;
     }
     
     .box:nth-child(1){
-      width: 99.49%;
+      width: calc(99.99% - 5px);
       padding-top: 50%;
     }
     
@@ -136,12 +137,12 @@ p {
     }
     
     .box, .box:nth-child(6) {
-      width: 32.83%;
+      width: calc(33.33% - 5px);
       padding-top: 33.33%;
     }
     
     .box:nth-child(3), .box:nth-child(4){
-      width: 66.16%;
+      width: calc(66.66% - 5px);
     }
 }
 
@@ -156,11 +157,7 @@ p {
     .box, .box:nth-child(1), .box:nth-child(2), .box:nth-child(3), .box:nth-child(4), .box:nth-child(5), .box:nth-child(6), .box:nth-child(8) {
     width: 100%;
     padding-top: 60%;
-    margin: .5% 0;
-    }
-    
-    .nav {
-      padding-top: 15%;
+    margin: 2px 0;
     }
     
     .nav p {
@@ -180,11 +177,12 @@ p {
     .box, .box:nth-child(1), .box:nth-child(2), .box:nth-child(3), .box:nth-child(4), .box:nth-child(5), .box:nth-child(6), .box:nth-child(8) {
     width: 100%;
     padding-top: 60%;
-    margin: .5% 0;
+    margin: 2px 0;
     }
     
     .nav {
-      padding-top: 15%;
+      height:120px;
+      top: -1px;
     }
     
     .nav p {
