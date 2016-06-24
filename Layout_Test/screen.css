@@ -20,6 +20,14 @@ a {
   top: -1px;
 }
 
+.nav-base {
+  width:100%;
+  height: 51px;
+  box-sizing: inherit;
+  color: white;
+  top: -1px;
+}
+
 .nav ul{
   position: absolute;
   right: 0;
@@ -91,7 +99,6 @@ a {
 .wrapper{
   width: 100%;
   position: relative;
-  top: 50px;
   margin: auto;
   background: white;
 }
@@ -108,16 +115,16 @@ a {
   box-sizing: border-box;
 }
 
-.box:nth-child(1) {
+.box:nth-child(2) {
   width: calc(75% - 5px);
   padding-top: 40%;
 }
 
-.box:nth-child(2) {
+.box:nth-child(3) {
   padding-top: 40%;
 }
 
-.box:nth-child(4), .box:nth-child(6) {
+.box:nth-child(5), .box:nth-child(7) {
   width: calc(50% - 5px);
 }
 
@@ -152,6 +159,7 @@ a {
 
 p.title{
   width: 100%;
+  max-height: 100%;
   color: white;
   position: absolute;
   font-size: 2em;
@@ -168,26 +176,36 @@ p {
   font-weight: 400;
 }
 
+footer {
+  width: 100%;
+  margin: 5px;
+  position: relative;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-size: 0.8em;
+  color: #202020;
+  text-align: center;
+}
+
 @media screen and (max-width: 1024px) {
     .wrapper{
       width: 100%;
     }
     
-    .box:nth-child(1){
+    .box:nth-child(2){
       width: calc(99.99% - 5px);
       padding-top: 50%;
     }
     
-    .box:nth-child(2){
+    .box:nth-child(3){
       padding-top: 33.33%;
     }
     
-    .box, .box:nth-child(6) {
+    .box, .box:nth-child(7) {
       width: calc(33.33% - 5px);
       padding-top: 33.33%;
     }
     
-    .box:nth-child(3), .box:nth-child(4){
+    .box:nth-child(4), .box:nth-child(5){
       width: calc(66.66% - 5px);
     }
     
@@ -201,12 +219,12 @@ p {
     width: 100%;
     }
     
-    .box, .box:nth-child(2), .box:nth-child(3), .box:nth-child(5), .box:nth-child(6), .box:nth-child(8) {
+    .box, .box:nth-child(3), .box:nth-child(4), .box:nth-child(6), .box:nth-child(7), .box:nth-child(9) {
     width: calc(50% - 5px);
     padding-top: 50%;
     }
     
-    box:nth-child(1), .box:nth-child(4) {
+    box:nth-child(2), .box:nth-child(5) {
     width: calc(100% - 5px);
     padding-top: 50%;
     }
@@ -222,7 +240,7 @@ p {
     width: 100%;
     }
     
-    .box, .box:nth-child(1), .box:nth-child(2), .box:nth-child(3), .box:nth-child(4), .box:nth-child(5), .box:nth-child(6), .box:nth-child(8) {
+    .box, .box:nth-child(2), .box:nth-child(3), .box:nth-child(4), .box:nth-child(5), .box:nth-child(6), .box:nth-child(7), .box:nth-child(9) {
     width: 100%;
     padding-top: 60%;
     margin: 2px 0;
