@@ -180,9 +180,10 @@ p {
 
 p.meta {
   font-family: "Lato", Helvetica, Arial, sans-serif;
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight: 400;
   margin-bottom: 30px;
+  color: dimgray;
 }
 
 .post-content h1 {
