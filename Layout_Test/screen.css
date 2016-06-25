@@ -184,7 +184,7 @@ p.meta {
   margin-bottom: 30px;
 }
 
-.wrapper h1 {
+.post-content h1 {
   font-family: "Lato", Helvetica, Arial, sans-serif;
   font-weight: 700;
   font-size: 2.5em;
@@ -220,6 +220,12 @@ footer {
   max-width: 700px;
   min-height: 900px;
   margin: auto;
+}
+
+.post-content img {
+  width: 100%;
+  height: auto;
+  margin: 10px 0;
 }
 
 @media screen and (max-width: 1024px) {
