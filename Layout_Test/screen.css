@@ -3,6 +3,7 @@ body {
   box-sizing: border-box;
   margin:0;
   color: white;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -234,9 +235,45 @@ footer {
 .post-footer {
   width: 100%;
   max-width: 700px;
-  min-height: 100px;
   margin: auto;
-  border-top: 1px solid #404040;
+}
+
+.post-footer .footer-meta {
+  margin: 5%;
+  border-top: 1px solid #BDBDBD;
+  color: black;
+  min-height: 100px;
+  padding-top: 5%;
+}
+
+.author-image {
+  width: 80px;
+  height: 80px;
+  margin:0;
+  border-radius: 50%;
+  background: black;
+  background-size:cover;
+  background-position: center;
+  display: inline-block;
+}
+
+.author-meta {
+  width: calc(100% - 80px);
+  position: relative;
+  height: 80px;
+  margin: 0;
+  display: inline-block;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.author-meta h4{
+  width: 100%;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  margin:0;
+  position: absolute;
+  box-sizing: border-box;
 }
 
 @media screen and (max-width: 1024px) {
