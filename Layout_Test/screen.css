@@ -232,6 +232,11 @@ footer {
   margin: 10px 0;
 }
 
+.d3-content {
+  width: 1024px;
+  margin-left: -137px;
+}
+
 .post-footer {
   width: 100%;
   max-width: 750px;
@@ -356,6 +361,11 @@ p.next-title{
     
     p.title {
       font-size: 1.6rem;
+    }
+    
+    .d3-content {
+      width: 100%;
+      margin-left: 0;
     }
 }
 
