@@ -2,12 +2,18 @@ body {
   background: white;
   box-sizing: border-box;
   margin:0;
-  color: white;
+  color: #212121;
   font-family: "Lato", Helvetica, Arial, sans-serif;
 }
 
-a {
+a, a:visited {
   text-decoration: none;
+  color: #212121;
+}
+
+a:hover {
+  color: #F44336;
+  text-decoration: underline;
 }
 
 .nav{
@@ -177,7 +183,6 @@ p {
   text-align: left;
   line-height: 1.8rem;
   margin: 5%;
-  color: black;
 }
 
 p.meta {
@@ -196,7 +201,6 @@ p.meta {
   text-transform: uppercase;
   line-height: 3rem;
   margin: 5%;
-  color: black;
 }
 
 footer {
@@ -204,11 +208,8 @@ footer {
   font-family: "Lato", Helvetica, Arial, sans-serif;
   font-weight: 400;
   font-size: 0.9rem;
-  color: #202020;
   text-align: center;
   padding: 0 0 2.5px 0;
-  position: relative;
-  top:50px;
 }
 
 .header-image {
@@ -288,48 +289,24 @@ footer {
 
 .recommended-post-wrapper {
   width: 100%;
-  margin: 5%;
   max-width: 750px;
   min-height: 100px;
   margin: auto;
   margin-bottom: 10px;
 }
 
-.prev-post {
-  width:50%;
-  position: relative;
-  padding-top:35%;
-  display: block;
-  float: left;
-      background-size:cover;
-      background-position: center;
-}
-
-.next-post {
-  width:50%;
-  position: relative;
-  padding-top:35%;
-  display: block;
-  float: right;
-      background-size:cover;
-      background-position: center;
-}
-
 p.prev-title, p.next-title{
-  width: 100%;
-  max-height: 100%;
-  margin:0;
+  width: 40%;
+  margin:0px 5%;
   font-family: "Lato", Helvetica, Arial, sans-serif;
   font-weight: 400;
   color: #212121;
-  position: absolute;
-  top: 0;
-  font-size: 1.2rem;
-  line-height: 1.5rem;
+  font-size: 1.3rem;
+  line-height: 2rem;
   text-transform: uppercase;
-  bottom: 0px;
-  padding: 20px;
+  padding: 20px 0;
   box-sizing: border-box;
+  display: inline-block;
 }
 
 p.next-title{
@@ -440,10 +417,7 @@ p.next-title{
       text-align: center; 
     }
     
-    .prev-post, .next-post {
-      width: 100%;
-      padding-top: 25%;
+    p.prev-title, p.next-title{
+      width: 90%;
     }
-    
-    
 }
