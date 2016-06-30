@@ -34,7 +34,7 @@ d3.json("http://damarberlari.github.io/D3_Maps_Ramadhan/world-110m2.json", funct
 });
 
 window.onresize = function(){
-		var newW = 1.12*d3.select(".d3-content").node().getBoundingClientRect().width;
+		var newW = d3.select(".d3-content").node().getBoundingClientRect().width;
 		if(newW!=width){
 			svg.remove();
 			draw();
@@ -42,7 +42,7 @@ window.onresize = function(){
 	}
 
 function draw(){
-width = 1.12*d3.select(".d3-content").node().getBoundingClientRect().width
+width = d3.select(".d3-content").node().getBoundingClientRect().width
 var   height = 720/1280*width,
       padding = width/1280*15,
       centered,
