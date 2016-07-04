@@ -1080,16 +1080,13 @@ svgr
 .attr('y',130)
 .attr('width',1019)
 .attr('height',200)
-.on('mouseenter',function(d,m){
-  showBase((d3.mouse(this)[0]-90+5),10,170,110,'#CFD8DC');
-  showScreenshot((d3.mouse(this)[0]-90+10),15,160,100,'url(#bg-'+Math.round(d3.mouse(this)[0]-90)+')');
-  })
 .on('mousemove',function(d,m){
   removeScreenshot();
   showBase((d3.mouse(this)[0]-90+5),10,170,110,'#CFD8DC');
   showScreenshot((d3.mouse(this)[0]-90+10),15,160,100,'url(#bg-'+Math.round(d3.mouse(this)[0]-90)+')');
   })
 .on('touchstart',function(d,m){
+  removeScreenshot();
   showBase((d3.mouse(this)[0]-90+5),10,170,110,'#CFD8DC');
   showScreenshot((d3.mouse(this)[0]-90+10),15,160,100,'url(#bg-'+Math.round(d3.mouse(this)[0]-90)+')');
   })
@@ -1098,8 +1095,7 @@ svgr
   showBase((d3.mouse(this)[0]-90+5),10,170,110,'#CFD8DC');
   showScreenshot((d3.mouse(this)[0]-90+10),15,160,100,'url(#bg-'+Math.round(d3.mouse(this)[0]-90)+')');
   })
-.on('mouseleave',function(){removeScreenshot()})
-.on('touchend',function(){removeScreenshot()});
+.on('mouseleave',function(){removeScreenshot()});
 
 svgr.selectAll('.bar')
 .data(dataset)
