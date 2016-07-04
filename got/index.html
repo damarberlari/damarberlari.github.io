@@ -19,7 +19,7 @@ svg {
   margin: auto;
 }
 
-.title{
+text{
   font-family: "Lato", Helvetica, Arial, sans-serif;
   fill: white;
   pointer-events: none;
@@ -1073,6 +1073,34 @@ var svgs = svg.append('g').attr('id','screenshot');
 var svgr = svg.append('g').attr('id','barcode');
 var svgt = svg.append('g').attr('id','text');
 
+svgr
+.append('rect')
+.attr('class','barbase')
+.attr('x',90)
+.attr('y',130)
+.attr('width',1019)
+.attr('height',200)
+.on('mouseenter',function(d,m){
+  showBase((d3.mouse(this)[0]-90+5),10,170,110,'#CFD8DC');
+  showScreenshot((d3.mouse(this)[0]-90+10),15,160,100,'url(#bg-'+Math.round(d3.mouse(this)[0]-90)+')');
+  })
+.on('mousemove',function(d,m){
+  removeScreenshot();
+  showBase((d3.mouse(this)[0]-90+5),10,170,110,'#CFD8DC');
+  showScreenshot((d3.mouse(this)[0]-90+10),15,160,100,'url(#bg-'+Math.round(d3.mouse(this)[0]-90)+')');
+  })
+.on('touchstart',function(d,m){
+  showBase((d3.mouse(this)[0]-90+5),10,170,110,'#CFD8DC');
+  showScreenshot((d3.mouse(this)[0]-90+10),15,160,100,'url(#bg-'+Math.round(d3.mouse(this)[0]-90)+')');
+  })
+.on('touchmove',function(d,m){
+  removeScreenshot();
+  showBase((d3.mouse(this)[0]-90+5),10,170,110,'#CFD8DC');
+  showScreenshot((d3.mouse(this)[0]-90+10),15,160,100,'url(#bg-'+Math.round(d3.mouse(this)[0]-90)+')');
+  })
+.on('mouseleave',function(){removeScreenshot()})
+.on('touchend',function(){removeScreenshot()});
+
 svgr.selectAll('.bar')
 .data(dataset)
 .enter()
@@ -1084,11 +1112,7 @@ svgr.selectAll('.bar')
 .attr('height',200)
 .attr('fill',function(d){return d})
 .attr('stroke',function(d){return d})
-.on('mouseover',function(d,m){
-  showBase((m+5),10,170,110,'#CFD8DC');
-  showScreenshot((m+10),15,160,100,'url(#bg-'+m+')');
-  })
-.on('mouseout',function(){removeScreenshot()});
+.attr('pointer-events','none');
 
 svgt.append('text')
 .attr('class','title')
