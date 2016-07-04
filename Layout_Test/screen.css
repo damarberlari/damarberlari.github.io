@@ -184,10 +184,11 @@ p.title{
 
 p {
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 1.1rem;
   text-align: left;
   line-height: 1.8rem;
+  -webkit-font-smoothing: auto;
 }
 
 p.meta {
@@ -286,19 +287,19 @@ footer {
 .author-image {
   width: 80px;
   height: 80px;
-  margin:2rem 0;
+  margin:2rem auto;
   border-radius: 50%;
   background: black;
   background-size:cover;
   background-position: center;
-  display: inline-block;
+  display: block;
 }
 
 .author-meta {
-  width: calc(100% - 80px);
-  position: absolute;
-  margin:2rem 0;
-  display: inline-block;
+  width: 100%;
+  position: relative;
+  margin:auto;
+  display: block;
   padding: 0 25px;
   box-sizing: border-box;
 }
@@ -309,6 +310,8 @@ footer {
   font-size: 1.1rem;
   margin: 0 0 5px 0;
   box-sizing: border-box;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .author-meta p{
@@ -317,6 +320,7 @@ footer {
   font-weight: 300;
   margin:0;
   box-sizing: border-box;
+  text-align: center;
 }
 
 .prev-title, .next-title{
