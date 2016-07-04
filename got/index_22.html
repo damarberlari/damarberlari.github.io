@@ -27,6 +27,7 @@ text{
 </style>
 </head>
 <body>
+<div id='location'>Mouse Location: </div>
 <div class='d3-content'></div>
 <script>
 var dataset=['#927D6B',
@@ -1073,6 +1074,20 @@ var svgs = svg.append('g').attr('id','screenshot');
 var svgr = svg.append('g').attr('id','barcode');
 var svgt = svg.append('g').attr('id','text');
 
+svgr
+.append('rect')
+.attr('x',90)
+.attr('y',130)
+.attr('width',1019)
+.attr('height',200)
+.attr('stroke-width',8)
+.attr('fill','black')
+.attr('stroke','#CFD8DC')
+.on('touchstart',function(){showLocation(d3.touches(this)[0])})
+.on('touchmove',function(){showLocation(d3.touches(this)[0])})
+.on('mousemove',function(){showLocation(d3.mouse(this))});
+
+
 svgr.selectAll('.bar')
 .data(dataset)
 .enter()
@@ -1084,11 +1099,12 @@ svgr.selectAll('.bar')
 .attr('height',200)
 .attr('fill',function(d){return d})
 .attr('stroke',function(d){return d})
-.on('mouseover',function(d,m){
-  showBase((m+5),10,170,110,'#CFD8DC');
-  showScreenshot((m+10),15,160,100,'url(#bg-'+m+')');
-  })
-.on('mouseout',removeScreenshot);
+.attr('pointer-events','none')
+//.on('mouseover',function(d,m){
+//  showBase((m+5),10,170,110,'#CFD8DC');
+//  showScreenshot((m+10),15,160,100,'url(#bg-'+m+')');
+//  })
+//.on('mouseout',removeScreenshot);
 
 svgt.append('text')
 .attr('class','title')
@@ -1097,7 +1113,29 @@ svgt.append('text')
 		.attr('fill','black')
 		.attr('text-anchor','middle')
 		.style('font-size','1.2em')
-		.text('GAME OF THRONES');
+		.text('GAME OF THRONES')
+		.attr('pointer-events','none');
+
+function showLocation(d){
+  d3.event.preventDefault();
+  d3.event.stopPropagation();
+      //d = d3.touches(this);
+      d3.select("#location")
+      .selectAll("p")
+      .data(d)
+      .enter()
+      .append("p");
+      
+      d3.select("#location")
+      .selectAll("p")
+      .data(d)
+      .exit()
+      .remove();
+
+      d3.select("#location")
+      .selectAll("p")
+      .html(function(d) {return d});
+}
 
 function showScreenshot(xloc,yloc,rwidth,rheight,background){
   svgs.append('rect')
