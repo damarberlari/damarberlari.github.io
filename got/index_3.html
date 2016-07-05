@@ -27,7 +27,6 @@ text{
 </style>
 </head>
 <body>
-<div id='location'>Mouse Location: </div>
 <div class='d3-content'></div>
 <script>
 var dataset=['#927D6B',
@@ -1085,7 +1084,9 @@ svgr
 .attr('stroke','#CFD8DC')
 .on('touchstart',function(){showLocation(d3.touches(this)[0])})
 .on('touchmove',function(){showLocation(d3.touches(this)[0])})
-.on('mousemove',function(){showLocation(d3.mouse(this))});
+.on('touchend',function(){svgs.selectAll('.screenshot').attr('display','none')})
+.on('mousemove',function(){showLocation(d3.mouse(this))})
+.on('mouseout',function(){svgs.selectAll('.screenshot').attr('display','none')});
 
 
 svgr.selectAll('.bar')
@@ -1116,27 +1117,34 @@ svgt.append('text')
 		.text('GAME OF THRONES')
 		.attr('pointer-events','none');
 
+svgs
+      .append('rect')
+      .attr('class','screenshot')
+      .attr('x',0)
+      .attr('y',15)
+      .attr('width',160)
+      .attr('height',100)
+      .attr('fill','black')
+      .attr('stroke','#CFD8DC')
+      .attr('stroke-width',4)
+      .attr('display','none');
+		
 function showLocation(d){
   d3.event.preventDefault();
   d3.event.stopPropagation();
-      mousedata=[d[0]];
+  mousedata=[d[0]];
       //d = d3.touches(this);
-      d3.select("#location")
-      .selectAll("p")
-      .data(mousedata)
-      .enter()
-      .append("p");
-      
-      d3.select("#location")
-      .selectAll("p")
+      svgs
+      .selectAll('.screenshot')
       .data(mousedata)
       .exit()
       .remove();
 
-      d3.select("#location")
-      .selectAll("p")
-      .html(function(d) {
-	return d});
+      svgs
+      .selectAll('.screenshot')
+      .attr('x',function(d) {return d-80})
+      .attr('fill',function(d) {return'url(#bg-'+Math.round(d-90)+')'})
+      .attr('display','block');
 }
 
 function showScreenshot(xloc,yloc,rwidth,rheight,background){
