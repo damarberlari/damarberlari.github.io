@@ -1054,7 +1054,7 @@ var width = d3.select(".d3-content").node().getBoundingClientRect().width;
 var svg = d3.select('.d3-content').append('svg')
       .attr('width', '100%')
       .attr('height', '100%') 
-      .attr('viewBox',"0 0 1209 490");
+      .attr('viewBox',"0 0 1199 450");
       
 svg.append("defs")
 	.selectAll("pattern").data(dataset).enter()
@@ -1076,7 +1076,7 @@ var svgt = svg.append('g').attr('id','text');
 svgr
 .append('rect')
 .attr('x',90)
-.attr('y',130)
+.attr('y',125)
 .attr('width',1019)
 .attr('height',200)
 .attr('stroke-width',8)
@@ -1084,9 +1084,9 @@ svgr
 .attr('stroke','#CFD8DC')
 .on('touchstart',function(){showLocation(d3.touches(this)[0])})
 .on('touchmove',function(){showLocation(d3.touches(this)[0])})
-.on('touchend',function(){svgs.selectAll('.screenshot').attr('display','none')})
+.on('touchend',function(){svgs.selectAll('.screenshotblock').attr('display','none')})
 .on('mousemove',function(){showLocation(d3.mouse(this))})
-.on('mouseout',function(){svgs.selectAll('.screenshot').attr('display','none')});
+.on('mouseout',function(){svgs.selectAll('.screenshotblock').attr('display','none')});
 
 
 svgr.selectAll('.bar')
@@ -1095,7 +1095,7 @@ svgr.selectAll('.bar')
 .append('rect')
 .attr('class','bar')
 .attr('x',function(d,m){return m+90})
-.attr('y',130)
+.attr('y',125)
 .attr('width',1)
 .attr('height',200)
 .attr('fill',function(d){return d})
@@ -1118,21 +1118,31 @@ svgt.append('text')
 		.attr('pointer-events','none');
 
 svgs
-      .append('rect')
-      .attr('class','screenshot')
-      .attr('x',0)
-      .attr('y',15)
-      .attr('width',160)
-      .attr('height',100)
-      .attr('fill','black')
-      .attr('stroke','#CFD8DC')
-      .attr('stroke-width',4)
-      .attr('display','none');
+.append('rect')
+.attr('class','screenshot screenshotblock')
+.attr('x',0)
+.attr('y',10)
+.attr('width',160)
+.attr('height',100)
+.attr('fill','black')
+.attr('stroke','#CFD8DC')
+.attr('stroke-width',3.5)
+.attr('display','none');
+
+svgs
+.append('path')
+.attr('class','pointer screenshotblock')
+.attr('fill','#CFD8DC')
+.attr('display','none');
 		
 function showLocation(d){
   d3.event.preventDefault();
   d3.event.stopPropagation();
-  mousedata=[d[0]];
+  if(d[0]<90) {
+    mousedata=[90];
+  }else if(d[0]>1108) {
+    mousedata=[1108];
+  }else {mousedata=[d[0]]};
       //d = d3.touches(this);
       svgs
       .selectAll('.screenshot')
@@ -1144,6 +1154,17 @@ function showLocation(d){
       .selectAll('.screenshot')
       .attr('x',function(d) {return d-80})
       .attr('fill',function(d) {return'url(#bg-'+Math.round(d-90)+')'})
+      .attr('display','block');
+      
+      svgs
+      .selectAll('.pointer')
+      .data(mousedata)
+      .exit()
+      .remove();
+      
+      svgs
+      .selectAll('.pointer')
+      .attr('d',function(d) {return 'M '+d+' 118 l 6 -8 l -12 0 Z'})
       .attr('display','block');
 }
 

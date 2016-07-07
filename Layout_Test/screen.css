@@ -185,9 +185,9 @@ p.title{
 p {
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-weight: 400;
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-align: left;
-  line-height: 1.8rem;
+  line-height: 1.7rem;
 }
 
 p.meta {
@@ -247,10 +247,6 @@ footer {
 .post-content > img {
   width: 100%;
   height: auto;
-  max-width: 750px;
-  box-sizing: border-box;
-  display: block;
-  margin: auto;
 }
 
 .d3-content {
