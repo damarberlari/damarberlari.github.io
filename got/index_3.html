@@ -1083,7 +1083,7 @@ svgr
 .attr('fill','black')
 .attr('stroke','#CFD8DC')
 .on('touchstart',function(){showLocation(d3.touches(this)[0])})
-.on('touchmove',function(){showLocation(d3.touches(this)[0])})
+//.on('touchmove',function(){showLocation(d3.touches(this)[0])})
 .on('touchend',function(){svgs.selectAll('.screenshotblock').attr('display','none')})
 .on('mousemove',function(){showLocation(d3.mouse(this))})
 .on('mouseout',function(){svgs.selectAll('.screenshotblock').attr('display','none')});
@@ -1153,8 +1153,7 @@ function showLocation(d){
       svgs
       .selectAll('.screenshot')
       .attr('x',function(d) {return d-80})
-      .attr('fill','black')
-      //.attr('fill',function(d) {return'url(#bg-'+Math.round(d-90)+')'})
+      .attr('fill',function(d) {return'url(#bg-'+Math.round(d-90)+')'})
       .attr('display','block');
       
       svgs
