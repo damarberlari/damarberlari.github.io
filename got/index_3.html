@@ -1056,18 +1056,18 @@ var svg = d3.select('.d3-content').append('svg')
       .attr('height', '100%') 
       .attr('viewBox',"0 0 1199 450");
       
-//svg.append("defs")
-//	.selectAll("pattern").data(dataset).enter()
-//	.append("pattern")
-//	.attr("id", function(d,m) {return "bg-"+m})
-//	.attr('width', 1)
-//	.attr('height',1)
-//	.append("image")
-//	.attr("xlink:href", function(d,m) {return "./screenshot/"+(m+1)+".jpg"})
-//	.attr("x",0)
-//	.attr("y",0)
-//	.attr('width', 160)
-//	.attr('height', 100);
+svg.append("defs")
+	.selectAll("pattern").data(dataset).enter()
+	.append("pattern")
+	.attr("id", function(d,m) {return "bg-"+m})
+	.attr('width', 1)
+	.attr('height',1)
+	.append("image")
+	.attr("xlink:href", function(d,m) {return "./screenshot/"+(m+1)+".jpg"})
+	.attr("x",0)
+	.attr("y",0)
+	.attr('width', 160)
+	.attr('height', 100);
 	
 var svgs = svg.append('g').attr('id','screenshot');
 var svgr = svg.append('g').attr('id','barcode');
