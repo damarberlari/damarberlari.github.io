@@ -96,7 +96,7 @@ var   title = svgt.append("text")
 var   subtitle = svgt.append("text") //dummytext for font-sizing
       .attr("id","subtitle")
       .attr("x", -padding)
-      .attr("y",4*(barHeight+padding/8)+padding+barHeight/2)
+      .attr("y",4*(barHeight+padding/8)+2*padding+barHeight/2)
       .attr("transform","translate("+0.55*width+" "+(0.05*height+barHeight/4)+")")
       .attr("text-anchor","end")
       .attr("font-size",fontSize)
