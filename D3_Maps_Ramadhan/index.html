@@ -3,7 +3,7 @@
 <head>
     <meta charset='utf-8'>
     <title>Fasting Maps</title>
-    <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css?family=Roboto Condensed:400" rel="stylesheet">
 <style>
 body {
@@ -15,8 +15,8 @@ svg {
 }
 
 .d3-content{
-  width: 89%;
-  margin-top:10%;
+  width: 90%;
+  margin:50px auto;
 }
 
 .axis path,
@@ -38,13 +38,13 @@ path {
 text {
                 font-family: "Lato", Helvetica, Arial, sans-serif;
                 fill: white;
-		font-weight: 300;
+		font-weight: 400;
 		pointer-events: none;
 		letter-spacing: normal;
             }
 
 text#title {
-  font-family: "Roboto Condensed", Helvetica, Arial, sans-serif;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
   font-weight: 400;
 }
 </style>
@@ -53,6 +53,6 @@ text#title {
 <div class='d3-content'></div>
 <script src='http://d3js.org/d3.v3.min.js'></script>
 <script src="http://d3js.org/topojson.v0.min.js"></script>
-<script src='fasting_maps.js'></script>
+<script src='fasting_maps_v2.js'></script>
 </body>
 </html>
