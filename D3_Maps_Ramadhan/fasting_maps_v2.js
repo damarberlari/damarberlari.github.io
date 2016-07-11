@@ -73,7 +73,7 @@ var   svgt = svg.append('g').attr('id','text');
    
 var   barHeight = (0.9*height-3*padding)/dataset.length-padding/8;
         
-var   fontSize = 16;
+var   fontSize = 17;
 
 var   title = svgt.append("text")
       .attr("id","title")
