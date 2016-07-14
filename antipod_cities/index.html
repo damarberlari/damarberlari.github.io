@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Fasting Maps</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
+<style>
+body {
+  background: white;
+}
+
+svg {
+  background: #404040;
+}
+
+.d3-content{
+  width: 50%;
+  margin:auto;
+  position: relative;
+}
+
+text {
+                font-family: "Lato", Helvetica, Arial, sans-serif;
+                fill: white;
+		font-weight: 300;
+		pointer-events: none;
+		letter-spacing: normal;
+            }
+.land_1 {
+  fill: #4CAF50;
+}
+
+.land_0{
+  fill: #1B5E20;
+  opacity: 0.3;
+}
+
+.boundary {
+  fill: none;
+  stroke: dimgray;
+  stroke-width: .5px;
+}
+
+.graticule {
+  fill: none;
+  stroke: #fff;
+  stroke-width: .5px;
+  stroke-opacity: .3;
+}
+
+.sphere {
+  fill: #03A9F4;
+}
+
+canvas {
+  width:100%;
+  height: auto;
+  position: absolute;
+  left:0;
+}
+
+</style>
+</head>
+<body>
+<div class='d3-content'></div>
+<script src='http://d3js.org/d3.v3.min.js'></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
+<script src='globe_rotate.js'></script>
+</body>
+</html>
