@@ -4,29 +4,33 @@
     <meta charset='utf-8'>
     <title>Antipod Cities</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 body {
   background: white;
+  margin: 0;
+  font-size: 12px;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+                color: white;
+		font-weight: 300;
 }
 
-svg {
+
+.wrapper{
   background: #404040;
+  width:1000px;
+  margin:auto;
 }
 
 .d3-content{
-  width: 100%;
-  max-width: 750px;
-  margin:auto;
+  width: 650px;
+  height:auto;
+  margin:0;
   position: relative;
+  display: block;
+  float: left;
 }
 
-text {
-                font-family: "Lato", Helvetica, Arial, sans-serif;
-                fill: white;
-		font-weight: 300;
-		pointer-events: none;
-		letter-spacing: normal;
-            }
 .land_1 {
   fill: #4CAF50;
 }
@@ -38,18 +42,105 @@ text {
 canvas {
   width:100%;
   height: auto;
-  position: absolute;
-  left:0;
 }
 
-#canvas_0 {
-  background: #212121;
+#canvas_1 {
+  position: absolute;
+  left:0;
+  top:0;
+}
+
+#sidebar {
+  position: relative;
+  display: block;
+  float: left;
+width:350px;
+box-sizing: border-box;
+}
+
+.title{
+		font-size: 4em;
+		font-weight: 400;
+		line-height: 1em;
+		padding: 25px 30px 5px 0px;
+		box-sizing: border-box;
+		pointer-events: none;
+		float: left;
+		text-transform: uppercase;
+}
+
+.caption, .list{
+  width:100%;
+  float: left;
+  padding: 10px 30px 10px 0px;
+  box-sizing: border-box;
+  font-size: 1.1em;
+}
+
+.antipodes{
+  width:100%;
+  font-size: 1em;
+  margin:0px;
+}
+
+text {
+  fill:white;
+  font-size: 1em;
+}
+
+.clearfix:before {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+@media screen and (max-width: 1000px) {
+  .wrapper {
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    max-width:650px;
+  }
+  
+  .d3-content{
+    width: 100%;
+  }
+  
+  #sidebar {
+    width: 100%;
+    height:calc(100vh - 100vw - 30px);
+    padding-bottom: 30px;
+    overflow: auto;
+  }
+  
+  .title,.caption, .list{
+    padding: 5px 30px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  body {
+    font-size: 10px;
+  }
 }
 
 </style>
 </head>
 <body>
+<div class='wrapper'>
 <div class='d3-content'></div>
+<div id="sidebar">
+<div class='title'>Antipode Cities</div>
+<div class='caption'>The antipodes of any place on the Earth is the place that is diametrically opposite it, so a line drawn from the one to the other passes through the centre of the Earth and forms a true diameter. For example, the antipodes of New Zealand's lower North Island lies in Spain. Most of the Earth's land surfaces have ocean at their antipodes, this being a consequence of most land being in the land hemisphere.
+An antipodal point is sometimes called an antipode, a back-formation from the plural antipodes, which in Greek is the plural of the singular antipous.The antipodes of any place on the Earth is the place that is diametrically opposite it, so a line drawn from the one to the other passes through the centre of the Earth and forms a true diameter. For example, the antipodes of New Zealand's lower North Island lies in Spain. Most of the Earth's land surfaces have ocean at their antipodes, this being a consequence of most land being in the land hemisphere.
+An antipodal point is sometimes called an antipode, a back-formation from the plural antipodes, which in Greek is the plural of the singular antipous.</div>
+<div class='list'></div>
+</div>
+<div class="clearfix"></div>
+</div>
 <script src='http://d3js.org/d3.v3.min.js'></script>
 <script src="//d3js.org/topojson.v1.min.js"></script>
 <script src='globe_rotate_v2.js'></script>

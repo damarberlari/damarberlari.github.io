@@ -1,4 +1,4 @@
-var diameter = 750,
+var diameter = 650,
     radius = diameter >> 1,
     dotRadius = diameter/150,
     velocity = .02,
@@ -10,7 +10,7 @@ var dataCity = [
     {index:1,long:-78.56,lat:-0.51,color:'gold',city:"Ecuador",country:"Ecuador"},
     {index:2,long:176.29,lat:-40.42,color:'crimson',city:"Madrid",country:"Spain"},
     {index:3,long:-3.7,lat:40.42,color:'gold',city:"Weber",country:"New Zealand"},
-    {index:4,long:114.11,lat:22.39,color:'gold',city:"Hong Kong",country:"China"},
+    {index:4,long:114.11,lat:22.39,color:'crimson',city:"Hong Kong",country:"China"},
     {index:5,long:-65.89,lat:-22.39,color:'gold',city:"Yujuj",country:"Ecuador"}
 ];
 
@@ -19,6 +19,27 @@ var antipodPair = [
     {from:2,to:3},
     {from:4,to:5}
 ]
+
+//svg = d3.select('.list').append('svg')
+//      .attr('width', '100%')
+//      .attr('height', '100%') 
+//      .attr('viewBox',"0 0 350 350");
+//
+//svg.selectAll(".antipodes")
+//.data(antipodPair)
+//.enter()
+//.append("text")
+//.attr("class","antipodes")
+//.attr("x", 0)
+//.attr("y",function(d,m){return (m+1)*20})
+//.text("test test")
+
+d3.select('.list').selectAll(".antipodes")
+.data(antipodPair)
+.enter()
+.append("p")
+.attr("class","antipodes")
+.html(function(d){return dataCity[d.from].city +" - "+ dataCity[d.to].city});
 
 var projection = d3.geo.orthographic()
     .scale(0.9*radius - 2)
@@ -77,7 +98,7 @@ d3.json("world-110m.json", function(error, world) {
       //sample: pekanbaru ecuador
       dataCity.filter(function(d){return (rotate[0]-90+d.long)%360>180}).forEach(function(d){
       var loc = projection([d.long,d.lat]);
-      context.beginPath(),context.arc(loc[0],loc[1],dotRadius, 2 * Math.PI, false),context.fillStyle = 'crimson', context.fill();
+      context.beginPath(),context.arc(loc[0],loc[1],dotRadius, 2 * Math.PI, false),context.fillStyle = d.color, context.fill();
       });
       //draw outer circle
       context.beginPath(), path.context(context)(globe);
