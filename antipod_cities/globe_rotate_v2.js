@@ -7,17 +7,32 @@ var diameter = 650,
     
 var dataCity = [
     {index:0,long:101.44,lat:0.51,color:'crimson',city:"Pekanbaru",country:"Indonesia"},
-    {index:1,long:-78.56,lat:-0.51,color:'gold',city:"Ecuador",country:"Ecuador"},
+    {index:1,long:-78.56,lat:-0.51,color:'gold',city:"Machachi",country:"Ecuador"},
     {index:2,long:176.29,lat:-40.42,color:'crimson',city:"Madrid",country:"Spain"},
     {index:3,long:-3.7,lat:40.42,color:'gold',city:"Weber",country:"New Zealand"},
     {index:4,long:114.11,lat:22.39,color:'crimson',city:"Hong Kong",country:"China"},
-    {index:5,long:-65.89,lat:-22.39,color:'gold',city:"Yujuj",country:"Ecuador"}
+    {index:5,long:-65.89,lat:-22.39,color:'gold',city:"La Quiaca",country:"Argentina"}
 ];
 
 var antipodPair = [
     {from:0,to:1},
     {from:2,to:3},
-    {from:4,to:5}
+    {from:4,to:5},
+    {from:0,to:1},
+    {from:2,to:3},
+    {from:0,to:1},
+    {from:2,to:3},
+    {from:0,to:1},
+    {from:2,to:3},
+    {from:0,to:1},
+    {from:2,to:3},
+    {from:4,to:5},
+    {from:0,to:1},
+    {from:2,to:3},
+    {from:0,to:1},
+    {from:2,to:3},
+    {from:0,to:1},
+    {from:2,to:3}
 ]
 
 //svg = d3.select('.list').append('svg')
@@ -39,7 +54,7 @@ d3.select('.list').selectAll(".antipodes")
 .enter()
 .append("p")
 .attr("class","antipodes")
-.html(function(d){return dataCity[d.from].city +" - "+ dataCity[d.to].city});
+.html(function(d){return dataCity[d.from].city+", "+dataCity[d.from].country+" - "+ dataCity[d.to].city+", "+dataCity[d.to].country});
 
 var projection = d3.geo.orthographic()
     .scale(0.9*radius - 2)
@@ -100,6 +115,7 @@ d3.json("world-110m.json", function(error, world) {
       var loc = projection([d.long,d.lat]);
       context.beginPath(),context.arc(loc[0],loc[1],dotRadius, 2 * Math.PI, false),context.fillStyle = d.color, context.fill();
       });
+      
       //draw outer circle
       context.beginPath(), path.context(context)(globe);
       context.lineWidth = dotRadius*2.2;
