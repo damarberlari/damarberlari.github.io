@@ -4,7 +4,6 @@ var diameter = 650,
     velocity = .02,
     then = Date.now()
     landColor = ['#1B5E20','#4CAF50']
-    antipodeSelected = 0;
     
 var dataCity = [
     {index:0,long:101.44,lat:0.51,color:'crimson',city:"Pekanbaru",country:"Indonesia"},
@@ -18,8 +17,18 @@ var dataCity = [
 var antipodPair = [
     {index:0,from:0,to:1},
     {index:1,from:2,to:3},
-    {index:2,from:4,to:5}
+    {index:2,from:4,to:5},
+    {index:3,from:4,to:5},
+    {index:4,from:4,to:5},
+    {index:5,from:4,to:5},
+    {index:6,from:4,to:5},
+    {index:7,from:4,to:5},
+    {index:8,from:4,to:5},
+    {index:9,from:4,to:5},
+    {index:10,from:4,to:5}
 ]
+
+var antipodeSelected = antipodPair[0];
 
 //svg = d3.select('.list').append('svg')
 //      .attr('width', '100%')
@@ -39,7 +48,7 @@ d3.select('.list').selectAll(".antipodes")
 .data(antipodPair)
 .enter()
 .append("p")
-.attr("class","antipodes")
+.attr("class",function(d){if(d==antipodeSelected){return "antipodes_selected"}else{return "antipodes"}})
 .html(function(d){return dataCity[d.from].city+", "+dataCity[d.from].country+" - "+ dataCity[d.to].city+", "+dataCity[d.to].country})
 .on("click",antipodeFilter);
 
@@ -66,8 +75,9 @@ d3.json("world-110m.json", function(error, world) {
       globe = {type: "Sphere"};
 
   d3.timer(function() {
-    console.log(antipodeSelected);
+    var dotColor, dotAlpha;
     var angle = velocity * (Date.now() - then);
+    var dotRadiusAnimated = angle%15;
     canvas.each(function(i) {
       context = this.getContext("2d");
       path.context(context);
@@ -84,16 +94,18 @@ d3.json("world-110m.json", function(error, world) {
       rotate = [angle+180,0]
       }
       projection.rotate(rotate);
+      context.globalAlpha = 1;
       context.beginPath(), path(land),context.fillStyle = landColor[i], context.fill();
       if(i==0){
       //draw lines on 1st layer
       context.beginPath();
-      antipodPair.filter(function(d){return d.index==antipodeSelected}).forEach(function(d){
+      antipodPair.filter(function(d){return d==antipodeSelected}).forEach(function(d){
 	var fromLoc = projection([dataCity[d.from].long,dataCity[d.from].lat]);
 	var toLoc = projection([dataCity[d.to].long,dataCity[d.to].lat]);
 	context.moveTo(fromLoc[0],fromLoc[1]),context.lineTo(toLoc[0],toLoc[1]);
 	context.lineWidth = 1;
-      context.strokeStyle = 'rgba(255,255,255,0.5)';
+	context.globalAlpha = 0.6;
+      context.strokeStyle = 'white';
       context.stroke();
       })
       }else{
@@ -104,10 +116,12 @@ d3.json("world-110m.json", function(error, world) {
       context.stroke();
       
       //draw city point on 2nd layer
-      //sample: pekanbaru ecuador
+      //sample: pekanbaru ecuador606060
       dataCity.filter(function(d){return (rotate[0]-90+d.long)%360>180}).forEach(function(d){
       var loc = projection([d.long,d.lat]);
-      context.beginPath(),context.arc(loc[0],loc[1],dotRadius, 2 * Math.PI, false),context.fillStyle = d.color, context.fill();
+      if(d.index==antipodeSelected.from||d.index==antipodeSelected.to){dotColor=d.color,dotAlpha=0.5}else{dotColor='#9E9E9E',dotAlpha=0}
+      context.beginPath(),context.arc(loc[0],loc[1],dotRadiusAnimated, 2 * Math.PI, false),context.globalAlpha = dotAlpha,context.fillStyle = dotColor, context.fill();
+      context.beginPath(),context.arc(loc[0],loc[1],dotRadius, 2 * Math.PI, false),context.globalAlpha = 1,context.fillStyle = dotColor, context.fill();
       });
       
       }
@@ -117,7 +131,7 @@ d3.json("world-110m.json", function(error, world) {
 });
 
 function antipodeFilter(d){
-	antipodeSelected = d.index;
+	antipodeSelected = d;
 	d3.selectAll(".antipodes_selected").attr("class","antipodes");
 	d3.select(this).attr("class","antipodes_selected");
 };
