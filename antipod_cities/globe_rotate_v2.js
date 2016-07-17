@@ -3,36 +3,22 @@ var diameter = 650,
     dotRadius = diameter/150,
     velocity = .02,
     then = Date.now()
-    landColor = ['#1B5E20','#4CAF50'];
+    landColor = ['#1B5E20','#4CAF50']
+    antipodeSelected = 0;
     
 var dataCity = [
     {index:0,long:101.44,lat:0.51,color:'crimson',city:"Pekanbaru",country:"Indonesia"},
     {index:1,long:-78.56,lat:-0.51,color:'gold',city:"Machachi",country:"Ecuador"},
-    {index:2,long:176.29,lat:-40.42,color:'crimson',city:"Madrid",country:"Spain"},
-    {index:3,long:-3.7,lat:40.42,color:'gold',city:"Weber",country:"New Zealand"},
+    {index:2,long:176.29,lat:-40.42,color:'crimson',city:"Weber",country:"New Zealand"},
+    {index:3,long:-3.7,lat:40.42,color:'gold',city:"Madrid",country:"Spain"},
     {index:4,long:114.11,lat:22.39,color:'crimson',city:"Hong Kong",country:"China"},
     {index:5,long:-65.89,lat:-22.39,color:'gold',city:"La Quiaca",country:"Argentina"}
 ];
 
 var antipodPair = [
-    {from:0,to:1},
-    {from:2,to:3},
-    {from:4,to:5},
-    {from:0,to:1},
-    {from:2,to:3},
-    {from:0,to:1},
-    {from:2,to:3},
-    {from:0,to:1},
-    {from:2,to:3},
-    {from:0,to:1},
-    {from:2,to:3},
-    {from:4,to:5},
-    {from:0,to:1},
-    {from:2,to:3},
-    {from:0,to:1},
-    {from:2,to:3},
-    {from:0,to:1},
-    {from:2,to:3}
+    {index:0,from:0,to:1},
+    {index:1,from:2,to:3},
+    {index:2,from:4,to:5}
 ]
 
 //svg = d3.select('.list').append('svg')
@@ -54,7 +40,8 @@ d3.select('.list').selectAll(".antipodes")
 .enter()
 .append("p")
 .attr("class","antipodes")
-.html(function(d){return dataCity[d.from].city+", "+dataCity[d.from].country+" - "+ dataCity[d.to].city+", "+dataCity[d.to].country});
+.html(function(d){return dataCity[d.from].city+", "+dataCity[d.from].country+" - "+ dataCity[d.to].city+", "+dataCity[d.to].country})
+.on("click",antipodeFilter);
 
 var projection = d3.geo.orthographic()
     .scale(0.9*radius - 2)
@@ -79,6 +66,7 @@ d3.json("world-110m.json", function(error, world) {
       globe = {type: "Sphere"};
 
   d3.timer(function() {
+    console.log(antipodeSelected);
     var angle = velocity * (Date.now() - then);
     canvas.each(function(i) {
       context = this.getContext("2d");
@@ -90,7 +78,7 @@ d3.json("world-110m.json", function(error, world) {
       context.scale(-1,1);
       rotate = [angle,0];
       context.beginPath(), path(globe);
-      context.fillStyle = 'black', context.fill()
+      context.fillStyle = '#212121', context.fill()
       }
       else{
       rotate = [angle+180,0]
@@ -100,15 +88,21 @@ d3.json("world-110m.json", function(error, world) {
       if(i==0){
       //draw lines on 1st layer
       context.beginPath();
-      antipodPair.forEach(function(d){
+      antipodPair.filter(function(d){return d.index==antipodeSelected}).forEach(function(d){
 	var fromLoc = projection([dataCity[d.from].long,dataCity[d.from].lat]);
 	var toLoc = projection([dataCity[d.to].long,dataCity[d.to].lat]);
 	context.moveTo(fromLoc[0],fromLoc[1]),context.lineTo(toLoc[0],toLoc[1]);
-      })
-      context.lineWidth = 1;
-      context.strokeStyle = 'white';
+	context.lineWidth = 1;
+      context.strokeStyle = 'rgba(255,255,255,0.5)';
       context.stroke();
+      })
       }else{
+      //draw outer circle
+      context.beginPath(), path.context(context)(globe);
+      context.lineWidth = dotRadius*2.2;
+      context.strokeStyle = '#111111';
+      context.stroke();
+      
       //draw city point on 2nd layer
       //sample: pekanbaru ecuador
       dataCity.filter(function(d){return (rotate[0]-90+d.long)%360>180}).forEach(function(d){
@@ -116,13 +110,14 @@ d3.json("world-110m.json", function(error, world) {
       context.beginPath(),context.arc(loc[0],loc[1],dotRadius, 2 * Math.PI, false),context.fillStyle = d.color, context.fill();
       });
       
-      //draw outer circle
-      context.beginPath(), path.context(context)(globe);
-      context.lineWidth = dotRadius*2.2;
-      context.strokeStyle = 'white';
-      context.stroke();
       }
       if(i==0){context.restore()};
     });
   });
 });
+
+function antipodeFilter(d){
+	antipodeSelected = d.index;
+	d3.selectAll(".antipodes_selected").attr("class","antipodes");
+	d3.select(this).attr("class","antipodes_selected");
+};
