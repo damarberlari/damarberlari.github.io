@@ -11,21 +11,25 @@ var dataCity = [
     {index:2,long:176.29,lat:-40.42,color:'crimson',city:"Weber",country:"New Zealand"},
     {index:3,long:-3.7,lat:40.42,color:'gold',city:"Madrid",country:"Spain"},
     {index:4,long:114.11,lat:22.39,color:'crimson',city:"Hong Kong",country:"China"},
-    {index:5,long:-65.89,lat:-22.39,color:'gold',city:"La Quiaca",country:"Argentina"}
+    {index:5,long:-65.89,lat:-22.39,color:'gold',city:"La Quiaca",country:"Argentina"},
+    {index:6,long:172.67,lat:-43.53,color:'crimson',city:"Christchurch",country:"New Zealand"},
+    {index:7,long:-7.37,lat:43.53,color:'gold',city:"A Coruna",country:"Spain"},
+    {index:8,long:175.28,lat:-37.79,color:'crimson',city:"Hamilton",country:"New Zealand"},
+    {index:9,long:-4.72,lat:37.79,color:'gold',city:"Cordoba",country:"Spain"},
+    {index:10,long:100.42,lat:-0.95,color:'crimson',city:"Padang",country:"Indonesia"},
+    {index:11,long:-79.58,lat:0.95,color:'gold',city:"Esmeraldas",country:"Ecuador"},
+    {index:12,long:178.06,lat:-17.71,color:'crimson',city:"Navosa",country:"Fiji"},
+    {index:13,long:-1.94,lat:17.71,color:'gold',city:"Tombouctu",country:"Mali"}
 ];
 
 var antipodPair = [
     {index:0,from:0,to:1},
     {index:1,from:2,to:3},
     {index:2,from:4,to:5},
-    {index:3,from:4,to:5},
-    {index:4,from:4,to:5},
-    {index:5,from:4,to:5},
-    {index:6,from:4,to:5},
-    {index:7,from:4,to:5},
-    {index:8,from:4,to:5},
-    {index:9,from:4,to:5},
-    {index:10,from:4,to:5}
+    {index:3,from:6,to:7},
+    {index:4,from:8,to:9},
+    {index:5,from:10,to:11},
+    {index:6,from:12,to:13}
 ]
 
 //var antipodeSelected = antipodPair[0];
@@ -108,7 +112,7 @@ d3.json("world-110m.json", function(error, world) {
 	var fromLoc = projection([dataCity[d.from].long,dataCity[d.from].lat]);
 	var toLoc = projection([dataCity[d.to].long,dataCity[d.to].lat]);
 	context.moveTo(fromLoc[0],fromLoc[1]),context.lineTo(toLoc[0],toLoc[1]);
-	context.lineWidth = 1;
+	context.lineWidth = 2;
 	context.globalAlpha = 0.6;
       context.strokeStyle = 'white';
       context.stroke();
