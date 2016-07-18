@@ -27,6 +27,7 @@ body {
   width: 65%;
   height:auto;
   margin:0;
+  box-sizing: border-box;
   position: relative;
   display: block;
   float: left;
@@ -41,8 +42,9 @@ body {
 }
 
 canvas {
-  width:100%;
+  width:90%;
   height: auto;
+  margin:5%;
 }
 
 #canvas_1 {
@@ -56,7 +58,7 @@ canvas {
   display: block;
   float: right;
   width:35%;
-  padding: 30px 70px 0 30px;
+  padding: 3% 5% 0 3%;
   box-sizing: border-box;
 }
 
@@ -86,7 +88,6 @@ canvas {
   z-index: 99;
   color: white;
   font-weight: 300;
-  background: rgba(0,0,0,0.4);
 }
 
 .antipodes, .antipodes_selected{
@@ -96,10 +97,12 @@ canvas {
   padding: 5px;
   box-sizing: border-box;
   cursor: default;
+  clear: both;
+  background: rgba(0,0,0,0.4);
 }
 
-.antipodes:hover, .antipodes_selected:hover{
-  background: rgba(0,0,0,0.4);
+.antipodes_header,.antipodes:hover, .antipodes_selected:hover{
+  background: rgba(0,0,0,0.6);
 }
 
 .antipodes::before, .antipodes_selected::before, .antipodes::after, .antipodes_selected::after{
@@ -134,6 +137,40 @@ canvas {
   background: gold;
 }
 
+.hide {
+  display: none;
+}
+
+.antipodes_header {
+  width: 2.5em;
+  height: 2.5em;
+  float: right;
+  position: relative;
+}
+
+.compact:before{
+  content: "";
+  width: 0; 
+  height: 0; 
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid rgba(255,255,255,0.8);
+  position: absolute;
+  top:11px;
+  left: 7px;
+}
+
+.expand:before{
+  content: "";
+  width: 0; 
+  height: 0; 
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid rgba(255,255,255,0.8);
+  position: absolute;
+  top:11px;
+  left: 7px;
+}
 
 
 text {
@@ -167,12 +204,10 @@ text {
   
   #left-sidebar{
     width: 100%;
-    padding-left: 10%;
-    padding-right: 10%;
+	padding: 10%;
+	padding-bottom: 2%;
   }
 }
-
-
 </style>
 </head>
 <body>
@@ -182,7 +217,7 @@ text {
 <div class='caption'>The antipodes of any place on the Earth is the place that is diametrically opposite it, so a line drawn from the one to the other passes through the centre of the Earth and forms a true diameter. For example, the antipodes of New Zealand's lower North Island lies in Spain. Most of the Earth's land surfaces have ocean at their antipodes, this being a consequence of most land being in the land hemisphere.
 An antipodal point is sometimes called an antipode, a back-formation from the plural antipodes, which in Greek is the plural of the singular antipous.</div>
 </div>
-<div class='d3-content'><div class='list'></div></div>
+<div class='d3-content'><div class='list'><div class='antipodes_header compact'></div></div></div>
 <div class="clearfix"></div>
 </div>
 <script src='http://d3js.org/d3.v3.min.js'></script>

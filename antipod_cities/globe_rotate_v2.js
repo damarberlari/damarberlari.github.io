@@ -28,7 +28,8 @@ var antipodPair = [
     {index:10,from:4,to:5}
 ]
 
-var antipodeSelected = antipodPair[0];
+//var antipodeSelected = antipodPair[0];
+var antipodeSelected = antipodeSelector();
 
 //svg = d3.select('.list').append('svg')
 //      .attr('width', '100%')
@@ -44,16 +45,20 @@ var antipodeSelected = antipodPair[0];
 //.attr("y",function(d,m){return (m+1)*20})
 //.text("test test")
 
-d3.select('.list').selectAll(".antipodes")
+var stest = d3.select('.list').selectAll(".antipodes")
 .data(antipodPair)
 .enter()
+
+stest
 .append("p")
-.attr("class",function(d){if(d==antipodeSelected){return "antipodes_selected"}else{return "antipodes"}})
+.attr("class",function(d){if(d==antipodeSelected()){return "antipodes_selected hide"}else{return "antipodes hide"}})
 .html(function(d){return dataCity[d.from].city+", "+dataCity[d.from].country+" - "+ dataCity[d.to].city+", "+dataCity[d.to].country})
-.on("click",antipodeFilter);
+.on("click",antipodeSelected);
+
+d3.select('.antipodes_header').on("click",antipodeMenu)
 
 var projection = d3.geo.orthographic()
-    .scale(0.9*radius - 2)
+    .scale(radius - 7)
     .translate([radius, radius])
     .clipAngle(90)
     .precision(0);
@@ -77,7 +82,7 @@ d3.json("world-110m.json", function(error, world) {
   d3.timer(function() {
     var dotColor, dotAlpha;
     var angle = velocity * (Date.now() - then);
-    var dotRadiusAnimated = angle%15;
+    var dotRadiusAnimated = angle%20;
     canvas.each(function(i) {
       context = this.getContext("2d");
       path.context(context);
@@ -99,7 +104,7 @@ d3.json("world-110m.json", function(error, world) {
       if(i==0){
       //draw lines on 1st layer
       context.beginPath();
-      antipodPair.filter(function(d){return d==antipodeSelected}).forEach(function(d){
+      antipodPair.filter(function(d){return d==antipodeSelected()}).forEach(function(d){
 	var fromLoc = projection([dataCity[d.from].long,dataCity[d.from].lat]);
 	var toLoc = projection([dataCity[d.to].long,dataCity[d.to].lat]);
 	context.moveTo(fromLoc[0],fromLoc[1]),context.lineTo(toLoc[0],toLoc[1]);
@@ -119,7 +124,7 @@ d3.json("world-110m.json", function(error, world) {
       //sample: pekanbaru ecuador606060
       dataCity.filter(function(d){return (rotate[0]-90+d.long)%360>180}).forEach(function(d){
       var loc = projection([d.long,d.lat]);
-      if(d.index==antipodeSelected.from||d.index==antipodeSelected.to){dotColor=d.color,dotAlpha=0.5}else{dotColor='#9E9E9E',dotAlpha=0}
+      if(d.index==antipodeSelected().from||d.index==antipodeSelected().to){dotColor=d.color,dotAlpha=0.5}else{dotColor='#9E9E9E',dotAlpha=0}
       context.beginPath(),context.arc(loc[0],loc[1],dotRadiusAnimated, 2 * Math.PI, false),context.globalAlpha = dotAlpha,context.fillStyle = dotColor, context.fill();
       context.beginPath(),context.arc(loc[0],loc[1],dotRadius, 2 * Math.PI, false),context.globalAlpha = 1,context.fillStyle = dotColor, context.fill();
       });
@@ -135,3 +140,31 @@ function antipodeFilter(d){
 	d3.selectAll(".antipodes_selected").attr("class","antipodes");
 	d3.select(this).attr("class","antipodes_selected");
 };
+
+function antipodeSelector() {
+	var activeAntipode=antipodPair[0];
+	function selected(obj) {
+		if (obj) {
+			activeAntipode=obj;
+            d3.select('.list').selectAll("p").data(antipodPair).attr("class",function(d){if(d==activeAntipode){return "antipodes_selected"}else{return "antipodes"}})
+            return activeAntipode;
+		}
+		else {
+			return activeAntipode;
+		}
+	};
+	return selected;
+};
+
+function antipodeMenu() {
+    var menu = d3.select(this);
+    var list = d3.select('.list').selectAll('p').data(antipodPair);
+    if(menu.attr("class")=="antipodes_header expand"){
+        menu.attr("class","antipodes_header compact");
+        list.attr("class",function(d){if(d==antipodeSelected()){return "antipodes_selected hide"}else{return "antipodes hide"}})
+    }else{
+        menu.attr("class","antipodes_header expand");
+        list.attr("class",function(d){if(d==antipodeSelected()){return "antipodes_selected"}else{return "antipodes"}})
+    }
+    
+}
