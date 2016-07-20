@@ -6,20 +6,20 @@ var diameter = 650,
     landColor = ['#1B5E20','#4CAF50']
     
 var dataCity = [
-    {index:0,long:101.44,lat:0.51,color:'crimson',city:"Pekanbaru",country:"Indonesia"},
-    {index:1,long:-78.56,lat:-0.51,color:'gold',city:"Machachi",country:"Ecuador"},
-    {index:2,long:176.29,lat:-40.42,color:'crimson',city:"Weber",country:"New Zealand"},
-    {index:3,long:-3.7,lat:40.42,color:'gold',city:"Madrid",country:"Spain"},
-    {index:4,long:114.11,lat:22.39,color:'crimson',city:"Hong Kong",country:"China"},
-    {index:5,long:-65.89,lat:-22.39,color:'gold',city:"La Quiaca",country:"Argentina"},
-    {index:6,long:172.67,lat:-43.53,color:'crimson',city:"Christchurch",country:"New Zealand"},
-    {index:7,long:-7.37,lat:43.53,color:'gold',city:"A Coruna",country:"Spain"},
-    {index:8,long:175.28,lat:-37.79,color:'crimson',city:"Hamilton",country:"New Zealand"},
-    {index:9,long:-4.72,lat:37.79,color:'gold',city:"Cordoba",country:"Spain"},
-    {index:10,long:100.42,lat:-0.95,color:'crimson',city:"Padang",country:"Indonesia"},
-    {index:11,long:-79.58,lat:0.95,color:'gold',city:"Esmeraldas",country:"Ecuador"},
-    {index:12,long:178.06,lat:-17.71,color:'crimson',city:"Navosa",country:"Fiji"},
-    {index:13,long:-1.94,lat:17.71,color:'gold',city:"Tombouctu",country:"Mali"}
+    {index:0,long:176.29,lat:-40.42,color:'crimson',city:"Weber",country:"New Zealand"},
+    {index:1,long:-3.7,lat:40.42,color:'gold',city:"Madrid",country:"Spain"},
+    {index:2,long:114.11,lat:22.39,color:'crimson',city:"Hong Kong",country:"China"},
+    {index:3,long:-65.89,lat:-22.39,color:'gold',city:"La Quiaca",country:"Argentina"},
+    {index:4,long:100.42,lat:-0.95,color:'crimson',city:"Padang",country:"Indonesia"},
+    {index:5,long:-79.58,lat:0.95,color:'gold',city:"Esmeraldas",country:"Ecuador"},
+    {index:6,long:178.06,lat:-17.71,color:'crimson',city:"Navosa",country:"Fiji"},
+    {index:7,long:-1.94,lat:17.71,color:'gold',city:"Tombouctu",country:"Mali"},
+    {index:8,long:106.63,lat:10.82,color:'crimson',city:"Ho Chi Minh City",country:"Vietnam"},
+    {index:9,long:-73.37,lat:-10.82,color:'gold',city:"Ucayali",country:"Peru"},
+    {index:10,long:107.61,lat:51.82,color:'crimson',city:"Ulan Ude",country:"Russia"},
+    {index:11,long:-72.39,lat:-51.82,color:'gold',city:"Puerto Natales",country:"Chile"},
+    {index:12,long:70.65,lat:27.11,color:'crimson',city:"Desert National Park",country:"India"},
+    {index:13,long:-109.35,lat:-27.11,color:'gold',city:"Easter Island",country:"Chile"}
 ];
 
 var antipodPair = [
@@ -55,11 +55,12 @@ var stest = d3.select('.list').selectAll(".antipodes")
 
 stest
 .append("p")
-.attr("class",function(d){if(d==antipodeSelected()){return "antipodes_selected hide"}else{return "antipodes hide"}})
+.attr("class",function(d){if(d==antipodeSelected()){return "antipodes_selected act"}else{return "antipodes hide"}})
 .html(function(d){return dataCity[d.from].city+", "+dataCity[d.from].country+" - "+ dataCity[d.to].city+", "+dataCity[d.to].country})
 .on("click",antipodeSelected);
 
-d3.select('.antipodes_header').on("click",antipodeMenu)
+d3.select('.antipodes_header').on("click",antipodeMenu);
+d3.select('.act').on('click',antipodeMenu);
 
 var projection = d3.geo.orthographic()
     .scale(radius - 7)
@@ -150,8 +151,10 @@ function antipodeSelector() {
 	function selected(obj) {
 		if (obj) {
 			activeAntipode=obj;
-            d3.select('.list').selectAll("p").data(antipodPair).attr("class",function(d){if(d==activeAntipode){return "antipodes_selected"}else{return "antipodes"}})
-            return activeAntipode;
+            d3.select('.list').selectAll("p").data(antipodPair).attr("class",function(d){if(d==activeAntipode){return "antipodes_selected act"}else{return "antipodes hide"}}).on("click",antipodeSelected);
+            d3.select('.antipodes_header').attr('class','antipodes_header compact');
+	    d3.select('.act').on('click',antipodeMenu);
+	    return activeAntipode;
 		}
 		else {
 			return activeAntipode;
@@ -165,10 +168,11 @@ function antipodeMenu() {
     var list = d3.select('.list').selectAll('p').data(antipodPair);
     if(menu.attr("class")=="antipodes_header expand"){
         menu.attr("class","antipodes_header compact");
-        list.attr("class",function(d){if(d==antipodeSelected()){return "antipodes_selected hide"}else{return "antipodes hide"}})
+        list.attr("class",function(d){if(d==antipodeSelected()){return "antipodes_selected act"}else{return "antipodes hide"}}).on("click",antipodeSelected);
+	d3.select('.act').on('click',antipodeMenu);
     }else{
-        menu.attr("class","antipodes_header expand");
-        list.attr("class",function(d){if(d==antipodeSelected()){return "antipodes_selected"}else{return "antipodes"}})
+        d3.select(".antipodes_header").attr("class","antipodes_header expand");
+        list.attr("class",function(d){if(d==antipodeSelected()){return "antipodes_selected"}else{return "antipodes"}}).on("click",antipodeSelected);
     }
     
 }
