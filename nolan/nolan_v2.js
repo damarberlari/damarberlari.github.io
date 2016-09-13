@@ -10,6 +10,7 @@ graphdata =  [
                "revenue" : 39.7,
                "rating" : 92,
                "img_url" : "http://www.gstatic.com/tv/thumb/movieposters/28578/p28578_p_v8_af.jpg",
+               "selected" : false,
                "consensus" : "Christopher Nolan skillfully guides the audience through Memento's fractured narrative, seeping his film in existential dread."
             },{
                "name" : "Insomnia",
@@ -19,6 +20,7 @@ graphdata =  [
                "rating" : 92,
                "color"  : "#E95E2B",
                "img_url" : "http://www.gstatic.com/tv/thumb/movieposters/30021/p30021_p_v8_aa.jpg",
+               "selected" : false,
                "consensus" : "Driven by Pacino's performance, Insomnia is a smart and riveting psychological drama."
             },{
                "name" : "Batman Begins",
@@ -28,6 +30,7 @@ graphdata =  [
                "rating" : 85,
                "color"  : "#E3632C",
                "img_url" : "http://www.gstatic.com/tv/thumb/movieposters/35903/p35903_p_v8_ae.jpg",
+               "selected" : true,
                "consensus" : "Brooding and dark, but also exciting and smart, Batman Begins is a film that understands the essence of one of the definitive superheroes."
             },{
                "name" : "The Prestige",
@@ -37,6 +40,7 @@ graphdata =  [
                "rating" : 76,
                "color"  : "#DB692D",
                "img_url" : "http://www.gstatic.com/tv/thumb/movieposters/161581/p161581_p_v8_aa.jpg",
+               "selected" : false,
                "consensus" : "Full of twists and turns, The Prestige is a dazzling period piece that never stops challenging the audience."
             },{
                "name" : "The Dark Knight",
@@ -46,6 +50,7 @@ graphdata =  [
                "rating" : 94,
                "color"  : "#EA5D2B",
                "img_url" : "http://www.gstatic.com/tv/thumb/movieposters/173378/p173378_p_v8_aa.jpg",
+               "selected" : false,
                "consensus" : "Dark, complex and unforgettable, The Dark Knight succeeds not just as an entertaining comic book film, but as a richly thrilling crime saga."
             },{
                "name" : "Inception",
@@ -55,6 +60,7 @@ graphdata =  [
                "rating" : 86,
                "color"  : "#E4622C",
                "img_url" : "http://t2.gstatic.com/images?q=tbn:ANd9GcRo9vfJCM6dzPkZHIHBVCtlJnAnew9Ai26kEdrli0-tfmatmciD",
+               "selected" : false,
                "consensus" : "Smart, innovative, and thrilling, Inception is that rare summer blockbuster that succeeds viscerally as well as intellectually."
             },{
                "name" : "The Dark Knight Rises",
@@ -64,6 +70,7 @@ graphdata =  [
                "rating" : 88,
                "color"  : "#E5612C",
                "img_url" : "http://t1.gstatic.com/images?q=tbn:ANd9GcQSGF8_VbDqKF0B_4IQ0NF87VMDSy7_MPKryawR-qLnSIPQwo5z",
+               "selected" : false,
                "consensus" : "The Dark Knight Rises is an ambitious, thoughtful, and potent action film that concludes Christopher Nolan's franchise in spectacular fashion."
             },{
                "name" : "Interstellar",
@@ -73,6 +80,7 @@ graphdata =  [
                "rating" : 71,
                "color"  : "#D76C2E",
                "img_url" : "http://t1.gstatic.com/images?q=tbn:ANd9GcRf61mker2o4KH3CbVE7Zw5B1-VogMH8LfZHEaq3UdCMLxARZAB",
+               "selected" : false,
                "consensus" : "Interstellar represents more of the thrilling, thought-provoking, and visually resplendent filmmaking moviegoers have come to expect from writer-director Christopher Nolan, even if its intellectual reach somewhat exceeds its grasp."
             }
             ]},
@@ -124,7 +132,7 @@ graphdata =  [
                "rating" : 91,
                "color"  : "#EA5D2B",
                "img_url" : "http://t0.gstatic.com/images?q=tbn:ANd9GcQdWKWF2aW3BeYRdEC3pAE5mbJUgd4myk6KyRUy6xmGdFixe5Rn",
-               "selected" : false
+               "selected" : true
             },{
                "name" : "The Revenant",
                "year" : 2015,
@@ -174,7 +182,7 @@ graphdata =  [
                "rating" : 79,
                "color"  : "#DB692D",
                "img_url" : "http://www.gstatic.com/tv/thumb/movieposters/23069/p23069_p_v8_ad.jpg",
-               "selected" : false
+               "selected" : true
             },{
                "name" : "Panic Room",
                "year" : 2002,
@@ -242,6 +250,7 @@ graphdata =  [
                "revenue" : 78.4,
                "rating" : 100,
                "img_url" : "http://t1.gstatic.com/images?q=tbn:ANd9GcRHzSaUCOKu1RwS-bfbaUeeo_I1JcBkiuJRjBElvJi7qsHXkUkJ",
+               "selected" : false,
                "consensus" : "With its impressive action sequences, taut economic direction, and relentlessly fast pace, it's clear why The Terminator continues to be an influence on sci-fi and action flicks."
                 } ,
                 {
@@ -251,6 +260,7 @@ graphdata =  [
                 "revenue" : 131,
                 "rating" : 98,
                 "img_url" : "http://www.gstatic.com/tv/thumb/movieposters/9384/p9384_p_v8_as.jpg",
+                "selected" : false,
                 "consensus" : "While Alien was a marvel of slow-building, atmospheric tension, Aliens packs a much more visceral punch, and features a typically strong performance from Sigourney Weaver."  
                 },
                 {
@@ -260,6 +270,7 @@ graphdata =  [
                 "revenue" : 90,
                 "rating" : 89,
                 "img_url" : "http://www.gstatic.com/tv/thumb/movieposters/11774/p11774_p_v8_aa.jpg",
+                "selected" : false,
                 "consensus" : "The utterly gorgeous special effects frequently overshadow the fact that The Abyss is also a totally gripping, claustrophobic thriller, complete with an interesting crew of characters."  
                 },
                 {
@@ -269,6 +280,7 @@ graphdata =  [
                 "revenue" : 519.8,
                 "rating" : 93,
                 "img_url" : "http://t1.gstatic.com/images?q=tbn:ANd9GcS5J6Ay6y1UT7WAI4U7Zm2KDYITrvfOI3vmaCNdGhx_0jmWiI1d",
+                "selected" : false,
                 "consensus" : "T2 features thrilling action sequences and eye-popping visual effects, but what takes this sci-fi/ action landmark to the next level is the depth of the human (and cyborg) characters."  
                 },
                 {
@@ -287,6 +299,7 @@ graphdata =  [
                 "revenue" : 2186.7,
                 "rating" : 88,
                 "img_url" : "http://t0.gstatic.com/images?q=tbn:ANd9GcQhYjUIu2o5v5u3rfJpCq5Cz0Q9WK--XdYxai_N2d0ImohPiIOp",
+                "selected" : true,
                 "consensus" : "A mostly unqualified triumph for James Cameron, who offers a dizzying blend of spectacular visuals and old-fashioned melodrama."  
                 },
                 {
@@ -296,6 +309,7 @@ graphdata =  [
                 "revenue" : 2787.9,
                 "rating" : 83,
                 "img_url" : "http://t0.gstatic.com/images?q=tbn:ANd9GcQCfmvrE4fMo2cd8esc7mDZPtFSJThAujddMPkRtti1_ij6u-jp",
+                "selected" : false,
                 "consensus" : "It might be more impressive on a technical level than as a piece of storytelling, but Avatar reaffirms James Cameron's singular gift for imaginative, absorbing filmmaking."  
                 }
             ]
@@ -413,8 +427,6 @@ var movTriangle =   d3.select(el).selectAll(className).selectAll("polygon")
                     .on("mouseout", function() {
                         d3.select(this)
                         .attr("fill-opacity", 0.8);
-                        
-                        d3.selectAll(".detail-box").data(dataset).classed("hidden",true)
                     });
 }
 
@@ -502,8 +514,7 @@ var title = d3.select(el).selectAll(className)
                     d3Chart.destroy(el);
                     if(dataset.key==graphdata.length-1)
                     {d3Chart.create(el,graphdata[0])}
-                    else {d3Chart.create(el,graphdata[dataset.key+1])};
-                    
+                    else {d3Chart.create(el,graphdata[dataset.key+1])};   
                 });
       
       
@@ -553,7 +564,7 @@ var detailGroup = d3.select(el).selectAll(className).selectAll("detail-box")
                     .enter()
                     .append("g")
                     .attr("class","detail-box")
-                    .classed("hidden",true)
+                    .classed("hidden",function(d){return !d.selected})
                     .each(function(d,m){
                         d3.select(this)
                         .append("rect")
@@ -580,10 +591,15 @@ var detailGroup = d3.select(el).selectAll(className).selectAll("detail-box")
                         d3.select(this)
                         .append("path")
                         .attr("class", "line")
-                        .attr("d", function(){return "M"+(xScale(m)-yScale(d.budget))+" "+(h-80)+" L"+(xScale(m))+" "+(h-80-yScale(d.revenue))+" L"+(xScale(m)+yScale(d.budget))+" "+(h-80)})
+                        .attr("d", function(){return "M"+(xScale(m))+" "+(h-80)+" L"+(xScale(m))+" "+(h-80)+" L"+(xScale(m))+" "+(h-80)})
                         .attr("stroke","white")
                         .attr("stroke-width",2)
-                        .attr("fill","none");
+                        .attr("fill","none")
+                        .transition()
+                        .ease(d3.easeCubic)
+                        .duration(700)
+                        .attr("d", function(){return "M"+(xScale(m)-yScale(d.budget))+" "+(h-80)+" L"+(xScale(m))+" "+(h-80-yScale(d.revenue))+" L"+(xScale(m)+yScale(d.budget))+" "+(h-80)});
+                        
                         
                         var loc=[240,290,358];
                         
@@ -672,3 +688,4 @@ d3Chart._wrapText = function (selection, width, maxLine) {
 var el=".d3-content";
 
 d3Chart.create(el,graphdata[0]);
+
