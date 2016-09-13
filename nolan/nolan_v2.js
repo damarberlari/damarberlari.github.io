@@ -4,6 +4,7 @@ graphdata =  [
             "source"    : "Rotten Tomatoes, Box Office Mojo",
             "movie" : [
             {
+               "key" : 0,
                "name" : "Memento",
                "year" : 2000,
                "budget" : 9,
@@ -13,6 +14,7 @@ graphdata =  [
                "selected" : false,
                "consensus" : "Christopher Nolan skillfully guides the audience through Memento's fractured narrative, seeping his film in existential dread."
             },{
+                "key" : 1,
                "name" : "Insomnia",
                "year" : 2002,
                "budget" : 42,
@@ -23,6 +25,7 @@ graphdata =  [
                "selected" : false,
                "consensus" : "Driven by Pacino's performance, Insomnia is a smart and riveting psychological drama."
             },{
+                "key" : 2,
                "name" : "Batman Begins",
                "year" : 2005,
                "budget" : 150,
@@ -33,6 +36,7 @@ graphdata =  [
                "selected" : true,
                "consensus" : "Brooding and dark, but also exciting and smart, Batman Begins is a film that understands the essence of one of the definitive superheroes."
             },{
+                "key" : 3,
                "name" : "The Prestige",
                "year" : 2006,
                "budget" : 40,
@@ -43,6 +47,7 @@ graphdata =  [
                "selected" : false,
                "consensus" : "Full of twists and turns, The Prestige is a dazzling period piece that never stops challenging the audience."
             },{
+                "key" : 4,
                "name" : "The Dark Knight",
                "year" : 2008,
                "budget" : 185,
@@ -53,6 +58,7 @@ graphdata =  [
                "selected" : false,
                "consensus" : "Dark, complex and unforgettable, The Dark Knight succeeds not just as an entertaining comic book film, but as a richly thrilling crime saga."
             },{
+                "key" : 5,
                "name" : "Inception",
                "year" : 2010,
                "budget" : 160,
@@ -63,6 +69,7 @@ graphdata =  [
                "selected" : false,
                "consensus" : "Smart, innovative, and thrilling, Inception is that rare summer blockbuster that succeeds viscerally as well as intellectually."
             },{
+                "key" : 6,
                "name" : "The Dark Knight Rises",
                "year" : 2012,
                "budget" : 250,
@@ -73,6 +80,7 @@ graphdata =  [
                "selected" : false,
                "consensus" : "The Dark Knight Rises is an ambitious, thoughtful, and potent action film that concludes Christopher Nolan's franchise in spectacular fashion."
             },{
+                "key" : 7,
                "name" : "Interstellar",
                "year" : 2014,
                "budget" : 165,
@@ -89,6 +97,7 @@ graphdata =  [
             "source"    : "Rotten Tomatoes, Box Office Mojo, The Numbers",
             "movie" : [
             {
+                "key" : 0,
                "name" : "Amores Perros",
                "year" : 2001,
                "budget" : 2,
@@ -98,6 +107,7 @@ graphdata =  [
                "img_url" : "http://t0.gstatic.com/images?q=tbn:ANd9GcS0EpBQFNPv6xOw_8CJX3H4WMKk0w7e9MGVbPH-HXzjMi45Wdvi",
                "selected" : false
             },{
+                "key" : 1,
                "name" : "21 Grams",
                "year" : 2003,
                "budget" : 20,
@@ -107,6 +117,7 @@ graphdata =  [
                "img_url" : "http://www.gstatic.com/tv/thumb/movieposters/32921/p32921_p_v8_ag.jpg",
                "selected" : false
             },{
+                "key" : 2,
                "name" : "Babel",
                "year" : 2006,
                "budget" : 20,
@@ -116,6 +127,7 @@ graphdata =  [
                "img_url" : "http://www.gstatic.com/tv/thumb/movieposters/161617/p161617_p_v8_aa.jpg",
                "selected" : false
             },{
+                "key" : 3,
                "name" : "Biutiful",
                "year" : 2010,
                "budget" : 35,
@@ -125,6 +137,7 @@ graphdata =  [
                "img_url" : "http://www.gstatic.com/tv/thumb/movieposters/8292640/p8292640_p_v8_ab.jpg",
                "selected" : false
             },{
+                "key" : 4,
                "name" : "Birdman",
                "year" : 2014,
                "budget" : 18,
@@ -134,6 +147,7 @@ graphdata =  [
                "img_url" : "http://t0.gstatic.com/images?q=tbn:ANd9GcQdWKWF2aW3BeYRdEC3pAE5mbJUgd4myk6KyRUy6xmGdFixe5Rn",
                "selected" : true
             },{
+                "key" : 5,
                "name" : "The Revenant",
                "year" : 2015,
                "budget" : 135,
@@ -148,6 +162,7 @@ graphdata =  [
             "source"    : "Rotten Tomatoes, Box Office Mojo, The Numbers",
             "movie" : [
             {
+                "key" : 0,
                "name" : "Alien 3",
                "year" : 1992,
                "budget" : 50,
@@ -157,6 +172,7 @@ graphdata =  [
                "img_url" : "http://www.gstatic.com/tv/thumb/movieposters/14014/p14014_p_v8_ab.jpg",
                "selected" : false
             },{
+                "key" : 1,
                "name" : "Seven",
                "year" : 1995,
                "budget" : 33,
@@ -166,6 +182,7 @@ graphdata =  [
                "img_url" : "http://t1.gstatic.com/images?q=tbn:ANd9GcRod45bAdo2Os6THPDA2qDH2qIwNtqBlrjfZGGn_J2ppx6DIhhU",
                "selected" : false
             },{
+                "key" : 2,
                "name" : "The Game",
                "year" : 1997,
                "budget" : 50,
@@ -175,6 +192,7 @@ graphdata =  [
                "img_url" : "http://t2.gstatic.com/images?q=tbn:ANd9GcTQEmgrOXMpP7CnpeJOgYYasTGEvQakL8RVpVIoQ-XdbdOAyoGK",
                "selected" : false
             },{
+                "key" : 3,
                "name" : "Fight Club",
                "year" : 1999,
                "budget" : 63,
@@ -184,6 +202,7 @@ graphdata =  [
                "img_url" : "http://www.gstatic.com/tv/thumb/movieposters/23069/p23069_p_v8_ad.jpg",
                "selected" : true
             },{
+                "key" : 4,
                "name" : "Panic Room",
                "year" : 2002,
                "budget" : 48,
@@ -193,15 +212,7 @@ graphdata =  [
                "img_url" : "http://www.gstatic.com/tv/thumb/movieposters/29417/p29417_p_v8_af.jpg",
                "selected" : false
             },{
-               "name" : "Zodiac",
-               "year" : 2007,
-               "budget" : 65,
-               "revenue" : 84.7,
-               "rating" : 89,
-               "color"  : "#E4622C",
-               "img_url" : "http://www.gstatic.com/tv/thumb/movieposters/162782/p162782_p_v8_aa.jpg",
-               "selected" : false
-            },{
+                "key" : 6,
                "name" : "The Curious Case of Benjamin Button",
                "year" : 2008,
                "budget" : 150,
@@ -211,6 +222,7 @@ graphdata =  [
                "img_url" : "http://www.gstatic.com/tv/thumb/movieposters/170920/p170920_p_v8_am.jpg",
                "selected" : false
             },{
+                "key" : 7,
                "name" : "The Social Network",
                "year" : 2010,
                "budget" : 40,
@@ -220,6 +232,7 @@ graphdata =  [
                "img_url" : "http://t2.gstatic.com/images?q=tbn:ANd9GcTj268E01VcjLW3fNrO2z10WpXs7WMeciAB9wYSOA2DI-le_NQH",
                "selected" : false
             },{
+                "key" : 8,
                "name" : "The Girl with the Dragon Tattoo",
                "year" : 2011,
                "budget" : 90,
@@ -229,6 +242,7 @@ graphdata =  [
                "img_url" : "http://www.gstatic.com/tv/thumb/movieposters/8702416/p8702416_p_v8_ah.jpg",
                "selected" : false
             },{
+                "key" : 9,
                "name" : "Gone Girl",
                "year" : 2014,
                "budget" : 61,
@@ -237,6 +251,16 @@ graphdata =  [
                "color"  : "#D76C2E",
                "img_url" : "http://t1.gstatic.com/images?q=tbn:ANd9GcTwcWs6CK22NdvXZH0CbigLxoV-N3GIJypphImFYYv1vG_VKXTQ",
                "selected" : false
+            },{
+                "key" : 5,
+               "name" : "Zodiac",
+               "year" : 2007,
+               "budget" : 65,
+               "revenue" : 84.7,
+               "rating" : 89,
+               "color"  : "#E4622C",
+               "img_url" : "http://www.gstatic.com/tv/thumb/movieposters/162782/p162782_p_v8_aa.jpg",
+               "selected" : false
             }
             ]},
             {"key":3,
@@ -244,6 +268,7 @@ graphdata =  [
             "source"    : "Rotten Tomatoes, Box Office Mojo, The Numbers",
             "movie" : [
                {
+                "key" : 0,
                "name" : "The Terminator",
                "year" : 1984,
                "budget" : 6.4,
@@ -254,6 +279,7 @@ graphdata =  [
                "consensus" : "With its impressive action sequences, taut economic direction, and relentlessly fast pace, it's clear why The Terminator continues to be an influence on sci-fi and action flicks."
                 } ,
                 {
+                    "key" : 1,
                 "name" : "Aliens",
                 "year" : 1986,
                 "budget" : 17,
@@ -264,6 +290,7 @@ graphdata =  [
                 "consensus" : "While Alien was a marvel of slow-building, atmospheric tension, Aliens packs a much more visceral punch, and features a typically strong performance from Sigourney Weaver."  
                 },
                 {
+                    "key" : 2,
                 "name" : "The Abyss",
                 "year" : 1989,
                 "budget" : 70,
@@ -274,6 +301,7 @@ graphdata =  [
                 "consensus" : "The utterly gorgeous special effects frequently overshadow the fact that The Abyss is also a totally gripping, claustrophobic thriller, complete with an interesting crew of characters."  
                 },
                 {
+                    "key" : 3,
                 "name" : "Terminator 2: Judgment Day",
                 "year" : 1991,
                 "budget" : 102,
@@ -284,6 +312,7 @@ graphdata =  [
                 "consensus" : "T2 features thrilling action sequences and eye-popping visual effects, but what takes this sci-fi/ action landmark to the next level is the depth of the human (and cyborg) characters."  
                 },
                 {
+                    "key" : 4,
                 "name" : "True Lies",
                 "year" : 1994,
                 "budget" : 115,
@@ -293,6 +322,7 @@ graphdata =  [
                 "consensus" : "If it doesn't reach the heights of director James Cameron's and star Arnold Schwarzenegger's previous collaborations, True Lies still packs enough action and humor into its sometimes absurd plot to entertain."  
                 },
                 {
+                    "key" : 5,
                 "name" : "Titanic",
                 "year" : 1997,
                 "budget" : 200,
@@ -303,6 +333,7 @@ graphdata =  [
                 "consensus" : "A mostly unqualified triumph for James Cameron, who offers a dizzying blend of spectacular visuals and old-fashioned melodrama."  
                 },
                 {
+                    "key" : 6,
                 "name" : "Avatar",
                 "year" : 2009,
                 "budget" : 425,
@@ -330,6 +361,7 @@ d3Chart.create = function(el, state) {
   svg.append('g').attr('class', 'axis');
   svg.append('g').attr('class', 'detail');
   svg.append('g').attr('class', 'title');
+  svg.append('g').attr('class', 'legend');
 
   d3Chart.update(el, state);
 };
@@ -339,7 +371,8 @@ d3Chart.update = function(el, state) {
   this._drawTriangle(el, ".movie-triangle", scale, state.movie);
   this._drawAxis(el, ".axis", scale, state.movie);
   this._drawTitle(el, ".title", scale, state);
-  this._drawDetail(el, ".detail", scale,state.movie);
+  this._drawDetail(el, ".detail", scale, state.movie);
+  //this._drawLegend(el, ".legend", scale, state.movie);
 };
 
 d3Chart.destroy = function(el) {
@@ -377,9 +410,9 @@ var movTriangle =   d3.select(el).selectAll(className).selectAll("polygon")
                     .data(dataset)
                     .enter()
                     .append("polygon")
-                    .attr("points", function(d,m) {return xScale(m)+","+(h-80)+
-                          " "+xScale(m)+","+(h-80)+
-                          " "+xScale(m)+","+(h-80)
+                    .attr("points", function(d,m) {return xScale(d.key)+","+(h-80)+
+                          " "+xScale(d.key)+","+(h-80)+
+                          " "+xScale(d.key)+","+(h-80)
                           })
                     .attr("fill", function(d){return "rgb(255, "+(230-d.rating)+", 80)"})
                     .attr("fill-opacity", 0.8);
@@ -388,17 +421,17 @@ var movTriangle =   d3.select(el).selectAll(className).selectAll("polygon")
                     .transition()
                     .ease(d3.easeCubic)
                     .duration(700)
-                    .attr("points", function(d,m) {return xScale(m)+","+(h-yScale(d.revenue)-80)+
-                          " "+(xScale(m)-yScale(d.budget))+","+(h-80)+
-                          " "+(xScale(m)+yScale(d.budget))+","+(h-80)
+                    .attr("points", function(d,m) {return xScale(d.key)+","+(h-yScale(d.revenue)-80)+
+                          " "+(xScale(d.key)-yScale(d.budget))+","+(h-80)+
+                          " "+(xScale(d.key)+yScale(d.budget))+","+(h-80)
                           })
                     .attr("cursor","pointer")
                     .each(function(d,m){
                         
                         var movLayout = d3.select(el).selectAll(className).append("polygon")
-                        .attr("points", function() {return xScale(m)+","+(h-80)+
-                              " "+xScale(m)+","+(h-80)+
-                              " "+xScale(m)+","+(h-80)
+                        .attr("points", function() {return xScale(d.key)+","+(h-80)+
+                              " "+xScale(d.key)+","+(h-80)+
+                              " "+xScale(d.key)+","+(h-80)
                               })
                         .attr("fill", function(){return "rgb(255, "+(230-d.rating)+", 80)"})
                         .attr("fill-opacity", 0.8)
@@ -408,9 +441,9 @@ var movTriangle =   d3.select(el).selectAll(className).selectAll("polygon")
                         .transition()
                         .ease(d3.easeCubic)
                         .duration(700)
-                        .attr("points", function() {return xScale(m)+","+(h-yScale(d.revenue)-80)+
-                              " "+(xScale(m)-yScale(d.budget))+","+(h-80)+
-                              " "+(xScale(m))+","+(h-80)
+                        .attr("points", function() {return xScale(d.key)+","+(h-yScale(d.revenue)-80)+
+                              " "+(xScale(d.key)-yScale(d.budget))+","+(h-80)+
+                              " "+(xScale(d.key))+","+(h-80)
                               })
                         
                     });
@@ -437,7 +470,7 @@ var xScale = scale.xScale;
 var yScale = scale.yScale;
 
 var line = d3.line()
-    .x(function(d,m) { return xScale(m); })
+    .x(function(d,m) { return xScale(d.key); })
     .y(h-80);
 
 var axis = d3.select(el).selectAll(className).append("path")
@@ -450,7 +483,7 @@ var dots =   d3.select(el).selectAll(className).selectAll("circle")
                     .enter()
                     .append("circle")
                     .attr("class","dots")
-                    .attr("cx",function(d,m){return xScale(m)})
+                    .attr("cx",function(d,m){return xScale(d.key)})
                     .attr("cy", h-80)
                     .attr("r",5)
                     .attr("pointer-events","none");
@@ -461,7 +494,7 @@ var axisTexts = d3.select(el).selectAll(className).selectAll("text")
                 .append("text")
                 .attr("class","axisText")
                 .attr("font-size", 13)
-                .attr("x",function(d,m){return xScale(m)})
+                .attr("x",function(d,m){return xScale(d.key)})
                 .attr("y",h-60)
                 .attr("text-anchor","middle")
                 .text(function(d,m){return d.year});
@@ -469,7 +502,7 @@ var axisTexts = d3.select(el).selectAll(className).selectAll("text")
                 
                 axisTexts
       .append("tspan")
-      .attr("x",function(d,m){return xScale(m)})
+      .attr("x",function(d,m){return xScale(d.key)})
       .attr("y",h-60)
       .attr("dy",17)
       .text(function(d,m){return d.name.toUpperCase()})
@@ -591,14 +624,14 @@ var detailGroup = d3.select(el).selectAll(className).selectAll("detail-box")
                         d3.select(this)
                         .append("path")
                         .attr("class", "line")
-                        .attr("d", function(){return "M"+(xScale(m))+" "+(h-80)+" L"+(xScale(m))+" "+(h-80)+" L"+(xScale(m))+" "+(h-80)})
+                        .attr("d", function(){return "M"+(xScale(d.key))+" "+(h-80)+" L"+(xScale(d.key))+" "+(h-80)+" L"+(xScale(d.key))+" "+(h-80)})
                         .attr("stroke","white")
                         .attr("stroke-width",2)
                         .attr("fill","none")
                         .transition()
                         .ease(d3.easeCubic)
                         .duration(700)
-                        .attr("d", function(){return "M"+(xScale(m)-yScale(d.budget))+" "+(h-80)+" L"+(xScale(m))+" "+(h-80-yScale(d.revenue))+" L"+(xScale(m)+yScale(d.budget))+" "+(h-80)});
+                        .attr("d", function(){return "M"+(xScale(d.key)-yScale(d.budget))+" "+(h-80)+" L"+(xScale(d.key))+" "+(h-80-yScale(d.revenue))+" L"+(xScale(d.key)+yScale(d.budget))+" "+(h-80)});
                         
                         
                         var loc=[240,290,358];
@@ -659,6 +692,30 @@ var detailGroup = d3.select(el).selectAll(className).selectAll("detail-box")
     //                .attr("pointer-events","none");
 }
 
+d3Chart._drawLegend = function(el,className,scale,dataset) {
+var w = scale.w;
+var h = scale.h;
+var xScale = scale.xScale;
+var yScale = scale.yScale;
+
+var xLegend = d3.select(el).selectAll(className).selectAll("#budget")
+                    .data(dataset.filter(function(d){return d.selected}))
+                    .enter()
+                    .append("path")
+                    .attr("class","legend")
+                    .attr("id","budget")
+                    .attr("d",function(d){return "M"+(xScale(d.key))+" "+(h-90-yScale(d.revenue))+" L"+(xScale(d.key)-yScale(d.budget))+" "+(h-90-yScale(d.revenue))});
+                    
+var yLegend = d3.select(el).selectAll(className).selectAll("#revenue")
+                    .data(dataset.filter(function(d){return d.selected}))
+                    .enter()
+                    .append("path")
+                    .attr("class","legend")
+                    .attr("id","revenue")
+                    .attr("d",function(d){return "M"+(xScale(d.key)+yScale(d.budget)+10)+" "+(h-80-yScale(d.revenue))+" L"+(xScale(d.key)+yScale(d.budget)+10)+" "+(h-80)});
+                    
+
+}
 
 d3Chart._wrapText = function (selection, width, maxLine) {
     selection.each(function() {
