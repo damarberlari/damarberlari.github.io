@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Christopher Nolan Movie Guide</title>
+    <script src='http://d3js.org/d3.v4.min.js'></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display+SC:700" rel="stylesheet">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      .main {
+	width: 100%;
+	max-width: 1140px;
+	margin: auto;
+      }
+      
+      .d3-content {
+	width: 100%;
+	margin-top: 20px;
+      }
+      svg{
+        background: #202020;
+      }
+      
+      .dots{
+	fill: #202020;
+	stroke: white;
+	stroke-width: 2px;
+      }
+      
+      .line{
+	stroke: white;
+	stroke-width: 2px;
+      }
+      
+      .axisText, .detailTitle, .legend-data, .detail-consensus{
+	fill: white;
+	font-family: "Lato", Helvetica, Arial, sans-serif;
+	font-weight: 300;
+      }
+      
+      .chartTitle{
+	fill: #202020;
+	font-family: "Lato", Helvetica, Arial, sans-serif;
+	font-weight: 300;
+      }
+      
+      .subtitle{
+	fill: white;
+	font-family: "Roboto", Helvetica, Arial, sans-serif;
+	font-style: italic;
+	font-weight: 300;
+      }
+      
+      .header {
+	padding: 20px 0px;
+	width: 100%;
+	max-width: 700px;
+	margin:auto;
+	border-bottom: 1px solid black;
+      }
+      
+      .main_title {
+	font-family: "Playfair Display SC", Helvetica, Arial, sans-serif;
+	font-size: 64px;
+	line-height: 68px;
+	margin: 0;
+	text-align: center;
+      }
+      
+      .hidden {
+	display: none;
+      }
+      
+@media screen and (max-width: 480px) {
+  .main_title {
+	font-size: 40px;
+	line-height: 40px;
+      }
+}
+    </style>
+</head>
+<body>
+<div class='main'>
+<div class='header'>
+<h1 class='main_title'>Christopher Nolan</h1>
+<h1 class='main_title'>Movie Guide</h1>
+</div>
+<div class='d3-content'></div>
+</div>
+<script src='nolan_v2.js'></script>
+</body>
+</html>

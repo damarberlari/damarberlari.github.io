@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+                <meta charset="utf-8">
+                <title>Oscar</title>
+                <script type="text/javascript" src="../d3-master/d3.js"></script>
+                <link href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+                <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:300' rel='stylesheet' type='text/css'>
+        </head>
+        <body>
+<style>
+            .post-content{
+                width:800px;
+            }
+
+            svg{
+                font-family: "Roboto", Helvetica, Arial, sans-serif;
+                background: #202020;
+            }
+</style>
+<div class="post-content"></div>
+
+<script type="text/javascript">
+        
+	//set initial variable
+	w = d3.select(".post-content").node().getBoundingClientRect().width;
+	d3scale = w/1300;
+	h = 840/1300*w;
+        color = d3.scale.category10();
+	
+	svg = d3.select(".post-content")
+	.append("svg")
+	.attr("width", w)
+	.attr("height", h);
+        
+        var pack = d3.layout.pack().size([w, h]);
+        
+        
+        d3.json('oscar.json', function(error, data){
+            var nodes = pack.nodes(data);
+            
+            console.log(nodes);
+            
+            svg.selectAll('circle').data(nodes).enter().append('circle')
+              .attr('cx', function(d) { return d.x })
+               .attr('cy', function(d) { return d.y })
+               .attr('r', function(d) { return d.r } )
+               .attr("fill", function(d) { return color(d.depth);})
+               .attr("fill-opacity", 0.8)
+               .on("mouseover",function(d){if(d.depth>0){d3.select(this).attr("fill-opacity", 1)}})
+               .on("mouseout",function(){d3.select(this).attr("fill-opacity", 0.8)});
+        });
+      
+        function classes(root) {
+        var classes = [];
+
+        function recurse(name, node) {
+            if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
+            else classes.push({packageName: name, className: node.name, value: node.value});
+        }
+
+        recurse(null, root);
+        return {children: classes};
+        }
+</script>
+        </body>
+</html>

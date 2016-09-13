@@ -1,0 +1,100 @@
+{
+"name": "oscar",
+"children": [
+    {
+    "name": "Leo",
+    "value": 3
+    },
+    {
+    "name": "Leo",
+    "value": 3
+    },
+    {
+    "name": "Leo",
+    "value": 3
+    },
+    {
+    "name": "Leo",
+    "value": 3
+    },
+    {
+    "name": "Leo",
+    "value": 3
+    },
+    {
+    "name": "Leo",
+    "value": 3
+    },
+    {
+    "name": "Leo",
+    "value": 3
+    },
+    {
+    "name": "Leo",
+    "value": 3
+    },
+    {
+    "name": "Leo",
+    "value": 1
+    },
+    {
+    "name": "Leo",
+    "value": 1
+    },
+    {
+    "name": "Leo",
+    "value": 1
+    },
+    {
+    "name": "Leo",
+    "value": 1
+    },
+    {
+    "name": "Leo",
+    "value": 1
+    },
+    {
+    "name": "Leo",
+    "value": 1
+    },
+    {
+    "name": "Peter",
+    "value": 10
+    },
+    {
+    "name": "Johnny",
+    "value": 2
+    },
+    {
+    "name": "winner",
+    "children":[
+        {
+        "name": "winner-1",
+        "children": [
+            {
+            "name": "Peter",
+            "value": 3
+            },
+            {
+            "name": "Peter",
+            "value": 1
+            }
+        ]
+        },
+        {
+        "name": "winner-2",
+        "children": [
+            {
+            "name": "Peter",
+            "value": 15
+            },
+            {
+            "name": "Peter",
+            "value": 2
+            }
+        ]
+        }
+        ]
+    }
+    ]
+}
