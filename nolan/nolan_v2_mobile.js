@@ -650,7 +650,7 @@ var detailGroup = d3.select(el).selectAll(className).selectAll(".detail-box")
                         .attr("x",235)
                         .attr("y",760)
                         .attr("dy",24)
-                        .attr("font-size", 18)
+                        .attr("font-size", 20)
                         .attr("text-anchor","start")
                         .text(function(){return d.consensus})
                         .call(d3Chart._wrapText,300,5);
