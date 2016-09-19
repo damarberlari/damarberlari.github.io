@@ -355,24 +355,39 @@ d3Chart.create = function(el, state) {
       .attr("class","svg-master")
       .attr('width', '100%')
       .attr('height', '100%') 
-      .attr('viewBox',"0 0 1280 720");
+      .attr('viewBox',"0 0 640 960");
 
   svg.append('g').attr('class', 'movie-triangle');
   svg.append('g').attr('class', 'detail');
   svg.append('g').attr('class', 'axis');
   svg.append('g').attr('class', 'title');
   svg.append('g').attr('class', 'legend');
+  svg.append('g').attr('class', 'navigator');
+  
+      var pattern = d3.select(el).selectAll(".detail").append("defs")
+	.selectAll("pattern").data(state.movie).enter()
+	.append("pattern")
+	.attr("id", function(d,m) {return "bg-"+m})
+	.attr('width', 1)
+	.attr('height',1)
+	.append("image")
+	.attr("xlink:href", function(d) {return d.img_url})
+	.attr("x",0)
+	.attr("y",0)
+	.attr('width', 128)
+	.attr('height', 191);
 
-  d3Chart.update(el, state);
+  d3Chart.update(el, state, 0);
 };
 
-d3Chart.update = function(el, state) {
+d3Chart.update = function(el, state, counter) {
   scale = this._scale(state.movie);
-  this._drawTriangle(el, ".movie-triangle", scale, state.movie);
+  this._drawTriangle(el, ".movie-triangle", scale, state.movie, counter);
   this._drawAxis(el, ".axis", scale, state.movie);
   this._drawTitle(el, ".title", scale, state);
-  this._drawDetail(el, ".detail", scale, state.movie);
-  this._drawLegend(el, ".legend", scale, state.movie);
+  this._drawDetail(el, ".detail", scale, state.movie, counter);
+  this._drawNavigator(el, ".navigator", scale, state, counter);
+  //this._drawLegend(el, ".legend", scale, state.movie);
 };
 
 d3Chart.destroy = function(el) {
@@ -385,8 +400,8 @@ d3Chart._scale = function(dataset) {
     
 var array = Object.keys(dataset).map(function(key){return dataset[key].revenue})
 var maxRev = Math.max.apply(null,array)
-var w = 1280;
-var h = 720;
+var w = 640;
+var h = 960;
             
 var xScale =    d3.scaleLinear()
                 .domain([0,dataset.length-1])
@@ -395,55 +410,63 @@ var xScale =    d3.scaleLinear()
                      
 var yScale =    d3.scaleLinear()
                 .domain([0, maxRev])
-                .range([0, h-160]);
+                .range([0, h-480]);
                 
 return {w: w, h: h, xScale: xScale, yScale: yScale}
 }
 
-d3Chart._drawTriangle = function(el, className, scale, dataset) {
+d3Chart._drawTriangle = function(el, className, scale, dataset, counter) {
 var w = scale.w;
 var h = scale.h;
 var xScale = scale.xScale;
 var yScale = scale.yScale;
+
             
-var movTriangle =   d3.select(el).selectAll(className).selectAll("polygon")
-                    .data(dataset)
+var movTriangle =   d3.select(el).selectAll(className).selectAll(".triangle-main")
+                    .data(dataset.filter(function(d){return d.key == counter}))
+                    
+                    movTriangle
                     .enter()
                     .append("polygon")
-                    .attr("points", function(d,m) {return xScale(d.key)+","+(h-80)+
-                          " "+xScale(d.key)+","+(h-80)+
-                          " "+xScale(d.key)+","+(h-80)
+                    .attr("class","triangle-main")
+                    .attr("points", function(d,m) {return w/2+","+(h-320)+
+                          " "+w/2+","+(h-320)+
+                          " "+w/2+","+(h-320)
                           })
                     .attr("fill", function(d){return "rgb(255, "+(230-d.rating)+", 80)"})
-                    .attr("fill-opacity", 0.8);
-            
-                    movTriangle
-                    .transition()
-                    .ease(d3.easeCubic)
-                    .duration(700)
-                    .attr("points", function(d,m) {return xScale(d.key)+","+(h-yScale(d.revenue)-80)+
-                          " "+(xScale(d.key)-yScale(d.budget))+","+(h-80)+
-                          " "+(xScale(d.key)+yScale(d.budget))+","+(h-80)
-                          })
-                    .attr("cursor","pointer")
+                    .attr("fill-opacity", 0.8)
                     .each(function(d,m){
-                        
-                        var movLayout = d3.select(el).selectAll(className).append("polygon")
-                        .attr("points", function() {return xScale(d.key)+","+(h-80)+
-                              " "+xScale(d.key)+","+(h-80)+
-                              " "+xScale(d.key)+","+(h-80)
+                    
+                    var movLayout = d3.select(el).selectAll(className).append("polygon")
+                        .attr("class","triangle-layout")
+                        .attr("points", function() {return w/2+","+(h-320)+
+                              " "+w/2+","+(h-320)+
+                              " "+w/2+","+(h-320)
                               })
                         .attr("fill", function(){return "rgb(255, "+(230-d.rating)+", 80)"})
                         .attr("fill-opacity", 0.8)
                         .attr("pointer-events","none");
+                    });
+                    
+                    d3.select(el).selectAll(className).selectAll(".triangle-main")
+                    .data(dataset.filter(function(d){return d.key == counter}))
+                    .transition()
+                    .ease(d3.easeCubic)
+                    .duration(700)
+                    .attr("points", function(d,m) {return w/2+","+(h-yScale(d.revenue)-320)+
+                          " "+(w/2-yScale(d.budget))+","+(h-320)+
+                          " "+(w/2+yScale(d.budget))+","+(h-320)
+                          })
+                    .attr("cursor","pointer")
+                    .each(function(d,m){
                         
-                        movLayout
+                        d3.select(el).selectAll(className).selectAll(".triangle-layout")
                         .transition()
                         .ease(d3.easeCubic)
                         .duration(700)
-                        .attr("points", function() {return xScale(d.key)+","+(h-yScale(d.revenue)-80)+
-                              " "+(xScale(d.key)-yScale(d.budget))+","+(h-80)+
-                              " "+(xScale(d.key))+","+(h-80)
+                        .attr("points", function() {return w/2+","+(h-yScale(d.revenue)-320)+
+                              " "+(w/2-yScale(d.budget))+","+(h-320)+
+                              " "+(w/2)+","+(h-320)
                               })
                         
                     });
@@ -472,51 +495,16 @@ var w = scale.w;
 var h = scale.h;
 var xScale = scale.xScale;
 var yScale = scale.yScale;
-
-var line = d3.line()
-    .x(function(d,m) { return xScale(d.key); })
-    .y(h-80);
-
-var axis = d3.select(el).selectAll(className).append("path")
-      .datum(dataset)
-      .attr("class", "line")
-      .attr("d", line);
     
 var dots =   d3.select(el).selectAll(className).selectAll("circle")
-                    .data(dataset)
+                    .data(dataset.filter(function(d){return d.key==0}))
                     .enter()
                     .append("circle")
                     .attr("class","dots")
-                    .attr("cx",function(d,m){return xScale(d.key)})
-                    .attr("cy", h-80)
-                    .attr("r",5)
+                    .attr("cx",w/2)
+                    .attr("cy", h-320)
+                    .attr("r",8)
                     .attr("pointer-events","none");
-
-var axisTexts = d3.select(el).selectAll(className).selectAll("text")
-                .data(dataset)
-                .enter()
-                .append("text")
-                .attr("class","axisText")
-                .attr("font-size", 13)
-                .attr("x",function(d,m){return xScale(d.key)})
-                .attr("y",h-60)
-                .attr("text-anchor","middle")
-                .text(function(d,m){return d.year});
-                
-                
-                axisTexts
-      .append("tspan")
-      .attr("x",function(d,m){return xScale(d.key)})
-      .attr("y",h-60)
-      .attr("dy",17)
-      .text(function(d,m){return d.name.toUpperCase()})
-      .call(d3Chart._wrapText,xScale(1)-xScale(0),2);
-      //
-      //axisTexts
-      //.append("tspan")
-      //.attr("x",function(d,m){return xScale(m)})
-      //.attr("dy",18)
-      //.text(function(d,m){return d.year});
 
 }
 
@@ -542,10 +530,10 @@ var title = d3.select(el).selectAll(className)
                 .append("text")
                 .attr("class","chartTitle")
                 .attr("filter","url(#solid)")
-                .attr("x",120)
-                .attr("y",130)
+                .attr("x",320)
+                .attr("y",80)
                 .attr("font-size", 40)
-                .attr("text-anchor","start")
+                .attr("text-anchor","middle")
                 .text(dataset.director.toUpperCase())
                 .on("click",function(){
                     d3Chart.destroy(el);
@@ -559,57 +547,46 @@ var title = d3.select(el).selectAll(className)
                 .append("text")
                 .attr("class","chartTitle")
                 .attr("filter","url(#solid)")
-                .attr("x",120)
-                .attr("y",185)
+                .attr("x",320)
+                .attr("y",135)
                 .attr("font-size", 40)
-                .attr("text-anchor","start")
+                .attr("text-anchor","middle")
       .text("MOVIE GUIDE");
       
       d3.select(el).selectAll(className)
                 .append("text")
                 .attr("class","subtitle")
-                .attr("x",120)
-                .attr("y",215)
+                .attr("x",320)
+                .attr("y",165)
                 .attr("font-size", 12)
-                .attr("text-anchor","start")
+                .attr("text-anchor","middle")
       .text("Source: "+dataset.source);
       
       
 }
 
-d3Chart._drawDetail = function(el,className,scale,dataset) {
+d3Chart._drawDetail = function(el,className,scale,dataset,counter) {
 var w = scale.w;
 var h = scale.h;
 var xScale = scale.xScale;
 var yScale = scale.yScale;
 
-    var pattern = d3.select(el).selectAll(className).append("defs")
-	.selectAll("pattern").data(dataset).enter()
-	.append("pattern")
-	.attr("id", function(d,m) {return "bg-"+m})
-	.attr('width', 1)
-	.attr('height',1)
-	.append("image")
-	.attr("xlink:href", function(d) {return d.img_url})
-	.attr("x",0)
-	.attr("y",0)
-	.attr('width', 94)
-	.attr('height', 140);
-
-var detailGroup = d3.select(el).selectAll(className).selectAll("detail-box")
+var detailGroup = d3.select(el).selectAll(className).selectAll(".detail-box")
                     .data(dataset)
+                    
+                    detailGroup
                     .enter()
                     .append("g")
                     .attr("class","detail-box")
-                    .classed("hidden",function(d){return !d.selected})
+                    .classed("hidden",function(d){return !(d.key==counter)})
                     .each(function(d,m){
                         d3.select(this)
                         .append("rect")
                         .attr("class","posters")
-                        .attr("x", 120)
-                        .attr("y", 250)
-                        .attr("width",94)
-                        .attr("height",140)
+                        .attr("x", 80)
+                        .attr("y", 700)
+                        .attr("width",128)
+                        .attr("height",191)
                         .attr("fill", function(){return "url(#bg-"+m+")"})
                         .attr("stroke","white")
                         .attr("stroke-width",1)
@@ -619,26 +596,26 @@ var detailGroup = d3.select(el).selectAll(className).selectAll("detail-box")
                         .append("text")
                         .attr("class","detailTitle")
                         .attr("x",235)
-                        .attr("y",264)
-                        .attr("font-size", 18)
+                        .attr("y",720)
+                        .attr("font-size", 24)
                         .attr("start","begin")
                         .text(function(){return d.name.toUpperCase()+" ("+d.year+")"});
                         
                         
-                        d3.select(this)
-                        .append("path")
-                        .attr("class", "line")
-                        .attr("d", function(){return "M"+(xScale(d.key))+" "+(h-80)+" L"+(xScale(d.key))+" "+(h-80)+" L"+(xScale(d.key))+" "+(h-80)})
-                        .attr("stroke","white")
-                        .attr("stroke-width",2)
-                        .attr("fill","none")
-                        .transition()
-                        .ease(d3.easeCubic)
-                        .duration(700)
-                        .attr("d", function(){return "M"+(xScale(d.key)-yScale(d.budget))+" "+(h-80)+" L"+(xScale(d.key))+" "+(h-80-yScale(d.revenue))+" L"+(xScale(d.key)+yScale(d.budget))+" "+(h-80)+ " Z"});
+                        //d3.select(this)
+                        //.append("path")
+                        //.attr("class", "line")
+                        //.attr("d", function(){return "M"+(w/2)+" "+(h-320)+" L"+(w/2)+" "+(h-320)+" L"+(w/2)+" "+(h-320)})
+                        //.attr("stroke","white")
+                        //.attr("stroke-width",2)
+                        //.attr("fill","none")
+                        //.transition()
+                        //.ease(d3.easeCubic)
+                        //.duration(700)
+                        //.attr("d", function(){return "M"+(w/2-yScale(d.budget))+" "+(h-320)+" L"+(w/2)+" "+(h-320-yScale(d.revenue))+" L"+(w/2+yScale(d.budget))+" "+(h-320)+ " Z"});
+                        //
                         
-                        
-                        var loc=[240,290,358];
+                        var loc=[242,330,440];
                         
                         d3.select(this)
                         .selectAll("legend-circle")
@@ -646,9 +623,9 @@ var detailGroup = d3.select(el).selectAll(className).selectAll("detail-box")
                         .enter()
                         .append("circle")
                         .attr("class","legend-circle")
-                        .attr("r",5)
+                        .attr("r",6)
                         .attr("cx",function(d,m){return loc[m]})
-                        .attr("cy",280)
+                        .attr("cy",740)
                         .attr("fill",function(d){return d})
                         
                         d3.select(this)
@@ -657,10 +634,10 @@ var detailGroup = d3.select(el).selectAll(className).selectAll("detail-box")
                         .enter()
                         .append("text")
                         .attr("class","legend-data")
-                        .attr("x",function(d,m){return loc[m]+10})
-                        .attr("y",283.8)
+                        .attr("x",function(d,m){return loc[m]+15})
+                        .attr("y",747)
                         .attr("fill","white")
-                        .attr("font-size", 12)
+                        .attr("font-size", 18)
                         .attr("start","begin")
                         .text(function(d,m){
                             if(m==0){return d+"%"} else {return d+" Mil"}
@@ -671,15 +648,18 @@ var detailGroup = d3.select(el).selectAll(className).selectAll("detail-box")
                         .append("text")
                         .attr("class","detail-consensus")
                         .attr("x",235)
-                        .attr("y",290)
-                        .attr("dy",17)
-                        .attr("font-size", 13)
+                        .attr("y",760)
+                        .attr("dy",24)
+                        .attr("font-size", 18)
                         .attr("text-anchor","start")
                         .text(function(){return d.consensus})
                         .call(d3Chart._wrapText,300,5);
                         
                     })
    
+   
+                    detailGroup
+                    .classed("hidden",function(d){return !(d.key==counter)})
     //var poster =   d3.select(el).selectAll(className).selectAll("rect")
     //                .data(dataset)
     //                .enter()
@@ -750,6 +730,40 @@ var M =             d3.select(el).selectAll(className).selectAll("#revenue-text"
                         .text("Revenue"); 
                     
 
+}
+
+d3Chart._drawNavigator = function(el,className, scale, dataset, counter) {
+var prevButton = d3.select(el).selectAll(className).selectAll("#prev-button")
+                    .data([0])
+                    .enter()
+                    .append("path")
+                    .attr("class","button")
+                    .attr("id","prev-button")
+                    .attr("d","M20 800 L40 780 L40 820 Z");
+                    
+                    d3.select(el).selectAll(className).selectAll("#prev-button")
+                    .attr("opacity",function(){if(counter==0){return 0.2}else{return 0.9}})
+                    .on("click",function(){
+                        if(counter>0){
+                            d3Chart.update(el,dataset, counter-1);
+                            }
+                        else{d3Chart.update(el,dataset, 0)}
+                    });
+                    
+var nextButton = d3.select(el).selectAll(className).selectAll("#next-button")
+                    .data([0])
+                    .enter()
+                    .append("path")
+                    .attr("class","button")
+                    .attr("id","next-button")
+                    .attr("d","M620 800 L600 780 L600 820 Z");
+                    
+                    d3.select(el).selectAll(className).selectAll("#next-button")
+                    .attr("opacity",function(){if(counter==dataset.movie.length-1){return 0.2}else{return 0.9}})
+                    .on("click",function(){
+                        if(counter>=dataset.movie.length-1){d3Chart.update(el,dataset,dataset.movie.length-1)}
+                        else{d3Chart.update(el,dataset,counter+1)}
+                    });
 }
 
 d3Chart._wrapText = function (selection, width, maxLine) {
