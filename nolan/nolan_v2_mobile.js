@@ -355,7 +355,7 @@ d3Chart.create = function(el, state) {
       .attr("class","svg-master")
       .attr('width', '100%')
       .attr('height', '100%') 
-      .attr('viewBox',"0 0 640 960");
+      .attr('viewBox',"0 0 640 940");
 
   svg.append('g').attr('class', 'movie-triangle');
   svg.append('g').attr('class', 'detail');
@@ -376,15 +376,14 @@ d3Chart.create = function(el, state) {
 	.attr("y",0)
 	.attr('width', 128)
 	.attr('height', 191);
-
-  d3Chart.update(el, state, 0);
+    scale = this._scale(state.movie);
+    this._drawTitle(el, ".title", scale, state);    
+    this.update(el, scale, state, 0);
 };
 
-d3Chart.update = function(el, state, counter) {
-  scale = this._scale(state.movie);
+d3Chart.update = function(el, scale, state, counter) {
   this._drawTriangle(el, ".movie-triangle", scale, state.movie, counter);
   this._drawAxis(el, ".axis", scale, state.movie);
-  this._drawTitle(el, ".title", scale, state);
   this._drawDetail(el, ".detail", scale, state.movie, counter);
   this._drawNavigator(el, ".navigator", scale, state, counter);
   //this._drawLegend(el, ".legend", scale, state.movie);
@@ -733,36 +732,47 @@ var M =             d3.select(el).selectAll(className).selectAll("#revenue-text"
 }
 
 d3Chart._drawNavigator = function(el,className, scale, dataset, counter) {
-var prevButton = d3.select(el).selectAll(className).selectAll("#prev-button")
-                    .data([0])
+var button = [{x:0, d:"M20 800 L40 780 L40 820 Z",id:"prev-button"},
+{x:590, d:"M620 800 L600 780 L600 820 Z", id:"next-button"}];
+                    
+var rect = d3.select(el).selectAll(className).selectAll(".rect-button")
+                    .data(button)
+                    .enter()
+                    .append("rect")
+                    .attr("class","rect-button")
+                    .attr("id",function(d){return "rect-"+d.id})
+                    .attr("x",function(d){return d.x})
+                    .attr("y",640)
+                    .attr("width",50)
+                    .attr("height",320);
+                    
+var triButton = d3.select(el).selectAll(className).selectAll(".tri-button")
+                    .data(button)
                     .enter()
                     .append("path")
-                    .attr("class","button")
-                    .attr("id","prev-button")
-                    .attr("d","M20 800 L40 780 L40 820 Z");
+                    .attr("class","tri-button")
+                    .attr("id",function(d){return "tri-"+d.id})
+                    .attr("d",function(d){return d.d})
+                    .attr("pointer-events","none");
                     
-                    d3.select(el).selectAll(className).selectAll("#prev-button")
-                    .attr("opacity",function(){if(counter==0){return 0.2}else{return 0.9}})
+                    d3.select(el).selectAll(className).select("#tri-prev-button")
+                    .attr("opacity",function(){if(counter==0){return 0.2}else{return 0.9}});
+                    
+                    d3.select(el).selectAll(className).select("#tri-next-button")
+                    .attr("opacity",function(){if(counter==dataset.movie.length-1){return 0.2}else{return 0.9}});
+                    
+                    d3.select(el).selectAll(className).select("#rect-prev-button")
                     .on("click",function(){
                         if(counter>0){
-                            d3Chart.update(el,dataset, counter-1);
+                            d3Chart.update(el,scale,dataset, counter-1);
                             }
-                        else{d3Chart.update(el,dataset, 0)}
+                        else{d3Chart.update(el,scale,dataset, 0)}
                     });
                     
-var nextButton = d3.select(el).selectAll(className).selectAll("#next-button")
-                    .data([0])
-                    .enter()
-                    .append("path")
-                    .attr("class","button")
-                    .attr("id","next-button")
-                    .attr("d","M620 800 L600 780 L600 820 Z");
-                    
-                    d3.select(el).selectAll(className).selectAll("#next-button")
-                    .attr("opacity",function(){if(counter==dataset.movie.length-1){return 0.2}else{return 0.9}})
+                    d3.select(el).selectAll(className).select("#rect-next-button")
                     .on("click",function(){
                         if(counter>=dataset.movie.length-1){d3Chart.update(el,dataset,dataset.movie.length-1)}
-                        else{d3Chart.update(el,dataset,counter+1)}
+                        else{d3Chart.update(el,scale,dataset,counter+1)}
                     });
 }
 
