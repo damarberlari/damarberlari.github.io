@@ -32,6 +32,10 @@
 	    .nominated:hover{
 		fill-opacity:0.9;
 	    }
+	    .legend{
+		cursor: pointer;
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
+	    }
 
 
 </style>
@@ -116,7 +120,6 @@
 		.attr("fill",function(d,m){
 			return setColor(m)
 			})
-		.attr("cursor","pointer")
 		.on("mouseover",function(){
 			d3.select(this).attr("r",rScale(5));
 		})
@@ -164,9 +167,9 @@
 			.attr("class","text")
 			.attr("text-anchor","middle")
 			.text(d.name)
-			.style("font-size","14px")
+			.style("font-size","15px")
 			.attr("x", cx)
-			.attr("y", cy)
+			.attr("y", cy+5)
 			.style("pointer-events","none");
 			}
 			})
