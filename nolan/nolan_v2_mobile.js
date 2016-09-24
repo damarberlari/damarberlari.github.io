@@ -460,8 +460,7 @@ var movTriangle =   d3.select(el).selectAll(className).selectAll(".triangle-main
                     .attr("points", function(d,m) {return xScale(d.key)+","+(h-yScale(d.revenue)-triPad)+
                           " "+(xScale(d.key)-yScale(d.budget))+","+(h-triPad)+
                           " "+(xScale(d.key)+yScale(d.budget))+","+(h-triPad)
-                          })
-                    .attr("cursor","pointer");
+                          });
                     
                     d3.select(el).selectAll(className).selectAll(".triangle-layout")
                     .data(dataset.filter(function(d){
@@ -480,8 +479,7 @@ var movTriangle =   d3.select(el).selectAll(className).selectAll(".triangle-main
                     d3.select(el).selectAll(className).selectAll(".triangle-main")
                     .on("mouseover", function(d,k) {
                         d3.event.preventDefault();
-                        d3.select(this)
-                        .attr("fill-opacity", 0.9);
+                        
                         
                         var id=d.key;
                         
