@@ -22,7 +22,7 @@
             }
 	    .text{
                 font-family: "Lato", Helvetica, Arial, sans-serif;
-                fill: white;
+                fill: #FFF;
             }
 	    .nominated{
 		fill-opacity:0.75;
@@ -105,6 +105,23 @@
 		return color;
 	}
 	
+	var defs = svg
+            .append("defs")
+
+var filter = defs.append("filter")
+            .attr("x",0)
+            .attr("y",0)
+            .attr("width",1)
+            .attr("height",1)
+            .attr("id","solid")
+            
+filter.append("feFlood")
+.attr("flood-color","#202020")
+.attr("flood-opacity",0.4)
+
+filter.append("feComposite")
+.attr("in","SourceGraphic")
+	
 		legend = svgl.selectAll("legend").data(selected);
 		
 		legend.enter()
@@ -164,6 +181,7 @@
 			if(selected[d.won]){
 			svg
 			.append("text")
+			.attr("filter","url(#solid)")
 			.attr("class","text")
 			.attr("text-anchor","middle")
 			.text(d.name)
