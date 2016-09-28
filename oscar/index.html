@@ -1,22 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
-        <head>
-                <meta charset="utf-8">
-                <title>Oscar</title>
-                <script src='http://d3js.org/d3.v3.min.js'></script>
-                <link href='https://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
-                <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:300' rel='stylesheet' type='text/css'>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-        </head>
-        <body>
-<style>
-            .post-content{
-                width:100%;
-		max-width: 820px;
-		margin:auto;
-            }
 
-            svg{
+<html>
+<head>
+    <title>OSCAR NOMINEES AND WINNERS VISUALIZED</title>
+    <script src='http://d3js.org/d3.v3.min.js'></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Playfair+Display+SC:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            margin: 0;
+            color: #202020;
+            font-size: 16px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 300;
+        }
+        h1, p, img {
+            margin:0;
+        }
+        .nav-bar{
+            width:100%;
+            height:60px;
+            margin:0;
+            background: #202020;
+            box-shadow: 0px 2px 10px rgba(20,20,20,0.3); 
+        }
+        .wrapper{
+            width:100%;
+            max-width: 1200px;
+            margin: auto;
+            font-size: 1em;
+        }
+        .header{
+            width:100%;
+            max-width:700px;
+            margin-top: 40px;
+            margin-bottom: 30px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .header h1{
+            text-align: center;
+            font-family: 'Playfair Display SC', serif;
+            font-weight: 700;
+            font-size: 4em;
+            line-height: 1.1em;
+        }
+        .header-line{
+            width:400px;
+            margin: 0 auto;
+            color: #202020;
+        }
+        .d3-content{
+            width:100%;
+	    max-width: 950px;
+            margin: 40px auto;
+        }
+        .post-content{
+            width: 100%;
+            max-width:850px;
+            margin:auto;
+        }
+        
+        .post-content .author {
+            width: 25%;
+            display: inline-block;
+            float:left;
+            margin-right:2.5%;
+            margin-bottom: 40px;
+        }
+        .meta {
+            text-align: right;
+            font-size: 1em;
+            line-height: 1.5em;
+            font-weight: 400;
+        }
+        .post-content .main-content {
+            width: 72.5%;
+            display: inline-block;
+            float: left;
+        }
+        .post-content .main-content p {
+            text-align: left;
+            font-size: 1em;
+            line-height: 1.5em;
+            margin-bottom: 40px;
+        }
+        .post-content .main-content img{
+            width: 100%;
+            height: auto;
+            margin-bottom: 40px;
+        }
+        
+        .clearfix:before {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: " ";
+            clear: both;
+            height: 0;
+        }
+        
+        /*CSS D3*/
+        svg{
                 font-family: "Lato", Helvetica, Arial, sans-serif;
                 background: #202020;
             }
@@ -37,183 +124,60 @@
 		-webkit-tap-highlight-color: rgba(0,0,0,0);
 	    }
 
-
-</style>
-<div class="post-content"></div>
-
-<script type="text/javascript">
+        /*end CSS d3*/
         
-	//set initial variable
-	w = 820;
-	d3scale = w/820;
-	h = w;
-	rheight = d3scale*20;
-	padding = d3scale*10;
-	
-	var psv = d3.dsv(";", "text/plain");
-	var selected = [true,true,true,true],
-	selectAll = true;
-	
-	svg = d3.select(".post-content")
-	.append("svg")
-      .attr('width', '100%')
-      .attr('height', '100%') 
-      .attr('viewBox',"0 0 820 820");
-	
-	svgl=svg.append("g");
-	
-	svg.append("text") //dummytext for font-sizing
-        .attr("y","-20")
-	.text("dummy")
-        .style("font-size","15px")
-	.each(function(){
-	      textheight = d3.select(this).node().getBoundingClientRect().height;
-	});
-	
-	rScale = d3.scale.linear()
-	.domain([0, 3])
-	.range([0, d3scale*3*12.8/2]);
-	
-	xScale = d3.scale.linear()
-	.domain([0, 820])
-	.range([0, w]);
-	
-	yScale = d3.scale.linear()
-	.domain([0, 820])
-	.range([10, h+10]);
-	
-	psv("positions_circle.csv", function(error,dataset) {
-		draw(dataset);	
-          });
-	
-	
-	
-	function setColor(value){
-		var color="#262626";
-		if(selected[value]){
-		switch(value){
-			case 1: color="#378e43"
-			break;
-			case 2: color="#fdc010"
-			break;
-			case 3: color="#ef4437"
-			break;
-			default: color="#3d82c4"
-		}
-		}
-		
-		return color;
-	}
-	
-	var defs = svg
-            .append("defs")
+        @media screen and (max-width: 900px) {
+            .post-content{
+                max-width: 600px;
+            }
+            .header-line{
+                width:40%;
+            }
+            .post-content .author{
+                width:100%;
+                margin-right:0;
+            }
+            .post-content .main-content{
+                width:100%;
+            }
+            .meta{
+                text-align: left;
+            }
+        }
+        
+        @media screen and (max-width: 650px) {
+            .header, .main-content p, .post-content .author{
+                width:90%;
+                margin-left:5%;
+                margin-right: 5%;
+                box-sizing: border-box;
+            }
+        }
+    </style>
+</head>
 
-var filter = defs.append("filter")
-            .attr("x",0)
-            .attr("y",0)
-            .attr("width",1)
-            .attr("height",1)
-            .attr("id","solid")
-            
-filter.append("feFlood")
-.attr("flood-color","#202020")
-.attr("flood-opacity",0.4)
+<body>
+<div class='nav-bar'></div>
+<div class='wrapper'>
+    <div class='header'><h1>OSCAR NOMINEES AND WINNERS VISUALIZED</h1></div>
+    <hr class='header-line'>
+    <div class='d3-content'></div>
+    <div class='post-content'>
+        <div class='author'>
+            <h1 class='meta'>by: Damar Aji Pramudita</h1>
+            <h1 class='meta'>22 December 2016</h1>
+        </div>
+        <div class='main-content'>
+            <script src='oscar.js'></script>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas gravida tellus vel orci consequat vehicula. Proin ultrices, felis nec lobortis tristique, mi felis pretium urna, eget commodo ante nulla id quam. Sed dictum sem eu iaculis vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc eget nisl cursus, malesuada neque non, consequat lacus. Donec ex tortor, interdum quis venenatis non, lobortis id dolor. Nullam pellentesque laoreet ligula quis rhoncus. Sed fringilla est id sem lacinia blandit. Nullam enim odio, pharetra vitae justo consectetur, semper ullamcorper turpis. Quisque tempus urna at convallis fringilla. Fusce mollis et massa nec mattis. Maecenas et purus nibh. In sed sapien a nibh bibendum sollicitudin id sit amet ante.</p>
+            <p>Etiam blandit egestas magna quis consequat. Proin scelerisque arcu vitae purus porta consequat eu sit amet nisl. Quisque id urna quis quam consectetur feugiat. Sed eros eros, ullamcorper in turpis eu, bibendum vestibulum libero. Sed eros risus, interdum et arcu ac, viverra posuere leo. Donec vulputate ipsum quis condimentum varius. Donec tincidunt blandit erat vitae efficitur. Proin leo metus, sodales sed viverra vel, euismod at nisi. Fusce id facilisis eros, eu sagittis turpis. Vivamus feugiat nibh mattis, tempus elit id, sollicitudin eros. Donec lacinia accumsan nulla, in rutrum risus efficitur dignissim. Quisque mollis sed odio ac facilisis. Curabitur iaculis libero a accumsan gravida. Sed varius erat ut velit porttitor placerat.</p>
+            <img src='https://c3.staticflickr.com/9/8496/29415027146_8cf8137f21_h.jpg'>
+            <p>Etiam lacus est, mollis ut pulvinar sit amet, fermentum in tellus. Integer in orci id arcu efficitur laoreet at et ipsum. In nunc risus, placerat rhoncus libero ut, tincidunt varius ipsum. Aliquam erat volutpat. Phasellus felis nisl, malesuada nec erat ac, ullamcorper pretium lorem. Morbi ac mattis eros, vel vehicula nisl. Cras varius felis nisl. Pellentesque fringilla dapibus semper. Aenean ut orci justo. Donec bibendum laoreet dictum. Sed vehicula lorem ac est vestibulum faucibus. Cras dapibus id velit et fringilla.</p>
+        </div>
+        <div class='clearfix'></div>
+    </div>
+</div>
 
-filter.append("feComposite")
-.attr("in","SourceGraphic")
-	
-		legend = svgl.selectAll("legend").data(selected);
-		
-		legend.enter()
-		.append("circle")
-		.attr("class","legend")
-		.attr("cx",function(d,m){return w-padding-2*m*(rScale(4)+4*d3scale)-rScale(4)})
-		.attr("cy",h-padding-rScale(4))
-		.attr("r",rScale(4))
-		.attr("stroke",function(d,m){
-			return setColor(m)
-			})
-		.attr("stroke-width",2)
-		.attr("fill",function(d,m){
-			return setColor(m)
-			})
-		.on("mouseover",function(){
-			d3.select(this).attr("r",rScale(5));
-		})
-		.on("mouseout",function(){
-			d3.select(this).attr("r",rScale(4));
-		})
-		.on("click",function(d,m){
-			if(!selectAll&&selected[m]){
-				selected=[true,true,true,true]
-				selectAll=true;
-			}else{
-				selected=[false,false,false,false]
-				selectAll=false;
-			};
-			selected[m]=true;
-			legend.attr("fill",function(l,n){return setColor(n)});
-			circle.attr("fill",function(l){return setColor(+l.won)});
-			circleWon.attr("fill",function(l){return setColor(+l.won)});
-		})
-		
-		
-	function draw(dataset){
-		circle = svg
-		.selectAll("circle.nominated")
-		.data(dataset)
-		
-		circleWon = svg
-		.selectAll("circle.won")
-		.data(dataset)
-		
-		circle
-		.enter()
-		.append("circle")
-		.attr("class","nominated")
-		.attr("cx",function(d){return xScale(+d.xpos)})
-		.attr("cy",function(d){return yScale(+d.ypos)})
-		.attr("r",function(d){return rScale(+d.nominated)})
-		.attr("fill",function(d){return setColor(+d.won)})
-		.on("mouseover", function(d){
-			var cx=Number(d3.select(this).attr("cx"));
-			var cy=Number(d3.select(this).attr("cy"));
-			if(selected[d.won]){
-			svg
-			.append("text")
-			.attr("filter","url(#solid)")
-			.attr("class","text")
-			.attr("text-anchor","middle")
-			.text(d.name)
-			.style("font-size","15px")
-			.attr("x", cx)
-			.attr("y", cy+5)
-			.style("pointer-events","none");
-			}
-			})
-		.on("mouseout", function(d){
-			svg.selectAll("text.text")
-			.remove();
-			})
-		
-		circleWon
-		.enter()
-			.append("circle")
-			.attr("class","won")
-			.attr("cx",function(d){return xScale(+d.xpos)})
-			.attr("cy",function(d){return yScale(+d.ypos)})
-			.attr("r",function(d){return rScale(+d.won)})
-			.attr("fill",function(d){return setColor(+d.won)})
-			.style("pointer-events","none")
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-</script>
-        </body>
+
+</body>
 </html>
