@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>BEST DIRECTORS' FILMOGRAPHY VISUALIZED</title>
-    <script src='http://d3js.org/d3.v4.min.js'></script>
+    <script src='http://d3js.org/d3.v3.min.js'></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Playfair+Display+SC:700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i" rel="stylesheet">
@@ -163,65 +163,25 @@
 	
 	/*CSS D3*/
         svg{
-        background: #202020;
-        }
-        
-        .dots{
-	fill: #202020;
-	stroke: white;
-	stroke-width: 2px;
-        }
-      
-        .line{
-	stroke: white;
-	stroke-width: 3px;
-        }
-      
-        .legend-line{
-	stroke: white;
-	stroke-width: 1px;
-        }
-      
-        .axis-text, .detailTitle, .legend-data, .legend-text, .detail-consensus{
-	fill: white;
-	font-family: "Lato", Helvetica, Arial, sans-serif;
-	font-weight: 300;
-        }
-      
-        .chartTitle{
-	fill: #202020;
-	font-family: "Lato", Helvetica, Arial, sans-serif;
-	font-weight: 300;
-        }
-      
-        .subtitle{
-	fill: white;
-	font-family: "Roboto", Helvetica, Arial, sans-serif;
-	font-style: italic;
-	font-weight: 300;
-        }
-        .hidden {
-	display: none;
-        }
-      
-        .tri-button {
-	fill: white;
-        }
-      
-        .triangle-main {
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	cursor: pointer;
-        }
-      
-        .rect-button {
-	cursor: pointer;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	opacity: 0;
-        }
-      
-        .mobile{
-	visibility: hidden;
-        }
+                font-family: "Lato", Helvetica, Arial, sans-serif;
+                background: #202020;
+            }
+	    .text{
+                font-family: "Lato", Helvetica, Arial, sans-serif;
+                fill: #FFF;
+            }
+	    .nominated{
+		fill-opacity:0.75;
+		cursor: pointer;
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
+	    }
+	    .nominated:hover{
+		fill-opacity:0.9;
+	    }
+	    .legend{
+		cursor: pointer;
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
+	    }
 
         /*end CSS d3*/
     </style>
@@ -247,6 +207,6 @@
         <div class='clearfix'></div>
     </div>
 </div>
-<script src='nolan_v2_mobile.js'></script>
+<script src='oscar.js'></script>
 </body>
 </html>
