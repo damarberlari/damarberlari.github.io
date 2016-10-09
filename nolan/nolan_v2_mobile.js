@@ -370,13 +370,19 @@ d3Chart.create = function(el, state, device) {
     this._drawPattern(el,".detail",state.movie);
     this.update(el, scale, state, 2);
   
+    window.onresize = function() {
+    d3Chart.destroy(el);
+    d3Chart.create(el,state,detectDevice(window));
+    }
 };
 
 d3Chart.update = function(el, scale, state, counter) {
   this._drawTriangle(el, ".movie-triangle", scale, state.movie, counter);
   this._drawAxis(el, ".axis", scale, state.movie);
   this._drawDetail(el, ".detail", scale, state.movie, counter);
+  if(scale.deviceType=='mobile'){
   this._drawNavigator(el, ".navigator", scale, state, counter);
+  }
   //this._drawLegend(el, ".legend", scale, state.movie);
 };
 
@@ -925,4 +931,6 @@ detectDevice = function(window){
 var el=".d3-content";
 
 d3Chart.create(el,graphdata[0],detectDevice(window));
+
+
 
