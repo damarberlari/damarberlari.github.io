@@ -371,8 +371,11 @@ d3Chart.create = function(el, state, device) {
     this.update(el, scale, state, 2);
   
     window.onresize = function() {
+    newDevice=detectDevice(window);
+    if(scale.deviceType!=newDevice.type){
     d3Chart.destroy(el);
-    d3Chart.create(el,state,detectDevice(window));
+    d3Chart.create(el,state,newDevice);
+    }
     }
 };
 
