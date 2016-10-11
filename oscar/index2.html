@@ -2,42 +2,35 @@
 
 <html>
 <head>
-    <title>BEST DIRECTORS' FILMOGRAPHY VISUALIZED</title>
+    <title>OSCAR NOMINEES AND WINNERS VISUALIZED</title>
     <script src='http://d3js.org/d3.v3.min.js'></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Playfair+Display+SC:700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#202020">
     <style>
-        html{
-	  height: 100%;
-	}
         body{
             margin: 0;
             color: #202020;
             font-size: 16px;
             font-family: 'Open Sans', sans-serif;
             font-weight: 300;
-	    height:100%;
         }
         h1, p, img {
             margin:0;
         }
-        #nav-bar{
+        .nav-bar{
             width:100%;
-            height:50px;
+            height:60px;
             margin:0;
             background: #202020;
-            box-shadow: 0px 2px 10px rgba(20,20,20,0.3);
-	    position: fixed;
-	    top:0;
+            box-shadow: 0px 2px 10px rgba(20,20,20,0.3); 
         }
         .wrapper{
             width:100%;
-            margin: 50px auto;
+            max-width: 1200px;
+            margin: auto;
             font-size: 1em;
-	    height: 100%;
         }
         .header{
             width:100%;
@@ -61,15 +54,16 @@
         }
         .d3-content{
             width:100%;
-	    height:85%;
+	    max-width: 950px;
+            margin: 40px auto;
         }
         .post-content{
             width: 100%;
             max-width:850px;
-            margin:40px auto;
+            margin:auto;
         }
         
-        .author {
+        .post-content .author {
             width: 25%;
             display: inline-block;
             float:left;
@@ -82,18 +76,18 @@
             line-height: 1.5em;
             font-weight: 400;
         }
-        .main-content {
+        .post-content .main-content {
             width: 72.5%;
             display: inline-block;
             float: left;
         }
-        .main-content p {
+        .post-content .main-content p {
             text-align: left;
             font-size: 1em;
             line-height: 1.5em;
             margin-bottom: 40px;
         }
-        .main-content img{
+        .post-content .main-content img{
             width: 100%;
             height: auto;
             margin-bottom: 40px;
@@ -107,61 +101,8 @@
             clear: both;
             height: 0;
         }
-	
-	.fixed {
-	  position: fixed;
-	  top:0;
-	}
         
-        @media screen and (max-width: 900px) {
-            .post-content{
-                max-width: 600px;
-            }
-            .header-line{
-                width:40%;
-            }
-            .post-content .author{
-                width:100%;
-                margin-right:0;
-            }
-            .post-content .main-content{
-                width:100%;
-            }
-            .meta{
-                text-align: left;
-            }
-        }
-        
-        @media screen and (max-width: 650px) {
-            .header, .post-content .main-content p, .post-content .author{
-                width:90%;
-                margin-left:5%;
-                margin-right: 5%;
-		margin-bottom: 20px;
-                box-sizing: border-box;
-            }
-	    .post-content{
-                margin: 20px auto;
-            }
-	    .header {
-	      margin-top:20px;
-	    }
-	    .header h1{
-	      font-size:3em;
-	    }
-	    .post-content .main-content img{
-            margin-bottom: 20px;
-        }
-	    
-        }
-	
-	@media screen and (max-width: 480px) {
-	    .header h1{
-	      font-size:2em;
-	    }
-        }
-	
-	/*CSS D3*/
+        /*CSS D3*/
         svg{
                 font-family: "Lato", Helvetica, Arial, sans-serif;
                 background: #202020;
@@ -184,21 +125,50 @@
 	    }
 
         /*end CSS d3*/
+        
+        @media screen and (max-width: 900px) {
+            .post-content{
+                max-width: 600px;
+            }
+            .header-line{
+                width:40%;
+            }
+            .post-content .author{
+                width:100%;
+                margin-right:0;
+            }
+            .post-content .main-content{
+                width:100%;
+            }
+            .meta{
+                text-align: left;
+            }
+        }
+        
+        @media screen and (max-width: 650px) {
+            .header, .main-content p, .post-content .author{
+                width:90%;
+                margin-left:5%;
+                margin-right: 5%;
+                box-sizing: border-box;
+            }
+        }
     </style>
 </head>
 
 <body>
-<div id='nav-bar'></div>
+<div class='nav-bar'></div>
 <div class='wrapper'>
-    <div class='d3-content'></div>
-    <div class='header'><h1>BEST DIRECTORS' FILMOGRAPHY VISUALIZED</h1></div>
+    <div class='header'><h1>OSCAR NOMINEES AND WINNERS VISUALIZED</h1></div>
     <hr class='header-line'>
+    <div class='d3-content'></div>
     <div class='post-content'>
         <div class='author'>
             <h1 class='meta'>by: Damar Aji Pramudita</h1>
             <h1 class='meta'>22 December 2016</h1>
         </div>
         <div class='main-content'>
+            <script src='oscar.js'></script>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas gravida tellus vel orci consequat vehicula. Proin ultrices, felis nec lobortis tristique, mi felis pretium urna, eget commodo ante nulla id quam. Sed dictum sem eu iaculis vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc eget nisl cursus, malesuada neque non, consequat lacus. Donec ex tortor, interdum quis venenatis non, lobortis id dolor. Nullam pellentesque laoreet ligula quis rhoncus. Sed fringilla est id sem lacinia blandit. Nullam enim odio, pharetra vitae justo consectetur, semper ullamcorper turpis. Quisque tempus urna at convallis fringilla. Fusce mollis et massa nec mattis. Maecenas et purus nibh. In sed sapien a nibh bibendum sollicitudin id sit amet ante.</p>
             <p>Etiam blandit egestas magna quis consequat. Proin scelerisque arcu vitae purus porta consequat eu sit amet nisl. Quisque id urna quis quam consectetur feugiat. Sed eros eros, ullamcorper in turpis eu, bibendum vestibulum libero. Sed eros risus, interdum et arcu ac, viverra posuere leo. Donec vulputate ipsum quis condimentum varius. Donec tincidunt blandit erat vitae efficitur. Proin leo metus, sodales sed viverra vel, euismod at nisi. Fusce id facilisis eros, eu sagittis turpis. Vivamus feugiat nibh mattis, tempus elit id, sollicitudin eros. Donec lacinia accumsan nulla, in rutrum risus efficitur dignissim. Quisque mollis sed odio ac facilisis. Curabitur iaculis libero a accumsan gravida. Sed varius erat ut velit porttitor placerat.</p>
             <img src='https://c3.staticflickr.com/9/8496/29415027146_8cf8137f21_h.jpg'>
@@ -207,6 +177,7 @@
         <div class='clearfix'></div>
     </div>
 </div>
-<script src='oscar.js'></script>
+
+
 </body>
 </html>
