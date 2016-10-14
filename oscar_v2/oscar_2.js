@@ -5,7 +5,7 @@
 	rheight = d3scale*20;
 	padding = d3scale*10;
 	
-	var psv = d3.dsv(";", "text/plain");
+	
 	var selected = [true,true,true,true],
 	selectAll = true;
 	
@@ -25,19 +25,28 @@
 	      textheight = d3.select(this).node().getBoundingClientRect().height;
 	});
 	
-	rScale = d3.scale.linear()
+	rScale = d3.scaleLinear()
 	.domain([0, 3])
-	.range([0, d3scale*3*12.8/2]);
+	.range([0, d3scale*3*12/2]);
 	
-	xScale = d3.scale.linear()
+	xScale = d3.scaleLinear()
 	.domain([0, 820])
 	.range([0, w]);
 	
-	yScale = d3.scale.linear()
+	yScale = d3.scaleLinear()
 	.domain([0, 820])
 	.range([10, h+10]);
 	
-	psv("positions_circle.csv", function(error,dataset) {
+	d3.csv("positions_circle.csv", function row(d) {
+  return {
+      index: +d.index,
+      name: d.name,
+    x: Math.random()*w,
+    y: Math.random()*h,
+    r: +d.r,
+    won: +d.won // convert "Length" column to number
+  };
+},function(error,dataset) {
 		draw(dataset);	
           });
 	
@@ -114,7 +123,8 @@ filter.append("feComposite")
 		
 		
 	function draw(dataset){
-                  
+                  console.log(dataset);
+    
 		circle = svg
 		.selectAll("circle.nominated")
 		.data(dataset)
@@ -127,9 +137,9 @@ filter.append("feComposite")
 		.enter()
 		.append("circle")
 		.attr("class","nominated")
-		.attr("cx",function(d){return xScale(+d.xpos)})
-		.attr("cy",function(d){return yScale(+d.ypos)})
-		.attr("r",function(d){return rScale(+d.nominated)})
+		.attr("cx",w/2)
+		.attr("cy",h/2)
+		.attr("r",function(d){return rScale(+d.r)})
 		.attr("fill",function(d){return setColor(+d.won)})
 		.on("mouseover", function(d){
 			var cx=Number(d3.select(this).attr("cx"));
@@ -156,13 +166,38 @@ filter.append("feComposite")
 		.enter()
 			.append("circle")
 			.attr("class","won")
-			.attr("cx",function(d){return xScale(+d.xpos)})
-			.attr("cy",function(d){return yScale(+d.ypos)})
+			.attr("cx",w/2)
+			.attr("cy",h/2)
 			.attr("r",function(d){return rScale(+d.won)})
 			.attr("fill",function(d){return setColor(+d.won)})
 			.style("pointer-events","none")
+                        
+                  var simulation = d3.forceSimulation(dataset)
+    .velocityDecay(0.2)
+    .force("x", d3.forceX(w/2).strength(0.01))
+    .force("y", d3.forceY(h/2).strength(0.01))
+    .force("collide", d3.forceCollide().radius(function(d) { return rScale(d.r) + 2; }).iterations(2))
+    .on("tick", ticked);
+    
+    function ticked() {
+   svg
+    .selectAll(".nominated")
+    .data(dataset)
+    .attr("cx",function(d){return xScale(d.x)})
+	.attr("cy",function(d){return yScale(d.y)})
+	.attr("r",function(d){return rScale(d.r)});
+        
+        svg
+    .selectAll(".won")
+    .data(dataset)
+    .attr("cx",function(d){return xScale(d.x)})
+	.attr("cy",function(d){return yScale(d.y)})
+}
 	}
+
+
 	
+        
 	
 	
 	
