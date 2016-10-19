@@ -1,18 +1,84 @@
+html{
+  height: 100%;
+}
+
 body {
   background: white;
+  height: 100%;
+  margin:0;
 }
 
 svg {
-  background: #404040;
+  background: #202020;
 }
 
 .d3-content{
-  width: 800px;
   margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
+  display: block;
+  width:100%;
+  height: 100%;
+  margin: auto;
 }
 
+.d3-left{
+  width: 70%;
+  height: 100%;
+  display: block;
+  float: left;
+}
+
+.d3-right{
+  width:30%;
+  height:100%;
+  background: #101010;
+  display: block;
+  float: right;
+}
+
+.d3-title{
+  color:white;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-size: 30px;
+  line-height: 32px;
+  font-weight: 400;
+  margin: 20px;
+}
+.d3-menu{
+            list-style: none;
+            padding: 0;
+	    font-family: "Lato", Helvetica, Arial, sans-serif;
+	    font-size: 16px;
+            overflow: auto;
+	    margin-top: 50px;
+        }
+        .d3-menu li{
+	  color: #404040;
+            height:63px;
+            margin-bottom:2px;
+            margin-top:0px;
+            border-top:1px solid #202020;
+            border-bottom:1px solid #202020;
+            cursor:pointer;
+        }
+	.d3-menu li p{
+	  margin:10px 20px;
+	}
+        .d3-menu li::before{
+            content: "";
+            float: left;
+            width:10px;
+            height: 100%;
+            background: #404040;
+            margin-right: 10px;
+        }
+	.d3-menu li:hover{
+            color: white;
+        }
+        .d3-menu li:hover::before{
+            background: crimson;
+        }
 @media screen and (max-device-width: 360px)
 {
     .d3-content{

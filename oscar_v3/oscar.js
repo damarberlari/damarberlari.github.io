@@ -2,11 +2,12 @@
 	w = 820;
 	h = 820;
         
-	svg = d3.select(".d3-left")
+	svg = d3.select(".d3-leftbar")
 	.append("svg")
       .attr('width', '100%')
       .attr('height', '100%') 
       .attr('viewBox',"0 0 820 820")
+      .attr('preserveAspectRatio','xMinYMin')
       ;
 	
         var nodes = d3.range(300).map(function(i) {
@@ -48,4 +49,5 @@ function ticked() {
     .attr("cx",function(d){return d.x})
 	.attr("cy",function(d){return d.y})
 	.attr("r",function(d){return d.r})
-}
+}	
+	

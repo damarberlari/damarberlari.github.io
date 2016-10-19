@@ -38,11 +38,12 @@
 	.range([10, h+10]);
 	
 	d3.csv("positions_circle.csv", function row(d) {
+            if(d.r>2){xPos=Math.random()*w/2+w/4,yPos=Math.random()*h/2+h/4}else{xPos=Math.random()*w,yPos=Math.random()*h}
   return {
       index: +d.index,
       name: d.name,
     x: Math.random()*w,
-    y: Math.random()*h,
+    y: yPos,
     r: +d.r,
     won: +d.won // convert "Length" column to number
   };
@@ -53,8 +54,6 @@
 	
 	
 	function setColor(value){
-		var color="#262626";
-		if(selected[value]){
 		switch(value){
 			case 1: color="#378e43"
 			break;
@@ -63,7 +62,6 @@
 			case 3: color="#ef4437"
 			break;
 			default: color="#3d82c4"
-		}
 		}
 		
 		return color;
@@ -85,8 +83,10 @@ filter.append("feFlood")
 
 filter.append("feComposite")
 .attr("in","SourceGraphic")
-	
-		legend = svgl.selectAll("legend").data(selected);
+		
+		
+	function draw(dataset){
+            legend = svgl.selectAll(".legend").data(selected);
 		
 		legend.enter()
 		.append("circle")
@@ -108,23 +108,17 @@ filter.append("feComposite")
 			d3.select(this).attr("r",rScale(4));
 		})
 		.on("click",function(d,m){
-			if(!selectAll&&selected[m]){
-				selected=[true,true,true,true]
-				selectAll=true;
-			}else{
-				selected=[false,false,false,false]
-				selectAll=false;
-			};
-			selected[m]=true;
-			legend.attr("fill",function(l,n){return setColor(n)});
-			circle.attr("fill",function(l){return setColor(+l.won)});
-			circleWon.attr("fill",function(l){return setColor(+l.won)});
-		})
-		
-		
-	function draw(dataset){
-                  console.log(dataset);
-    
+                  console.log(m);
+                  svgl.selectAll(".legend").attr("fill","#262626");
+                  d3.select(this).attr("fill",setColor(m));
+	        svg
+		.selectAll("circle.nominated")
+		.data(dataset).attr("fill","#262626").filter(function(l){return l.won==m}).attr("fill",function(l){return setColor(l.won)});
+                
+	        svg.selectAll("circle.won")
+		.data(dataset).attr("fill","#262626").filter(function(l){return l.won==m}).attr("fill",function(l){return setColor(l.won)});
+		});
+                
 		circle = svg
 		.selectAll("circle.nominated")
 		.data(dataset)
@@ -141,7 +135,9 @@ filter.append("feComposite")
 		.attr("cy",h/2)
 		.attr("r",function(d){return rScale(+d.r)})
 		.attr("fill",function(d){return setColor(+d.won)})
+                .attr("stroke","white").attr("stroke-width","0px")
 		.on("mouseover", function(d){
+                  d3.select(this).attr("stroke-width","2px")
 			var cx=Number(d3.select(this).attr("cx"));
 			var cy=Number(d3.select(this).attr("cy"));
 			if(selected[d.won]){
@@ -151,13 +147,14 @@ filter.append("feComposite")
 			.attr("class","text")
 			.attr("text-anchor","middle")
 			.text(d.name)
-			.style("font-size","15px")
+			.style("font-size","17px")
 			.attr("x", cx)
 			.attr("y", cy+5)
 			.style("pointer-events","none");
 			}
 			})
 		.on("mouseout", function(d){
+                  d3.select(this).attr("stroke-width","0px")
 			svg.selectAll("text.text")
 			.remove();
 			})
@@ -177,7 +174,27 @@ filter.append("feComposite")
     .force("x", d3.forceX(w/2).strength(0.01))
     .force("y", d3.forceY(h/2).strength(0.01))
     .force("collide", d3.forceCollide().radius(function(d) { return rScale(d.r) + 2; }).iterations(2))
-    .on("tick", ticked);
+    .on("tick", ticked)
+    .on("end",exportPos);
+    
+    svg.selectAll(".nominated").data(dataset)
+    .call(d3.drag()
+      .on("start",dragstarted)
+      .on("drag",dragged)
+      .on("end",dragended)
+      );
+    
+    function dragstarted(d){
+      if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+    }
+    
+    function dragged(d){
+      d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
+    }
+    
+    function dragended(d){
+      if (!d3.event.active) simulation.alphaTarget(0);
+    }
     
     function ticked() {
    svg
@@ -192,6 +209,12 @@ filter.append("feComposite")
     .data(dataset)
     .attr("cx",function(d){return xScale(d.x)})
 	.attr("cy",function(d){return yScale(d.y)})
+}
+
+function exportPos(){
+      var datastring=[];
+      svg.selectAll(".nominated").data(dataset).each(function(d){datastring.push(d.name+","+d.x+","+d.y+","+d.r+","+d.won)});
+      //console.log(datastring);
 }
 	}
 
