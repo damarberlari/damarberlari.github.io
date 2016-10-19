@@ -97,8 +97,6 @@ svg {
             padding: 0;
 	    font-family: "Lato", Helvetica, Arial, sans-serif;
 	    font-size: 16px;
-            max-height: 50%;
-            overflow: auto;
 	    margin-top: 50px;
         }
         .d3-menu li{
@@ -230,10 +228,14 @@ svg{
         <div class='d3-right'>
             <div class='d3-title'>THE ACADEMY AWARDS NOMINEES</div>
             <ul class='d3-menu'>
+                <li class="filter"><div class='legend-desc'><div class='legend-text'>ALL NOMINEES</div><div class='legend-text'>All actors nominated</div></div></li>
                 <li class="filter"><div class='legend-desc'><div class='legend-text'>THE PERSISTENTS</div><div class='legend-text'>Actors get nominated but never win</div></div></li>
                 <li class="filter"><div class='legend-desc'><div class='legend-text'>THE CHOSEN ONES</div><div class='legend-text'>Actors with one Oscar</div></li>
                 <li class="filter"><div class='legend-desc'><div class='legend-text'>THE HIGH ACHIEVERS</div><div class='legend-text'>Actors with two Oscars</div></li>
                 <li class="filter"><div class='legend-desc'><div class='legend-text'>THE BEST OF THE BESTS</div><div class='legend-text'>Actors with three Oscars</div></li>
+                <li class="filter"><div class='legend-desc'><div class='legend-text'>THE ALWAYS WON</div><div class='legend-text'>Actors always won on their nominations</div></li>
+                <li class="filter"><div class='legend-desc'><div class='legend-text'>THE REGULARS</div><div class='legend-text'>Actors with more than 5 nominations</div></li>
+                <li class="filter"><div class='legend-desc'><div class='legend-text'>THE GOOD RECORDS</div><div class='legend-text'>Actors with win to nominations ratio > 75%</div></li>
             </ul>
         </div>
         <div class='clearfix'></div>

@@ -86,15 +86,24 @@ filter.append("feComposite")
 		
 		
 	function draw(dataset){
-                d3.selectAll(".filter").data([0,1,2,3])
+                d3.selectAll(".filter").data([
+                                              {filter: function(won,nominated){return true}},
+                                              {filter: function(won,nominated){return won==0}},
+                                              {filter: function(won,nominated){return won==1}},
+                                              {filter: function(won,nominated){return won==2}},
+                                              {filter: function(won,nominated){return won==3}},
+                                              {filter: function(won,nominated){return won==nominated}},
+                                              {filter: function(won,nominated){return nominated>=5}},
+                                              {filter: function(won,nominated){return won/nominated>=0.75}}
+                                              ])
                 .on("click", function(d){
-                    svg
+                 svg
 		.selectAll("circle.nominated")
 		.data(dataset).attr("fill","#262626")
                 .on("mouseover", function(d){
                   d3.select(this).attr("stroke-width","0px")
 			})
-                .filter(function(l){return l.won==d}).attr("fill",function(l){return setColor(l.won)})
+                .filter(function(l){return d.filter(l.won,l.r)}).attr("fill",function(l){return setColor(l.won)})
                 .on("mouseover", function(d){
                   d3.select(this).attr("stroke-width","2px")
 			var cx=Number(d3.select(this).attr("cx"));
@@ -119,7 +128,9 @@ filter.append("feComposite")
 			});
                 
 	        svg.selectAll("circle.won")
-		.data(dataset).attr("fill","#262626").filter(function(l){return l.won==d}).attr("fill",function(l){return setColor(l.won)});
+		.data(dataset).attr("fill","#262626")
+                .filter(function(l){return d.filter(l.won,l.r)})
+                .attr("fill",function(l){return setColor(l.won)});
                     })
                 
 		circle = svg
