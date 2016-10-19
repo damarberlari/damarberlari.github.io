@@ -90,7 +90,33 @@ filter.append("feComposite")
                 .on("click", function(d){
                     svg
 		.selectAll("circle.nominated")
-		.data(dataset).attr("fill","#262626").filter(function(l){return l.won==d}).attr("fill",function(l){return setColor(l.won)});
+		.data(dataset).attr("fill","#262626")
+                .on("mouseover", function(d){
+                  d3.select(this).attr("stroke-width","0px")
+			})
+                .filter(function(l){return l.won==d}).attr("fill",function(l){return setColor(l.won)})
+                .on("mouseover", function(d){
+                  d3.select(this).attr("stroke-width","2px")
+			var cx=Number(d3.select(this).attr("cx"));
+			var cy=Number(d3.select(this).attr("cy"));
+			if(selected[d.won]){
+			svg
+			.append("text")
+			.attr("filter","url(#solid)")
+			.attr("class","text")
+			.attr("text-anchor","middle")
+			.text(d.name)
+			.style("font-size","17px")
+			.attr("x", cx)
+			.attr("y", cy+5)
+			.style("pointer-events","none");
+			}
+			})
+		.on("mouseout", function(d){
+                  d3.select(this).attr("stroke-width","0px")
+			svg.selectAll("text.text")
+			.remove();
+			});
                 
 	        svg.selectAll("circle.won")
 		.data(dataset).attr("fill","#262626").filter(function(l){return l.won==d}).attr("fill",function(l){return setColor(l.won)});
@@ -113,28 +139,7 @@ filter.append("feComposite")
 		.attr("r",function(d){return rScale(+d.r)})
 		.attr("fill",function(d){return setColor(+d.won)})
                 .attr("stroke","white").attr("stroke-width","0px")
-		.on("mouseover", function(d){
-                  d3.select(this).attr("stroke-width","2px")
-			var cx=Number(d3.select(this).attr("cx"));
-			var cy=Number(d3.select(this).attr("cy"));
-			if(selected[d.won]){
-			svg
-			.append("text")
-			.attr("filter","url(#solid)")
-			.attr("class","text")
-			.attr("text-anchor","middle")
-			.text(d.name)
-			.style("font-size","17px")
-			.attr("x", cx)
-			.attr("y", cy+5)
-			.style("pointer-events","none");
-			}
-			})
-		.on("mouseout", function(d){
-                  d3.select(this).attr("stroke-width","0px")
-			svg.selectAll("text.text")
-			.remove();
-			})
+		
 		
 		circleWon
 		.enter()
