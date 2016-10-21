@@ -65,9 +65,6 @@
   width:100%;
   height: 100%;
 }
-svg {
-  background: #202020;
-}
 
 .d3-left{
   width: 70%;
@@ -82,6 +79,7 @@ svg {
   background: #101010;
   display: block;
   float: right;
+  overflow: auto;
 }
 
 .d3-title{
@@ -106,6 +104,7 @@ svg {
             margin-top:0px;
             border-top:1px solid #202020;
             border-bottom:1px solid #202020;
+            overflow:hidden;
             cursor:pointer;
         }
         .d3-menu li::before{
@@ -129,9 +128,12 @@ svg {
             margin:0px;
         }
 
-svg{
-                font-family: "Lato", Helvetica, Arial, sans-serif;
+.svg-main{
                 background: #202020;
+            }
+            
+.svg-slide{
+                background: #101010;
             }
 	    .text{
                 font-family: "Lato", Helvetica, Arial, sans-serif;
@@ -206,6 +208,27 @@ svg{
 	  position: fixed;
 	  top:0;
 	}
+ 
+ 
+ .track {
+  stroke: #AAAAAA;
+  stroke-opacity: 0.3;
+  stroke-width: 5px;
+  stroke-linecap: round;
+}
+
+.track-overlay{
+    pointer-events: stroke;
+    stroke-width: 50px;
+    cursor: crosshair;
+}
+ 
+ .handle {
+  fill: #fff;
+  stroke: #000;
+  stroke-opacity: 0.5;
+  stroke-width: 1.25px;
+}
         
     </style>
 </head>
@@ -227,6 +250,7 @@ svg{
         <div class='d3-left'></div>
         <div class='d3-right'>
             <div class='d3-title'>THE ACADEMY AWARDS NOMINEES</div>
+            <div class='d3-slider'></div>
             <ul class='d3-menu'>
                 <li class="filter"><div class='legend-desc'><div class='legend-text'>ALL NOMINEES</div><div class='legend-text'>All actors nominated</div></div></li>
                 <li class="filter"><div class='legend-desc'><div class='legend-text'>THE PERSISTENTS</div><div class='legend-text'>Actors get nominated but never win</div></div></li>

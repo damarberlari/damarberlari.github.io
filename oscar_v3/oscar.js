@@ -11,9 +11,17 @@
 	
 	svg = d3.select(".d3-left")
 	.append("svg")
+        .attr("class","svg-main")
       .attr('width', '100%')
       .attr('height', '100%') 
       .attr('viewBox',"0 0 820 820");
+      
+      svgs = d3.select(".d3-slider")
+	.append("svg")
+        .attr("class","svg-slide")
+      .attr('width', '100%')
+      .attr('height', '100%') 
+      .attr('viewBox',"0 0 360 50");
 	
 	svgl=svg.append("g");
 	
@@ -177,6 +185,43 @@ filter.append("feComposite")
       .on("end",dragended)
       );
     
+    var x = d3.scaleLinear()
+    .domain([1, 10])
+    .range([20, 340])
+    .clamp(true);
+    
+    var slider = svgs.append("g")
+    .attr("class", "slider")
+    .attr("transform", "translate("+0+","+25+")")
+    
+    slider.append("line")
+    .attr("class", "track")
+    .attr("x1", 20)
+    .attr("x2", 340)
+    .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+    .attr("class", "track-inset")
+  .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+    .attr("class", "track-overlay")
+    .call(d3.drag()
+        .on("start.interrupt", function() { slider.interrupt(); })
+        .on("start drag", function() {
+            slide(x.invert(d3.event.x));
+            }));
+    
+    var handle = slider.insert("circle", ".track-overlay")
+    .attr("class", "handle")
+    .attr("r", 6)
+    .attr("cx",20);
+    
+    function slide(h) {
+      d3.selectAll(".nominated").data(dataset).attr("fill",function(l){return setColor(l.won)});
+      d3.selectAll(".nominated").data(dataset).filter(function(d){return d.r<h}).attr("fill","#262626")
+       d3.selectAll(".won").data(dataset).attr("fill",function(l){return setColor(l.won)});
+      d3.selectAll(".won").data(dataset).filter(function(d){return d.r<h}).attr("fill","#262626")
+  handle.attr("cx", x(h));
+  
+}
+    
     function dragstarted(d){
       if (!d3.event.active) simulation.alphaTarget(0.3).restart();
     }
@@ -190,6 +235,8 @@ filter.append("feComposite")
     }
     
     function ticked() {
+   
+   
    svg
     .selectAll(".nominated")
     .data(dataset)
