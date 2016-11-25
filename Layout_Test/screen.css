@@ -151,11 +151,7 @@ a:hover {
   width:100%;
   height: 100%;
   box-sizing: border-box;
-  background: black; /* For browsers that do not support gradients */
-  background: -webkit-radial-gradient(rgba(32,32,32,0.2),rgba(32,32,32,0.4)); /* Safari 5.1 to 6.0 */
-  background: -o-radial-gradient(rgba(32,32,32,0.2),rgba(32,32,32,0.4)); /* For Opera 11.6 to 12.0 */
-  background: -moz-radial-gradient(rgba(32,32,32,0.2),rgba(32,32,32,0.4)); /* For Firefox 3.6 to 15 */
-  background: radial-gradient(rgba(32,32,32,0.2),rgba(32,32,32,0.4)); /* Standard syntax */
+  background: rgba(32,32,32,0.6); /* Standard syntax */
   transition: all 0.5s ease 0s; 
   -webkit-transition: all 0.5s ease 0s;
 }

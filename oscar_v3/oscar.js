@@ -15,23 +15,7 @@
       .attr('width', '100%')
       .attr('height', '100%') 
       .attr('viewBox',"0 0 820 820");
-      
-      svgs = d3.select(".d3-slider")
-	.append("svg")
-        .attr("class","svg-slide")
-      .attr('width', '100%')
-      .attr('height', '100%') 
-      .attr('viewBox',"0 0 360 50");
-	
-	svgl=svg.append("g");
-	
-	svg.append("text") //dummytext for font-sizing
-        .attr("y","-20")
-	.text("dummy")
-        .style("font-size","15px")
-	.each(function(){
-	      textheight = d3.select(this).node().getBoundingClientRect().height;
-	});
+
 	
 	rScale = d3.scaleLinear()
 	.domain([0, 3])
@@ -99,12 +83,12 @@ filter.append("feComposite")
                                               {filter: function(won,nominated){return won==0}},
                                               {filter: function(won,nominated){return won==1}},
                                               {filter: function(won,nominated){return won==2}},
-                                              {filter: function(won,nominated){return won==3}},
-                                              {filter: function(won,nominated){return won==nominated}},
-                                              {filter: function(won,nominated){return nominated>=5}},
-                                              {filter: function(won,nominated){return won/nominated>=0.75}}
+                                              {filter: function(won,nominated){return won==3}}
                                               ])
                 .on("click", function(d){
+                  d3.select(".selected").classed("selected",false);
+                  d3.select(this).classed("selected",true);                  
+                  
                  svg
 		.selectAll("circle.nominated")
 		.data(dataset).attr("fill","#262626")
@@ -178,61 +162,12 @@ filter.append("feComposite")
     .on("tick", ticked)
     .on("end",exportPos);
     
-    svg.selectAll(".nominated").data(dataset)
-    .call(d3.drag()
-      .on("start",dragstarted)
-      .on("drag",dragged)
-      .on("end",dragended)
-      );
     
     var x = d3.scaleLinear()
-    .domain([1, 10])
+    .domain([0, 13])
     .range([20, 340])
     .clamp(true);
     
-    var slider = svgs.append("g")
-    .attr("class", "slider")
-    .attr("transform", "translate("+0+","+25+")")
-    
-    slider.append("line")
-    .attr("class", "track")
-    .attr("x1", 20)
-    .attr("x2", 340)
-    .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
-    .attr("class", "track-inset")
-  .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
-    .attr("class", "track-overlay")
-    .call(d3.drag()
-        .on("start.interrupt", function() { slider.interrupt(); })
-        .on("start drag", function() {
-            slide(x.invert(d3.event.x));
-            }));
-    
-    var handle = slider.insert("circle", ".track-overlay")
-    .attr("class", "handle")
-    .attr("r", 6)
-    .attr("cx",20);
-    
-    function slide(h) {
-      d3.selectAll(".nominated").data(dataset).attr("fill",function(l){return setColor(l.won)});
-      d3.selectAll(".nominated").data(dataset).filter(function(d){return d.r<h}).attr("fill","#262626")
-       d3.selectAll(".won").data(dataset).attr("fill",function(l){return setColor(l.won)});
-      d3.selectAll(".won").data(dataset).filter(function(d){return d.r<h}).attr("fill","#262626")
-  handle.attr("cx", x(h));
-  
-}
-    
-    function dragstarted(d){
-      if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-    }
-    
-    function dragged(d){
-      d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
-    }
-    
-    function dragended(d){
-      if (!d3.event.active) simulation.alphaTarget(0);
-    }
     
     function ticked() {
    
