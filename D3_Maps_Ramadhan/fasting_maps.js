@@ -194,6 +194,8 @@ var   path = d3.geo.path()
       .on("mouseout",function(d,m){
        mouseout(d,m);
        })
+      
+      mouseover({country: "Rusia", city: "Moskow", start: "01:45", end: "21:11", duration: 19.4333333333333, lat: 55.75, lon: 37.62},3);
 
       svgr
       .append("rect")

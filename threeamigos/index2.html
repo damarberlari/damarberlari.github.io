@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Three Amigos of Cinema</title>
+                <script type="text/javascript" src="../d3-master/d3.js"></script>
+	</head>
+	<body>
+        <style>
+            .box{
+                width:800px;
+            }
+            
+            svg{
+                opacity: 0.9;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                background: #404040;
+            }
+            
+            .axis path,
+            .axis line {
+                fill: none;
+                stroke: lightgray;
+                shape-rendering: crispEdges;
+            }
+            .axis text {
+                font-family: sans-serif;
+                fill: lightgray;
+            }
+            .tick line {
+                stroke-opacity: 0.2;
+            }
+            
+        </style>
+        <div class="box"></div>
+        
+        <script type="text/javascript">            
+            dataset = [
+                        {
+                        key:0,
+                        value:"alejandro inarritu",
+                        image:"alejandro",
+                        color: "steelblue",
+                        selected: true,
+                        first: 2001,
+                        last: 2014,
+                        worst: 0.64,
+                        best: 0.92,
+                        least: 20.9,
+                        biggest: 103.2
+                        },
+                        {
+                        key:1,
+                        value:"alfonso cuarron",
+                        image:"alfonso",
+                        color: "#ee4466",
+                        selected: false,
+                        first: 1991,
+                        last: 2013,
+                        worst: 0.36,
+                        best: 0.97,
+                        least: 0.009,
+                        biggest: 796.7
+                        },
+                        {
+                        key:2,
+                        value:"guillermo del toro",
+                        image:"guillermo",
+                        color: "#ffe34d",
+                        selected: false,
+                        first: 1993,
+                        last: 2015,
+                        worst: 0.57,
+                        best: 0.95,
+                        least: 0.6,
+                        biggest: 411
+                        }
+                       ];
+            
+            dataset_movie = [
+                        {key:0,dirkey:1,year:2013,value:"gravity",revenue: 723,rating: 0.97},
+                        {key:1,dirkey:1,year:2006,value:"children of men",revenue: 69.9,rating: 0.92},
+                        {key:2,dirkey:1,year:2004,value:"harry potter and the prisoner of azkaban",revenue: 796.7,rating: 0.91},
+                        {key:3,dirkey:1,year:2001,value:"y tu mama tambien",revenue: 33.6,rating: 0.92},
+                        {key:4,dirkey:1,year:1998,value:"great expectations",revenue: 55.5,rating: 0.36},
+                        {key:5,dirkey:1,year:1995,value:"a little princess",revenue: 10,rating: 0.97},
+                        {key:6,dirkey:1,year:1991,value:"solo con tu pareja",revenue: 0.009,rating: 0.67},
+                        {key:7,dirkey:0,year:2014,value:"birdman",revenue: 103.2,rating: 0.92},
+                        {key:8,dirkey:0,year:2010,value:"biutiful",revenue: 25,rating: 0.64},
+                        {key:9,dirkey:0,year:2006,value:"babel",revenue: 101,rating: 0.69},
+                        {key:10,dirkey:0,year:2003,value:"21 grams",revenue: 60,rating: 0.86},   
+                        {key:11,dirkey:0,year:2001,value:"amores perros",revenue: 20.9,rating: 0.92},
+                        {key:12,dirkey:2,year:2015,value:"crimson peak",revenue: 74,rating: 0.69},
+                        {key:13,dirkey:2,year:2013,value:"pacific rim",revenue: 411,rating: 0.72},
+                        {key:14,dirkey:2,year:2008,value:"hellboy ii: the golden army",revenue: 160.4,rating: 0.85},
+                        {key:15,dirkey:2,year:2006,value:"pan's labyrinth",revenue: 83.2,rating: 0.95},
+                        {key:16,dirkey:2,year:2004,value:"hellboy",revenue: 99.3,rating: 0.81},
+                        {key:17,dirkey:2,year:2002,value:"blade ii",revenue: 155,rating: 0.57},
+                        {key:17,dirkey:2,year:2001,value:"the devil's backbone",revenue: 6.45,rating: 0.92},
+                        {key:17,dirkey:2,year:1997,value:"mimic",revenue: 25.5,rating: 0.61},
+                        {key:17,dirkey:2,year:1993,value:"cronos",revenue: 0.6,rating: 0.89}
+            ]
+            dataimage = [ "alejandro","alfonso","guillermo" ];
+             
+            //set initial variable
+            var w = d3.select(".box").node().getBoundingClientRect().width;
+            var h = 0.6*w;
+            var d3scale = w/800;
+            var crad = d3scale*45;
+            var cstroke = d3scale*3;
+            var padding = d3scale*30;
+            var paddingAxis = d3scale*60;
+            var background = "url(#bg-threeamigos)";
+            var rwidth = d3scale*200;
+            var rheight = d3scale*20;
+            var notrans = true;
+            var textlength = 0;
+            var tabWidth = w-2*paddingAxis;
+            var tabHeight = h-4.5*padding-2*crad;
+            var xMin = 2003;
+            var xMax = 2015;
+            
+            var xScale = d3.scale.linear()
+                     .domain([xMin, xMax])
+                     .range([0, tabWidth]);
+            
+            var yScale = d3.scale.linear()
+                     .domain([0.32, 1.04])
+                     .range([tabHeight, 0]);
+                     
+            var revScale = d3.scale.linear()
+                     .domain([0, 800])
+                     .range([2, 50]);
+                   
+            //create svg
+            var svg = d3.select(".box")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);
+            
+            //create background for pattern
+            svg.append("defs")
+            .selectAll("pattern").data(dataimage).enter()
+            .append("pattern")
+            .attr("id", function(d) {return "bg-"+d})
+            .attr('width', 1)
+            .attr('height',1)
+            .append("image")
+            .attr("xlink:href", function(d) {return d+".jpg"})
+            .attr("x",0)
+            .attr("y",0)
+            .attr('width', 2*crad)
+            .attr('height', 2*crad);
+            
+            svgx=svg.append("g");//holder for x axis
+            svgy=svg.append("g");//holder for y axis
+            svgc=svg.append("g");//holder for circle
+            svgcs=svg.append("g");//holder for subdata circle
+            
+            var xAxis = d3.svg.axis()
+                  .scale(xScale)
+                  .orient("bottom")
+                  .tickFormat(d3.format("1"))
+                  .tickPadding(10)
+                  .innerTickSize(-tabHeight);
+        
+            var yAxis = d3.svg.axis()
+                  .scale(yScale)
+                  .orient("left")
+                  .ticks(7)
+                  .tickFormat(d3.format("1%"))
+                  .innerTickSize(-tabWidth);
+            
+            //create axis
+            svgx.attr("class", "axis").call(xAxis)
+                .attr("transform", "translate(" + paddingAxis + "," + (h - 1.5*padding) + ")")
+                .style("font-size", function(){
+                        textheight = d3.select(this).node().getBoundingClientRect().height;
+                        return rheight/textheight*10+ "px"});
+            
+            svgy.attr("class", "axis").call(yAxis)
+                .attr("transform", "translate(" + paddingAxis + ","+(h-1.5*padding-tabHeight)+")")
+                .selectAll("text")
+                .style("font-size", function(){
+                        textheight = d3.select(this).node().getBoundingClientRect().height;
+                        return rheight/textheight*10+ "px"});
+            
+            draw();
+            
+            function draw(){
+            
+            //create director circle
+            maindatacircle = svgc.selectAll("circle.maindata")
+            .data(dataset);
+            
+            maindatacircle.enter()
+            .append("circle")
+            .attr("class","maindata")
+            .attr("cx", function(d) {return padding + crad + d.key*(crad*2.2)})
+            .attr("cy", padding+crad+cstroke)
+            .attr("r", crad)
+            .attr("fill", function(d){return "url(#bg-"+d.image+")"})
+            .attr("fill-opacity", function(d){if(d.selected){return 1}else{return 0.3}})
+            .attr("stroke",function(d){return d.color})
+            .attr("stroke-width",cstroke)
+            .attr("stroke-opacity", function(d){if(d.selected){return 1}else{return 0.3}})
+            .on("click", function(d){
+                    d.selected=!d.selected;//change selected status
+                    d3.select(this).attr("fill-opacity", function(){if(d.selected){return 1}else{return 0.3}})
+                    .attr("stroke-opacity", function(d){if(d.selected){return 1}else{return 0.3}});
+                    draw();
+            });
+            
+            //create movie circle
+            
+            subdatacircle = svgcs.selectAll("circle.subdata")
+            .data(dataset_movie);
+            
+            subdatacircle.enter()
+            .append("circle")
+            .attr("class","subdata")
+            .attr("cx", function(d) {return xScale(d.year)})
+            .attr("cy", function(d) {return yScale(d.rating)})
+            .attr("r", 0)
+            .attr("fill", function(d){return dataset[d.dirkey].color})
+            .attr("fill-opacity",0.8)
+            .attr("transform", "translate(" + paddingAxis + ","+(h-1.5*padding-tabHeight)+")")
+            ;
+            
+            xMin=2001;
+            xMax=2013;
+            yMin=0.7;
+            yMax=0.9;
+            revMin=1000;
+            revMax=0;
+            
+            //review movie circle by director circle status
+            maindatacircle.each(function(d){
+            
+            if(d.selected){
+                xMin=Math.min(xMin,+d.first);
+                xMax=Math.max(xMax,+d.last);
+                yMin=Math.min(yMin,+d.worst);
+                yMax=Math.max(yMax,+d.best);
+                revMin=Math.min(revMin,+d.least);
+                revMax=Math.max(revMax,+d.biggest);
+            }
+            
+            xScale.domain([xMin-1, xMax+1]);
+            yScale.domain([yMin-0.04, yMax+0.04]);
+            revScale.domain([revMin,revMax])
+            });
+            
+            maindatacircle.each(function(d){
+            subdatacircle
+            .each(function(m){
+                        if(d.key==m.dirkey){                       
+                            if(d.selected){
+                                d3.select(this).transition().duration(500).attr("r",revScale(m.revenue))               
+                                .attr("cx", function() {return xScale(m.year)})
+                                .attr("cy", function() {return yScale(m.rating)});
+                                }
+                                
+                        if(!d.selected){
+                                d3.select(this).transition().duration(500).attr("r",0)
+                                .attr("cx", function() {return xScale(m.year)})
+                                .attr("cy", function() {return yScale(m.rating)});
+                            }
+                        }
+            })
+            });
+            
+            //resetAxis
+            svgx
+            .transition()
+            .duration(500).call(xAxis);
+            svgx.selectAll("text")
+            .style("font-size",function(){return rheight/textheight*10+ "px"});
+            
+            svgy
+            .transition()
+            .duration(500).call(yAxis);
+            svgy.selectAll("text")
+            .style("font-size",function(){return rheight/textheight*10+ "px"});
+            };
+        </script>
+        </body>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+                <meta charset="utf-8">
+                <title>Three Amigos of Cinema</title>
+                <script src='http://d3js.org/d3.v4.min.js'></script>
+                <link href='https://fonts.googleapis.com/css?family=Lato:400' rel='stylesheet' type='text/css'>
+        </head>
+        <body>
+<style>
+            .post-content{
+                width:710px;
+            }
+
+            svg{
+                opacity: 0.9;
+                font-family: "Lato", Helvetica, Arial, sans-serif;
+                background: #404040;
+		margin-left: 1%;
+            }
+
+            .axis path,
+            .axis line {
+                fill: none;
+                stroke: white;
+                stroke-width:1px;
+            }
+
+            text{
+                font-family: "Lato", Helvetica, Arial, sans-serif;
+                fill: lightgray;
+		pointer-events: none;
+            }
+            .detail{
+                font-family: "Lato", Helvetica, Arial, sans-serif;
+                fill: #404040;
+            }
+            .tick line {
+                stroke-opacity: 0.2;
+            }
+
+</style>
+<div class="post-content"></div>
+
+<script type="text/javascript">
+        dataset = [
+                        {
+                        key:0,
+                        fname:"alfonso",
+                        lname: "cuarron",
+                        image:"alfonso",
+                        color: "#ee4466",
+                        selected: false,
+                        first: 1991,
+                        last: 2013,
+                        worst: 0.36,
+                        best: 0.97,
+                        least: 0.009,
+                        biggest: 796.7,
+                        movies: [
+                                {key:0,dirkey:0,year:2013,value:"Gravity",revenue: 723.2,rating: 0.97},
+                                {key:1,dirkey:0,year:2006,value:"Children of Men",revenue: 69.9,rating: 0.92},
+                                {key:2,dirkey:0,year:2004,value:"Harry Potter and the Prisoner of Azkaban",revenue: 796.7,rating: 0.91},
+                                {key:3,dirkey:0,year:2001,value:"Y Tu Mama Tambien",revenue: 33.6,rating: 0.92},
+                                {key:4,dirkey:0,year:1998,value:"Great Expectations",revenue: 55.5,rating: 0.36},
+                                {key:5,dirkey:0,year:1995,value:"A Little Princess",revenue: 10,rating: 0.97},
+                                {key:6,dirkey:0,year:1991,value:"Solo Con Tu Pareja",revenue: 0.01,rating: 0.67}
+                            ]
+                        },
+                        {
+                        key:1,
+                        fname:"alejandro",
+                        lname: "inarritu",
+                        image:"alejandro",
+                        color: "steelblue",
+                        selected: true,
+                        first: 2001,
+                        last: 2014,
+                        worst: 0.64,
+                        best: 0.92,
+                        least: 20.9,
+                        biggest: 135.3,
+                        movies: [
+				{key:11,dirkey:1,year:2015,value:"The Revenant",revenue: 10,rating: 0.80},
+                                {key:7,dirkey:1,year:2014,value:"Birdman",revenue: 103.2,rating: 0.92},
+                                {key:8,dirkey:1,year:2010,value:"Biutiful",revenue: 25.1,rating: 0.64},
+                                {key:9,dirkey:1,year:2006,value:"Babel",revenue: 135.3,rating: 0.69},
+                                {key:10,dirkey:1,year:2003,value:"21 Grams",revenue: 60.4,rating: 0.80},
+                                {key:11,dirkey:1,year:2001,value:"Amores Perros",revenue: 20.9,rating: 0.92}
+                            ]
+                        },
+                        {
+                        key:2,
+                        fname:"guillermo",
+                        lname: "del toro",
+                        image:"guillermo",
+                        color: "#ffe34d",
+                        selected: false,
+                        first: 1993,
+                        last: 2015,
+                        worst: 0.57,
+                        best: 0.95,
+                        least: 0.6,
+                        biggest: 411,
+                        movies: [
+                                {key:12,dirkey:2,year:2015,value:"Crimson Peak",revenue: 74,rating: 0.69},
+                                {key:13,dirkey:2,year:2013,value:"Pacific Rim",revenue: 411,rating: 0.72},
+                                {key:14,dirkey:2,year:2008,value:"Hellboy II: The Golden Army",revenue: 160.4,rating: 0.85},
+                                {key:15,dirkey:2,year:2006,value:"Pan's Labyrinth",revenue: 83.2,rating: 0.95},
+                                {key:16,dirkey:2,year:2004,value:"Hellboy",revenue: 99.3,rating: 0.81},
+                                {key:17,dirkey:2,year:2002,value:"Blade II",revenue: 155,rating: 0.57},
+                                {key:18,dirkey:2,year:2001,value:"The Devil's Backbone",revenue: 6.5,rating: 0.92},
+                                {key:19,dirkey:2,year:1997,value:"Mimic",revenue: 25.5,rating: 0.61},
+                                {key:20,dirkey:2,year:1993,value:"Cronos",revenue: 0.6,rating: 0.89}
+                            ]
+                        }
+                       ];
+
+	dataimage = [ "alejandro","alfonso","guillermo" ];
+
+	
+	init();
+	
+	
+	function init() {
+	//set initial variable
+	w = 1.12*d3.select(".post-content").node().getBoundingClientRect().width;
+	h = 0.6*w;
+	d3scale = w/800;
+	crad = d3scale*25;
+	cstroke = d3scale*3;
+	padding = d3scale*25;
+	paddingAxis = d3scale*60;
+	background = "url(#bg-threeamigos)";
+	rwidth = d3scale*200;
+	rheight = d3scale*20;
+	notrans = true;
+	textlength = 0;
+	tabWidth = w-2*paddingAxis;
+	tabHeight = h-4.3*padding-2*crad;
+	xMin = 2003;
+	xMax = 2015;
+
+	xScale = d3.scaleLinear()
+	.domain([xMin, xMax])
+	.range([0, tabWidth]);
+
+	yScale = d3.scaleLinear()
+	.domain([0.32, 1.04])
+	.range([tabHeight, 0]);
+
+	revScale = d3.scaleLinear()
+	.domain([0, 800])
+	.range([5, d3scale*100]);
+
+	//create svg
+	svg = d3.select(".post-content")
+	.append("svg")
+	.attr("width", w)
+	.attr("height", h);
+	
+
+	//create background for pattern
+	svg.append("defs")
+	.selectAll("pattern").data(dataimage).enter()
+	.append("pattern")
+	.attr("id", function(d) {return "bg-"+d})
+	.attr('width', 1)
+	.attr('height',1)
+	.append("image")
+	.attr("xlink:href", function(d) {return "/content/images/2015/12/"+d+".jpg"})
+	.attr("x",0)
+	.attr("y",0)
+	.attr('width', 2*crad)
+	.attr('height', 2*crad);
+
+	svgl=svg.append("g");//holder for title
+	svgx=svg.append("g");//holder for x axis
+	svgy=svg.append("g");//holder for y axis
+	svgc=svg.append("g");//holder for circle
+	svgcs=svg.append("g");//holder for subdata circle
+	svgr=svg.append("g");//holder for text rectangle
+	svgt=svg.append("g");//holder for text
+
+	xAxis = d3.axisBottom(xScale)
+	.tickFormat(d3.format("1"))
+	.tickPadding(10);
+
+	yAxis = d3.axisLeft(yScale)
+	.ticks(7)
+	.tickSizeInner(-tabWidth);
+	
+	//create Title
+	
+
+	//create axis
+	svgx
+	.attr("class", "axis")
+	.call(xAxis)
+	.attr("transform", "translate(" + paddingAxis + "," + (h - 1.9*padding) + ")")
+	.attr("font-size","12px");
+
+	svgy
+	.attr("class", "axis")
+	.call(yAxis)
+	.attr("transform", "translate(" + paddingAxis + ","+(h-1.9*padding-tabHeight)+")")
+	.attr("font-size","12px");
+
+	//y axis legend
+	svgy
+	.append("text")
+	.attr("class","axis")
+	.attr("x", w-1.9*paddingAxis)
+	.attr("y", tabHeight/2)
+	.attr("text-anchor","middle")
+	.attr("font-size","13px")
+	.text("Rotten Tomatoes Rating")
+	.attr("transform", "rotate(90 "+(w-1.9*paddingAxis)+" "+(tabHeight/2)+")");
+
+	//create director circle
+	maindatacircle = svgc.selectAll("circle.maindata")
+	.data(dataset);
+
+	maindatacircle
+	.enter()
+	.append("circle")
+	.attr("class","maindata")
+	.attr("cx", function(d) {return padding + crad + d.key*(crad*3.2)})
+	.attr("cy", padding+crad+cstroke)
+	.attr("r", crad)
+	.attr("fill", function(d){return d.color})
+	.attr("fill-opacity", function(d){if(d.selected){return 1}else{return 0.3}})
+	.attr("stroke",function(d){return d.color})
+	.attr("stroke-width",cstroke)
+	.attr("stroke-opacity", function(d){if(d.selected){return 1}else{return 0.3}})
+	.attr("cursor","pointer")
+	.each(function(d){
+		var className = "director_"+d.key;
+		
+		//create director circle legend
+		svgc
+		.append("text")
+		.attr("class",className)
+		.attr("x", d3.select(this).attr("cx"))
+		.attr("y", Number(d3.select(this).attr("cy"))+crad)
+		.attr("fill","lightgray")
+		.attr("fill-opacity", function(){if(d.selected){return 1}else{return 0.3}})
+		.attr("text-anchor","middle")
+		.style("font-size","12px")
+		.attr("dy","1.2em")
+		.text(d.lname.toUpperCase());
+		
+		})
+	.on("click", function(d){
+		d.selected=!d.selected;//change selected status
+		
+		d3.select(this)
+		.attr("fill-opacity", function(){if(d.selected){return 1}else{return 0.3}}) //change fill and stroke opacity based on selected status
+		.attr("stroke-opacity", function(d){if(d.selected){return 1}else{return 0.3}});
+		
+		svgc.select(".director_"+d.key)
+		.attr("fill-opacity", function(){if(d.selected){return 1}else{return 0.3}});//change director legend opacity based on selected status
+		
+		draw(); //redraw the graph after selected status is changed
+	})
+	.on("mouseover", function(d){
+		//change director circle's and legend's opacity to 1 when hover
+		d3.select(this)
+		.attr("fill-opacity", 1)
+		.attr("stroke-opacity", 1);
+		
+		svgc.select(".director_"+d.key)
+		.attr("fill-opacity", 1);
+	})
+	.on("mouseout", function(d){
+		//change director circle's and legend's opacity to initial status when hover out
+		d3.select(this)
+		.attr("fill-opacity", function(){if(d.selected){return 1}else{return 0.3}}) //change fill and stroke opacity based on selected status
+		.attr("stroke-opacity", function(d){if(d.selected){return 1}else{return 0.3}});
+		
+		svgc.select(".director_"+d.key)
+		.attr("fill-opacity", function(){if(d.selected){return 1}else{return 0.3}}); //change director legend opacity based on selected status
+	});
+
+
+
+	//prepare circles for each director's movie before drawing
+	for(var i=0; i<dataset.length; i++){
+		
+		//set class for each director movie circle in the graphs
+		var className = "subdata_"+dataset[i].key;
+		
+		//create circle
+		var subdatacircle = svgcs.selectAll("circle."+className)
+		.data(dataset[i].movies);
+
+		subdatacircle
+		.enter()
+		.append("circle")
+		.attr("class",className)
+		.attr("cx", function(d) {return xScale(d.year)})
+		.attr("cy", function(d) {return yScale(d.rating)})
+		.attr("r", 0) //set initial radius to 0
+		.attr("fill", function(d){return dataset[d.dirkey].color})
+		.attr("fill-opacity",0.7)
+		.attr("transform", "translate(" + paddingAxis + ","+(h-1.9*padding-tabHeight)+")")//transform to fit Axis position
+		.on("mouseover", function(d){
+			//set circle opacity to 1
+			d3.select(this).attr("fill-opacity",1)
+			.attr("stroke","white")
+			.attr("stroke-width","2px")
+	
+			//create detail text on hover
+			var textdetail = svgt
+			.append("text")
+			.attr("class","detail")
+			.attr("x",d3.select(this).attr("cx"))
+			.attr("y",Number(d3.select(this).attr("cy"))-Number(d3.select(this).attr("r"))-2.8*rheight)
+			.attr("transform", d3.select(this).attr("transform"))
+			.attr("text-anchor","middle")
+			.style("font-size", "13px");
+	    
+			textdetail
+			.append("tspan")
+			.attr("x",d3.select(this).attr("cx"))
+			.attr("dy","1.1em")
+			.text(d.value.toUpperCase()+" ("+d.year+")");
+	    
+			textdetail
+			.append("tspan")
+			.attr("x",d3.select(this).attr("cx"))
+			.attr("dy","1.1em")
+			.text("Gross Revenue: $"+d.revenue+"M");
+	    
+			textdetail
+			.append("tspan")
+			.attr("x",d3.select(this).attr("cx"))
+			.attr("dy","1.1em")
+			.text("Rotten Tomatoes Rating: "+Math.round(d.rating*100)+"%");
+	    
+			textdetail.each(function(){
+				//draw detail text holder for each text
+				svgr
+				.append("rect")
+				.attr("x",d3.select(this).attr("x")-d3.select(this).node().getBoundingClientRect().width/2-10)
+				.attr("y",d3.select(this).attr("y"))
+				.attr("transform", d3.select(this).attr("transform"))
+				.attr("width",d3.select(this).node().getBoundingClientRect().width+20)
+				.attr("height",d3.select(this).node().getBoundingClientRect().height+5)
+				.attr("fill","white")
+				.attr("fill-opacity", 0.9)
+			});
+		})
+		.on("mouseout", function(){
+			//remove text and text holder on hover out
+			svgt
+			.selectAll("text")
+			.remove();
+			
+			svgr
+			.selectAll("rect")
+			.remove();
+			
+			//set circle opacity to default value
+			d3.select(this).attr("fill-opacity",0.7).attr("stroke-width",0);
+		});
+	};
+
+        
+	draw();//draw the circle!
+	};
+	
+	function draw(){
+	xMin=2001;
+	xMax=2013;
+	yMin=0.7;
+	yMax=0.9;
+	revMax=0;
+	
+	//prepare graph scale by director circle status
+	d3.selectAll("circle.maindata")
+	.data(dataset).each(function(d){
+		console.log("selected");
+		if(d.selected){
+		    xMin=Math.min(xMin,+d.first);
+		    xMax=Math.max(xMax,+d.last);
+		    yMin=Math.min(yMin,+d.worst);
+		    yMax=Math.max(yMax,+d.best);
+		    revMax=Math.max(revMax,+d.biggest);
+		};
+	
+		//rescale based on active movie circle
+		xScale.domain([xMin-1.9, xMax+1.9]);
+		yScale.domain([yMin-0.05, yMax+0.05]);
+		revScale.domain([1,revMax]);
+	});
+
+	d3.selectAll("circle.maindata")
+	.data(dataset).each(function(d){
+		var className = "subdata_"+d.key;
+		
+		//if director is selected, set the circle's radius to revenue. If not selected, set the radius to 0
+		d3
+		.selectAll("."+className)
+		.data(d.movies)
+		.transition()
+		.duration(500)
+		.attr("r", function(m){
+			if(d.selected){
+				return revScale(m.revenue)/2
+			}else{
+				return 0
+			}
+		})
+		//repositioned the circle based on graph's scale
+		.attr("cx", function(m) {return xScale(m.year)})
+		.attr("cy", function(m) {return yScale(m.rating)})
+		
+	});
+
+	//reset Axis scale
+	svgx
+	.transition()
+	.duration(500)
+	.call(xAxis);
+	
+	svgy
+	.transition()
+	.duration(500)
+	.call(yAxis);
+	
+	
+	};
+	
+</script>
+        </body>
+</html>

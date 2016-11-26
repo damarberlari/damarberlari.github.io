@@ -220,6 +220,8 @@ var   city = svgt.selectAll('.city')
       .attr("opacity", 0.7)
       .attr("text-anchor","start")
       .text(function(d){return d.city});
+      
+      
 
 var   mouseover = function(d,m) {
                   svgb.select("#bar_"+m).attr("opacity", 1);

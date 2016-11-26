@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Three Amigos of Cinema</title>
+                <script type="text/javascript" src="../d3-master/d3.js"></script>
+	</head>
+	<body>
+        <style>
+            .box{
+                width:700px;
+            }
+            
+            svg{
+                opacity: 0.9;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                background: dimgray;
+            }
+            
+        </style>
+        <div class="box"></div>
+        
+        <script type="text/javascript">            
+            dataset = [ {key: 0,value:"mobile", image:"mobile"},{key: 1,value:"alejandro inarritu", image:"alejandroinarritu"},{key: 2,value:"station", image:"station"},{key: 3,value:"alejandro inarritu", image:"alejandroinarritu"},{key: 4,value:"cablecar", image:"cablecar"},{key: 5,value:"alejandro inarritu", image:"alejandroinarritu"},{key: 6,value:"station", image:"station"},{key: 7,value:"cablecar", image:"cablecar" }];
+            dataset2 = [ {key: 0,value:"alejandro inarritu", image:"alejandroinarritu"},{key: 1,value:"cablecar", image:"cablecar"},{key: 2,value:"station", image:"station"},{key: 3,value:"mobile", image:"mobile"} ];
+            datafin = [ {key: 0,value:"mobile", image:"mobile"},{key: 1,value:"alejandro inarritu", image:"alejandroinarritu"},{key: 2,value:"station", image:"station"},{key: 3,value:"alejandro inarritu", image:"alejandroinarritu"},{key: 4,value:"cablecar", image:"cablecar"},{key: 5,value:"alejandro inarritu", image:"alejandroinarritu"},{key: 6,value:"station", image:"station"},{key: 7,value:"cablecar", image:"cablecar" }];;
+            dataimage = [ "alejandroinarritu","cablecar","station","mobile" ];
+            state = 0;
+            
+            var w = d3.select(".box").node().getBoundingClientRect().width;
+            var h = 0.7*w;
+            var d3scale = w/800;
+            var rad = d3scale*200;
+            var crad = d3scale*50;
+            var cstroke = d3scale*3;
+            var dlength = dataset.length;
+            var numval = 0;
+            var locBG = "url(#bg-alejandroinarritu)";
+            var transf= "translate("+w/2+" "+h/2+")";
+            var rwidth = d3scale*200;
+            var rheight = d3scale*30;
+            var notrans = true;
+            var textlength = 0;
+                     
+            var svg = d3.select(".box")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);
+            
+            svg.append("defs")
+            .selectAll("pattern").data(dataimage).enter()
+            .append("pattern")
+            .attr("id", function(d) {return "bg-"+d})
+            .attr('width', 1)
+            .attr('height',1)
+            .append("image")
+            .attr("xlink:href", function(d) {return d+".jpg"})
+            .attr("x",0)
+            .attr("y",0)
+            .attr('width', 2*crad)
+            .attr('height', 2*crad);
+            
+            svgr=svg.append("g");
+            svgt=svg.append("g");
+            svgc=svg.append("g");
+            
+            svgc
+                .append("circle")
+                .attr("class","maindata")
+                .attr("cx", 0)
+                .attr("cy", 0)
+                .attr("transform",transf)
+                .attr("r", crad)
+                .attr("fill", locBG)
+                .attr("shape-rendering", "geometricPrecision")
+                .attr("stroke", "lightgray")
+                .attr("stroke-width", cstroke);
+            
+            var cnt = 0;
+
+            for (var i = 0; i < dataimage.length; i++) {
+            var img = new Image();
+            img.onload = function() {
+                ++cnt;
+                if (cnt >= dataimage.length) {
+                    setTimeout(draw,1000);
+                }
+            };
+            img.src = dataimage[i]+".jpg";
+            }
+            
+            function draw(){
+            
+            subdata = svgc.selectAll("circle.subdata")
+            .data(datafin);
+            
+
+            subdata.enter()
+            .append("circle")
+            .attr("class","subdata")
+            .attr("cx", 0)
+            .attr("cy", 0)
+            .attr("r", crad)
+            .attr("fill", function(d){return "url(#bg-"+d.image+")"})
+            .attr("stroke", "lightgray")
+            .attr("stroke-width", cstroke)
+            .attr("transform",transf)
+            .on("click",function(){
+                notrans = false;
+                var locX=d3.select(this).attr("cx");
+                var locY=d3.select(this).attr("cy");
+                locBG=d3.select(this).attr("fill");
+                
+                svgc
+                .append("circle")
+                .attr("class","maindata")
+                .attr("cx", locX)
+                .attr("cy", locY)
+                .attr("transform",transf)
+                .attr("r", crad)
+                .attr("fill", locBG)
+                .attr("shape-rendering", "geometricPrecision")
+                .attr("stroke", "lightgray")
+                .attr("stroke-width", cstroke);
+                
+                svgc.selectAll("circle")
+                .transition()
+                .duration(300)
+                .ease("cubic-out")
+                .attr("cx",0)
+                .attr("cy",0)
+                .attr("transform",transf);
+                
+                svgt.selectAll("text")
+                .remove();
+                
+                svgr.selectAll("rect")
+                .remove();
+                
+                if(state<=0){
+                datafin=dataset2;
+                state=1;
+                }
+                else{
+                datafin=dataset;
+                state=0;
+                };
+                dlength=datafin.length;
+                setTimeout(draw,400);
+                
+            })
+            
+            subdata
+            .exit()
+            .transition()
+            .remove();
+            
+            subdata.attr("fill", function(d){return "url(#bg-"+d.image+")"});
+            
+            subdata
+            .transition()
+            .duration(700)
+            .ease("elastic")
+            .attr("cx", function(d){return (rad*Math.sin(Math.PI*2/(dlength)*d.key))})
+            .attr("cy", function(d){return -(rad*Math.cos(Math.PI*2/(dlength)*d.key))})
+            .each("end",function(d){
+                
+                svgt
+                .append("text")
+                .attr("class","subdata")
+                .attr("fill","lightgray")
+                .text(d.value)
+                .style("font-style","italic")
+                .style("font-variant","small-caps")
+                .style("font-size", function(){
+                    textheight = d3.select(this).node().getBoundingClientRect().height;
+                    textlength = d3.select(this).node().getBoundingClientRect().width;
+                    return rheight/textheight*12+ "px"})
+                .attr("transform",transf)
+                .attr("x", function(){
+                    if((Math.PI*2/(dlength)*d.key)<Math.PI){return crad+(rad*Math.sin(Math.PI*2/(dlength)*d.key))}
+                    else{return rad*Math.sin(Math.PI*2/(dlength)*d.key)-textlength*(rheight/textheight)*0.75-crad}
+                    })
+                .attr("y", function(){
+                    if((Math.PI*2/(dlength)*d.key)<Math.PI){return -(rad*Math.cos(Math.PI*2/(dlength)*d.key))-crad+rheight*0.65}
+                    else{return -(rad*Math.cos(Math.PI*2/(dlength)*d.key))+crad-rheight*0.35}
+                    })
+                .on("click",function(){console.log(d.value.replace(" ",""))});
+                
+                svgr
+                .append("rect")
+                .attr("x", rad*Math.sin(Math.PI*2/(dlength)*d.key))
+                .attr("y", function(){
+                    if((Math.PI*2/(dlength)*d.key)<Math.PI){return -(rad*Math.cos(Math.PI*2/(dlength)*d.key))-crad}
+                    else{return -(rad*Math.cos(Math.PI*2/(dlength)*d.key))+crad-rheight}
+                    })
+                .attr("width",0)
+                .attr("height",rheight)
+                .attr("transform",transf)
+                .attr("fill","steelblue")
+                .transition().ease("elastic").duration(500)
+                .attr("width",textlength*(rheight/textheight)*0.75+crad+7.5*(rheight/textheight))
+                .attr("x", function(){
+                    if((Math.PI*2/(dlength)*d.key)<Math.PI){return (rad*Math.sin(Math.PI*2/(dlength)*d.key))}
+                    else{return rad*Math.sin(Math.PI*2/(dlength)*d.key)-textlength*(rheight/textheight)*0.75-crad-7.5*(rheight/textheight)}
+                    });
+                
+                notrans=true
+                });
+            
+            svg.selectAll(".maindata")
+            .remove();
+            
+            svgc
+            .append("circle")
+            .attr("class","maindata")
+            .attr("cx", 0)
+            .attr("cy", 0)
+            .attr("r", crad)
+            .attr("fill", locBG)
+            .attr("stroke", "lightgray")
+            .attr("stroke-width", cstroke)
+            .attr("shape-rendering", "geometricPrecision")
+            .attr("transform",transf);
+
+            };
+            
+        </script>
+        </body>
+</html>
