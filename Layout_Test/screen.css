@@ -367,11 +367,7 @@ p.next-title{
       width: 33.33%;
       padding-top: 33.33%;
     }
-    
-    p.title {
-      font-size: 1.6rem;
-    }
-    
+
 }
 
 @media screen and (max-width: 800px) {
@@ -388,11 +384,7 @@ p.next-title{
     width: 50%;
     padding-top: 50%;
     }
-    
-    p.title {
-      font-size: 1.8rem;
-    }
-    
+
 
 }
 
@@ -412,6 +404,7 @@ p.next-title{
     width: 100%;
     padding-top: 60%;
     margin: 2px 0;
+    border: 0;
     }
     
     .nav ul {
@@ -424,10 +417,6 @@ p.next-title{
     
     .menu-box, .menu-box::before {
       display: block;
-    }
-    
-    p.title {
-      font-size: 1.5rem;
     }
     
     .author-image {
