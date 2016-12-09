@@ -10,12 +10,8 @@
 <body>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Playfair+Display+SC:700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Open+Sans:400" rel="stylesheet">
-<script src='http://d3js.org/d3.v3.min.js'></script>
-<script src="http://d3js.org/topojson.v0.min.js"></script>
-<link href='http://damarberlari.github.io/D3_Maps_Ramadhan/fasting_maps.css' rel='stylesheet' type='text/css'>
-<script src='http://damarberlari.github.io/D3_Maps_Ramadhan/fasting_maps.js'></script>
-<div class='nav'><div class='site-title'>damarberlari.</div><div class='menu-box'></div><ul><li><a href='#'>Menu</a></li></ul></div>
-
+<div class='nav'><div class='site-title'>databento.</div><div class='menu-box'></div></div>
+<div class='menu-list'></div>
 <div class='wrapper'>
         <div class='header-image' style='background-image: url("thumbnail_3_stop.gif")'></div>
         <div class='post-content'>
@@ -40,8 +36,48 @@
                         </p><p class='next-title'><a href='#'>&rarr;<br>The Hyperloop may be heading to Moscow, thanks to a mysterious Russian billionaire</a></p>
                 </div>
         </div>
-<footer>damarberlari.2016</footer>
 </div>
+<footer>damarberlari.2016</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+//if (document.images) {
+//		var img1 = new Image();
+//		var img2 = new Image();
+//
+//		img1.src = "thumbnail_1_start.gif";
+//		img2.src = "thumbnail_2_start.gif";
+//	}
+        
+$(document).ready(function(){
+  $('.box_wrapper').each(function(){
+    var src = $(this).attr('style');
+    var url = $(this).css('background-image')
+    $(this).hover(function(){
+     $(this).attr('style', src.replace('_stop.gif', '_start.gif'));
+    }, function(){
+      $(this).attr('style', src);
+    });
+  });
+});
 
+$(".menu-box").click(function(){
+    console.log("ok")
+    $(".menu-list").toggleClass("active");
+    $(".wrapper").toggleClass("active");
+});
+//$(document).ready(function()
+//{
+//    $(".imgDino").hover(
+//        function()
+//        {
+//            $(this).attr("src", "thumbnail_1_start.gif");
+//        },
+//        function()
+//        {
+//            $(this).attr("src", "thumbnail_1_stop.gif");
+//        }                         
+//    );                  
+//});
+</script>
 </body>
 </html>

@@ -3,7 +3,7 @@ var diameter = 650,
     dotRadius = diameter/150,
     velocity = .02,
     then = Date.now()
-    landColor = ['#1B5E20','#4CAF50']
+    landColor = ['#009688','#00695C']
     
 var dataCity = [
     {index:0,long:176.29,lat:-40.42,color:'crimson',city:"Weber",country:"New Zealand"},
@@ -98,7 +98,7 @@ d3.json("world-110m.json", function(error, world) {
       context.scale(-1,1);
       rotate = [angle,0];
       context.beginPath(), path(globe);
-      context.fillStyle = '#212121', context.fill()
+      context.fillStyle = '#00BCD4', context.fill()
       }
       else{
       rotate = [angle+180,0]
