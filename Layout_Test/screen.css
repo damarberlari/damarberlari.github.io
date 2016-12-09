@@ -110,14 +110,14 @@ a:hover {
   width: 250px;
   height: 100%;
   position: fixed;
-  right: -320px;
+  right: -250px;
   top: 0;
   padding-top: 35px;
   padding-left: 10px;
   box-sizing: border-box;
   z-index: 1;
-  transition: right 0.4s ease 0s; 
-  -webkit-transition: right 0.4s ease 0s;
+  transition: right 0.3s ease 0s; 
+  -webkit-transition: right 0.3s ease 0s;
 }
 
 .menu-list p{
@@ -139,8 +139,8 @@ a:hover {
   background: white;
   box-sizing: inherit;
   display: block;
-  transition: right 0.4s ease 0s; 
-  -webkit-transition: right 0.4s ease 0s;
+  transition: right 0.3s ease 0s; 
+  -webkit-transition: right 0.3s ease 0s;
 }
 
 .wrapper.active{
