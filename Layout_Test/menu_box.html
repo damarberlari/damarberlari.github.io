@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>testcss</title>
+</head>
+<style>
+    #menu-box {
+        width: 50px;
+        height: 50px;
+        margin: auto;
+        background: steelblue;
+        cursor: pointer;
+    }
+    
+    #menu {
+        width: 30px;
+        height: 4px;
+        position: relative;
+        top: 23px;
+        background: white;
+        margin: auto;
+        transition: all 0.3s ease 0s; 
+        -webkit-transition: all 0.3s ease 0s;
+    }
+    
+    #menu::before {
+        content: "";
+        width: 30px;
+        height: 4px;
+        position: absolute;
+        bottom: 10px;
+        left:0;
+        float: right;
+        background: white;
+        margin: auto;
+        display: block;
+        transition: all 0.3s ease 0s; 
+        -webkit-transition: all 0.3s ease 0s;
+    }
+    
+    #menu::after {
+        content: "";
+        width: 30px;
+        height: 4px;
+        position: absolute;
+        top: 10px;
+        left:0;
+        background: white;
+        margin: auto;
+        display: block;
+        transition: all 0.3s ease 0s; 
+        -webkit-transition: all 0.3s ease 0s;
+    }
+    
+    #menu.active {
+        width:0;
+        height:2px;
+    }
+    
+    #menu.active::before{
+        left:-15px;
+        bottom:0;
+        height:2px;
+        -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+     -ms-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+    }
+    
+    #menu.active::after{
+       left:-15px;
+       top:0;
+       height:2px;
+         -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+     -ms-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+    }
+</style>
+<body>
+<div id='menu-box'>
+    <div id='menu'></div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+$("#menu-box").click(function(){
+    console.log("ok")
+    $("#menu").toggleClass("active");
+});
+</script>
+</body>
+</html>
