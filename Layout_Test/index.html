@@ -10,7 +10,7 @@
 <body>
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
-<div class='nav'><div class='site-title'>databento.</div><div id='menu-box'><div id='menu'></div></div></div>
+<div class='nav'><a href='../Layout_Test/index.html'><div class='site-title'>databento.</div></a><div id='menu-box'><div id='menu'></div></div></div>
 <div class='menu-list'>
     <p>CATEGORY</p>
 </div>
@@ -26,15 +26,7 @@
 </div>
 <footer>damarberlari.2016</footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script>
-//if (document.images) {
-//		var img1 = new Image();
-//		var img2 = new Image();
-//
-//		img1.src = "thumbnail_1_start.gif";
-//		img2.src = "thumbnail_2_start.gif";
-//	}
-        
+<script>        
 $(document).ready(function(){
   $('.box_wrapper').each(function(){
     var src = $(this).attr('style');
@@ -49,22 +41,10 @@ $(document).ready(function(){
 
 $("#menu-box").click(function(){
     $("#menu").toggleClass("active");
+    $("#menu-box").toggleClass("active");
     $(".menu-list").toggleClass("active");
     $(".wrapper").toggleClass("active");
 });
-//$(document).ready(function()
-//{
-//    $(".imgDino").hover(
-//        function()
-//        {
-//            $(this).attr("src", "thumbnail_1_start.gif");
-//        },
-//        function()
-//        {
-//            $(this).attr("src", "thumbnail_1_stop.gif");
-//        }                         
-//    );                  
-//});
 </script>
 </body>
 </html>
