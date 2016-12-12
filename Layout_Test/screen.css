@@ -159,6 +159,10 @@ a:hover {
   -webkit-transition: right 0.3s ease 0s;
 }
 
+.wrapper-post {
+  padding: 0px;
+}
+
 .wrapper.active{
   right:250px;
 }
