@@ -203,7 +203,7 @@ a:hover {
   width:100%;
   height: 100%;
   box-sizing: border-box;
-  background: rgba(32,32,32,0.75); /* Standard syntax */
+  background: rgba(32,32,32,0.4); /* Standard syntax */
   transition: all 0.5s ease 0s; 
   -webkit-transition: all 0.5s ease 0s;
 }
