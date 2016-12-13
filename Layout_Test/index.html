@@ -28,7 +28,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>        
 $(document).ready(function(){
-  $('.box_wrapper').each(function(){
+  $('div.wrapper div.box div.box_wrapper').each(function(){
     var src = $(this).attr('style');
     var url = $(this).css('background-image')
     $(this).hover(function(){

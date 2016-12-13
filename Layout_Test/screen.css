@@ -59,8 +59,8 @@ a:hover {
         top: 25px;
         background: #212121;
         margin: auto;
-        transition: all 0.3s ease 0s; 
-        -webkit-transition: all 0.3s ease 0s;
+        transition: transform 0.3s ease 0s; 
+        -webkit-transition: transform 0.3s ease 0s;
     }
     
     #menu::before {
@@ -74,8 +74,8 @@ a:hover {
         background: #212121;
         margin: auto;
         display: block;
-        transition: all 0.3s ease 0s; 
-        -webkit-transition: all 0.3s ease 0s;
+        transition: transform 0.3s ease 0s; 
+        -webkit-transition: transform 0.3s ease 0s;
     }
     
     #menu::after {
@@ -88,35 +88,29 @@ a:hover {
         background: #212121;
         margin: auto;
         display: block;
-        transition: all 0.3s ease 0s; 
-        -webkit-transition: all 0.3s ease 0s;
+        transition: transform 0.3s ease 0s; 
+        -webkit-transition: transform 0.3s ease 0s;
     }
     
     #menu.active {
-        width:0;
-        height:2px;
+      -webkit-transform: rotate(45deg) scale(0.75);
+    -moz-transform: rotate(45deg) scale(0.75);
+     -ms-transform: rotate(45deg) scale(0.75);
+      -o-transform: rotate(45deg) scale(0.75);
     }
     
     #menu.active::before{
-        left:-6px;
-        bottom:0;
-        width:15px;
-        height:2px;
-        -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-     -ms-transform: rotate(45deg);
-      -o-transform: rotate(45deg);
+        -webkit-transform: translate(0,7px) scaleY(0);
+    -moz-transform: translate(0,7px) scaleY(0);
+     -ms-transform: translate(0,7px) scaleY(0);
+      -o-transform: translate(0,7px) scaleY(0);
     }
     
     #menu.active::after{
-       left:-6px;
-       top:0;
-       width:15px;
-       height:2px;
-         -webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-     -ms-transform: rotate(-45deg);
-      -o-transform: rotate(-45deg);
+       -webkit-transform: translate(0,-7px) rotate(-90deg);
+    -moz-transform: translate(0,-7px) rotate(-90deg);
+     -ms-transform: translate(0,-7px) rotate(-90deg);
+      -o-transform: translate(0,-7px) rotate(-90deg);
     }
 
 .menu-list {
@@ -130,8 +124,8 @@ a:hover {
   padding-left: 10px;
   box-sizing: border-box;
   z-index: 1;
-  transition: right 0.3s ease 0s; 
-  -webkit-transition: right 0.3s ease 0s;
+  transition: transform 0.3s ease 0s; 
+  -webkit-transition: transform 0.3s ease 0s;
   box-shadow: 0px 0px 1px rgba(20,20,20,0.3);
 }
 
@@ -141,30 +135,27 @@ a:hover {
   margin: 0;
 }
 
-.menu-list.active{
-  right:0;
-}
-
 .wrapper{
   width: 100%;
   padding: 5px;
   position: relative;
   top: 50px;
-  right:0;
   margin: auto;
   background: white;
   box-sizing: inherit;
   display: block;
-  transition: right 0.3s ease 0s; 
-  -webkit-transition: right 0.3s ease 0s;
+  transition: transform 0.3s ease 0s; 
+  -webkit-transition: transform 0.3s ease 0s;
 }
 
 .wrapper-post {
   padding: 0px;
 }
 
-.wrapper.active{
-  right:250px;
+.menu-list.active,.wrapper.active{
+  -ms-transform: translateX(-250px); /* IE 9 */
+  -webkit-transform: translateX(-250px); /* Chrome, Safari, Opera */
+  transform: translateX(-250px);
 }
 
 .clearfix:before {

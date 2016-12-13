@@ -205,12 +205,11 @@
             width: 100%;
             box-sizing: border-box;
             margin: auto;
+	    margin-bottom: 60px;
         }
         
         .author {
             width: 100%;
-            display: inline-block;
-            float:left;
             margin-right:2.5%;
             margin-bottom: 40px;
         }
@@ -220,12 +219,8 @@
             line-height: 1.5em;
             font-weight: 400;
         }
-        .main-content {
-            width: 100%;
-            display: inline-block;
-            float: left;
-        }
-        .main-content p {
+        
+        .post-content p {
             max-width: 650px;
             text-align: left;
             font-size: 1em;
@@ -234,7 +229,7 @@
             margin-right: auto;
             margin-bottom: 40px;
         }
-        .main-content img{
+        .post-content img{
             width: 100%;
             height: auto;
             margin-bottom: 40px;
@@ -249,13 +244,21 @@
             height: 0;
         }
 	
-	.fixed {
-	  position: fixed;
-	  top:0;
+	.footer {
+	  width: 100%;
+	  height: 70px;
+	  padding-top: 30px;
+	  text-align: center;
+	  background: whitesmoke;
+	  color: #212121;
+	  z-index: 2;
+	  font-family: 'Lato', serif;
+	  font-weight: 400;
+	  box-shadow: 0px -1px 1px rgba(20,20,20,0.3);
 	}
         
         @media screen and (max-width: 700px) {
-            .header, .post-content .main-content p, .post-content .author{
+            .header, .post-content p, .post-content .author{
                 width:90%;
                 margin-left:5%;
                 margin-right: 5%;
@@ -268,7 +271,7 @@
 	    .header h1{
 	      font-size:3em;
 	    }
-	    .post-content .main-content img{
+	    .post-content .post-content img{
             margin-bottom: 20px;
         }
 	    
@@ -358,15 +361,13 @@
             <h1 class='meta'>by: Damar Aji Pramudita</h1>
             <h1 class='meta'>22 December 2016</h1>
         </div>
-	<div class='main-content'>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas gravida tellus vel orci consequat vehicula. Proin ultrices, felis nec lobortis tristique, mi felis pretium urna, eget commodo ante nulla id quam. Sed dictum sem eu iaculis vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc eget nisl cursus, malesuada neque non, consequat lacus. Donec ex tortor, interdum quis venenatis non, lobortis id dolor. Nullam pellentesque laoreet ligula quis rhoncus. Sed fringilla est id sem lacinia blandit. Nullam enim odio, pharetra vitae justo consectetur, semper ullamcorper turpis. Quisque tempus urna at convallis fringilla. Fusce mollis et massa nec mattis. Maecenas et purus nibh. In sed sapien a nibh bibendum sollicitudin id sit amet ante.</p>
-            <p>Etiam blandit egestas magna quis consequat. Proin scelerisque arcu vitae purus porta consequat eu sit amet nisl. Quisque id urna quis quam consectetur feugiat. Sed eros eros, ullamcorper in turpis eu, bibendum vestibulum libero. Sed eros risus, interdum et arcu ac, viverra posuere leo. Donec vulputate ipsum quis condimentum varius. Donec tincidunt blandit erat vitae efficitur. Proin leo metus, sodales sed viverra vel, euismod at nisi. Fusce id facilisis eros, eu sagittis turpis. Vivamus feugiat nibh mattis, tempus elit id, sollicitudin eros. Donec lacinia accumsan nulla, in rutrum risus efficitur dignissim. Quisque mollis sed odio ac facilisis. Curabitur iaculis libero a accumsan gravida. Sed varius erat ut velit porttitor placerat.</p>
             <div class='d3-content'></div>
+	    <p>Etiam blandit egestas magna quis consequat. Proin scelerisque arcu vitae purus porta consequat eu sit amet nisl. Quisque id urna quis quam consectetur feugiat. Sed eros eros, ullamcorper in turpis eu, bibendum vestibulum libero. Sed eros risus, interdum et arcu ac, viverra posuere leo. Donec vulputate ipsum quis condimentum varius. Donec tincidunt blandit erat vitae efficitur. Proin leo metus, sodales sed viverra vel, euismod at nisi. Fusce id facilisis eros, eu sagittis turpis. Vivamus feugiat nibh mattis, tempus elit id, sollicitudin eros. Donec lacinia accumsan nulla, in rutrum risus efficitur dignissim. Quisque mollis sed odio ac facilisis. Curabitur iaculis libero a accumsan gravida. Sed varius erat ut velit porttitor placerat.</p>
             <p>Etiam lacus est, mollis ut pulvinar sit amet, fermentum in tellus. Integer in orci id arcu efficitur laoreet at et ipsum. In nunc risus, placerat rhoncus libero ut, tincidunt varius ipsum. Aliquam erat volutpat. Phasellus felis nisl, malesuada nec erat ac, ullamcorper pretium lorem. Morbi ac mattis eros, vel vehicula nisl. Cras varius felis nisl. Pellentesque fringilla dapibus semper. Aenean ut orci justo. Donec bibendum laoreet dictum. Sed vehicula lorem ac est vestibulum faucibus. Cras dapibus id velit et fringilla.</p>
-	</div>
     <div class='clearfix'></div>
     </div>
-    <div class='footer'>TEST</div>
+    <div class='footer'>databento.blog - 2016</div>
 </div>
 <script src='nolan_v2_mobile.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
