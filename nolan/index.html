@@ -37,7 +37,7 @@
   box-shadow: 0px 1px 1px rgba(20,20,20,0.3);
 }
 
-.nav .site-title{
+.site-title{
   position: absolute;
   top: 14px;
   text-align: right;
@@ -66,8 +66,8 @@
         top: 25px;
         background: #212121;
         margin: auto;
-        transition: all 0.3s ease 0s; 
-        -webkit-transition: all 0.3s ease 0s;
+        transition: transform 0.3s ease 0s; 
+        -webkit-transition: transform 0.3s ease 0s;
     }
     
     #menu::before {
@@ -81,8 +81,8 @@
         background: #212121;
         margin: auto;
         display: block;
-        transition: all 0.3s ease 0s; 
-        -webkit-transition: all 0.3s ease 0s;
+        transition: transform 0.3s ease 0s; 
+        -webkit-transition: transform 0.3s ease 0s;
     }
     
     #menu::after {
@@ -95,52 +95,43 @@
         background: #212121;
         margin: auto;
         display: block;
-        transition: all 0.3s ease 0s; 
-        -webkit-transition: all 0.3s ease 0s;
+        transition: transform 0.3s ease 0s; 
+        -webkit-transition: transform 0.3s ease 0s;
     }
     
     #menu.active {
-        width:0;
-        height:2px;
+      -webkit-transform: rotate(45deg) scale(0.75);
+    -moz-transform: rotate(45deg) scale(0.75);
+     -ms-transform: rotate(45deg) scale(0.75);
+      -o-transform: rotate(45deg) scale(0.75);
     }
     
     #menu.active::before{
-        left:-6px;
-        bottom:0;
-        width:15px;
-        height:2px;
-        -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-     -ms-transform: rotate(45deg);
-      -o-transform: rotate(45deg);
+        -webkit-transform: translate(0,7px) scaleY(0);
+    -moz-transform: translate(0,7px) scaleY(0);
+     -ms-transform: translate(0,7px) scaleY(0);
+      -o-transform: translate(0,7px) scaleY(0);
     }
     
     #menu.active::after{
-       left:-6px;
-       top:0;
-       width:15px;
-       height:2px;
-         -webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-     -ms-transform: rotate(-45deg);
-      -o-transform: rotate(-45deg);
+       -webkit-transform: translate(0,-7px) rotate(-90deg);
+    -moz-transform: translate(0,-7px) rotate(-90deg);
+     -ms-transform: translate(0,-7px) rotate(-90deg);
+      -o-transform: translate(0,-7px) rotate(-90deg);
     }
 
-
 .menu-list {
-  background: whitesmoke;
+  background: white;
   width: 250px;
   height: 150%;
   position: fixed;
-  right: -250px;
+  right: -300px;
   top: 0;
-  padding-top: 55px;
-  padding-left: 10px;
+  padding-top: 50px;
   box-sizing: border-box;
   z-index: 1;
-  transition: right 0.3s ease 0s; 
-  -webkit-transition: right 0.3s ease 0s;
-  box-shadow: 0px 0px 1px rgba(20,20,20,0.3);
+  transition: transform 0.3s ease 0s; 
+  -webkit-transition: transform 0.3s ease 0s;
 }
 
 .menu-list p{
@@ -149,8 +140,21 @@
   margin: 0;
 }
 
-.menu-list.active{
-  right:0;
+.menu-bg {
+  width: 100%;
+  height: 180px;
+  margin: 0;
+  background-size:cover;
+  background-position: center;
+  position: relative;
+  box-shadow: 0px 0px 1px rgba(20,20,20,0.3);
+}
+
+.menu-header {
+  width:100%;
+  height: 50px;
+  position: relative;
+  box-shadow: 0px 0px 1px rgba(20,20,20,0.3);
 }
 
 
@@ -159,24 +163,27 @@
   padding: 5px;
   position: relative;
   top: 50px;
-  right:0;
   margin: auto;
   background: white;
   box-sizing: inherit;
   display: block;
-  transition: right 0.3s ease 0s; 
-  -webkit-transition: right 0.3s ease 0s;
+  transition: transform 0.3s ease 0s; 
+  -webkit-transition: transform 0.3s ease 0s;
 }
 
 .wrapper-post {
   padding: 0px;
 }
 
-	
-.wrapper.active{
-  right:250px;
+.menu-list.active,.wrapper.active{
+  -ms-transform: translateX(-300px); /* IE 9 */
+  -webkit-transform: translateX(-300px); /* Chrome, Safari, Opera */
+  transform: translateX(-300px);
 }
 
+.menu-list.active{
+  box-shadow: 0px -1px 20px rgba(20,20,20,0.5);
+}
 
 .header{
     width:80%;
@@ -209,7 +216,7 @@
         }
         
         .author {
-            width: 100%;
+            width:74%;
             margin-left:13%;
             margin-bottom: 60px;
         }
@@ -220,6 +227,7 @@
         }
         
         .post-content p {
+	    width:74%;
             max-width: 600px;
             text-align: left;
             font-size: 1em;
@@ -350,7 +358,8 @@
 <body>
 <div class='nav'><a href='../Layout_Test/index.html'><div class='site-title'>databento.</div></a><div id='menu-box'><div id='menu'></div></div></div>
 <div class='menu-list'>
-    <p>CATEGORY</p>
+    <div class='menu-bg' style='background-image: url("header.jpg")'></div>
+    <div class='menu-header'><div class='site-title'>Menu.</div></div>
 </div>
 <div class='wrapper wrapper-post'>
     <div class='header'><h1>The Works of Christopher Nolan</h1></div>
@@ -375,7 +384,7 @@ $("#menu-box").click(function(){
     $("#menu").toggleClass("active");
     $("#menu-box").toggleClass("active");
     $(".menu-list").toggleClass("active");
-    $(".wrapper").toggleClass("active");
+    //$(".wrapper").toggleClass("active");
 });
 resizeD3();
 $( window ).resize(function() {
