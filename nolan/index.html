@@ -7,10 +7,11 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Playfair+Display+SC:700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i" rel="stylesheet">
+    <link href="../Layout_Test/screen.css?version=123" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#202020">
     <style>
-        html{
+/*        html{
 	  height: 100%;
 	}
         body{
@@ -176,8 +177,8 @@
 }
 
 .menu-list.active,.wrapper.active{
-  -ms-transform: translateX(-300px); /* IE 9 */
-  -webkit-transform: translateX(-300px); /* Chrome, Safari, Opera */
+  -ms-transform: translateX(-300px);
+  -webkit-transform: translateX(-300px); 
   transform: translateX(-300px);
 }
 
@@ -288,8 +289,14 @@
 	      font-size:2.6em;
 	    }
         }
-	
+*/	
 	/*CSS D3*/
+	.d3-content{
+    width:100%;
+    height:90%;
+    margin-bottom: 40px;
+}
+
         svg{
         background: #202020;
         }
@@ -363,7 +370,6 @@
 </div>
 <div class='wrapper wrapper-post'>
     <div class='header'><h1>The Works of Christopher Nolan</h1></div>
-    <div class='post-content'>
         <div class='author'>
             <h1 class='meta'>by: Damar Aji Pramudita</h1>
             <h1 class='meta'>22 December 2016</h1>
@@ -373,7 +379,6 @@
 	    <p>Etiam blandit egestas magna quis consequat. Proin scelerisque arcu vitae purus porta consequat eu sit amet nisl. Quisque id urna quis quam consectetur feugiat. Sed eros eros, ullamcorper in turpis eu, bibendum vestibulum libero. Sed eros risus, interdum et arcu ac, viverra posuere leo. Donec vulputate ipsum quis condimentum varius. Donec tincidunt blandit erat vitae efficitur. Proin leo metus, sodales sed viverra vel, euismod at nisi. Fusce id facilisis eros, eu sagittis turpis. Vivamus feugiat nibh mattis, tempus elit id, sollicitudin eros. Donec lacinia accumsan nulla, in rutrum risus efficitur dignissim. Quisque mollis sed odio ac facilisis. Curabitur iaculis libero a accumsan gravida. Sed varius erat ut velit porttitor placerat.</p>
             <p>Etiam lacus est, mollis ut pulvinar sit amet, fermentum in tellus. Integer in orci id arcu efficitur laoreet at et ipsum. In nunc risus, placerat rhoncus libero ut, tincidunt varius ipsum. Aliquam erat volutpat. Phasellus felis nisl, malesuada nec erat ac, ullamcorper pretium lorem. Morbi ac mattis eros, vel vehicula nisl. Cras varius felis nisl. Pellentesque fringilla dapibus semper. Aenean ut orci justo. Donec bibendum laoreet dictum. Sed vehicula lorem ac est vestibulum faucibus. Cras dapibus id velit et fringilla.</p>
     <div class='clearfix'></div>
-    </div>
     <div class='footer'>databento.blog - 2016</div>
 </div>
 <script src='nolan_v2_mobile.js'></script>
@@ -386,11 +391,6 @@ $("#menu-box").click(function(){
     $(".menu-list").toggleClass("active");
     //$(".wrapper").toggleClass("active");
 });
-resizeD3();
-$( window ).resize(function() {
-  resizeD3();
-});
-function resizeD3(){$(".d3-content").css("height", $( window ).height()*0.9)};
 });
 </script>
 </body>

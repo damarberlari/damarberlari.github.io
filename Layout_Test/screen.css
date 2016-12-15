@@ -1,8 +1,13 @@
+html,body{
+  height: 100%;
+}
+
 body {
   background: white;
   box-sizing: border-box;
   margin:0;
   color: #212121;
+  font-size: 16px;
   font-family: "Lato", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -40,7 +45,7 @@ a:hover {
   vertical-align: middle;
   margin: auto;
   padding: 0 10px;
-  font-size: 1.1rem;
+  font-size: 1.1em;
   font-weight: 400;
   box-sizing: border-box;
 }
@@ -153,6 +158,8 @@ a:hover {
 
 .wrapper{
   width: 100%;
+  height: calc(100% - 50px);
+  overflow: auto;
   padding: 5px;
   position: relative;
   top: 50px;
@@ -234,8 +241,8 @@ p.title{
   font-family: "Lato", Helvetica, Arial, sans-serif;
   font-weight: 400;
   color: white;
-  font-size: 2rem;
-  line-height: 2.6rem;
+  font-size: 2em;
+  line-height: 1.3em;
   text-transform: uppercase;
   padding: 0;
   box-sizing: border-box;
@@ -251,7 +258,7 @@ p.tag{
   color: white;
   font-weight: 300;
   color: black;
-  font-size: 0.9rem;
+  font-size: 0.9em;
   position: relative;
 }
 
@@ -263,161 +270,73 @@ p.tag span{
 p {
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-weight: 400;
-  font-size: 1rem;
+  font-size: 1em;
   text-align: left;
   line-height: 1.7rem;
 }
 
-p.meta {
-  font-family: "Lato", Helvetica, Arial, sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  margin-bottom: 30px;
-  color: dimgray;
+
+.header{
+    width:80%;
+    max-width:900px;
+    margin-top: 40px;
+    margin-bottom: 80px;
+    margin-left: 13%;
 }
 
-footer {
-  width: 100%;
-  font-family: "Lato", Helvetica, Arial, sans-serif;
-  font-weight: 400;
-  font-size: 0.9rem;
-  text-align: center;
-  padding: 0 0 2.5px 0;
-  display: block;
+.header h1{
+    font-family: 'Lato', serif;
+    font-weight: 700;
+    font-size: 5em;
+    text-transform: uppercase;
 }
 
-.header-image {
-  width: calc(100% + 5px);
-  height: 350px;
-  margin: -2.5px;
-  background-size:cover;
-  background-position: center;
-}
+/*        .post-content{
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            margin: auto;
+	    margin-bottom: 60px;
+        }*/
+        
+        .author {
+            width:74%;
+            margin-left:13%;
+            margin-bottom: 60px;
+        }
+        .meta {
+            font-size: 1em;
+            line-height: 1.2em;
+            font-weight: 400;
+        }
+        
+        .wrapper-post p {
+	    width:74%;
+            max-width: 600px;
+            text-align: left;
+            font-size: 1em;
+            line-height: 1.9em;
+            margin-left:13%;
+            margin-bottom: 40px;
+        }
+        .wrapper-post img{
+            width: 100%;
+            height: auto;
+            margin-bottom: 40px;
+        }
 
-.post-content {
-  width: 100%;
-  max-width: 1024px;
-  min-height: 900px;
-  margin: auto;
-}
-
-.post-content h1 {
-  width: 100%;
-  max-width: 750px;
-  margin: 2rem auto;
-  padding: 0 25px;
-  box-sizing: border-box;
-  font-family: "Playfair Display SC", Helvetica, Arial, sans-serif;
-  font-weight: 700;
-  font-size: 2.5rem;
-  text-align: left;
-  text-transform: uppercase;
-  line-height: 3rem;
-}
-
-.post-content p{
-  width: 100%;
-  max-width: 750px;
-  margin: 2rem auto;
-  padding: 0 25px;
-  box-sizing: border-box;
-}
-
-.post-content > img {
-  width: 100%;
-  height: auto;
-}
-
-.d3-content {
-  width: 100%;
-  margin:0;
-  -webkit-font-smoothing: auto;
-}
-
-.post-footer {
-  width: 100%;
-  max-width: 1024px;
-  margin: auto;
-}
-
-.footer-meta-wrapper {
-  width: 100%;
-  max-width: 750px;
-  margin: 2rem auto;
-  padding: 0 25px;
-  box-sizing: border-box;
-}
-
-.footer-meta {
-  width: 100%;
-  margin: 2rem auto;
-  box-sizing: border-box;
-  border-top: 1px solid #E0E0E0;
-  position: relative;
-}
-
-
-
-.author-image {
-  width: 80px;
-  height: 80px;
-  margin:2rem 0;
-  border-radius: 50%;
-  background: black;
-  background-size:cover;
-  background-position: center;
-  display: inline-block;
-}
-
-.author-meta {
-  width: calc(100% - 80px);
-  position: absolute;
-  margin:2rem 0;
-  display: inline-block;
-  padding: 0 25px;
-  box-sizing: border-box;
-}
-
-.author-meta h4{
-  font-family: "Lato", Helvetica, Arial, sans-serif;
-  font-weight: 400;
-  font-size: 1.1rem;
-  margin: 0 0 5px 0;
-  box-sizing: border-box;
-}
-
-.author-meta p{
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  font-size: 1rem;
-  font-weight: 300;
-  margin:0;
-  box-sizing: border-box;
-}
-
-.prev-title, .next-title{
-  width: 50%;
-  margin:0;
-  font-family: "Lato", Helvetica, Arial, sans-serif;
-  font-weight: 400;
-  color: #212121;
-  font-size: 1.3rem;
-  line-height: 2rem;
-  text-transform: uppercase;
-  box-sizing: border-box;
-  display: inline-block;
-}
-
-.prev-title {
-  padding-right: 2rem;
-}
-
-.next-title {
-  padding-left: 2rem;
-}
-
-p.next-title{
-  text-align: right;
-}
+	.footer {
+	  width: 100%;
+	  height: 70px;
+	  padding-top: 30px;
+	  text-align: center;
+	  background: whitesmoke;
+	  color: #212121;
+	  z-index: 2;
+	  font-family: 'Lato', serif;
+	  font-weight: 400;
+	  box-shadow: 0px -1px 1px rgba(20,20,20,0.3);
+	}
 
 @media screen and (max-width: 1024px) {
     .wrapper{
@@ -450,7 +369,23 @@ p.next-title{
     width: 50%;
     padding-top: 50%;
     }
-
+  
+  .header, .wrapper-post p, .wrapper-post .author{
+                width:90%;
+                margin-left:5%;
+                margin-right: 5%;
+		margin-bottom: 20px;
+                box-sizing: border-box;
+            }
+	    .header {
+	      margin-top:20px;
+	    }
+	    .header h1{
+	      font-size:4.5em;
+	    }
+	    .wrapper-post img{
+            margin-bottom: 20px;
+        }
 
 }
 
@@ -461,42 +396,24 @@ p.next-title{
     padding: 3px;
     }
     
-    .header-image {
-    width: 100%;
-    height: 350px;
-    margin: -2px 0;
-}
-    
     .box, .box:nth-child(1), .box:nth-child(2), .box:nth-child(3), .box:nth-child(4), .box:nth-child(5), .box:nth-child(6), .box:nth-child(8) {
     width: 100%;
     padding-top: 60%;
     }
- 
-    .nav .site-title{
-      font-weight: 400;
-    }
     
-    .author-image {
-      margin: 2rem auto;
-      display: block;
-      margin-bottom: 20px;
+    .header h1{
+	      font-size:4em;
     }
-    
-    .author-meta {
-      width: 100%;
-      margin: auto;
-      position: relative;
+}
+
+@media screen and (max-width: 500px) {
+  .header h1{
+	      font-size:3em;
     }
-    
-    .author-meta h4, .author-meta p{
-      text-align: center; 
-    }
-    
-    p.prev-title, p.next-title{
-      width: 100%;
-    }
-    
-    .post-content h1, .post-content p, .footer-meta-wrapper {
-      padding: 0 20px;
+}
+
+@media screen and (max-width: 360px) {
+  .header h1{
+	      font-size:2.5em;
     }
 }
