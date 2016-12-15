@@ -6,185 +6,14 @@
     <script src='http://d3js.org/d3.v4.min.js'></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Playfair+Display+SC:700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+        <link href="../Layout_Test/screen.css?version=123" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#202020">
-    <style>
-        html{
-            height:100%;
-        }
-        body{
-            margin: 0;
-            color: #202020;
-            font-size: 16px;
-            font-family: 'Open Sans', sans-serif;
-            font-weight: 400;
-            height: 100%;
-            -webkit-font-smoothing: antialiased;
-        }
-        h1, p, img {
-            margin:0;
-        }
-.nav{
-  width:100%;
-  height: 50px;
-  background: white;
-  position: fixed;
-  box-sizing: inherit;
-  z-index: 2;
-  top: -1px;
-  box-shadow: 0px 1px 1px rgba(20,20,20,0.3);
-}
-
-.nav .site-title{
-  position: absolute;
-  top: 14px;
-  text-align: right;
-  list-style: none;
-  font-family: "Lato", Helvetica, Arial, sans-serif;
-  color: #212121;
-  vertical-align: middle;
-  margin: auto;
-  padding: 0 10px;
-  font-size: 1.1rem;
-  font-weight: 400;
-  box-sizing: border-box;
-}
-
-    #menu-box {
-        width: 50px;
-        height: 50px;
-        float:right;
-        cursor: pointer;
-    }
-    
-    #menu {
-        width: 20px;
-        height: 2px;
-        position: relative;
-        top: 25px;
-        background: #212121;
-        margin: auto;
-        transition: all 0.3s ease 0s; 
-        -webkit-transition: all 0.3s ease 0s;
-    }
-    
-    #menu::before {
-        content: "";
-        width: 20px;
-        height: 2px;
-        position: absolute;
-        bottom: 7px;
-        left:0;
-        float: right;
-        background: #212121;
-        margin: auto;
-        display: block;
-        transition: all 0.3s ease 0s; 
-        -webkit-transition: all 0.3s ease 0s;
-    }
-    
-    #menu::after {
-        content: "";
-        width: 20px;
-        height: 2px;
-        position: absolute;
-        top: 7px;
-        left:0;
-        background: #212121;
-        margin: auto;
-        display: block;
-        transition: all 0.3s ease 0s; 
-        -webkit-transition: all 0.3s ease 0s;
-    }
-    
-    #menu.active {
-        width:0;
-        height:2px;
-    }
-    
-    #menu.active::before{
-        left:-6px;
-        bottom:0;
-        width:15px;
-        height:2px;
-        -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-     -ms-transform: rotate(45deg);
-      -o-transform: rotate(45deg);
-    }
-    
-    #menu.active::after{
-       left:-6px;
-       top:0;
-       width:15px;
-       height:2px;
-         -webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-     -ms-transform: rotate(-45deg);
-      -o-transform: rotate(-45deg);
-    }
-
-.menu-list {
-  background: whitesmoke;
-  width: 250px;
-  height: 150%;
-  position: fixed;
-  right: -250px;
-  top: 0;
-  padding-top: 55px;
-  padding-left: 10px;
-  box-sizing: border-box;
-  z-index: 1;
-  transition: right 0.3s ease 0s; 
-  -webkit-transition: right 0.3s ease 0s;
-  box-shadow: 0px 0px 1px rgba(20,20,20,0.3);
-}
-
-.menu-list p{
-  color: #212121;
-  font-size: 1.1em;
-  margin: 0;
-}
-
-.menu-list.active{
-  right:0;
-}
-        .wrapper{
-            width:100%;
-            height: 100%;
-            margin: 49px auto;
-            font-size: 1em;
-            position: relative;
-            right:0;
-            transition: right 0.3s ease 0s; 
-  -webkit-transition: right 0.3s ease 0s;
-        }
-        	.wrapper.active{
-  right:250px;
-}
-
-
-        .header{
-            width:100%;
-            max-width:1000px;
-            margin-top: 100px;
-            margin-bottom: 30px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .header h1{
-            text-align: center;
-            font-family: 'Lato', serif;
-            font-weight: 700;
-            font-size: 4.5em;
-            line-height: 1.1em;
-        }
-        
+    <style>       
     .d3-content{
-  margin: 50px auto;
-  display: block;
   width:100%;
   height: 100%;
+  margin-bottom: 40px;
 }
 
 .d3-left{
@@ -304,100 +133,41 @@
 		cursor: pointer;
 		-webkit-tap-highlight-color: rgba(0,0,0,0);
 	    }
-        
-        .post-content{
-            width: 100%;
-            height: 100%;
-            padding: 30px 0px;
-            box-sizing: border-box;
-            margin:40px auto;
-        }
-        
-        .author {
-            width: 100%;
-            display: inline-block;
-            float:left;
-            margin-right:2.5%;
-            margin-bottom: 40px;
-        }
-        .meta {
-            text-align: center;
-            font-size: 1em;
-            line-height: 1.5em;
-            font-weight: 300;
-        }
-        .main-content {
-            width: 100%;
-            height: 100%;
-            display: inline-block;
-            float: left;
-        }
-        .main-content p {
-            max-width: 650px;
-            text-align: left;
-            font-size: 1em;
-            line-height: 1.9em;
-            margin-left:auto;
-            margin-right: auto;
-            margin-bottom: 40px;
-        }
-        .main-content img{
-            width: 100%;
-            height: auto;
-            margin-bottom: 40px;
-        }
-        
-        .clearfix:before {
-            visibility: hidden;
-            display: block;
-            font-size: 0;
-            content: " ";
-            clear: both;
-            height: 0;
-        }
-	
-	.fixed {
-	  position: fixed;
-	  top:0;
-	}
-
-        
+     
     </style>
 </head>
 
 <body>
 <div class='nav'><a href='../Layout_Test/index.html'><div class='site-title'>databento.</div></a><div id='menu-box'><div id='menu'></div></div></div>
 <div class='menu-list'>
-    <p>CATEGORY</p>
+    <div class='menu-bg' style='background-image: url("../Layout_Test/header.jpg")'></div>
+    <div class='menu-header'><div class='site-title'>Menu.</div></div>
 </div>
-<div class='wrapper'>
-    <div class='header'><h1>THE ACADEMY AWARDS NOMINEES</h1></div>
-    <div class='post-content'>
+<div class='wrapper wrapper-post'>
+    <div class='header'><h1>The Academy Awards Best Actors</h1></div>
         <div class='author'>
             <h1 class='meta'>by: Damar Aji Pramudita</h1>
             <h1 class='meta'>22 December 2016</h1>
         </div>
-        <div class='main-content'>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas gravida tellus vel orci consequat vehicula. Proin ultrices, felis nec lobortis tristique, mi felis pretium urna, eget commodo ante nulla id quam. Sed dictum sem eu iaculis vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc eget nisl cursus, malesuada neque non, consequat lacus. Donec ex tortor, interdum quis venenatis non, lobortis id dolor. Nullam pellentesque laoreet ligula quis rhoncus. Sed fringilla est id sem lacinia blandit. Nullam enim odio, pharetra vitae justo consectetur, semper ullamcorper turpis. Quisque tempus urna at convallis fringilla. Fusce mollis et massa nec mattis. Maecenas et purus nibh. In sed sapien a nibh bibendum sollicitudin id sit amet ante.</p>
             <p>Etiam blandit egestas magna quis consequat. Proin scelerisque arcu vitae purus porta consequat eu sit amet nisl. Quisque id urna quis quam consectetur feugiat. Sed eros eros, ullamcorper in turpis eu, bibendum vestibulum libero. Sed eros risus, interdum et arcu ac, viverra posuere leo. Donec vulputate ipsum quis condimentum varius. Donec tincidunt blandit erat vitae efficitur. Proin leo metus, sodales sed viverra vel, euismod at nisi. Fusce id facilisis eros, eu sagittis turpis. Vivamus feugiat nibh mattis, tempus elit id, sollicitudin eros. Donec lacinia accumsan nulla, in rutrum risus efficitur dignissim. Quisque mollis sed odio ac facilisis. Curabitur iaculis libero a accumsan gravida. Sed varius erat ut velit porttitor placerat.</p>
-    <div class='d3-content'>
-        <div class='d3-left'></div>
-        <div class='d3-right'>
-            <div class='d3-title'>THE ACADEMY AWARDS NOMINEES</div>
-            <ul class='d3-menu'>
-                <li class="filter all selected"><div class='legend-desc'><div class='legend-text'>ALL NOMINEES</div><div class='legend-text'>All actors nominated</div></div></li>
-                <li class="filter zero"><div class='legend-desc'><div class='legend-text'>THE PERSISTENTS</div><div class='legend-text'>Actors get nominated but never win</div></div></li>
-                <li class="filter one"><div class='legend-desc'><div class='legend-text'>THE CHOSEN ONES</div><div class='legend-text'>Actors with one Oscar</div></li>
-                <li class="filter two"><div class='legend-desc'><div class='legend-text'>THE HIGH ACHIEVERS</div><div class='legend-text'>Actors with two Oscars</div></li>
-                <li class="filter three"><div class='legend-desc'><div class='legend-text'>THE BEST OF THE BESTS</div><div class='legend-text'>Actors with three Oscars</div></li>
-            </ul>
-        </div>
-        <div class='clearfix'></div>
-        </div>
+            <div class='d3-content'>
+                <div class='d3-left'></div>
+                <div class='d3-right'>
+                    <div class='d3-title'>THE ACADEMY AWARDS NOMINEES</div>
+                    <ul class='d3-menu'>
+                        <li class="filter all selected"><div class='legend-desc'><div class='legend-text'>ALL NOMINEES</div><div class='legend-text'>All actors nominated</div></div></li>
+                        <li class="filter zero"><div class='legend-desc'><div class='legend-text'>THE PERSISTENTS</div><div class='legend-text'>Actors get nominated but never win</div></div></li>
+                        <li class="filter one"><div class='legend-desc'><div class='legend-text'>THE CHOSEN ONES</div><div class='legend-text'>Actors with one Oscar</div></li>
+                        <li class="filter two"><div class='legend-desc'><div class='legend-text'>THE HIGH ACHIEVERS</div><div class='legend-text'>Actors with two Oscars</div></li>
+                        <li class="filter three"><div class='legend-desc'><div class='legend-text'>THE BEST OF THE BESTS</div><div class='legend-text'>Actors with three Oscars</div></li>
+                    </ul>
+                </div>
+                <div class='clearfix'></div>
+            </div>
             <p>Etiam lacus est, mollis ut pulvinar sit amet, fermentum in tellus. Integer in orci id arcu efficitur laoreet at et ipsum. In nunc risus, placerat rhoncus libero ut, tincidunt varius ipsum. Aliquam erat volutpat. Phasellus felis nisl, malesuada nec erat ac, ullamcorper pretium lorem. Morbi ac mattis eros, vel vehicula nisl. Cras varius felis nisl. Pellentesque fringilla dapibus semper. Aenean ut orci justo. Donec bibendum laoreet dictum. Sed vehicula lorem ac est vestibulum faucibus. Cras dapibus id velit et fringilla.</p>
-        </div>
-        <div class='clearfix'></div>
-    </div>
+    <div class='clearfix'></div>
+    <div class='footer'>databento.blog - 2016</div>
 </div>
 <script src='oscar.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
