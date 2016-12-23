@@ -213,8 +213,8 @@ a:hover {
   height: 100%;
   position: absolute;
   top:0;
-  background-size:cover;
-  background-position: center;
+  background-size: 200% auto;
+  background-position: 0 center;
 }
 
 .box_wrapper::before {
@@ -224,8 +224,12 @@ a:hover {
   height: 100%;
   box-sizing: border-box;
   background: rgba(32,32,32,0.4); /* Standard syntax */
-  transition: all 0.5s ease 0s; 
-  -webkit-transition: all 0.5s ease 0s;
+  transition: opacity 0.5s ease 0s; 
+  -webkit-transition: opacity 0.5s ease 0s;
+}
+
+.box_wrapper:hover {
+  background-position: 100% center;
 }
 
 .box_wrapper:hover::before {
