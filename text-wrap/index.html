@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Mind Map</title>
+    <script src='http://d3js.org/d3.v4.min.js'></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Playfair+Display+SC:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#202020">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .d3-content {
+            width: 100%;
+            height: 100%;
+            background: #202020;
+        }
+        .nodes {
+            stroke-width: 3px;
+            stroke: white;
+            cursor: pointer;
+        }
+        .fpl{
+            fill: gold;
+        }
+        .fp{
+            fill: steelblue;
+        }
+        .fu{
+            fill: green;
+        }
+        .links{
+            stroke-width: 3px;
+            stroke: white;
+        }
+        #marker {
+            fill: white;
+            stroke-width:0px;
+        }
+        .nodes:hover{
+            fill-opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+<div class='d3-content' id='d3-content'>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100%"
+	 height="100%" viewBox="0 0 1280 720" style="enable-background:new 0 0 1280 720;" xml:space="preserve">
+<style type="text/css">
+<![CDATA[
+	.st0{fill:#E91E63;stroke:#F48FB1;stroke-width:5;stroke-miterlimit:10;}
+	.st1{fill:#4CAF50;stroke:#81C784;stroke-width:5;stroke-miterlimit:10;}
+	.st2{fill:#FF9800;stroke:#FFCC80;stroke-width:5;stroke-miterlimit:10;}
+	.st3{fill:none;stroke:#FFFFFF;stroke-miterlimit:10;}
+	.st4{fill:#202020;}
+	.st5{fill:#2196F3;stroke:#64B5F6;stroke-width:5;stroke-miterlimit:10;}
+	.st6{fill:#FFFFFF;}
+	.st7{fill:none;}
+	.st8{font-size:12px;}
+	.st9{font-family:'Lato'; font-weight: 300;}
+]]>
+</style>
+<g id="Layer_1">
+	<rect class="st4" width="1280" height="720"/>
+</g>
+<g id="Layer_2">
+	<g id="faktor_x5F_penyebab_x5F_desc">
+		<rect x="50" y="14" class="st7" width="100" height="56.446"/>
+		<text transform="matrix(1 0 0 1 50 23.5806)"><tspan x="0" y="0" class="st6 st9 st8">Tidak adanya </tspan><tspan x="0" y="15.6" class="st6 st9 st8">wadah untuk </tspan><tspan x="0" y="31.2" class="st6 st9 st8">berkarya dan </tspan><tspan x="0" y="46.8" class="st6 st9 st8">berkompetisi</tspan></text>
+		<rect x="417" y="265.93" class="st7" width="100" height="56.447"/>
+		<text transform="matrix(1 0 0 1 417 275.5107)"><tspan x="0" y="0" class="st6 st9 st8">Kurangnya </tspan><tspan x="0" y="15.6" class="st6 st9 st8">fasilitas untuk </tspan><tspan x="0" y="31.2" class="st6 st9 st8">pengembangan </tspan><tspan x="0" y="46.8" class="st6 st9 st8">diri</tspan></text>
+		<rect x="528.5" y="297.048" class="st7" width="100" height="25.329"/>
+		<text transform="matrix(1 0 0 1 528.5 306.6289)"><tspan x="0" y="0" class="st6 st9 st8">Kurangnya </tspan><tspan x="0" y="15.6" class="st6 st9 st8">penguasaan IT</tspan></text>
+		<rect x="364" y="125" class="st7" width="100" height="56.446"/>
+		<text transform="matrix(1 0 0 1 364 134.5811)"><tspan x="0" y="0" class="st6 st9 st8">Kurangnya </tspan><tspan x="0" y="15.6" class="st6 st9 st8">motivasi guru </tspan><tspan x="0" y="31.2" class="st6 st9 st8">untuk </tspan><tspan x="0" y="46.8" class="st6 st9 st8">berkembang</tspan></text>
+		<rect x="611.585" y="125" class="st7" width="100" height="56.446"/>
+		<text transform="matrix(1 0 0 1 611.585 134.5811)"><tspan x="0" y="0" class="st6 st9 st8">Kurangnya </tspan><tspan x="0" y="15.6" class="st6 st9 st8">pelatihan </tspan><tspan x="0" y="31.2" class="st6 st9 st8">&amp; diklat </tspan><tspan x="0" y="46.8" class="st6 st9 st8">untuk guru</tspan></text>
+		<rect x="914.393" y="265.931" class="st7" width="100" height="56.446"/>
+		<text transform="matrix(1 0 0 1 952.1357 275.5117)"><tspan x="0" y="0" class="st6 st9 st8">Kurangnya </tspan><tspan x="24.375" y="15.6" class="st6 st9 st8">sarana </tspan><tspan x="-6.278" y="31.2" class="st6 st9 st8">&amp; prasarana </tspan><tspan x="2.821" y="46.8" class="st6 st9 st8">penunjang </tspan></text>
+		<rect x="1124" y="265.931" class="st7" width="100" height="56.446"/>
+		<text transform="matrix(1 0 0 1 1140.6973 275.5117)"><tspan x="0" y="0" class="st6 st9 st8">Adat &amp; budaya </tspan><tspan x="56.186" y="15.6" class="st6 st9 st8">yang </tspan><tspan x="16.705" y="31.2" class="st6 st9 st8">tidak sesuai </tspan><tspan x="3.9" y="46.8" class="st6 st9 st8">/menghambat</tspan></text>
+		<rect x="725.596" y="125" class="st7" width="124.404" height="72.291"/>
+		<text transform="matrix(1 0 0 1 787.7432 134.5811)"><tspan x="0" y="0" class="st6 st9 st8">Kurangnya </tspan><tspan x="-50.737" y="15.6" class="st6 st9 st8">partisipasi orangtua </tspan><tspan x="27.808" y="31.2" class="st6 st9 st8">dalam </tspan><tspan x="-15.352" y="46.8" class="st6 st9 st8">pembelajaran</tspan></text>
+		<rect x="849" y="361.427" class="st7" width="100" height="56.445"/>
+		<text transform="matrix(1 0 0 1 889.5908 371.0078)"><tspan x="0" y="0" class="st6 st9 st8">Belum ada </tspan><tspan x="-11.674" y="15.6" class="st6 st9 st8">inspirational </tspan><tspan x="10.959" y="31.199" class="st6 st9 st8">teacher/</tspan><tspan x="-1.015" y="46.799" class="st6 st9 st8">role model</tspan></text>
+		<rect x="985" y="125" class="st7" width="100" height="56.446"/>
+		<text transform="matrix(1 0 0 1 1024.3037 134.5811)"><tspan x="0" y="0" class="st6 st9 st8">Bimbingan </tspan><tspan x="0.78" y="15.6" class="st6 st9 st8">Konsultasi </tspan><tspan x="25.389" y="31.2" class="st6 st9 st8">belum </tspan><tspan x="7.059" y="46.8" class="st6 st9 st8">maksimal</tspan></text>
+		<rect x="1038" y="361.427" class="st7" width="100" height="56.445"/>
+		<text transform="matrix(1 0 0 1 1081.0088 371.0078)"><tspan x="0" y="0" class="st6 st9 st8">Minimnya </tspan><tspan x="3.354" y="15.6" class="st6 st9 st8">informasi </tspan><tspan x="-6.045" y="31.199" class="st6 st9 st8">pendidikan </tspan><tspan x="10.646" y="46.799" class="st6 st9 st8">lanjutan</tspan></text>
+		<rect x="162" y="28.112" class="st7" width="100" height="42.551"/>
+		<text transform="matrix(1 0 0 1 162 37.6929)"><tspan x="0" y="0" class="st6 st9 st8">Tidak adanya </tspan><tspan x="0" y="15.6" class="st6 st9 st8">reward dari </tspan><tspan x="0" y="31.2" class="st6 st9 st8">pemerintah</tspan></text>
+		<rect x="275" y="23.895" class="st7" width="100" height="79.246"/>
+		<text transform="matrix(1 0 0 1 275 33.4761)"><tspan x="0" y="0" class="st6 st9 st8">Belum </tspan><tspan x="0" y="15.6" class="st6 st9 st8">tersalurkannya </tspan><tspan x="0" y="31.2" class="st6 st9 st8">tunjangan khusus </tspan><tspan x="0" y="46.8" class="st6 st9 st8">profesi </tspan></text>
+		<rect x="522" y="27.112" class="st7" width="100" height="56.446"/>
+		<text transform="matrix(1 0 0 1 536.0039 36.6929)"><tspan x="0" y="0" class="st6 st9 st8">Dana Pemda </tspan><tspan x="1.982" y="15.6" class="st6 st9 st8">untuk diklat </tspan><tspan x="12.076" y="31.2" class="st6 st9 st8">terbatas</tspan></text>
+		<rect x="410" y="28.112" class="st7" width="100" height="56.446"/>
+		<text transform="matrix(1 0 0 1 411.0361 37.6929)"><tspan x="0" y="0" class="st6 st9 st8">Forum guru tidak </tspan><tspan x="3.646" y="15.6" class="st6 st9 st8">berjalan dengan </tspan><tspan x="36.965" y="31.2" class="st6 st9 st8">baik</tspan></text>
+		<rect x="820" y="28.112" class="st7" width="100" height="56.446"/>
+		<text transform="matrix(1 0 0 1 844.9004 37.6934)"><tspan x="0" y="0" class="st6 st9 st8">Tidak adanya </tspan><tspan x="-0.144" y="15.6" class="st6 st9 st8">forum guru &amp; </tspan><tspan x="15.651" y="31.2" class="st6 st9 st8">wali murid</tspan></text>
+		<rect x="914" y="28.112" class="st7" width="100" height="56.446"/>
+		<text transform="matrix(1 0 0 1 959.2578 37.6934)"><tspan x="0" y="0" class="st6 st9 st8">Orangtua </tspan><tspan x="-6.682" y="15.6" class="st6 st9 st8">fokus pada </tspan><tspan x="5.434" y="31.2" class="st6 st9 st8">ekonomi</tspan></text>
+		<rect x="1068.812" y="28.112" class="st7" width="100" height="28.223"/>
+		<text transform="matrix(1 0 0 1 1114.1875 37.6934)"><tspan x="0" y="0" class="st6 st9 st8">Tidak ada </tspan><tspan x="8.515" y="15.6" class="st6 st9 st8">guru BK</tspan></text>
+		<g>
+			<rect x="1144" y="28.112" class="st7" width="100" height="37.156"/>
+			<text transform="matrix(1 0 0 1 1189.375 37.6934)"><tspan x="0" y="0" class="st6 st9 st8">Tidak ada </tspan><tspan x="14.286" y="15.6" class="st6 st9 st8">jam BK</tspan></text>
+		</g>
+		<rect x="24.746" y="264.507" class="st7" width="100" height="57.87"/>
+		<text transform="matrix(1 0 0 1 24.7461 274.0884)"><tspan x="0" y="0" class="st6 st9 st8">Penunjukan </tspan><tspan x="0" y="15.6" class="st6 st9 st8">Kepala Sekolah </tspan><tspan x="0" y="31.2" class="st6 st9 st8">yang tidak sesuai </tspan><tspan x="0" y="46.8" class="st6 st9 st8">prosedur</tspan></text>
+		<rect x="149.938" y="265.085" class="st7" width="116.294" height="57.292"/>
+		<text transform="matrix(1 0 0 1 149.938 274.6665)"><tspan x="0" y="0" class="st6 st9 st8">Penunjukan  </tspan><tspan x="0" y="15.6" class="st6 st9 st8">peserta diklat </tspan><tspan x="0" y="31.2" class="st6 st9 st8">secara  </tspan><tspan x="0" y="46.8" class="st6 st9 st8">kekerabatan </tspan></text>
+		<rect x="257.13" y="264.591" class="st7" width="112.87" height="57.786"/>
+		<text transform="matrix(1 0 0 1 257.1304 274.1724)"><tspan x="0" y="0" class="st6 st9 st8">Belum adanya </tspan><tspan x="0" y="15.6" class="st6 st9 st8">transparansi dari </tspan><tspan x="0" y="31.2" class="st6 st9 st8">dinas berkaitan </tspan><tspan x="0" y="46.8" class="st6 st9 st8">dengan tunjangan</tspan></text>
+	</g>
+	<g id="faktor_x5F_penyebab">
+		<circle class="st5" cx="76.913" cy="345" r="10"/>
+		<circle class="st5" cx="198" cy="345" r="10"/>
+		<circle class="st5" cx="317" cy="345" r="10"/>
+		<circle class="st5" cx="446" cy="345" r="10"/>
+		<circle class="st5" cx="582" cy="345" r="10"/>
+		<circle class="st5" cx="390" cy="205" r="10"/>
+		<circle class="st5" cx="638" cy="205" r="10"/>
+		<circle class="st5" cx="932" cy="440" r="10"/>
+		<circle class="st5" cx="998" cy="345" r="10"/>
+		<circle class="st5" cx="1208" cy="345" r="10"/>
+		<circle class="st5" cx="1121" cy="440" r="10"/>
+		<circle class="st5" cx="830" cy="205" r="10"/>
+		<circle class="st5" cx="1071" cy="205" r="10"/>
+		<circle class="st2" cx="212" cy="94" r="10"/>
+		<circle class="st2" cx="325" cy="94" r="10"/>
+		<circle class="st2" cx="100" cy="94" r="10"/>
+		<circle class="st2" cx="572" cy="94" r="10"/>
+		<circle class="st2" cx="460" cy="95" r="10"/>
+		<circle class="st2" cx="907" cy="94" r="10"/>
+		<circle class="st2" cx="997" cy="94" r="10"/>
+		<circle class="st2" cx="1144" cy="94" r="10"/>
+		<circle class="st2" cx="1228" cy="94" r="10"/>
+	</g>
+	<g id="impact">
+		<circle class="st0" cx="198" cy="440" r="10"/>
+		<circle class="st0" cx="390" cy="440" r="10"/>
+		<circle class="st0" cx="638" cy="440" r="10"/>
+	</g>
+	<g id="masalah_x5F_utama">
+		<path id="masalah-utama_2_" class="st1" d="M248,640c0,27.617-22.386,50-50,50s-50-22.383-50-50s22.386-50,50-50
+			S248,612.383,248,640z"/>
+		<path id="masalah-utama_1_" class="st1" d="M564,640c0,27.617-22.386,50-50,50s-50-22.383-50-50s22.386-50,50-50
+			S564,612.383,564,640z"/>
+		<path id="masalah-utama" class="st1" d="M880,640c0,27.617-22.386,50-50,50s-50-22.383-50-50s22.386-50,50-50S880,612.383,880,640
+			z"/>
+	</g>
+	<g id="lines">
+		<path class="st3" d="M325,104c0,56.451,20.127,102.131,45,102.131"/>
+		<path class="st3" d="M212,104c0,56.451,70.668,102.131,158,102.131"/>
+		<g>
+			<g>
+				<path class="st3" d="M100,104c0,55.708,120.653,100.926,270.973,102.107"/>
+				<g>
+					<path class="st6" d="M377.008,206.131c-2.859,1.001-6.415,2.733-8.634,4.596l1.808-4.723l-1.631-4.786
+						C370.699,203.163,374.188,205.025,377.008,206.131z"/>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<line class="st3" x1="637.5" y1="218" x2="637.5" y2="420"/>
+				<g>
+					<path class="st6" d="M637.5,426.319c-1.054-2.84-2.852-6.363-4.756-8.548l4.756,1.721l4.755-1.721
+						C640.351,419.956,638.553,423.479,637.5,426.319z"/>
+				</g>
+			</g>
+		</g>
+		<path class="st3" d="M1208,355c0,157.153-135.852,284.319-303.738,284.319"/>
+		<g>
+			<g>
+				<line class="st3" x1="197.5" y1="453" x2="197.5" y2="581"/>
+				<g>
+					<path class="st6" d="M197.5,587.291c-1.054-2.84-2.852-6.363-4.756-8.547l4.756,1.72l4.755-1.72
+						C200.351,580.928,198.553,584.451,197.5,587.291z"/>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<line class="st3" x1="197.5" y1="358" x2="197.5" y2="420"/>
+				<g>
+					<path class="st6" d="M198,426.319c-1.054-2.84-2.852-6.363-4.756-8.548l4.756,1.721l4.755-1.721
+						C200.851,419.956,199.053,423.479,198,426.319z"/>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<path class="st3" d="M76.913,358.044c0,44.107,44.694,80.086,101.096,82.495"/>
+				<g>
+					<path class="st6" d="M184.043,440.668c-2.866,0.98-6.435,2.687-8.667,4.534l1.842-4.71l-1.598-4.798
+						C177.755,437.654,181.231,439.543,184.043,440.668z"/>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<path class="st3" d="M317,358.044c0,44.328-43.926,80.493-99.377,82.953"/>
+				<g>
+					<path class="st6" d="M211.588,441.131c2.811-1.13,6.285-3.021,8.417-4.983l-1.592,4.8l1.847,4.707
+						C218.026,443.81,214.456,442.107,211.588,441.131z"/>
+				</g>
+			</g>
+		</g>
+		<path class="st3" d="M572,106.876c0,53.832,21.173,97.392,47.338,97.392"/>
+		<g>
+			<g>
+				<path class="st3" d="M460,106.031c0,53.014,70.581,96.137,159,98.021"/>
+				<g>
+					<path class="st6" d="M625.035,204.116c-2.855,1.011-6.405,2.756-8.618,4.627l1.792-4.729l-1.649-4.78
+						C618.715,201.17,622.211,203.021,625.035,204.116z"/>
+				</g>
+			</g>
+		</g>
+		<path class="st3" d="M907,107c0,53.727-25.077,97.203-56.063,97.203"/>
+		<g>
+			<g>
+				<path class="st3" d="M997,107c0,52.487-65.703,95.198-148.097,97.194"/>
+				<g>
+					<path class="st6" d="M842.868,204.268c2.822-1.099,6.317-2.953,8.471-4.892l-1.645,4.783l1.796,4.727
+						C849.276,207.017,845.725,205.275,842.868,204.268z"/>
+				</g>
+			</g>
+		</g>
+		<path class="st3" d="M1144,107c0,54.097-23.636,97.872-52.843,97.872"/>
+		<g>
+			<g>
+				<path class="st3" d="M1228,107c0,52.795-61.305,95.771-138.256,97.916"/>
+				<g>
+					<path class="st6" d="M1083.71,205c2.821-1.102,6.313-2.96,8.465-4.902l-1.639,4.785l1.802,4.725
+						C1090.121,207.741,1086.567,206.004,1083.71,205z"/>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<line class="st3" x1="389.5" y1="218" x2="389.5" y2="420"/>
+				<g>
+					<path class="st6" d="M389.5,426.319c-1.054-2.84-2.852-6.363-4.756-8.548l4.756,1.721l4.755-1.721
+						C392.351,419.956,390.553,423.479,389.5,426.319z"/>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<line class="st3" x1="830.5" y1="217" x2="830.5" y2="584"/>
+				<g>
+					<path class="st6" d="M830.5,590c-1.054-2.84-2.852-6.363-4.756-8.547l4.756,1.72l4.755-1.72
+						C833.351,583.637,831.553,587.16,830.5,590z"/>
+				</g>
+			</g>
+		</g>
+		<path class="st3" d="M932,450c0,104.994-15.893,189.954-35.533,189.954"/>
+		<path class="st3" d="M998.955,360c0,154.389-44.015,279.319-98.409,279.319"/>
+		<path class="st3" d="M1071,215c0,234.536-76.238,424.319-170.454,424.319"/>
+		<g>
+			<g>
+				<path class="st3" d="M1121,450c0,103.497-103.082,187.551-231.681,190.109"/>
+				<g>
+					<path class="st6" d="M883.281,640.169c2.818-1.11,6.305-2.979,8.449-4.928l-1.623,4.79l1.815,4.719
+						C889.701,642.891,886.142,641.164,883.281,640.169z"/>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    
+  var videoElement = document.getElementById("d3-content");
+    
+  function toggleFullScreen() {
+    if (!document.mozFullScreen && !document.webkitFullScreen) {
+      if (videoElement.mozRequestFullScreen) {
+        videoElement.mozRequestFullScreen();
+      } else {
+        videoElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+      }
+    } else {
+      if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else {
+        document.webkitCancelFullScreen();
+      }
+    }
+  }
+  
+  document.addEventListener("keydown", function(e) {
+    if (e.keyCode == 13) {
+      toggleFullScreen();
+    }
+  }, false);
+  
+  var zoom= d3.zoom()
+        .scaleExtent([1 / 2, 4])
+        .on("zoom", zoomed);
+        
+  d3.select("svg")
+  .append("rect")
+  .attr("class","rected")
+    .attr("width", 1280)
+    .attr("height", 720)
+    .style("fill", "none")
+    .style("pointer-events", "all");
+    
+    var sliding=slide();
+
+    d3.select("body")
+    .on("keydown", function(d){
+        if(d3.event.keyCode=='39'){cursorPointer=sliding(1)}else if(d3.event.keyCode=='37'){cursorPointer=sliding(-1)};
+        drawSlides(zoom,cursorPointer);
+    });
+    
+    function zoomed() {
+        d3.select("#Layer_2").transition().duration(500).attr("transform", d3.event.transform);
+        d3.select("#Layer_1").transition().duration(500).attr("transform", d3.event.transform);
+    }
+    
+    function slide(){
+        var counter=0;
+        
+        return function(increment){
+        counter=counter+increment;
+        if(counter>3){counter=3}else if(counter<1){counter=1};
+        return counter;
+        }
+    }
+    
+    function drawSlides(zoom,counter) {
+    switch (counter) {
+    case 1:
+        var zoomID = d3.zoomIdentity
+        .scale(3)
+        .translate(0, -240);
+        
+        d3.select("#Layer_2").call(zoom.transform,zoomID);
+        break;
+    case 2:
+        var zoomID = d3.zoomIdentity
+        .scale(3)
+        .translate(0, -480);
+        
+        d3.select("#Layer_2").call(zoom.transform,zoomID);
+        break;
+    default:
+        var zoomID = d3.zoomIdentity
+        .scale(1)
+        .translate(0, 0);
+        
+        d3.select("#Layer_2").call(zoom.transform,zoomID);
+    };
+    }
+    
+</script>
+</body>
+</html>

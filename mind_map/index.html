@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Mind Map</title>
+    <script src='http://d3js.org/d3.v4.min.js'></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Playfair+Display+SC:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#202020">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .d3-content {
+            width: 100%;
+            height: 100%;
+            background: #202020;
+        }
+        .nodes {
+            stroke-width: 3px;
+            stroke: white;
+            cursor: pointer;
+        }
+        .fpl{
+            fill: #FF5722;
+        }
+        .fp{
+            fill: #3F51B5;
+        }
+        .fu{
+            fill: #009688;
+        }
+        .links{
+            stroke-width: 3px;
+            stroke: white;
+        }
+        #marker {
+            fill: white;
+            stroke-width:0px;
+        }
+        .nodes:hover{
+            fill-opacity: 1;
+        }
+        .text {
+            fill: white;
+	font-family: "Lato", Helvetica, Arial, sans-serif;
+	font-weight: 400;
+        }
+    </style>
+</head>
+
+<body>
+<div class='d3-content' id='d3-content'></div>
+<script src='mind_map.js'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    
+  var videoElement = document.getElementById("d3-content");
+    
+  function toggleFullScreen() {
+    if (!document.mozFullScreen && !document.webkitFullScreen) {
+      if (videoElement.mozRequestFullScreen) {
+        videoElement.mozRequestFullScreen();
+      } else {
+        videoElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+      }
+    } else {
+      if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else {
+        document.webkitCancelFullScreen();
+      }
+    }
+  }
+  
+  document.addEventListener("keydown", function(e) {
+    if (e.keyCode == 13) {
+      toggleFullScreen();
+    }
+  }, false);
+</script>
+</body>
+</html>
