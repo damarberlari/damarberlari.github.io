@@ -335,7 +335,7 @@
         
         return function(increment){
         counter=counter+increment;
-        if(counter>3){counter=3}else if(counter<1){counter=1};
+        if(counter>4){counter=4}else if(counter<0){counter=0};
         return counter;
         }
     }
@@ -346,25 +346,41 @@
         var zoomID = d3.zoomIdentity
         .scale(3)
         .translate(0, -240);
-        
+        svgReset();
         d3.select("#Layer_2").call(zoom.transform,zoomID);
         break;
     case 2:
         var zoomID = d3.zoomIdentity
         .scale(3)
         .translate(0, -480);
-        
+        svgReset();
         d3.select("#Layer_2").call(zoom.transform,zoomID);
+        break;
+    case 3:
+        var zoomID = d3.zoomIdentity
+        .scale(1)
+        .translate(0, 0);
+        svgReset();
+        d3.select("#Layer_2").call(zoom.transform,zoomID);
+        break;
+    case 4:
+        svgReset();
+        d3.select("#Layer_2").attr("opacity",0.1);
+        d3.select("svg").append("text").attr("id","text-temp").text("END").attr("x",640).attr("y",360).attr("font-size",24).attr("fill","white");
         break;
     default:
         var zoomID = d3.zoomIdentity
         .scale(1)
         .translate(0, 0);
-        
+        svgReset();
         d3.select("#Layer_2").call(zoom.transform,zoomID);
     };
     }
-    
+
+function svgReset() {
+    d3.select("#Layer_2").attr("opacity",1);
+    d3.select("#text-temp").remove();
+}
 </script>
 </body>
 </html>
