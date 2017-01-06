@@ -466,7 +466,7 @@
     var sliding=slide();
     drawSlides(zoom,sliding(0));
     
-    var title = d3.select("#Layer_2").append("text").attr("class","title").attr("x",50).attr("y",600).attr("dy",26)
+    var title = d3.select("#Layer_2").append("text").attr("class","title").attr("x",50).attr("y",600).attr("dy",26).attr("opacity",1);
     title.append("tspan").attr("x",50).attr("y",600).text("PENDIDIKAN")
     title.append("tspan").attr("x",50).attr("y",600).attr("dy",52).text("DI")
     title.append("tspan").attr("x",50).attr("y",600).attr("dy",78).text("MALUKU TENGGARA BARAT");
@@ -502,23 +502,23 @@
         .scale(3)
         .translate(0, -480);
         //svgReset();
-	d3.select(".title").attr("opacity",1);
+	d3.select(".title").transition().duration(1000).ease(d3.easeCubicInOut).attr("opacity",1);
         d3.select("#masalah-utama-1").attr("opacity",0);
 	d3.select("#masalah-utama-2").attr("opacity",0);
 	d3.select("#masalah-utama-3").attr("opacity",0);
         d3.selectAll("#impact-1").attr("opacity",0);
 	d3.selectAll("#impact-2a").attr("opacity",0);
 	d3.selectAll("#impact-2b").attr("opacity",0);
-	d3.selectAll("#fp-1").attr("opacity",0);
-	d3.selectAll("#fp-2").attr("opacity",0);
-	d3.selectAll("#fp-3").attr("opacity",0);
+	d3.selectAll("#fp-1").transition().duration(1000).ease(d3.easeCubicInOut).attr("opacity",0);
+	d3.selectAll("#fp-2").transition().duration(1000).ease(d3.easeCubicInOut).attr("opacity",0);
+	d3.selectAll("#fp-3").transition().duration(1000).ease(d3.easeCubicInOut).attr("opacity",0);
 	d3.selectAll("#fp-link-1").attr("opacity",0);
 	d3.selectAll("#fp-link-2").attr("opacity",0);
 	d3.selectAll("#fp-link-3").attr("opacity",0);
-	d3.selectAll("#fpl-2a").attr("opacity",0);
-	d3.selectAll("#fpl-2b").attr("opacity",0);
-	d3.selectAll("#fpl-3a").attr("opacity",0);
-	d3.selectAll("#fpl-3b").attr("opacity",0);
+	d3.selectAll("#fpl-2a").transition().duration(1000).ease(d3.easeCubicInOut).attr("opacity",0);
+	d3.selectAll("#fpl-2b").transition().duration(1000).ease(d3.easeCubicInOut).attr("opacity",0);
+	d3.selectAll("#fpl-3a").transition().duration(1000).ease(d3.easeCubicInOut).attr("opacity",0);
+	d3.selectAll("#fpl-3b").transition().duration(1000).ease(d3.easeCubicInOut).attr("opacity",0);
 	d3.selectAll("#fpl-2a-link").attr("opacity",0);
 	d3.selectAll("#fpl-2b-link").attr("opacity",0);
 	d3.selectAll("#fpl-3a-link").attr("opacity",0);
@@ -527,13 +527,14 @@
 	d3.selectAll("#impact-2b").attr("opacity",0);
 	d3.select("#related-problem-1").attr("opacity",0);
 	d3.select("#related-problem-2").attr("opacity",0);
-        d3.select("#Layer_2").call(zoom.transform,zoomID);
+        d3.select("#Layer_2").transition().duration(1000).ease(d3.easeCubicInOut).call(zoom.transform,zoomID);
         break;
     case 1:
         var zoomID = d3.zoomIdentity
-        .scale(1);
+        .scale(1)
+	.translate(0, 0);
         //svgReset();
-	d3.select(".title").attr("opacity",0);
+	d3.select(".title").transition().duration(1000).ease(d3.easeCubicInOut).attr("opacity",1);
 	d3.select("#masalah-utama-1").attr("opacity",0);
 	d3.select("#masalah-utama-2").attr("opacity",0);
 	d3.select("#masalah-utama-3").attr("opacity",0);
@@ -563,6 +564,7 @@
         .scale(1.2)
         .translate(0, 0);
         //svgReset();
+	d3.select(".title").transition().duration(1000).ease(d3.easeCubicInOut).attr("opacity",0);
 	d3.select("#masalah-utama-1").attr("opacity",0);
 	d3.select("#masalah-utama-2").attr("opacity",0);
 	d3.select("#masalah-utama-3").attr("opacity",0);
