@@ -543,8 +543,8 @@
 		<path class="st6" d="M341.575,659.426h-5.027v13.943h-2.052v-13.943h-5.017v-1.697h12.096V659.426z"/>
 	</g>
 </g>
-<g id="Layer_3">
-	</g>
+
+
 </svg>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -581,22 +581,15 @@
     var sliding=slide();
     drawSlides(zoom,sliding(0));
     
-    //var title = d3.select("#Layer_2").append("text").attr("class","title").attr("x",50).attr("y",600).attr("dy",26).attr("opacity",1);
-    //title.append("tspan").attr("x",50).attr("y",600).text("PENDIDIKAN")
-    //title.append("tspan").attr("x",50).attr("y",600).attr("dy",52).text("DI")
-    //title.append("tspan").attr("x",50).attr("y",600).attr("dy",78).text("MALUKU TENGGARA BARAT");
-    
     d3.select("body")
     .on("keydown", function(d){
         if(d3.event.keyCode=='39'){cursorPointer=sliding(1)}else if(d3.event.keyCode=='37'){cursorPointer=sliding(-1)};
         drawSlides(zoom,cursorPointer);
     })
-    .on("click",function(d){drawSlides(zoom,sliding(1));})
-    .on("touchend",function(d){drawSlides(zoom,sliding(1));});
+    .on("click",function(d){drawSlides(zoom,sliding(1));});
     
     function zoomed() {
         d3.select("#Layer_2").attr("transform", d3.event.transform);
-        //d3.select("#Layer_1").attr("transform", d3.event.transform);
     }
     
     function slide(){
