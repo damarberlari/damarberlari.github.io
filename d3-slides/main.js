@@ -27,7 +27,7 @@ d3.select("body")
         drawSlides(cursorPointer);
         drawProgress(cursorPointer);
     })
-    .on("click",function(){
+    .on("touchend",function(){
         cursorPointer=sliding(1);
         drawSlides(cursorPointer);
         drawProgress(cursorPointer);
@@ -100,14 +100,14 @@ function drawSlides(drawCounter) {
             .attr("stroke","#A7FFEB")
             .attr("stroke-width",3);
             
-            var totalLength = path.node().getTotalLength();
-            console.log(totalLength);
+            //var totalLength = path.node().getTotalLength();
+            //console.log(totalLength);
             
             path
             .attr("stroke-dasharray", "5000 5000")
             .attr("stroke-dashoffset", "5000");
             
-            d3.select(".svg-master").append("text").attr("class","title-main").attr("x",1220).attr("y",615)
+            d3.select(".svg-master").append("text").attr("class","title-main").attr("x",1220).attr("y",613)
             .attr("filter","url(#title-main-bg)")
             .attr("text-anchor","end");
             
@@ -115,9 +115,11 @@ function drawSlides(drawCounter) {
             .attr("filter","url(#title-side-bg)")
             .attr("text-anchor","end");
             
+            
             this.resetSVG();
         },
         resetSVG: function(){
+                d3.select(".circle").transition(feature.transition).attr("r",0);
                 d3.select(".background").transition().duration(1000).attr("fill","#2196F3")
                 d3.select(".line").transition().duration(0).attr("stroke-dashoffset", "5000");
         },
@@ -134,12 +136,14 @@ function drawSlides(drawCounter) {
         drawSlide1: function(){
             
             d3.select(".title-main")
-            .text("DATA VISUALIZATION");
+            .text(" DATA VISUALIZATION ");
             
             d3.select(".title-side")
-            .text("OVERVIEW");
+            .text(" OVERVIEW ");
             
-            d3.select(".circle").transition(feature.transition).attr("cx",300).attr("r",150);   
+            d3.select(".circle").transition(feature.transition).attr("cx",300).attr("r",150);
+            
+            //console.log(d3.select(".title-side").node().getBBox());
             },
         drawSlide2: function(){
             d3.select(".title-main")
@@ -148,7 +152,6 @@ function drawSlides(drawCounter) {
             d3.select(".title-side")
             .text("..IS EVERYWHERE");  
             
-            d3.select(".circle").attr("cx",300).transition().duration(0).attr("r",0);
             d3.select(".background").transition().duration(750).attr("fill","#009688");
             d3.select(".line").transition().duration(5000).ease(d3.easeLinear).attr("stroke-dashoffset", 0);
             },
@@ -176,7 +179,7 @@ function drawSlides(drawCounter) {
         feature.resetSVG();
         return slides[drawCounter]();
     }else{
-        console.log("initiation");
+        //console.log("initiation");
         feature.drawSVG();
         return slides.length-1;
     }
