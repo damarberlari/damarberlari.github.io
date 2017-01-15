@@ -46,8 +46,7 @@ function drawSlides(drawCounter) {
             
             d3.select("svg").append("rect").attr("class","background").attr("x",0).attr("y",0).attr("width",1280).attr("height","720");
             d3.select("svg").append("circle").attr("class","circle").attr("cx",10).attr("cy",360).attr("r",10).attr("fill","#FF1744");
-            d3.select("svg").append("rect").attr("id","progress-bar-base").attr("x",0).attr("y",717).attr("width",1280).attr("height",3);
-            d3.select("svg").append("rect").attr("id","progress-bar").attr("x",0).attr("y",717).attr("width",0).attr("height",3);
+            
             
             var defs = d3.select("svg")
             .append("defs");
@@ -82,6 +81,12 @@ function drawSlides(drawCounter) {
             .domain([0, 19])
             .range([0, 1280]);
             
+            var xBand = d3.scaleBand()
+            .domain(d3.range(20))
+            .range([0, 1280])
+            .paddingInner(0.2);
+            
+            
             var y = d3.scaleLinear()
             .domain([0, 1])
             .range([620, 100]);
@@ -100,6 +105,17 @@ function drawSlides(drawCounter) {
             .attr("stroke","#A7FFEB")
             .attr("stroke-width",3);
             
+            d3.select("svg").selectAll(".bar")
+            .data(d3.range(20).map(function(){return Math.random()}))
+            .enter()
+            .append("rect")
+            .attr("class","bar")
+            .attr("x",function(d,m){return xBand(m)})
+            .attr("width",function(d,m){return xBand.bandwidth()})
+            .attr("height",0)
+            .attr("fill","#FF1744");
+            
+            console.log(xBand())
             //var totalLength = path.node().getTotalLength();
             //console.log(totalLength);
             
@@ -115,13 +131,16 @@ function drawSlides(drawCounter) {
             .attr("filter","url(#title-side-bg)")
             .attr("text-anchor","end");
             
+            d3.select("svg").append("rect").attr("id","progress-bar-base").attr("x",0).attr("y",717).attr("width",1280).attr("height",3);
+            d3.select("svg").append("rect").attr("id","progress-bar").attr("x",0).attr("y",717).attr("width",0).attr("height",3);
             
             this.resetSVG();
         },
         resetSVG: function(){
                 d3.select(".circle").transition(feature.transition).attr("r",0);
-                d3.select(".background").transition().duration(1000).attr("fill","#2196F3")
+                d3.select(".background").transition().duration(1000).attr("fill","#2196F3");
                 d3.select(".line").transition().duration(0).attr("stroke-dashoffset", "5000");
+                d3.selectAll(".bar").transition(feature.transition).attr("y",720).attr("height",0);
         },
         drawTitle: function(){
             
@@ -156,13 +175,35 @@ function drawSlides(drawCounter) {
             d3.select(".line").transition().duration(5000).ease(d3.easeLinear).attr("stroke-dashoffset", 0);
             },
         drawSlide3: function(){
+            var y = d3.scaleLinear()
+            .domain([0, 1])
+            .range([0, 650]);
+            
             d3.select(".title-main")
-            .text("");
+            .text("MAKING BAR GRAPH");
+            
+            d3.select(".title-side")
+            .text("AS EASY AS");
+            d3.select(".background").transition().duration(750).attr("fill","#212121");
+            d3.selectAll(".bar").data(d3.range(20).map(function(){return Math.random()})).attr("y",720).transition(feature.transition).attr("y", function(d){return 720-y(d)}).attr("height",function(d){return y(d)}); 
+            },
+        drawSlide4: function(){
+            d3.select(".title-main")
+            .text("DRAWING A CIRCLE");
+            
+            d3.select(".title-side")
+            .text("IN ONE STROKE");
+            d3.select(".background").transition().duration(750).attr("fill","#FFC107");
+            d3.select(".circle").attr("cx",900).transition(feature.transition).attr("r",90); 
+            },
+        drawSlideEnd: function(){
+            d3.select(".title-main")
+            .text("THE END");
             
             d3.select(".title-side")
             .text("");
-            d3.select(".background").transition().duration(750).attr("fill","#404040");
-            d3.select(".circle").attr("cx",900).transition(feature.transition).attr("r",90); 
+            d3.select(".background").transition().duration(750).attr("fill","#FFC107").transition().duration(1000).attr("fill","#212121");
+            d3.select(".circle").transition(feature.transition).attr("cx",640).attr("r",250).transition().duration(1000).attr("r",0); 
             }
     };
 
@@ -171,8 +212,8 @@ function drawSlides(drawCounter) {
         feature.drawSlide1,
         feature.drawSlide2,
         feature.drawSlide3,
-        feature.drawSlide2,
-        feature.drawSlide1
+        feature.drawSlide4,
+        feature.drawSlideEnd
     ];
     
     if(drawCounter!= null){
