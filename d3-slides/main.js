@@ -27,7 +27,7 @@ d3.select("body")
         drawSlides(cursorPointer);
         drawProgress(cursorPointer);
     })
-    .on("touchend",function(){
+    .on("click",function(){
         cursorPointer=sliding(1);
         drawSlides(cursorPointer);
         drawProgress(cursorPointer);
