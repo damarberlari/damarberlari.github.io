@@ -27,8 +27,17 @@ d3.select("body")
         drawSlides(cursorPointer);
         drawProgress(cursorPointer);
     })
-    .on("touchend",function(){
+    
+    d3.select(".nav-next")
+    .on("mouseup touchend",function(){
         cursorPointer=sliding(1);
+        drawSlides(cursorPointer);
+        drawProgress(cursorPointer);
+    });
+    
+    d3.select(".nav-prev")
+    .on("mouseup touchend",function(){
+        cursorPointer=sliding(-1);
         drawSlides(cursorPointer);
         drawProgress(cursorPointer);
     });
@@ -115,7 +124,7 @@ function drawSlides(drawCounter) {
             .attr("height",0)
             .attr("fill","#FF1744");
             
-            console.log(xBand())
+            //console.log(xBand())
             //var totalLength = path.node().getTotalLength();
             //console.log(totalLength);
             
@@ -133,6 +142,10 @@ function drawSlides(drawCounter) {
             
             d3.select("svg").append("rect").attr("id","progress-bar-base").attr("x",0).attr("y",717).attr("width",1280).attr("height",3);
             d3.select("svg").append("rect").attr("id","progress-bar").attr("x",0).attr("y",717).attr("width",0).attr("height",3);
+            
+            d3.select("svg").append("rect").attr("class","nav nav-next").attr("x",640).attr("y",0).attr("width",640).attr("height",720);
+            d3.select("svg").append("rect").attr("class","nav nav-prev").attr("x",0).attr("y",0).attr("width",640).attr("height",720);
+            
             
             this.resetSVG();
         },
