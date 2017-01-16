@@ -22,10 +22,12 @@ drawSlides(0);
 
 d3.select("body")
     .on("keydown", function(){
+        if(d3.event.keyCode=='39'||d3.event.keyCode=='37'){
         if(d3.event.keyCode=='39'){cursorPointer=sliding(1)}else if(d3.event.keyCode=='37'){cursorPointer=sliding(-1)};
         //console.log(cursorPointer);
         drawSlides(cursorPointer);
         drawProgress(cursorPointer);
+        }
     })
     
     d3.select(".nav-next")
@@ -54,7 +56,7 @@ function drawSlides(drawCounter) {
             .attr('viewBox',"0 0 1280 720");
             
             d3.select("svg").append("rect").attr("class","background").attr("x",0).attr("y",0).attr("width",1280).attr("height","720");
-            d3.select("svg").append("circle").attr("class","circle").attr("cx",10).attr("cy",360).attr("r",10).attr("fill","#FF1744");
+            d3.select("svg").append("circle").attr("class","circle").attr("cx",10).attr("cy",360).attr("r",0).attr("fill","#FF1744");
             
             
             var defs = d3.select("svg")
@@ -114,6 +116,16 @@ function drawSlides(drawCounter) {
             .attr("stroke","#A7FFEB")
             .attr("stroke-width",3);
             
+            d3.select("svg").selectAll(".circles")
+            .data([3,9.5,16])
+            .enter()
+            .append("circle").attr("class","circles")
+            .attr("cx",function(d){return x(d)})
+            .attr("cy",360)
+            .attr("r",0)
+            .attr("fill","#FF1744");
+            
+            
             d3.select("svg").selectAll(".bar")
             .data(d3.range(20).map(function(){return Math.random()}))
             .enter()
@@ -150,7 +162,8 @@ function drawSlides(drawCounter) {
             this.resetSVG();
         },
         resetSVG: function(){
-                d3.select(".circle").transition(feature.transition).attr("r",0);
+                d3.selectAll(".circle").transition(feature.transition).attr("r",0);
+                d3.selectAll(".circles").transition(feature.transition).attr("r",0);
                 d3.select(".background").transition().duration(1000).attr("fill","#2196F3");
                 d3.select(".line").transition().duration(0).attr("stroke-dashoffset", "5000");
                 d3.selectAll(".bar").transition(feature.transition).attr("y",720).attr("height",0);
@@ -163,7 +176,7 @@ function drawSlides(drawCounter) {
             d3.select(".title-side")
             .text("");
             
-            d3.select(".circle").transition(feature.transition).attr("cx",10).attr("r",10);
+            d3.select(".circle").transition(feature.transition).attr("cx",10).attr("r",0);
             },
         drawSlide1: function(){
             
@@ -202,12 +215,12 @@ function drawSlides(drawCounter) {
             },
         drawSlide4: function(){
             d3.select(".title-main")
-            .text("DRAWING A CIRCLE");
+            .text("DRAWING CIRCLES");
             
             d3.select(".title-side")
-            .text("IN ONE STROKE");
+            .text("IN ONE GO");
             d3.select(".background").transition().duration(750).attr("fill","#FFC107");
-            d3.select(".circle").attr("cx",900).transition(feature.transition).attr("r",90); 
+            d3.selectAll(".circles").data(d3.range(20)).transition(feature.transition).ease(d3.easeBackOut).delay(function(d,m){return m*300;}).attr("r",120); 
             },
         drawSlideEnd: function(){
             d3.select(".title-main")

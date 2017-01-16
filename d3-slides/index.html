@@ -60,7 +60,7 @@
         if (videoElement.mozRequestFullScreen) {
           videoElement.mozRequestFullScreen();
         } else {
-          videoElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+          videoElement.webkitRequestFullScreen();
         }
       } else {
         if (document.mozCancelFullScreen) {
