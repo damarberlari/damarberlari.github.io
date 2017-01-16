@@ -29,14 +29,14 @@ d3.select("body")
     })
     
     d3.select(".nav-next")
-    .on("mouseup touchend",function(){
+    .on("click",function(){
         cursorPointer=sliding(1);
         drawSlides(cursorPointer);
         drawProgress(cursorPointer);
     });
     
     d3.select(".nav-prev")
-    .on("mouseup touchend",function(){
+    .on("click",function(){
         cursorPointer=sliding(-1);
         drawSlides(cursorPointer);
         drawProgress(cursorPointer);
