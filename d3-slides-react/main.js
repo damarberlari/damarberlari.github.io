@@ -84,7 +84,7 @@ var TitleContainer = React.createClass({
   },
   drawRectBound: function(d,el){
     var bbox=d.node().getBBox();
-    console.log(bbox);
+    //console.log(bbox);
     d3.select("#text-background").select(el).attr("width",bbox.width+10).attr("height", bbox.height).attr("x", bbox.x-5).attr("y", bbox.y);
   },
   componentDidUpdate: function() {
@@ -118,20 +118,26 @@ var App = React.createClass({
   getInitialState: function() {
       return data[sliding(0)];
   },
-  componentWillMount: function() {
-    d3.select("body")
-    .on("keydown", this.update)
-  },
   componentDidMount: function() {
-    //console.log("loaded");
+    d3.select("body")
+    .on("keydown", this.update);
+    d3.select("#nav-next").on("click",this.increment);
+    d3.select("#nav-prev").on("click",this.decrement);
   },
   update: function() {
-   // console.log("OK")
     if(d3.event.keyCode=='39'){
-    this.setState(data[sliding(1)]);
+    this.increment();
     }else if(d3.event.keyCode=='37'){
-    this.setState(data[sliding(-1)]);
+    this.decrement();
     }
+  },
+  increment: function() {
+   //console.log("increment")
+    this.setState(data[sliding(1)]);
+  },
+  decrement: function() {
+   //console.log("decrement")
+    this.setState(data[sliding(-1)]);
   },
   reset: function() {
     this.setState({id: 0});
@@ -140,8 +146,10 @@ var App = React.createClass({
     return (
       <svg class="svg-master" width="100%" height="100%" viewBox="0 0 1280 720">
             <SlideContainer counter={this.state.id} color={this.state.color}/>
-            <ProgressContainer counter={this.state.id} max={data.length-1}/>
             <TitleContainer counter={this.state.id} title={this.state.title} subtitle={this.state.subtitle}/>
+            <ProgressContainer counter={this.state.id} max={data.length-1}/>
+            <rect id="nav-next" x="640" y="0" width="640" height="720"></rect>
+            <rect id="nav-prev" x="0" y="0" width="640" height="720"></rect>
       </svg>
     )
   }
