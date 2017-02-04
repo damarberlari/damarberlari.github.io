@@ -61,7 +61,7 @@ var data = [
     }
   },
   { id:3, content: "This is Slide 1", color: "#2196F3", title:"BRING DATA TO LIFE", subtitle:"Circles! Circles!", 
-    data:[1,2,3,4,5,6],
+    data:[1,2,3,4,5,6,7],
     action: {
                 enter:  function(data){
                             d3.select("#slide-container").selectAll(".circle-sample").data(data).enter().append("circle").attr("class","circle-sample").attr("cx",function(d){return d*1280/(data.length+1)}).attr("cy",360).attr("r",0).attr("fill","#F44336");
@@ -74,12 +74,16 @@ var data = [
                         }
     }
   },
-  { id:4, content: "This is The End", color: "#F44336", title:"THE END", subtitle:"Many more to come", 
+  { id:4, content: "This is The End", color: "#212121", title:"THE END", subtitle:"Many more to come", 
     data:[],
     action: {
                 enter:  function(){},
-                update: function(){},
-                exit:   function(){}
+                update: function(){
+                            d3.select("#slide-container").select(".circle-sample:nth-of-type(4)").transition().duration(500).attr("r",300).transition().duration(500).attr("r",0);
+                },
+                exit:   function(){
+                            d3.select("#slide-container").select(".circle-sample:nth-of-type(4)").transition().duration(500).attr("r",0);
+                }
     }
   }
 ];
