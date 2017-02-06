@@ -38,25 +38,32 @@ var data = [
                                         .x(function(d,m){return m*1280/(data.graphA.length-1)})
                                         .y(function(d) { return domain(d) })
                                         .curve(d3.curveMonotoneX);
-                            d3.select("#slide-container").append("path").datum(data.graphA).attr("class","line-sample-1").attr("d",line).attr("fill","none").attr("stroke","#FF1744").attr("stroke-width",3);
-                            d3.select("#slide-container").append("path").datum(data.graphB).attr("class","line-sample-2").attr("d",line).attr("fill","none").attr("stroke","#0091EA").attr("stroke-width",3);
+                            d3.select("#slide-container").append("path").datum(data.graphA).attr("class","line-sample-1").attr("d",line).attr("fill","none").attr("stroke","#2962FF").attr("stroke-width",3);
+                            d3.select("#slide-container").append("path").datum(data.graphB).attr("class","line-sample-2").attr("d",line).attr("fill","none").attr("stroke","#FF1744").attr("stroke-width",3);
                             
                             var totalLength1 = d3.select("#slide-container").select(".line-sample-1").node().getTotalLength();
                             d3.select("#slide-container").select(".line-sample-1").attr("stroke-dasharray", function(){return totalLength1+" "+totalLength1}).attr("stroke-dashoffset", function(){return totalLength1});
                             var totalLength2 = d3.select("#slide-container").select(".line-sample-2").node().getTotalLength();
                             d3.select("#slide-container").select(".line-sample-2").attr("stroke-dasharray", function(){return totalLength2+" "+totalLength2}).attr("stroke-dashoffset", function(){return totalLength2});
                         
-                       },
+                            d3.select("#slide-container").selectAll(".dot-sample-1").data(data.graphA).enter().append("circle").attr("class","dot-sample-1").attr("cx",function(d,m){return m*1280/(data.graphA.length-1)}).attr("cy",function(d) { return domain(d) }).attr("r",0).attr("fill","#2962FF");
+                            d3.select("#slide-container").selectAll(".dot-sample-2").data(data.graphB).enter().append("circle").attr("class","dot-sample-2").attr("cx",function(d,m){return m*1280/(data.graphA.length-1)}).attr("cy",function(d) { return domain(d) }).attr("r",0).attr("fill","#FF1744");
+                      },
                 update: function(data){
                             d3.select("#slide-container").select(".line-sample-1").transition().ease(d3.easeLinear).duration(1500).attr("stroke-dashoffset",0);
                             d3.select("#slide-container").select(".line-sample-2").transition().ease(d3.easeLinear).duration(1500).attr("stroke-dashoffset",0);
-                      },
+
+                            d3.select("#slide-container").selectAll(".dot-sample-1").transition().ease(d3.easeLinear).duration(100).delay(function(d,m){return m*1500/data.graphA.length}).attr("r",5);
+                            d3.select("#slide-container").selectAll(".dot-sample-2").transition().ease(d3.easeLinear).duration(100).delay(function(d,m){return m*1500/data.graphB.length}).attr("r",5);
+                    },
                 exit:   function(){
                             var totalLength1 = d3.select("#slide-container").select(".line-sample-1").node().getTotalLength();
                             d3.select("#slide-container").select(".line-sample-1").transition().duration(0).attr("stroke-dashoffset", function(){return totalLength1});
                             var totalLength2 = d3.select("#slide-container").select(".line-sample-2").node().getTotalLength();
                             d3.select("#slide-container").select(".line-sample-2").transition().duration(0).attr("stroke-dashoffset", function(){return totalLength2});
-                        
+
+                            d3.select("#slide-container").selectAll(".dot-sample-1").transition().ease(d3.easeLinear).duration(0).attr("r",0);
+                            d3.select("#slide-container").selectAll(".dot-sample-2").transition().ease(d3.easeLinear).duration(0).attr("r",0);
                        }
     }
   },
@@ -64,7 +71,7 @@ var data = [
     data:[1,2,3,4,5,6,7],
     action: {
                 enter:  function(data){
-                            d3.select("#slide-container").selectAll(".circle-sample").data(data).enter().append("circle").attr("class","circle-sample").attr("cx",function(d){return d*1280/(data.length+1)}).attr("cy",360).attr("r",0).attr("fill","#F44336");
+                            d3.select("#slide-container").append("g").attr("id","circles").selectAll(".circle-sample").data(data).enter().append("circle").attr("class","circle-sample").attr("cx",function(d){return d*1280/(data.length+1)}).attr("cy",360).attr("r",0).attr("fill","#F44336");
                         },
                 update: function(){
                             d3.select("#slide-container").selectAll(".circle-sample").transition().duration(500).delay(function(d){return d*100}).attr("r",50);
@@ -78,11 +85,11 @@ var data = [
     data:[],
     action: {
                 enter:  function(){},
-                update: function(){
-                            d3.select("#slide-container").select(".circle-sample:nth-of-type(4)").transition().duration(500).attr("r",300).transition().duration(500).attr("r",0);
+                update: function(data){
+                            d3.select("#slide-container").select("#circles").selectAll(".circle-sample:nth-of-type(4)").transition().duration(500).attr("r",300).transition().duration(500).attr("r",0);
                 },
                 exit:   function(){
-                            d3.select("#slide-container").select(".circle-sample:nth-of-type(4)").transition().duration(500).attr("r",0);
+                            d3.select("#slide-container").select("#circles").selectAll(".circle-sample:nth-of-type(4)").transition().duration(500).attr("r",0);
                 }
     }
   }
@@ -128,7 +135,7 @@ var ProgressContainer = React.createClass({
   render: function() {
     return (
       <g id="progress-container">
-      <rect id="rect-progress" x="0" y="717" height="3" width="0" fill="crimson"></rect>
+      <rect id="rect-progress" x="0" y="717" height="3" width="0" fill="#FAFAFA" opacity="0.9"></rect>
       </g>
     )
   }
@@ -225,10 +232,12 @@ var App = React.createClass({
   }
 });
 
+//setTimeout(function(){ 
 ReactDOM.render(
   <App dataset={data} sliding={slide(data.length-1)}/>,
   document.getElementById('app')
 );
+//}, 1000);
 
 function slide(max){
         var counter=0;
