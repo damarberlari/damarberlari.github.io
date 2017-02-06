@@ -50,11 +50,11 @@ var data = [
                             d3.select("#slide-container").selectAll(".dot-sample-2").data(data.graphB).enter().append("circle").attr("class","dot-sample-2").attr("cx",function(d,m){return m*1280/(data.graphA.length-1)}).attr("cy",function(d) { return domain(d) }).attr("r",0).attr("fill","#FF1744");
                       },
                 update: function(data){
-                            d3.select("#slide-container").select(".line-sample-1").transition().ease(d3.easeLinear).duration(1500).attr("stroke-dashoffset",0);
-                            d3.select("#slide-container").select(".line-sample-2").transition().ease(d3.easeLinear).duration(1500).attr("stroke-dashoffset",0);
+                            d3.select("#slide-container").select(".line-sample-1").transition().ease(d3.easeLinear).duration(2500).attr("stroke-dashoffset",0);
+                            d3.select("#slide-container").select(".line-sample-2").transition().ease(d3.easeLinear).duration(2500).attr("stroke-dashoffset",0);
 
-                            d3.select("#slide-container").selectAll(".dot-sample-1").transition().ease(d3.easeLinear).duration(100).delay(function(d,m){return m*1500/data.graphA.length}).attr("r",5);
-                            d3.select("#slide-container").selectAll(".dot-sample-2").transition().ease(d3.easeLinear).duration(100).delay(function(d,m){return m*1500/data.graphB.length}).attr("r",5);
+                            d3.select("#slide-container").selectAll(".dot-sample-1").transition().ease(d3.easeLinear).duration(100).delay(function(d,m){return m*2500/data.graphA.length}).attr("r",5);
+                            d3.select("#slide-container").selectAll(".dot-sample-2").transition().ease(d3.easeLinear).duration(100).delay(function(d,m){return m*2500/data.graphB.length}).attr("r",5);
                     },
                 exit:   function(){
                             var totalLength1 = d3.select("#slide-container").select(".line-sample-1").node().getTotalLength();
