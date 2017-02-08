@@ -3,7 +3,7 @@ var dataSample = d3.range(20).map(function(){return Math.random()*700});
 
 
 var data = [
-  { id:0, content: "This is Title", color: "#F44336", title:"DATA VISUALIZATION WITH D3", subtitle:"", 
+  { id:0, content: "Title", color: "#009688", title:"DATA VISUALIZATION WITH D3", subtitle:"", 
     data:[],
     action: {
                 enter:  function(){},
@@ -11,7 +11,33 @@ var data = [
                 exit:   function(){}
     }
   },
-  { id:1, content: "This is Slide 2", color: "#202020", title:"BRING DATA TO LIFE", subtitle:"Bar Graph", 
+  { id:1, content: "Data Visualization", color: "#009688", title:"DATA VISUALIZATION", subtitle:"a storytelling medium", 
+    data:dataSample,
+    action: {
+                enter:  function(){},
+                update: function(){},
+                exit:   function(){}
+    }
+  },
+  { id:1, content: "Data Visualization", color: "#424242", title:"DATA DRIVEN DOCUMENTS/D3", subtitle:"a JavaScript frameworks that bring data to life", 
+    data:dataSample,
+    action: {
+                enter:  function(data){
+                        d3.xml("image/logoD3.svg").get(function(error, xml) {
+                        if (error) throw error;
+                        document.getElementById("slide-container").appendChild(xml.documentElement);
+                        d3.select("#d3-logo").attr("fill-opacity",0).attr("transform","translate(-128,121) translate(640,0) scale(1.4)");
+                        });
+                },
+                update: function(data){
+                        d3.select("#d3-logo").transition().duration(500).attr("fill-opacity",1)
+                             },
+                exit:   function(){
+                        d3.select("#d3-logo").transition().duration(0).attr("fill-opacity",0)
+                            }
+    }
+  },
+  { id:1, content: "Bring Data to Life", color: "#202020", title:"BRING DATA TO LIFE", subtitle:"Bar Graph", 
     data:dataSample,
     action: {
                 enter:  function(data){
@@ -65,6 +91,28 @@ var data = [
                             d3.select("#slide-container").selectAll(".dot-sample-1").transition().ease(d3.easeLinear).duration(0).attr("r",0);
                             d3.select("#slide-container").selectAll(".dot-sample-2").transition().ease(d3.easeLinear).duration(0).attr("r",0);
                        }
+    }
+  },
+  { id:2, content: "This is Slide 3", color: "#009688", title:"BRING DATA TO LIFE", subtitle:"Scatter Plot", 
+    data:[{id:"MEX", gdp: 16957.69746, gini:0.457},	{id:"TUR", gdp: 20549.293089, gini:0.402},	{id:"LVA", gdp: 21223.718421, gini:0.347},	{id:"HUN", gdp: 22997.744927, gini:0.289},	{id:"POL", gdp: 23541.52617, gini:0.298},	{id:"GRC", gdp: 25284.405782, gini:0.34},	{id:"EST", gdp: 25973.313576, gini:0.338},	{id:"PRT", gdp: 26454.226847, gini:0.338},	{id:"SVK", gdp: 26654.008792, gini:0.25},	{id:"SVN", gdp: 28847.362659, gini:0.25},	{id:"CZE", gdp: 29051.390424, gini:0.256},	{id:"ISR", gdp: 31763.867463, gini:0.371},	{id:"ESP", gdp: 31991.051808, gini:0.335},	{id:"KOR", gdp: 32222.880455, gini:0.307},	{id:"NZL", gdp: 32991.255639, gini:0.333},	{id:"JPN", gdp: 35738.275135, gini:0.33},	{id:"ITA", gdp: 35757.0229, gini:0.331},	{id:"GBR", gdp: 37475.045871, gini:0.351},	{id:"FRA", gdp: 37671.028181, gini:0.308},	{id:"ISL", gdp: 40486.432961, gini:0.256},	{id:"FIN", gdp: 40619.937023, gini:0.26},	{id:"CAN", gdp: 42143.975015, gini:0.321},	{id:"BEL", gdp: 42639.076623, gini:0.268},	{id:"AUS", gdp: 43169.929137, gini:0.326},	{id:"DEU", gdp: 43564.07389, gini:0.289},	{id:"SWE", gdp: 44724.851249, gini:0.274},	{id:"DNK", gdp: 44808.543206, gini:0.249},	{id:"AUT", gdp: 46253.60764, gini:0.276},	{id:"IRL", gdp: 46519.442937, gini:0.304},	{id:"NLD", gdp: 46715.500984, gini:0.281},	{id:"NOR", gdp: 65374.680731, gini:0.253},	{id:"LUX", gdp: 91096.924499, gini:0.301}
+    ],
+    domain: {y:d3.scaleLinear()
+            .domain([0.2, 0.5])
+            .range([720, 0]),
+            x:d3.scaleLinear()
+            .domain([20000, 95000])
+            .range([100, 1180])
+            }, 
+    action: {
+                enter:  function(data,domain){
+                            d3.select("#slide-container").selectAll(".scatter-sample").data(data).enter().append("circle").attr("class","scatter-sample").attr("cx",function(d){return domain.x(d.gdp)}).attr("cy",function(d) { return domain.y(d.gini) }).attr("r",0).attr("fill","#E0F2F1");
+                        },
+                update: function(data){
+                            d3.select("#slide-container").selectAll(".scatter-sample").data(data).transition().duration(500).delay(function(d,m){return m*100}).attr("r",5);
+                        },
+                exit:   function(){
+                            d3.select("#slide-container").selectAll(".scatter-sample").transition().duration(500).attr("r",0);
+                        }
     }
   },
   { id:3, content: "This is Slide 1", color: "#2196F3", title:"BRING DATA TO LIFE", subtitle:"Circles! Circles!", 
