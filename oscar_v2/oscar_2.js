@@ -214,7 +214,8 @@ filter.append("feComposite")
 function exportPos(){
       var datastring=[];
       svg.selectAll(".nominated").data(dataset).each(function(d){datastring.push(d.name+","+d.x+","+d.y+","+d.r+","+d.won)});
-      //console.log(datastring);
+      console.log(datastring);
+	  console.log("done!");
 }
 	}
 
