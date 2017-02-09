@@ -223,7 +223,7 @@ var TitleContainer = React.createClass({
       <rect id="title-bg" x="0" y="0" width="0" height="0"></rect>
       <rect id="subtitle-bg" x="0" y="0" width="0" height="0"></rect>
       </g>
-      <text id="title" x="1220" y="600"></text>
+      <text id="title" x="1220" y="610"></text>
       <text id="subtitle" x="1220" y="660"></text>
       </g>
     )
