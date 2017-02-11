@@ -11,12 +11,53 @@ var data = [
                 exit:   function(){}
     }
   },
-  { id:1, content: "Data Visualization", color: "#FFC857", title:"DATA VISUALIZATION", subtitle:"a storytelling medium", 
+  { id:1, content: "Data Visualization", color: "#157A6E", title:"DATA VISUALIZATION", subtitle:"a storytelling medium", 
     data:dataSample,
     action: {
-                enter:  function(){},
-                update: function(){},
-                exit:   function(){}
+                enter:  function(){
+                        d3.select("#slide-container").append("defs")
+                        .append("clipPath")
+                        .attr("id","rect-path")
+                        .append("rect")
+                        .attr("x",0)
+                        .attr("y",0)
+                        .attr("width",1280)
+                        .attr("height",720);
+                       
+                        d3.json("https://damarberlari.github.io/D3_Maps_Ramadhan/world-110m2.json", function(error, map) {
+                        
+                        var topology=map;
+                        var   projection = d3.geoMercator()
+                        .scale((1280 + 1) / 2 / Math.PI)
+                        .rotate([-5,0])
+                        .translate([1280 / 2, 1.15*720 / 2])
+                        .precision(.1);
+
+                        var path = d3.geoPath()
+                        .projection(projection);
+ 
+                        d3.select("#slide-container").append("g").attr("id","maps").attr("clip-path","url(#rect-path)").selectAll(".lands")
+                        .data(topojson.feature(topology, topology.objects.countries).features)
+                        .enter()
+                        .append("path")
+                        .attr("class","lands")
+                        .attr("id", function(d){return d.id})
+                        .attr("d", path)
+                        .attr("fill","#F7F7F7")
+                        .attr("stroke","#157A6E")
+                        .attr("stroke-width",0.5)
+                        .attr("opacity",0);
+
+                        console.log(topojson.feature(topology, topology.objects.countries).features);
+                      });
+                      
+                },
+                update: function(){
+                        d3.select("#slide-container").select("#maps").selectAll(".lands").on("mouseover",function(d){console.log(d.id)}).transition().duration(500).attr("opacity",1);
+                },
+                exit:   function(){
+                        d3.select("#slide-container").select("#maps").selectAll(".lands").on("mouseover",function(){}).transition().duration(500).attr("opacity",0);
+                }
     }
   },
   { id:2, content: "Data Visualization", color: "#100B00", title:"DATA DRIVEN DOCUMENTS/D3", subtitle:"a JavaScript frameworks that bring data to life", 

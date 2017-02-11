@@ -61,7 +61,7 @@ var   xAxis = d3.svg.axis()
       .tickPadding(padding/2)
       .innerTickSize(-0.9*height+3*padding);
 
-var   projection = d3.geo.mercator()
+var   projection = d3.geoMercator()
       .scale((width + 1) / 2 / Math.PI)
       .rotate([210,0])
       .translate([width / 2, 1.15*height / 2])
