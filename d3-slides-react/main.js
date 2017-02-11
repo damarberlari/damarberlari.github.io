@@ -11,10 +11,20 @@ var data = [
                 exit:   function(){}
     }
   },
-  { id:1, content: "Data Visualization", color: "#157A6E", title:"DATA VISUALIZATION", subtitle:"a storytelling medium", 
-    data:dataSample,
+  { id:1, content: "Data Visualization", color: "#2F4C7C", title:"DATA VISUALIZATION", subtitle:"a storytelling medium", 
+    data:[
+      {city:"Tokyo", lat:35.689487,lon:139.691706,population:38},
+      {city:"Jakarta", lat:-6.174465,lon:106.822745,population:31.5},
+      {city:"Seoul", lat:37.566535,lon:126.977969,population:25.5},
+      {city:"Karachi", lat:24.8614625,lon:67.009939,population:24.3},
+      {city:"Shanghai", lat:31.230416,lon:121.473701,population:24.3},
+      {city:"Manila", lat:14.599512,lon:120.984219,population:24.12},
+      {city:"New York", lat:40.712784,lon:-74.005941,population:23.63},
+      {city:"Mumbai", lat:19.075984,lon:72.877656,population:23.61},
+      {city:"Mexico City", lat:19.432608,lon:-99.133208,population:22.2}
+    ],
     action: {
-                enter:  function(){
+                enter:  function(data){
                         d3.select("#slide-container").append("defs")
                         .append("clipPath")
                         .attr("id","rect-path")
@@ -43,20 +53,38 @@ var data = [
                         .attr("class","lands")
                         .attr("id", function(d){return d.id})
                         .attr("d", path)
-                        .attr("fill","#F7F7F7")
-                        .attr("stroke","#157A6E")
+                        .attr("fill","#FDFDFB")
+                        .attr("stroke","#2F4C7C")
                         .attr("stroke-width",0.5)
                         .attr("opacity",0);
 
-                        console.log(topojson.feature(topology, topology.objects.countries).features);
+                        d3.select("#slide-container").select("#maps")
+                        .selectAll(".cities")
+                        .data(data)
+                        .enter()
+                        .append("circle")
+                        .attr("class","cities")
+                        .attr("cx", function(d) {
+                              return projection([d.lon, d.lat])[0];
+                        })
+                        .attr("cy", function(d) {
+                                return projection([d.lon, d.lat])[1];
+                        })
+                        .attr("r", 0)
+                        .attr("fill","#EA2B1F")
+                        .attr("fill-opacity",0.7)
+                        .attr("stroke-width",1)
+                        .attr("stroke","#EA2B1F")
                       });
                       
                 },
                 update: function(){
-                        d3.select("#slide-container").select("#maps").selectAll(".lands").on("mouseover",function(d){console.log(d.id)}).transition().duration(500).attr("opacity",1);
+                        d3.select("#slide-container").select("#maps").selectAll(".lands").on("mouseover",function(d){console.log(d.id); d3.select(this).attr("fill","#252117")}).transition().duration(500).attr("opacity",1);
+                        d3.select("#slide-container").select("#maps").selectAll(".cities").transition().duration(500).attr("r",function(d){return d.population});
                 },
                 exit:   function(){
                         d3.select("#slide-container").select("#maps").selectAll(".lands").on("mouseover",function(){}).transition().duration(500).attr("opacity",0);
+                        d3.select("#slide-container").select("#maps").selectAll(".cities").transition().duration(500).attr("r",0);
                 }
     }
   },
