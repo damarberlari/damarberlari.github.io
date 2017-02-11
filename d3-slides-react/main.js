@@ -46,7 +46,10 @@ var data = [
                         var path = d3.geoPath()
                         .projection(projection);
  
-                        d3.select("#slide-container").append("g").attr("id","maps").attr("clip-path","url(#rect-path)").selectAll(".lands")
+                        d3.select("#slide-container").append("g").attr("id","maps").attr("clip-path","url(#rect-path)")
+                        .append("g")
+                        .attr("id","lands")
+                        .selectAll(".lands")
                         .data(topojson.feature(topology, topology.objects.countries).features)
                         .enter()
                         .append("path")
@@ -59,6 +62,8 @@ var data = [
                         .attr("opacity",0);
 
                         d3.select("#slide-container").select("#maps")
+                        .append("g")
+                        .attr("id","cities")
                         .selectAll(".cities")
                         .data(data)
                         .enter()
@@ -79,12 +84,12 @@ var data = [
                       
                 },
                 update: function(){
-                        d3.select("#slide-container").select("#maps").selectAll(".lands").on("mouseover",function(d){console.log(d.id); d3.select(this).attr("fill","#252117")}).transition().duration(500).attr("opacity",1);
-                        d3.select("#slide-container").select("#maps").selectAll(".cities").transition().duration(500).attr("r",function(d){return d.population});
+                        d3.select("#slide-container").select("#maps").select("#lands").selectAll(".lands").on("mouseover",function(d){console.log(d.id); d3.select(this).attr("fill","#252117")}).transition().duration(500).attr("opacity",1);
+                        d3.select("#slide-container").select("#maps").select("#cities").selectAll(".cities").transition().duration(500).attr("r",function(d){return d.population});
                 },
                 exit:   function(){
-                        d3.select("#slide-container").select("#maps").selectAll(".lands").on("mouseover",function(){}).transition().duration(500).attr("opacity",0);
-                        d3.select("#slide-container").select("#maps").selectAll(".cities").transition().duration(500).attr("r",0);
+                        d3.select("#slide-container").select("#maps").select("#lands").selectAll(".lands").on("mouseover",function(){}).transition().duration(500).attr("opacity",0);
+                        d3.select("#slide-container").select("#maps").select("#cities").selectAll(".cities").transition().duration(500).attr("r",0);
                 }
     }
   },
@@ -113,7 +118,7 @@ var data = [
                             d3.select("#slide-container").selectAll(".bar-sample").data(data).enter().append("rect").attr("class","bar-sample").attr("x",function(d,m){return 2+m*1280/(data.length)}).attr("y",720).attr("width",60).attr("height",0).attr("fill","#EA2B1F");
                         },
                 update: function(data){
-                            d3.select("#slide-container").selectAll(".bar-sample").data(data).transition().duration(500).attr("y",function(d){return 720-d}).attr("height",function(d){return d});
+                            d3.select("#slide-container").selectAll(".bar-sample").transition().duration(500).attr("y",function(d){return 720-d}).attr("height",function(d){return d});
                         },
                 exit:   function(){
                             d3.select("#slide-container").selectAll(".bar-sample").transition().duration(500).attr("y",720).attr("height",0);
