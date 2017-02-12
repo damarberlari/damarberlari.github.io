@@ -143,7 +143,7 @@ var dataset =
 
 var slideData = [
   {
-    id:0, title:"", subtitle:"",
+    id:0, title:"INTRODUCTION", subtitle:"",
     update:function(){
           d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(500).attr("r",0);
     },
@@ -152,7 +152,7 @@ var slideData = [
     }
   },
   {
-    id:1, title:"", subtitle:"",
+    id:1, title:"THE NOMINEES", subtitle:"",
     update:function(data,domain){
           d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(500).attr("r",function(d){return domain(d.nom)}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#157A6E"}}).attr("stroke",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#7FB6AF"}});
     },
@@ -161,7 +161,7 @@ var slideData = [
     }
   },
   {
-    id:2, title:"", subtitle:"",
+    id:2, title:"THE WINNERS", subtitle:"",
     update:function(data,domain){
           d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(500).attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#FFC857"}}).attr("stroke","#D1A448");
     },
@@ -170,7 +170,7 @@ var slideData = [
     }
   },
   {
-    id:3, title:"", subtitle:"",
+    id:3, title:"EXPLORE", subtitle:"",
     update:function(data,domain){
           d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(500).attr("r",function(d){return domain(d.nom)}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#157A6E"}}).attr("stroke",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#7FB6AF"}});
           d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(0).attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#FFC857"}}).attr("stroke","#D1A448");
@@ -210,18 +210,32 @@ var ProgressContainer = React.createClass({
   getDefaultProps: function() {
       return {counter: 0};
   },
+  componentWillUpdate: function() {
+    d3.selectAll(".button-progress").transition().duration(500).attr("opacity",0.2);
+  },
   componentDidUpdate: function() {
     //console.log("progress updated");
     var counter=this.props.counter;
     var max=this.props.max;
     d3.select("#rect-progress").transition().duration(500).attr("x",function(){return (counter/max*1280)});
+    d3.selectAll(".button-progress")
+    .filter(function(d){return d.id==counter}).transition().duration(500).attr("opacity",1);
   },
   componentDidMount: function() {
     //console.log("progress loaded");
+    var counter=this.props.counter;
+    var data=this.props.data;
+    d3.selectAll(".button-progress").data(data).filter(function(d){return d.id==counter}).attr("opacity",1);
   },
   render: function() {
+    var length=this.props.data.length;
     return (
       <g id="progress-container">
+      {this.props.data.map(function(d){
+            return (<g className="button-progress" opacity="0.2">
+            <text className="text-progress" x={(d.id+1)*1280/length-5} y="710">{d.title}</text>
+            </g>)
+      },length)}
       <rect id="rect-progress" x="0" y="718" height="2" width={1/this.props.max*1280} fill="#FAFAFA" opacity="0.9"></rect>
       </g>
     )
@@ -308,6 +322,7 @@ var App = React.createClass({
     this.state.dataset.enter(this.state.dataset.data,this.state.dataset.domain);
     d3.select("body")
     .on("keydown", this.update);
+    d3.selectAll(".button-progress").on("click", this.jump)
   },
   update: function() {
     if(d3.event.keyCode=='39'){
@@ -324,13 +339,16 @@ var App = React.createClass({
    //console.log("decrement")
     this.setState({slideData: this.props.slideData[this.props.sliding(this.props.sliding()-1)], slide:this.props.sliding()});
   },
+  jump: function(d) {
+    this.setState({slideData: this.props.slideData[this.props.sliding(d.id)], slide:this.props.sliding()});
+  },
   render: function() {
     return (
       <svg class="svg-master" width="100%" height="100%" viewBox="0 0 1280 720">
             <SlideContainer counter={this.state.dataset.id} color={this.state.dataset.color}/>
-            <TitleContainer counter={this.state.slideData.id} title={this.state.slideData.title} subtitle={this.state.slideData.subtitle}/>
+            
             <VisualizationTitle title={["THE ACADEMY AWARDS","BEST FOREIGN FILMS"]}/>
-            <ProgressContainer counter={this.state.slide} max={this.props.slideData.length}/>
+            <ProgressContainer data={this.props.slideData} counter={this.state.slide} max={this.props.slideData.length}/>
       </svg>
     )
   }
