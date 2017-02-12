@@ -11,20 +11,66 @@ var data = [
                 exit:   function(){}
     }
   },
-  { id:1, content: "Data Visualization", color: "#2F4C7C", title:"DATA VISUALIZATION", subtitle:"a storytelling medium", 
+  { id:1, content: "Data Visualization", color: "#2F4C7C", title:"", subtitle:"", 
     data:[
-      {city:"Tokyo", lat:35.689487,lon:139.691706,population:38},
-      {city:"Jakarta", lat:-6.174465,lon:106.822745,population:31.5},
-      {city:"Seoul", lat:37.566535,lon:126.977969,population:25.5},
-      {city:"Karachi", lat:24.8614625,lon:67.009939,population:24.3},
-      {city:"Shanghai", lat:31.230416,lon:121.473701,population:24.3},
-      {city:"Manila", lat:14.599512,lon:120.984219,population:24.12},
-      {city:"New York", lat:40.712784,lon:-74.005941,population:23.63},
-      {city:"Mumbai", lat:19.075984,lon:72.877656,population:23.61},
-      {city:"Mexico City", lat:19.432608,lon:-99.133208,population:22.2}
+      {country: "Italy", won: 14, nom: 31, lon: 12.0586029412373, lat: 42.9136784041319, color: "#FFC857"},
+{country: "France", won: 12, nom: 39, lon: -1.34925044172771, lat: 44.3311024175147, color: "#FFCD66"},
+{country: "Spain", won: 4, nom: 19, lon: -3.63611100815254, lat: 40.4259818962248, color: "#FFD784"},
+{country: "Japan", won: 4, nom: 15, lon: 138.228130998681, lat: 37.9550748563406, color: "#FFD784"},
+{country: "Sweden", won: 3, nom: 15, lon: 16.8311443000081, lat: 63.4319246858594, color: "#FFDC94"},
+{country: "Denmark", won: 3, nom: 12, lon: 9.85077012351991, lat: 56.0759847076341, color: "#FFDC94"},
+{country: "Netherlands", won: 3, nom: 7, lon: 5.49830441445574, lat: 52.3033799063646, color: "#FFDC94"},
+{country: "Germany", won: 2, nom: 10, lon: 10.280876968037, lat: 51.2393416207863, color: "#FFDC94"},
+{country: "Hungary", won: 2, nom: 9, lon: 19.3528552944021, lat: 47.2039343142717, color: "#FFDC94"},
+{country: "Argentina", won: 2, nom: 7, lon: -65.4336777146603, lat: -36.710169098842, color: "#FFDC94"},
+{country: "Switzerland", won: 2, nom: 5, lon: 8.1038191713355, lat: 46.7904858363136, color: "#FFDC94"},
+{country: "Austria", won: 2, nom: 4, lon: 14.0625182968975, lat: 47.6154906740616, color: "#FFDC94"},
+{country: "Poland", won: 1, nom: 10, lon: 19.2723182108479, lat: 52.2008199713429, color: "#FFE1A3"},
+{country: "Canada", won: 1, nom: 7, lon: -97.0180736829745, lat: 67.9782476750077, color: "#FFE1A3"},
+{country: "Russian Federation", won: 1, nom: 6, lon: 100.237671923529, lat: 64.7694069555879, color: "#FFE1A3"},
+{country: "Algeria", won: 1, nom: 5, lon: 2.57377787406677, lat: 28.4422727664439, color: "#FFE1A3"},
+{country: "Taiwan, Province of China", won: 1, nom: 3, lon: 120.955292266107, lat: 23.7338469141756, color: "#FFE1A3"},
+{country: "Iran, Islamic Republic of", won: 1, nom: 3, lon: 54.1858902422257, lat: 32.7007380089774, color: "#FFE1A3"},
+{country: "Czech Republic", won: 1, nom: 3, lon: 15.3142541466767, lat: 49.774182896175, color: "#FFE1A3"},
+{country: "South Africa", won: 1, nom: 2, lon: 24.9807266448113, lat: -29.0788557970192, color: "#FFE1A3"},
+{country: "Côte d'Ivoire", won: 1, nom: 1, lon: -5.63080661432827, lat: 7.55413182775637, color: "#FFE1A3"},
+{country: "Bosnia and Herzegovina", won: 1, nom: 1, lon: 17.791048552889, lat: 44.181391221309, color: "#FFE1A3"},
+{country: "Israel", won: 0, nom: 10, lon: 34.9895248791009, lat: 31.4904553663693, color: "#FFF0D1"},
+{country: "Mexico", won: 0, nom: 8, lon: -102.773244844841, lat: 24.1700686112569, color: "#FFF0D1"},
+{country: "Belgium", won: 0, nom: 7, lon: 4.56687971020034, lat: 50.648176253573, color: "#FFF0D1"},
+{country: "Norway", won: 0, nom: 5, lon: 8.468946, lat: 60.472024, color: "#FFF0D1"},
+{country: "Greece", won: 0, nom: 5, lon: 22.7052356957002, lat: 39.1103875134186, color: "#FFF0D1"},
+{country: "Brazil", won: 0, nom: 4, lon: -53.0100555346954, lat: -11.2215725124192, color: "#FFF0D1"},
+{country: "India", won: 0, nom: 3, lon: 79.594265046544, lat: 23.2418434062337, color: "#FFF0D1"},
+{country: "United Kingdom", won: 0, nom: 2, lon: -2.92226940198663, lat: 54.0953890185326, color: "#FFF0D1"},
+{country: "China", won: 0, nom: 2, lon: 104.188647153077, lat: 37.577133390366, color: "#FFF0D1"},
+{country: "Palestinian Territory, Occupied", won: 0, nom: 2, lon: 35.2438921864398, lat: 31.9277997971315, color: "#FFF0D1"},
+{country: "Hong Kong", won: 0, nom: 2, lon: 114.109497, lat: 22.396428, color: "#FFF0D1"},
+{country: "Nepal", won: 0, nom: 1, lon: 83.9741876093016, lat: 28.2460874510694, color: "#FFF0D1"},
+{country: "Cambodia", won: 0, nom: 1, lon: 104.86464625217, lat: 12.6790705893622, color: "#FFF0D1"},
+{country: "Nicaragua", won: 0, nom: 1, lon: -85.0362200209642, lat: 12.847034817111, color: "#FFF0D1"},
+{country: "Peru", won: 0, nom: 1, lon: -74.3908609135039, lat: -9.2894783122096, color: "#FFF0D1"},
+{country: "Iceland", won: 0, nom: 1, lon: -18.7736635613791, lat: 65.0957081207027, color: "#FFF0D1"},
+{country: "Colombia", won: 0, nom: 1, lon: -73.0946157297414, lat: 3.93771631701062, color: "#FFF0D1"},
+{country: "Cuba", won: 0, nom: 1, lon: -78.9884679783013, lat: 21.6298969116728, color: "#FFF0D1"},
+{country: "Finland", won: 0, nom: 1, lon: 26.2214468844272, lat: 64.9067372717463, color: "#FFF0D1"},
+{country: "Georgia", won: 0, nom: 1, lon: 43.4418918562648, lat: 42.1633830238413, color: "#FFF0D1"},
+{country: "Kazakhstan", won: 0, nom: 1, lon: 67.299808681699, lat: 48.4603667537948, color: "#FFF0D1"},
+{country: "Uruguay", won: 0, nom: 1, lon: -56.0163393091086, lat: -32.8158124104208, color: "#FFF0D1"},
+{country: "Chile", won: 0, nom: 1, lon: -71.6831973271217, lat: -41.7067943467158, color: "#FFF0D1"},
+{country: "Australia", won: 0, nom: 1, lon: 134.597599145698, lat: -26.2395468431157, color: "#FFF0D1"},
+{country: "Jordan", won: 0, nom: 1, lon: 36.768900772778, lat: 31.2571716931679, color: "#FFF0D1"},
+{country: "Puerto Rico", won: 0, nom: 1, lon: -66.5039770380917, lat: 18.2250977936673, color: "#FFF0D1"},
+{country: "Estonia", won: 0, nom: 1, lon: 25.8062554134565, lat: 58.6492433484798, color: "#FFF0D1"},
+{country: "Mauritania", won: 0, nom: 1, lon: -10.3294664798403, lat: 20.2872440958102, color: "#FFF0D1"},
+{country: "Macedonia, the former Yugoslav Republic of", won: 0, nom: 1, lon: 21.6878644345684, lat: 41.5993053392327, color: "#FFF0D1"},
+{country: "Viet Nam", won: 0, nom: 1, lon: 106.242022610281, lat: 16.8227669815299, color: "#FFF0D1"}
     ],
+    domain: d3.scaleLinear()
+            .domain([1, 40])
+            .range([5, 60]),
     action: {
-                enter:  function(data){
+                enter:  function(data,domain){
                         d3.select("#slide-container").append("defs")
                         .append("clipPath")
                         .attr("id","rect-path")
@@ -39,8 +85,8 @@ var data = [
                         var topology=map;
                         var   projection = d3.geoMercator()
                         .scale((1280 + 1) / 2 / Math.PI)
-                        .rotate([-5,0])
-                        .translate([1280 / 2, 1.15*720 / 2])
+                        .rotate([-10,0])
+                        .translate([1280 / 2, 1.2*720 / 2])
                         .precision(.1);
 
                         var path = d3.geoPath()
@@ -61,12 +107,15 @@ var data = [
                         .attr("stroke-width",0.5)
                         .attr("opacity",0);
 
+
                         d3.select("#slide-container").select("#maps")
                         .append("g")
                         .attr("id","cities")
                         .selectAll(".cities")
                         .data(data)
                         .enter()
+                        .append("g")
+                        .attr("id",function(d,m){return "city-"+m})
                         .append("circle")
                         .attr("class","cities")
                         .attr("cx", function(d) {
@@ -76,20 +125,40 @@ var data = [
                                 return projection([d.lon, d.lat])[1];
                         })
                         .attr("r", 0)
-                        .attr("fill","#EA2B1F")
+                        .attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#157A6E"}})
                         .attr("fill-opacity",0.7)
                         .attr("stroke-width",1)
-                        .attr("stroke","#EA2B1F")
+                        .attr("stroke",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#7FB6AF"}})
+                        .each(function(d,m){
+                          d3.select("#slide-container").select("#maps").select("#cities").select("#city-"+m)
+                          .append("circle")
+                          .attr("class","sub-cities")
+                          .data([d])
+                          .attr("cx", function(d) {
+                              return projection([d.lon, d.lat])[0];
+                          })
+                          .attr("cy", function(d) {
+                                  return projection([d.lon, d.lat])[1];
+                          })
+                          .attr("r", 0)
+                          .attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#FFC857"}})
+                          .attr("fill-opacity",0.7);
+                        })
+                        .on("mouseover",function(d){d3.select(this).attr("fill-opacity",0.9)})
+                        .on("mouseout",function(d){d3.select(this).attr("fill-opacity",0.7)});
                       });
+
                       
                 },
-                update: function(){
-                        d3.select("#slide-container").select("#maps").select("#lands").selectAll(".lands").on("mouseover",function(d){console.log(d.id); d3.select(this).attr("fill","#252117")}).transition().duration(500).attr("opacity",1);
-                        d3.select("#slide-container").select("#maps").select("#cities").selectAll(".cities").transition().duration(500).attr("r",function(d){return d.population});
+                update: function(data,domain){
+                        d3.select("#slide-container").select("#maps").select("#lands").selectAll(".lands").transition().duration(500).attr("opacity",1);
+                        d3.select("#slide-container").select("#maps").select("#cities").selectAll(".cities").transition().duration(500).attr("r",function(d){return domain(d.nom)});
+                        d3.select("#slide-container").select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(500).attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}});
                 },
                 exit:   function(){
-                        d3.select("#slide-container").select("#maps").select("#lands").selectAll(".lands").on("mouseover",function(){}).transition().duration(500).attr("opacity",0);
+                        d3.select("#slide-container").select("#maps").select("#lands").selectAll(".lands").transition().duration(500).attr("opacity",0);
                         d3.select("#slide-container").select("#maps").select("#cities").selectAll(".cities").transition().duration(500).attr("r",0);
+                        d3.select("#slide-container").select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(500).attr("r",0);
                 }
     }
   },
