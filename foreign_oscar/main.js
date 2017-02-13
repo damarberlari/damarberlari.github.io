@@ -168,7 +168,7 @@ var slideData = [
           "are several.."
     ],
     update:function(data,domain){
-          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(1000).attr("r",function(d){return domain(d.nom)}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#157A6E"}}).attr("stroke",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#7FB6AF"}});
+          d3.select("#maps").select("#cities").selectAll(".cities").transition().delay(1500).duration(1000).attr("r",function(d){return domain(d.nom)}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#157A6E"}}).attr("stroke",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#7FB6AF"}});
     },
     exit: function(){
       
@@ -183,7 +183,7 @@ var slideData = [
           "won..."
     ],
     update:function(data,domain){
-          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(1000).attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#FFC857"}}).attr("stroke","#D1A448");
+          d3.select("#maps").select("#cities").selectAll(".cities").transition().delay(1500).duration(1000).attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#FFC857"}}).attr("stroke","#D1A448");
     },
     exit: function(data,domain){
           
