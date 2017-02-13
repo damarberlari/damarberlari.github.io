@@ -320,10 +320,11 @@ var App = React.createClass({
   componentDidMount: function() {
     //console.log("app loaded");
     //console.log(this.props.sliding());
+    var slide=this.state.slide;
     this.state.dataset.enter(this.state.dataset.data,this.state.dataset.domain);
     d3.select("body")
     .on("keydown", this.update);
-    d3.selectAll(".button-progress").on("click", this.jump).on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1)}).on("mouseout",function(){d3.select(this).transition().duration(500).attr("opacity",0.2)})
+    d3.selectAll(".button-progress").on("click", this.jump).on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1)}).on("mouseout",function(d){d3.select(this).transition().duration(500).attr("opacity",function(){if(d.id=slide){return 1}else{0.2}})})
   },
   update: function() {
     if(d3.event.keyCode=='39'){
