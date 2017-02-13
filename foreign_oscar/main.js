@@ -233,7 +233,7 @@ var ProgressContainer = React.createClass({
       <g id="progress-container">
       {this.props.data.map(function(d){
             return (<g className="button-progress" opacity="0.2">
-            <rect className="bg-progress" x={(d.id)*1280/length} y="680" width={1280/length} height="40" fill="none">{d.title}</text>       
+            <rect className="bg-progress" x={(d.id)*1280/length} y="680" width={1280/length} height="40" fill="none">{d.title}</rect>       
             <text className="text-progress" x={(d.id+1)*1280/length-5} y="710">{d.title}</text>
             </g>)
       },length)}
