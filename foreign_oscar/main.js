@@ -72,7 +72,7 @@ var dataset =
                         var topology=map;
                         var   projection = d3.geoMercator()
                         .scale((1280 + 1) / 2 / Math.PI)
-                        .rotate([0,0])
+                        .rotate([-5,0])
                         .translate([1280 / 2, 1.2*720 / 2])
                         .precision(.1);
 
@@ -144,26 +144,46 @@ var dataset =
 var slideData = [
   {
     id:0, title:"INTRODUCTION", subtitle:"",
+    x:"25", y:"480", align:"anchor-start",
+    text: [
+          "This visualization shows the countries that",
+          "have nominations for or won the Academy",
+          "Awards Best Foreign Films.",
+          " ",
+          "Use keyboard arrow or click on the section",
+          "below to navigate."
+    ],
     update:function(){
-          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(500).attr("r",0);
+          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(1000).attr("r",0);
     },
     exit: function(){
       
     }
   },
   {
-    id:1, title:"THE NOMINEES", subtitle:"",
+    id:1, title:"THE NOMINEES", subtitle:"THE NOMINEES",
+    x:"550", y:"275", align:"anchor-end",
+    text: [
+          "Currently there",
+          "are several.."
+    ],
     update:function(data,domain){
-          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(500).attr("r",function(d){return domain(d.nom)}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#157A6E"}}).attr("stroke",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#7FB6AF"}});
+          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(1000).attr("r",function(d){return domain(d.nom)}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#157A6E"}}).attr("stroke",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#7FB6AF"}});
     },
     exit: function(){
       
     }
   },
   {
-    id:2, title:"THE WINNERS", subtitle:"",
+    id:2, title:"THE WINNERS", subtitle:"THE WINNERS",
+    x:"550", y:"275", align:"anchor-end",
+    text: [
+          "Only handful",
+          "of countries",
+          "won..."
+    ],
     update:function(data,domain){
-          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(500).attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#FFC857"}}).attr("stroke","#D1A448");
+          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(1000).attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#FFC857"}}).attr("stroke","#D1A448");
     },
     exit: function(data,domain){
           
@@ -171,13 +191,17 @@ var slideData = [
   },
   {
     id:3, title:"EXPLORE", subtitle:"",
+    x:"25", y:"480", align:"anchor-end",
+    text: [
+          ""
+    ],
     update:function(data,domain){
-          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(500).attr("r",function(d){return domain(d.nom)}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#157A6E"}}).attr("stroke",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#7FB6AF"}});
+          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(1000).attr("r",function(d){return domain(d.nom)}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#157A6E"}}).attr("stroke",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#7FB6AF"}});
           d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(0).attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#FFC857"}}).attr("stroke","#D1A448");
 
     },
     exit: function(data,domain){
-          d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(0).delay(500).attr("r",0);
+          d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(0).delay(1000).attr("r",0);
     }
   }
 ];
@@ -219,6 +243,8 @@ var ProgressContainer = React.createClass({
     var max=this.props.max;
     d3.select("#rect-progress").transition().duration(500).attr("x",function(){return (counter/max*1280)});
     d3.selectAll(".button-progress")
+    .on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1)})
+    .on("mouseout",function(d){d3.select(this).filter(function(d){return d.id!=counter}).transition().duration(500).attr("opacity",0.2)})
     .filter(function(d){return d.id==counter}).transition().duration(500).attr("opacity",1);
   },
   componentDidMount: function() {
@@ -226,6 +252,10 @@ var ProgressContainer = React.createClass({
     var counter=this.props.counter;
     var data=this.props.data;
     d3.selectAll(".button-progress").data(data).filter(function(d){return d.id==counter}).attr("opacity",1);
+    d3.selectAll(".button-progress")
+    .on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1)})
+    .on("mouseout",function(d){d3.select(this).filter(function(d){return d.id!=counter}).transition().duration(500).attr("opacity",0.2)})
+    .filter(function(d){return d.id==counter}).transition().duration(500).attr("opacity",1);
   },
   render: function() {
     var length=this.props.data.length;
@@ -244,41 +274,32 @@ var ProgressContainer = React.createClass({
 }
 )
 
-var TitleContainer = React.createClass({
+var TextContainer = React.createClass({
   getDefaultProps: function() {
-      return {counter: 0};
+      return {text: "", x:"0", y:"0", align:"start"};
   },
-  componentWillUpdate: function() {
-    
+  componentWillUpdate: function(){
+      d3.select("#section-text").transition().duration(0).attr("opacity",0);
+      d3.select("#section-title").transition().duration(0).attr("opacity",0);
   },
-  drawRectBound: function(d,el){
-    var bbox=d.node().getBBox();
-    //console.log(bbox);
-    d3.select("#text-background").select(el).attr("width",bbox.width+10).attr("height", bbox.height).attr("x", bbox.x-5).attr("y", bbox.y);
-  },
-  componentDidUpdate: function() {
-    //console.log("title updated");
-    var title=this.props.title;
-    var subtitle=this.props.subtitle;
-    d3.select("#title").text(title).call(this.drawRectBound,"#title-bg");
-    d3.select("#subtitle").text(subtitle).call(this.drawRectBound,"#subtitle-bg");
-  },
-  componentDidMount: function() {
-    //console.log("title loaded");
-    var title=this.props.title;
-    var subtitle=this.props.subtitle;
-    d3.select("#title").text(title).call(this.drawRectBound,"#title-bg");
-    d3.select("#subtitle").text(subtitle).call(this.drawRectBound,"#subtitle-bg");
+  componentDidUpdate: function(){
+      d3.select("#section-text").transition().duration(1500).attr("opacity",1);
+      d3.select("#section-title").transition().duration(1000).attr("opacity",1);
   },
   render: function() {
+    var xPos=this.props.x;
+    console.log(this.props.align)
     return (
-      <g id="title-container">
-      <g id="text-background">
-      <rect id="title-bg" x="0" y="0" width="0" height="0"></rect>
-      <rect id="subtitle-bg" x="0" y="0" width="0" height="0"></rect>
-      </g>
-      <text id="title" x="1220" y="613"></text>
-      <text id="subtitle" x="1220" y="660"></text>
+      <g id="text-container">
+        <text id="section-title" x={this.props.x} y={this.props.y-7} className={this.props.align}>{this.props.subtitle}</text>
+        <text id="section-text" x={this.props.x} y={this.props.y} className={this.props.align}>
+          {
+            this.props.text.map(function(obj){
+                return <tspan x={xPos} dy="14">
+                  {obj}
+                </tspan>
+          })}
+        </text>
       </g>
     )
   }
@@ -324,7 +345,7 @@ var App = React.createClass({
     this.state.dataset.enter(this.state.dataset.data,this.state.dataset.domain);
     d3.select("body")
     .on("keydown", this.update);
-    d3.selectAll(".button-progress").on("click", this.jump).on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1)}).on("mouseout",function(d){d3.select(this).transition().duration(500).attr("opacity",0.2)})
+    d3.selectAll(".button-progress").on("click", this.jump)
   },
   update: function() {
     if(d3.event.keyCode=='39'){
@@ -348,7 +369,7 @@ var App = React.createClass({
     return (
       <svg class="svg-master" width="100%" height="100%" viewBox="0 0 1280 720">
             <SlideContainer counter={this.state.dataset.id} color={this.state.dataset.color}/>
-            
+            <TextContainer title={this.state.slideData.title} subtitle={this.state.slideData.subtitle} text={this.state.slideData.text} x={this.state.slideData.x} y={this.state.slideData.y} align={this.state.slideData.align}/>
             <VisualizationTitle title={["THE ACADEMY AWARDS","BEST FOREIGN FILMS"]}/>
             <ProgressContainer data={this.props.slideData} counter={this.state.slide} max={this.props.slideData.length}/>
       </svg>
