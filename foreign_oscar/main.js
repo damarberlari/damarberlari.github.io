@@ -323,7 +323,7 @@ var App = React.createClass({
     this.state.dataset.enter(this.state.dataset.data,this.state.dataset.domain);
     d3.select("body")
     .on("keydown", this.update);
-    d3.selectAll(".button-progress").on("click", this.jump)
+    d3.selectAll(".button-progress").on("click", this.jump).on("mouseover",function(){d3.select("this").attr("opacity",1)}).on("mouseout",function(){d3.select("this").attr("opacity",0.2)})
   },
   update: function() {
     if(d3.event.keyCode=='39'){
