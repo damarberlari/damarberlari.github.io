@@ -243,9 +243,9 @@ var ProgressContainer = React.createClass({
     var max=this.props.max;
     d3.select("#rect-progress").transition().duration(500).attr("x",function(){return (counter/max*1280)});
     d3.selectAll(".button-progress")
-    .on("mouseover",function(){d3.select(this).transition().duration(500).attr("opacity",1)})
-    .on("mouseout",function(d){d3.select(this).filter(function(d){return d.id!=counter}).transition().duration(500).attr("opacity",0.2)})
-    .filter(function(d){return d.id==counter}).transition().duration(500).attr("opacity",1);
+    .on("mouseover",function(){d3.select(this).transition().duration(200).attr("opacity",1)})
+    .on("mouseout",function(d){d3.select(this).filter(function(d){return d.id!=counter}).transition().duration(200).attr("opacity",0.2)})
+    .filter(function(d){return d.id==counter}).transition().duration(200).attr("opacity",1);
   },
   componentDidMount: function() {
     //console.log("progress loaded");
@@ -295,7 +295,7 @@ var TextContainer = React.createClass({
         <text id="section-text" x={this.props.x} y={this.props.y} className={this.props.align}>
           {
             this.props.text.map(function(obj){
-                return <tspan x={xPos} dy="14">
+                return <tspan x={xPos} dy="18">
                   {obj}
                 </tspan>
           })}
