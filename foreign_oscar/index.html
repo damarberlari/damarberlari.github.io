@@ -3,14 +3,12 @@
     >
 <html lang="en">
 <head>
-    <script src='https://d3js.org/d3.v4.min.js'></script>
-    <script src="https://d3js.org/topojson.v2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.18.1/babel.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react-dom.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:300,400" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Best Foreign Films Academy Awards" />
+    <meta property="og:description" content="An interactive visualization shows the nominees and winners of the Academy Awards Best Foreign Films" />
+    <meta property="og:image" content="http://damarberlari.github.io/foreign_oscar/thumbnail.png" />
     <title>Best Foreign Movies</title>
     <style>
     body, html {
@@ -74,6 +72,12 @@
 </head>
 <body>
     <div id="app"><div id="loading">Loading...</div></div>
+    <script src='https://d3js.org/d3.v4.min.js'></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.18.1/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react-dom.min.js"></script>
+    
     <script type="text/babel" src="main.js"></script>
     <script>
     var videoElement = document.getElementById("app");
