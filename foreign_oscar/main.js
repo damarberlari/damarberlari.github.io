@@ -146,51 +146,89 @@ var slideData = [
     id:0, title:"INTRODUCTION", subtitle:"",
     x:"25", y:"480", align:"anchor-start",
     text: [
-          "This visualization shows the countries that",
-          "have nominations for or won the Academy",
-          "Awards Best Foreign Films.",
+          "This visualization shows  the countries that have",
+          "received nominations or won The Academy Awards",
+          "for Foreign Language Films category.",
           " ",
-          "Use keyboard arrow or click on the section",
+          "Data from 1956 - 2017 Academy Awards are used.",
+          "However, nominations for former countries (Soviet",
+          "Union, West Germany, East Germany, Yugoslavia, and ",
+          "Czechoslovakia are excluded - only the nominations for",
+          "their modern counterparts are considered.",
+          " ",
+          "You can use keyboard arrow or click on the section",
           "below to navigate."
     ],
     update:function(){
-          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(1000).attr("r",0);
     },
     exit: function(){
-      
     }
   },
   {
     id:1, title:"THE NOMINEES", subtitle:"THE NOMINEES",
-    x:"550", y:"275", align:"anchor-end",
+    x:"550", y:"215", align:"anchor-end",
     text: [
-          "Currently there",
-          "are several.."
+          "Since 1956, only",
+          "57 countries have",
+          "been nominated",
+          "for the category.",
+          " ",
+          "As you can see, it",
+          "is dominated by",
+          "the European",
+          "countries."
     ],
     update:function(data,domain){
-          d3.select("#maps").select("#cities").selectAll(".cities").transition().delay(1500).duration(1000).attr("r",function(d){return domain(d.nom)}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#157A6E"}}).attr("stroke",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#7FB6AF"}});
+          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000).attr("r",function(d){return domain(d.nom)}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#157A6E"}}).attr("stroke",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#7FB6AF"}});
     },
     exit: function(){
-      
+          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(1000).attr("r",0);
     }
   },
   {
     id:2, title:"THE WINNERS", subtitle:"THE WINNERS",
-    x:"550", y:"275", align:"anchor-end",
+    x:"550", y:"215", align:"anchor-end",
     text: [
-          "Only handful",
-          "of countries",
-          "won..."
+          "Out of these 57",
+          "countries, only 25",
+          "have won the",
+          "awards, with Italy",
+          "and France at the",
+          "top of the list."
     ],
     update:function(data,domain){
-          d3.select("#maps").select("#cities").selectAll(".cities").transition().delay(1500).duration(1000).attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#FFC857"}}).attr("stroke","#D1A448");
+          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000).attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}}).attr("fill","#FFC857").attr("stroke","#D1A448");
     },
     exit: function(data,domain){
-          
+          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(1000).attr("r",0).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#157A6E"}}).attr("stroke",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#7FB6AF"}});
     }
   },
   {
-    id:3, title:"EXPLORE", subtitle:"",
+    id:3, title:"ITALY & FRANCE", subtitle:"ITALY & FRANCE",
+    x:"550", y:"215", align:"anchor-end",
+    text: [
+          "Italy is the most",
+          "awarded country",
+          "with 14 awards",
+          "and 31 nominations",
+          " ",
+          "However, France",
+          "receives the most",
+          "nominations",
+          "(39 for 12 win)."
+    ],
+    update:function(data,domain){
+          d3.select("#maps").select("#cities").selectAll(".cities").filter(function(d){return d.country!="France"&d.country!="Italy"}).transition().duration(1500).attr("r",function(d){return domain(d.nom)}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#157A6E"}}).attr("stroke",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#7FB6AF"}}).attr("opacity",0.4);
+          d3.select("#maps").select("#cities").selectAll(".cities").filter(function(d){return d.country=="France"|d.country=="Italy"}).transition().duration(1500).attr("r",function(d){return domain(d.nom)}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#157A6E"}}).attr("stroke",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#7FB6AF"}});
+          d3.select("#maps").select("#cities").selectAll(".sub-cities").filter(function(d){return d.country=="France"|d.country=="Italy"}).transition().duration(1500).attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}});
+    },
+    exit: function(data,domain){
+          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(1000).attr("r",0);
+          d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(1000).attr("r",0);
+    }
+  },
+  {
+    id:4, title:"EXPLORE", subtitle:"",
     x:"25", y:"480", align:"anchor-end",
     text: [
           ""
@@ -295,7 +333,7 @@ var TextContainer = React.createClass({
         <text id="section-text" x={this.props.x} y={this.props.y} className={this.props.align}>
           {
             this.props.text.map(function(obj){
-                return <tspan x={xPos} dy="18">
+                return <tspan x={xPos} dy="16">
                   {obj}
                 </tspan>
           })}
