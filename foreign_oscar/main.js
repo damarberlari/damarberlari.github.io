@@ -192,7 +192,7 @@ var slideData = [
       .attr("r",function(d){return domain(d.nom)})
       .attr("opacity",1)
       .attr("fill","#157A6E")
-      .stroke("stroke","#7FB6AF");
+      .attr("stroke","#7FB6AF");
       
       d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
       .attr("r",0)
