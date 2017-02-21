@@ -163,8 +163,8 @@ var slideData = [
       d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
       .attr("r",0)
       .attr("opacity",1)
-      .fill("fill","#157A6E")
-      .stroke("stroke","#7FB6AF");
+      .attr("fill","#157A6E")
+      .attr("stroke","#7FB6AF");
       
       d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
       .attr("r",0)
@@ -191,7 +191,7 @@ var slideData = [
       d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
       .attr("r",function(d){return domain(d.nom)})
       .attr("opacity",1)
-      .fill("fill","#157A6E")
+      .attr("fill","#157A6E")
       .stroke("stroke","#7FB6AF");
       
       d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
@@ -244,15 +244,15 @@ var slideData = [
       d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
       .attr("r",function(d){return domain(d.nom)})
       .attr("opacity",0.4)
-      .fill("fill","#157A6E")
-      .stroke("stroke","#7FB6AF")
+      .attr("fill","#157A6E")
+      .attr("stroke","#7FB6AF")
       .filter(function(d){return d.country=="France"|d.country=="Italy"})
       .attr("opacity",1);
       
       d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
       .attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}})
       .attr("opacity",0.4)
-      .filter(function(d){return d.country=="France"|d.country=="Italy"})
+      .attr(function(d){return d.country=="France"|d.country=="Italy"})
       .attr("opacity",1);
     },
     exit: function(data,domain){
@@ -268,8 +268,8 @@ var slideData = [
       d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
       .attr("r",function(d){return domain(d.nom)})
       .attr("opacity",1)
-      .fill("fill","#157A6E")
-      .stroke("stroke","#7FB6AF");
+      .attr("fill","#157A6E")
+      .attr("stroke","#7FB6AF");
       
       d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
       .attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}})
