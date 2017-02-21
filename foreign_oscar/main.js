@@ -160,6 +160,15 @@ var slideData = [
           "below to navigate."
     ],
     update:function(){
+      d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
+      .attr("r",0)
+      .attr("opacity",1)
+      .fill("fill","#157A6E")
+      .stroke("stroke","#7FB6AF");
+      
+      d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
+      .attr("r",0)
+      .attr("opacity",1);
     },
     exit: function(){
     }
@@ -179,10 +188,17 @@ var slideData = [
           "countries."
     ],
     update:function(data,domain){
-          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000).attr("r",function(d){return domain(d.nom)}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#157A6E"}}).attr("stroke",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#7FB6AF"}});
+      d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
+      .attr("r",function(d){return domain(d.nom)})
+      .attr("opacity",1)
+      .fill("fill","#157A6E")
+      .stroke("stroke","#7FB6AF");
+      
+      d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
+      .attr("r",0)
+      .attr("opacity",1);
     },
     exit: function(){
-          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(1000).attr("r",0);
     }
   },
   {
@@ -197,10 +213,17 @@ var slideData = [
           "top of the list."
     ],
     update:function(data,domain){
-          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000).attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}}).attr("fill","#FFC857").attr("stroke","#D1A448");
+      d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
+      .attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}})
+      .attr("opacity",1)
+      .attr("fill","#FFC857")
+      .attr("stroke","#D1A448");
+      
+      d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
+      .attr("r",0)
+      .attr("opacity",1);    
     },
     exit: function(data,domain){
-          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(1000).attr("r",0).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#157A6E"}}).attr("stroke",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#7FB6AF"}});
     }
   },
   {
@@ -218,13 +241,21 @@ var slideData = [
           "(39 for 12 win)."
     ],
     update:function(data,domain){
-          d3.select("#maps").select("#cities").selectAll(".cities").filter(function(d){return d.country!="France"&d.country!="Italy"}).transition().duration(1500).attr("r",function(d){return domain(d.nom)}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#157A6E"}}).attr("stroke",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#7FB6AF"}}).attr("opacity",0.4);
-          d3.select("#maps").select("#cities").selectAll(".cities").filter(function(d){return d.country=="France"|d.country=="Italy"}).transition().duration(1500).attr("r",function(d){return domain(d.nom)}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#157A6E"}}).attr("stroke",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#7FB6AF"}});
-          d3.select("#maps").select("#cities").selectAll(".sub-cities").filter(function(d){return d.country=="France"|d.country=="Italy"}).transition().duration(1500).attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}});
+      d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
+      .attr("r",function(d){return domain(d.nom)})
+      .attr("opacity",0.4)
+      .fill("fill","#157A6E")
+      .stroke("stroke","#7FB6AF")
+      .filter(function(d){return d.country=="France"|d.country=="Italy"})
+      .attr("opacity",1);
+      
+      d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
+      .attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}})
+      .attr("opacity",0.4)
+      .filter(function(d){return d.country=="France"|d.country=="Italy"})
+      .attr("opacity",1);
     },
     exit: function(data,domain){
-          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(1000).attr("r",0);
-          d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(1000).attr("r",0);
     }
   },
   {
@@ -234,12 +265,17 @@ var slideData = [
           ""
     ],
     update:function(data,domain){
-          d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(1000).attr("r",function(d){return domain(d.nom)}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#157A6E"}}).attr("stroke",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#7FB6AF"}});
-          d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(0).attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}}).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#FFC857"}}).attr("stroke","#D1A448");
-
+      d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
+      .attr("r",function(d){return domain(d.nom)})
+      .attr("opacity",1)
+      .fill("fill","#157A6E")
+      .stroke("stroke","#7FB6AF");
+      
+      d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
+      .attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}})
+      .attr("opacity",1);     
     },
     exit: function(data,domain){
-          d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(0).delay(1000).attr("r",0);
     }
   }
 ];
