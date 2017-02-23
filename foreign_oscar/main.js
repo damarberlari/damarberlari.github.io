@@ -32,7 +32,7 @@ var dataset =
         {country: "China", won: 0, nom: 2, lon: 104.188647153077, lat: 37.577133390366, continent: "Asia"},
         {country: "Palestinian Territory, Occupied", won: 0, nom: 2, lon: 35.2438921864398, lat: 31.9277997971315, continent: "Middle East"},
         {country: "Hong Kong", won: 0, nom: 2, lon: 114.109497, lat: 22.396428, continent: "Asia"},
-        {country: "Côte d'Ivoire", won: 1, nom: 1, lon: -5.63080661432827, lat: 7.55413182775637, continent: "Africa"},
+        {country: "Ivory Coast", won: 1, nom: 1, lon: -5.63080661432827, lat: 7.55413182775637, continent: "Africa"},
         {country: "Bosnia and Herzegovina", won: 1, nom: 1, lon: 17.791048552889, lat: 44.181391221309, continent: "Europe"},
         {country: "Nepal", won: 0, nom: 1, lon: 83.9741876093016, lat: 28.2460874510694, continent: "Asia"},
         {country: "Cambodia", won: 0, nom: 1, lon: 104.86464625217, lat: 12.6790705893622, continent: "South East Asia"},
@@ -79,7 +79,8 @@ var dataset =
                         var path = d3.geoPath()
                         .projection(projection);
  
-                        d3.select("#slide-container").append("g").attr("id","maps").attr("clip-path","url(#rect-path)")
+                        d3.select("#slide-container").append("g").attr("id","maps")
+                        .attr("clip-path","url(#rect-path)")
                         .append("g")
                         .attr("id","lands")
                         .selectAll(".lands")
@@ -162,13 +163,11 @@ var slideData = [
     update:function(){
       d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
       .attr("r",0)
-      .attr("opacity",1)
       .attr("fill","#157A6E")
       .attr("stroke","#7FB6AF");
       
       d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
-      .attr("r",0)
-      .attr("opacity",1);
+      .attr("r",0);
     },
     exit: function(){
     }
@@ -190,13 +189,11 @@ var slideData = [
     update:function(data,domain){
       d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
       .attr("r",function(d){return domain(d.nom)})
-      .attr("opacity",1)
       .attr("fill","#157A6E")
       .attr("stroke","#7FB6AF");
       
       d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
-      .attr("r",0)
-      .attr("opacity",1);
+      .attr("r",0);
     },
     exit: function(){
     }
@@ -215,13 +212,11 @@ var slideData = [
     update:function(data,domain){
       d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
       .attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}})
-      .attr("opacity",1)
       .attr("fill","#FFC857")
       .attr("stroke","#D1A448");
       
       d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
-      .attr("r",0)
-      .attr("opacity",1);    
+      .attr("r",0);    
     },
     exit: function(data,domain){
     }
@@ -242,38 +237,120 @@ var slideData = [
     ],
     update:function(data,domain){
       d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
-      .attr("r",function(d){return domain(d.nom)})
-      .attr("opacity",0.4)
+      .attr("r",0)
       .attr("fill","#157A6E")
       .attr("stroke","#7FB6AF")
       .filter(function(d){return d.country=="France"|d.country=="Italy"})
-      .attr("opacity",1);
+      .attr("r",function(d){return domain(d.nom)});
       
       d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
-      .attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}})
-      .attr("opacity",0.4)
-      .attr(function(d){return d.country=="France"|d.country=="Italy"})
-      .attr("opacity",1);
+      .attr("r",0)
+      .filter(function(d){return d.country=="France"|d.country=="Italy"})
+      .attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}});
     },
     exit: function(data,domain){
     }
   },
   {
-    id:4, title:"EXPLORE", subtitle:"",
+    id:4, title:"DISQUALIFIED", subtitle:"DISQUALIFIED",
+    x:"550", y:"215", align:"anchor-end",
+    text: [
+          " "
+    ],
+    update:function(data,domain){
+      d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
+      .attr("r",0)
+      .attr("fill","#157A6E")
+      .attr("stroke","#7FB6AF")
+      .filter(function(d){return d.country=="Uruguay"})
+      .attr("r",function(d){return domain(d.nom)})
+      .attr("fill","#EF645C")
+      .attr("stroke","#7FB6AF");
+      
+      d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
+      .attr("r",0)
+      .filter(function(d){return d.country=="Uruguay"})
+      .attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}});
+    },
+    exit: function(data,domain){
+    }
+  },
+  {
+    id:5, title:"BEST RECORDS", subtitle:"BEST RECORDS",
+    x:"550", y:"215", align:"anchor-end",
+    text: [
+          " "
+    ],
+    update:function(data,domain){
+      d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
+      .attr("r",0)
+      .attr("fill","#157A6E")
+      .attr("stroke","#7FB6AF")
+      .filter(function(d){return d.nom==d.won})
+      .attr("r",function(d){return domain(d.nom)});
+      
+      d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
+      .attr("r",0)
+      .filter(function(d){return d.nom==d.won})
+      .attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}});
+    },
+    exit: function(data,domain){
+    }
+  },
+  {
+    id:6, title:"KEEP TRYING", subtitle:"KEEP TRYING",
+    x:"550", y:"215", align:"anchor-end",
+    text: [
+          " "
+    ],
+    update:function(data,domain){
+      d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
+      .attr("r",0)
+      .attr("fill","#157A6E")
+      .attr("stroke","#7FB6AF")
+      .filter(function(d){return d.country=="Israel"})
+      .attr("r",function(d){return domain(d.nom)});
+      
+      d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
+      .attr("r",0);
+    },
+    exit: function(data,domain){
+    }
+  },
+  {
+    id:7, title:"KEEP TRYING", subtitle:"KEEP TRYING",
+    x:"550", y:"215", align:"anchor-end",
+    text: [
+          " "
+    ],
+    update:function(data,domain){
+      d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
+      .attr("r",0)
+      .attr("fill","#157A6E")
+      .attr("stroke","#7FB6AF")
+      .filter(function(d){return d.continent=="South East Asia"})
+      .attr("r",function(d){return domain(d.nom)});
+      
+      d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
+      .attr("r",0);
+    },
+    exit: function(data,domain){
+    }
+  },
+  {
+    id:8, title:"EXPLORE", subtitle:"",
     x:"25", y:"480", align:"anchor-end",
     text: [
           ""
     ],
     update:function(data,domain){
       d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
-      .attr("r",function(d){return domain(d.nom)})
-      .attr("opacity",1)
       .attr("fill","#157A6E")
-      .attr("stroke","#7FB6AF");
+      .attr("stroke","#7FB6AF")
+      .attr("r",function(d){return domain(d.nom)});
       
       d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
-      .attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}})
-      .attr("opacity",1);     
+      .attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}}); 
     },
     exit: function(data,domain){
     }
