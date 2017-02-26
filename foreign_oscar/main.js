@@ -23,14 +23,14 @@ var dataset =
         {country: "Greece", won: 0, nom: 5, lon: 22.7052356957002, lat: 39.1103875134186, continent: "Europe"},
         {country: "Austria", won: 2, nom: 4, lon: 14.0625182968975, lat: 47.6154906740616, continent: "Europe"},
         {country: "Brazil", won: 0, nom: 4, lon: -53.0100555346954, lat: -11.2215725124192, continent: "Latin America"},
-        {country: "Taiwan, Province of China", won: 1, nom: 3, lon: 120.955292266107, lat: 23.7338469141756, continent: "Asia"},
-        {country: "Iran, Islamic Republic of", won: 1, nom: 3, lon: 54.1858902422257, lat: 32.7007380089774, continent: "Middle East"},
+        {country: "Taiwan", won: 1, nom: 3, lon: 120.955292266107, lat: 23.7338469141756, continent: "Asia"},
+        {country: "Iran", won: 1, nom: 3, lon: 54.1858902422257, lat: 32.7007380089774, continent: "Middle East"},
         {country: "Czech Republic", won: 1, nom: 3, lon: 15.3142541466767, lat: 49.774182896175, continent: "Europe"},
         {country: "India", won: 0, nom: 3, lon: 79.594265046544, lat: 23.2418434062337, continent: "Asia"},
         {country: "South Africa", won: 1, nom: 2, lon: 24.9807266448113, lat: -29.0788557970192, continent: "Africa"},
         {country: "United Kingdom", won: 0, nom: 2, lon: -2.92226940198663, lat: 54.0953890185326, continent: "Europe"},
         {country: "China", won: 0, nom: 2, lon: 104.188647153077, lat: 37.577133390366, continent: "Asia"},
-        {country: "Palestinian Territory, Occupied", won: 0, nom: 2, lon: 35.2438921864398, lat: 31.9277997971315, continent: "Middle East"},
+        {country: "Palestine", won: 0, nom: 2, lon: 35.2438921864398, lat: 31.9277997971315, continent: "Middle East"},
         {country: "Hong Kong", won: 0, nom: 2, lon: 114.109497, lat: 22.396428, continent: "Asia"},
         {country: "Ivory Coast", won: 1, nom: 1, lon: -5.63080661432827, lat: 7.55413182775637, continent: "Africa"},
         {country: "Bosnia and Herzegovina", won: 1, nom: 1, lon: 17.791048552889, lat: 44.181391221309, continent: "Europe"},
@@ -51,7 +51,7 @@ var dataset =
         {country: "Puerto Rico", won: 0, nom: 1, lon: -66.5039770380917, lat: 18.2250977936673, continent: "Latin America"},
         {country: "Estonia", won: 0, nom: 1, lon: 25.8062554134565, lat: 58.6492433484798, continent: "Europe"},
         {country: "Mauritania", won: 0, nom: 1, lon: -10.3294664798403, lat: 20.2872440958102, continent: "Africa"},
-        {country: "Macedonia, the former Yugoslav Republic of", won: 0, nom: 1, lon: 21.6878644345684, lat: 41.5993053392327, continent: "Europe"},
+        {country: "Macedonia", won: 0, nom: 1, lon: 21.6878644345684, lat: 41.5993053392327, continent: "Europe"},
         {country: "Viet Nam", won: 0, nom: 1, lon: 106.242022610281, lat: 16.8227669815299, continent: "South East Asia"}
     ],
     domain: d3.scaleLinear()
@@ -129,15 +129,61 @@ var dataset =
                                   return projection([d.lon, d.lat])[1];
                           })
                           .attr("r", 0)
-                          .attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#FFC857"}})
+                          .attr("fill","#FFC857")
                           .attr("fill-opacity",0.7)
                           .attr("stroke","#D1A448")
                           .attr("pointer-events","none")
                           //.transition().duration(500).attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}})
                           ;
                         })
-                        .on("mouseover",function(d){d3.select(this).attr("fill-opacity",0.9).attr("fill","#52AA5E")})
-                        .on("mouseout",function(d){d3.select(this).attr("fill-opacity",0.7).attr("fill",function(d){if(d.country=="Uruguay"){return "#EF645C"}else{return "#157A6E"}})})
+                        .on("mouseover",function(d){
+                          d3.select(this).attr("fill-opacity",0.9);
+
+                          d3.select("#stats-title")
+                          .transition()
+                          .duration(500)
+                          .attr("opacity",1)
+                          .attr("x",function(){return projection([d.lon, d.lat])[0]-5})
+                          .attr("y",function(){return projection([d.lon, d.lat])[1]-45})
+                          .selectAll("tspan")
+                          .attr("x",function(){return projection([d.lon, d.lat])[0]-5})
+                          
+                          d3.select("#stats-title")
+                          .selectAll("tspan")
+                          .data([d.country.toUpperCase(),"Nominated: "+d.nom,"Won: "+d.won])
+                          .text(function(m){return m});
+
+                          var bbox=d3.select("#stats-title").node().getBBox();
+                          console.log(bbox);
+
+                          d3.select("#stats-rect")
+                          .transition()
+                          .duration(500)
+                          .attr("x",function(){return projection([d.lon, d.lat])[0]-bbox.width-10})
+                          .attr("y",function(){return projection([d.lon, d.lat])[1]-45})
+                          .attr("width",bbox.width+10)
+                          .attr("opacity",0.9);
+                        })
+                        .on("mouseout",function(d){
+                          d3.select(this).attr("fill-opacity",0.7);
+                          d3.select("#stats-rect")
+                          .transition()
+                          .duration(500)
+                          .attr("opacity",0);
+                          d3.select("#stats-title")
+                          .transition()
+                          .duration(500)
+                          .attr("opacity",0)
+                        })
+
+                          d3.select("#maps")
+                          .append("path")
+                          .attr("class","path-israel")
+                          .attr("d","M745 335 L745 435 L810 435")
+                          .attr("fill","none")
+                          .attr("stroke","#157A6E")
+                          .attr("stroke-dasharray",200)
+                          .attr("stroke-dashoffset",200);
                       });      
           }
 };
@@ -145,22 +191,25 @@ var dataset =
 var slideData = [
   {
     id:0, title:"INTRODUCTION", subtitle:"",
-    x:"25", y:"480", align:"anchor-start",
+    x:"25", y:"470", align:"anchor-start",
+    zoomID: d3.zoomIdentity
+        .scale(1)
+        .translate(0, 0),
     text: [
-          "This visualization shows  the countries that have",
-          "received nominations or won The Academy Awards",
-          "for Foreign Language Films category.",
+          "This visualization shows the nominees and winners",
+          "of The Academy Awards Foreign Language Films",
+          "category from 1956 to 2016.",
           " ",
-          "Data from 1956 - 2017 Academy Awards are used.",
-          "However, nominations for former countries (Soviet",
-          "Union, West Germany, East Germany, Yugoslavia, and ",
-          "Czechoslovakia are excluded - only the nominations for",
-          "their modern counterparts are considered.",
+          "Nominations received by countries that no longer",
+          "exist (SovietUnion, West Germany, East Germany,",
+          "Yugoslavia, and Czechoslovakia) are excluded - only",
+          "the nominations for their modern counterparts are",
+          "considered.",
           " ",
-          "You can use keyboard arrow or click on the section",
-          "below to navigate."
+          "Use left/right keyboard arrow or click on the section",
+          "below to navigate between some fun facts."
     ],
-    update:function(){
+    update:function(data,domain,zoom,zoomID){
       d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
       .attr("r",0)
       .attr("fill","#157A6E")
@@ -168,6 +217,8 @@ var slideData = [
       
       d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
       .attr("r",0);
+
+      d3.select("#maps").transition().duration(2000).ease(d3.easeCubicInOut).call(zoom.transform,zoomID);
     },
     exit: function(){
     }
@@ -176,16 +227,18 @@ var slideData = [
     id:1, title:"THE NOMINEES", subtitle:"THE NOMINEES",
     x:"550", y:"215", align:"anchor-end",
     text: [
-          "Since 1956, only",
-          "57 countries have",
-          "been nominated",
-          "for the category.",
-          " ",
-          "As you can see, it",
-          "is dominated by",
-          "the European",
-          "countries."
+          "Only 57 countries",
+          "have been",
+          "nominated for the",
+          "awards so far. As",
+          "you can see, the",
+          "overwhelming",
+          "majority are from",
+          "Europe."
     ],
+    zoomID: d3.zoomIdentity
+        .scale(1.5)
+        .translate(0, 0),
     update:function(data,domain){
       d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
       .attr("r",function(d){return domain(d.nom)})
@@ -207,7 +260,11 @@ var slideData = [
           "have won the",
           "awards, with Italy",
           "and France at the",
-          "top of the list."
+          "top of the list.",
+          " ",
+          "Hover on the",
+          "circles to check",
+          "the numbers."
     ],
     update:function(data,domain){
       d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
@@ -225,15 +282,13 @@ var slideData = [
     id:3, title:"ITALY & FRANCE", subtitle:"ITALY & FRANCE",
     x:"550", y:"215", align:"anchor-end",
     text: [
-          "Italy is the most",
-          "awarded country",
-          "with 14 awards",
-          "and 31 nominations",
+          "Italy has won the",
+          "most, followed by",
+          "France",
           " ",
           "However, France",
-          "receives the most",
-          "nominations",
-          "(39 for 12 win)."
+          "holds the most",
+          "nominations."
     ],
     update:function(data,domain){
       d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
@@ -253,9 +308,15 @@ var slideData = [
   },
   {
     id:4, title:"DISQUALIFIED", subtitle:"DISQUALIFIED",
-    x:"550", y:"215", align:"anchor-end",
+    x:"460", y:"550", align:"anchor-start",
     text: [
-          " "
+          "Uruguay almost",
+          "had a nomination",
+          "in 1992, but it was",
+          "disqualified for",
+          "lacking of",
+          "involvement from",
+          "Uruguayan artists."
     ],
     update:function(data,domain){
       d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
@@ -264,44 +325,32 @@ var slideData = [
       .attr("stroke","#7FB6AF")
       .filter(function(d){return d.country=="Uruguay"})
       .attr("r",function(d){return domain(d.nom)})
-      .attr("fill","#EF645C")
-      .attr("stroke","#7FB6AF");
+      .attr("fill","#EA2B1F")
+      .attr("stroke","#EF645C");
       
       d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
       .attr("r",0)
       .filter(function(d){return d.country=="Uruguay"})
-      .attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}});
+      .attr("fill","none")
+      .attr("stroke","#EF645C")
+      .attr("r",domain(10));
     },
     exit: function(data,domain){
     }
   },
   {
-    id:5, title:"BEST RECORDS", subtitle:"BEST RECORDS",
-    x:"550", y:"215", align:"anchor-end",
+    id:5, title:"KEEP TRYING", subtitle:"KEEP TRYING",
+    x:"820", y:"440", align:"anchor-start",
     text: [
-          " "
-    ],
-    update:function(data,domain){
-      d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
-      .attr("r",0)
-      .attr("fill","#157A6E")
-      .attr("stroke","#7FB6AF")
-      .filter(function(d){return d.nom==d.won})
-      .attr("r",function(d){return domain(d.nom)});
-      
-      d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
-      .attr("r",0)
-      .filter(function(d){return d.nom==d.won})
-      .attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}});
-    },
-    exit: function(data,domain){
-    }
-  },
-  {
-    id:6, title:"KEEP TRYING", subtitle:"KEEP TRYING",
-    x:"550", y:"215", align:"anchor-end",
-    text: [
-          " "
+          "Israel might be",
+          "the diCaprio of",
+          "the Foreign",
+          "Language Films",
+          "category. They",
+          "have received 10",
+          "nominations in",
+          "total, but never",
+          "won any."
     ],
     update:function(data,domain){
       d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
@@ -313,32 +362,46 @@ var slideData = [
       
       d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
       .attr("r",0);
+
+      d3.selectAll(".path-israel").transition().duration(2000).attr("stroke-dashoffset",0);
     },
     exit: function(data,domain){
+      d3.selectAll(".path-israel").transition().duration(1000).attr("stroke-dashoffset",200);
     }
   },
   {
-    id:7, title:"KEEP TRYING", subtitle:"KEEP TRYING",
-    x:"550", y:"215", align:"anchor-end",
+    id:6, title:"ASIA POWER", subtitle:"ASIA POWER",
+    x:"1155", y:"255", align:"anchor-start",
     text: [
-          " "
+          "Japan is the only",
+          "non-European",
+          "country on the",
+          "top 5.",
+          " ",
+          "They have won 4",
+          "awards from 15",
+          "nominations, on a",
+          "par with Spain (4",
+          "of 19)."
     ],
     update:function(data,domain){
       d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
       .attr("r",0)
       .attr("fill","#157A6E")
       .attr("stroke","#7FB6AF")
-      .filter(function(d){return d.continent=="South East Asia"})
+      .filter(function(d){return d.won>2})
       .attr("r",function(d){return domain(d.nom)});
       
       d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
-      .attr("r",0);
+      .attr("r",0)
+      .filter(function(d){return d.won>2})
+      .attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}});
     },
     exit: function(data,domain){
     }
   },
   {
-    id:8, title:"EXPLORE", subtitle:"",
+    id:7, title:"EXPLORE", subtitle:"",
     x:"25", y:"480", align:"anchor-end",
     text: [
           ""
@@ -347,7 +410,10 @@ var slideData = [
       d3.select("#maps").select("#cities").selectAll(".cities").transition().duration(2000)
       .attr("fill","#157A6E")
       .attr("stroke","#7FB6AF")
-      .attr("r",function(d){return domain(d.nom)});
+      .attr("r",function(d){return domain(d.nom)})
+      .filter(function(d){return d.country=="Uruguay"})
+      .attr("fill","#EA2B1F")
+      .attr("stroke","#EF645C");;
       
       d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
       .attr("r",function(d){if(d.won>0){return domain(d.won)}else{return 0}}); 
@@ -477,6 +543,23 @@ var VisualizationTitle = React.createClass({
 }
 )
 
+var StatContainer = React.createClass({
+  render: function() {
+    return (
+      <g id="stats-container">
+      <rect id="stats-rect" x="600" y="350" width="110" height="45" opacity="0" fill="white">
+      </rect>
+      <text id="stats-title" x="600" y="350" opacity="0">
+        <tspan id="stats-country" x="600" dy="14">COUNTRY</tspan>
+        <tspan className="stats" x="600" dy="14">Nominated: 0</tspan>
+        <tspan className="stats" x="600" dy="14">Won: 0</tspan>
+      </text>
+      </g>
+    )
+  }
+}
+)
+
 var App = React.createClass({
   getInitialState: function() {
       return {dataset:this.props.dataset, slideData: this.props.slideData[this.props.sliding(0)], slide:this.props.sliding(0)};
@@ -487,6 +570,7 @@ var App = React.createClass({
   },
   componentDidUpdate: function(){
     this.state.slideData.update(this.state.dataset.data,this.state.dataset.domain);
+    
     console.log("newstate: "+this.state.slide);
   },
   componentDidMount: function() {
@@ -521,8 +605,9 @@ var App = React.createClass({
       <svg class="svg-master" width="100%" height="100%" viewBox="0 0 1280 720">
             <SlideContainer counter={this.state.dataset.id} color={this.state.dataset.color}/>
             <TextContainer title={this.state.slideData.title} subtitle={this.state.slideData.subtitle} text={this.state.slideData.text} x={this.state.slideData.x} y={this.state.slideData.y} align={this.state.slideData.align}/>
-            <VisualizationTitle title={["THE ACADEMY AWARDS","BEST FOREIGN FILMS"]}/>
+            <VisualizationTitle title={["THE ACADEMY AWARDS","FOREIGN LANGUAGE FILMS"]}/>
             <ProgressContainer data={this.props.slideData} counter={this.state.slide} max={this.props.slideData.length}/>
+            <StatContainer data={this.props.slideData}/>
       </svg>
     )
   }

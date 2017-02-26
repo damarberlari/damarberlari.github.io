@@ -3,6 +3,8 @@
     >
 <html lang="en">
 <head>
+    <script src='pace.min.js'></script>
+    <link href="pace.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +35,7 @@
         #v-title {
             fill: #F7F7F7;
             font-family: "Lato", Helvetica, Arial, sans-serif;
-            font-size: 26px;
+            font-size: 23px;
             font-weight: 400;
         }
         #section-text {
@@ -47,6 +49,23 @@
             font-family: "Lato", Helvetica, Arial, sans-serif;
             font-size: 16px;
             font-weight: 700;
+        }
+        #stats-container{
+            pointer-events: none;
+        }
+        #stats-country {
+            fill: #100B00;
+            font-family: "Lato", Helvetica, Arial, sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            text-anchor: end;            
+        }
+        .stats {
+            fill: #100B00;
+            font-family: "Open Sans", Helvetica, Arial, sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            text-anchor: end;
         }
         .anchor-start{
             text-anchor: start;
@@ -71,7 +90,7 @@
     </style>
 </head>
 <body>
-    <div id="app"><div id="loading">Loading...</div></div>
+    <div id="app"><div id="loading"></div></div>
     <script src='https://d3js.org/d3.v4.min.js'></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.18.1/babel.min.js"></script>
