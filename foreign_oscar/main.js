@@ -1,3 +1,8 @@
+var ReactDOM = require('react-dom');
+var React = require('react');
+var d3 = require('d3');
+var topojson = require('topojson');
+
 var dataset =
   { content: "Data Visualization", color: "#2F4C7C", 
     data:[
@@ -67,7 +72,7 @@ var dataset =
                         .attr("width",1280)
                         .attr("height",720);
                        
-                        d3.json("https://damarberlari.github.io/D3_Maps_Ramadhan/world-110m2.json", function(error, map) {
+                        d3.json("world-110m2.json", function(error, map) {
                         
                         var topology=map;
                         var   projection = d3.geoMercator()
@@ -154,7 +159,7 @@ var dataset =
                           .text(function(m){return m});
 
                           var bbox=d3.select("#stats-title").node().getBBox();
-                          console.log(bbox);
+                          //console.log(bbox);
 
                           d3.select("#stats-rect")
                           .transition()
@@ -217,8 +222,6 @@ var slideData = [
       
       d3.select("#maps").select("#cities").selectAll(".sub-cities").transition().duration(2000)
       .attr("r",0);
-
-      d3.select("#maps").transition().duration(2000).ease(d3.easeCubicInOut).call(zoom.transform,zoomID);
     },
     exit: function(){
     }
@@ -279,7 +282,7 @@ var slideData = [
     }
   },
   {
-    id:3, title:"ITALY & FRANCE", subtitle:"ITALY & FRANCE",
+    id:3, title:"THE RIVALS", subtitle:"THE RIVALS",
     x:"550", y:"215", align:"anchor-end",
     text: [
           "Italy has won the",
@@ -307,7 +310,7 @@ var slideData = [
     }
   },
   {
-    id:4, title:"DISQUALIFIED", subtitle:"DISQUALIFIED",
+    id:4, title:"THE UNFORTUNATE", subtitle:"THE UNFORTUNATE",
     x:"460", y:"550", align:"anchor-start",
     text: [
           "Uruguay almost",
@@ -339,7 +342,7 @@ var slideData = [
     }
   },
   {
-    id:5, title:"KEEP TRYING", subtitle:"KEEP TRYING",
+    id:5, title:"THE PERSISTENT", subtitle:"THE PERSISTENT",
     x:"820", y:"440", align:"anchor-start",
     text: [
           "Israel might be",
@@ -370,7 +373,7 @@ var slideData = [
     }
   },
   {
-    id:6, title:"ASIA POWER", subtitle:"ASIA POWER",
+    id:6, title:"THE OTHER", subtitle:"THE OTHER",
     x:"1155", y:"255", align:"anchor-start",
     text: [
           "Japan is the only",
@@ -479,8 +482,8 @@ var ProgressContainer = React.createClass({
     return (
       <g id="progress-container">
       {this.props.data.map(function(d){
-            return (<g className="button-progress" opacity="0.2">
-            <rect className="bg-progress" x={(d.id)*1280/length} y="680" width={1280/length} height="40" fill="none">{d.title}</rect>       
+            return (<g key={d.id} className="button-progress" opacity="0.2">
+            <rect className="bg-progress" x={(d.id)*1280/length} y="680" width={1280/length} height="40" fill="none">{d.title}</rect>  
             <text className="text-progress" x={(d.id+1)*1280/length-5} y="710">{d.title}</text>
             </g>)
       },length)}
@@ -505,14 +508,14 @@ var TextContainer = React.createClass({
   },
   render: function() {
     var xPos=this.props.x;
-    console.log(this.props.align)
+    //console.log(this.props.align)
     return (
       <g id="text-container">
         <text id="section-title" x={this.props.x} y={this.props.y-7} className={this.props.align}>{this.props.subtitle}</text>
         <text id="section-text" x={this.props.x} y={this.props.y} className={this.props.align}>
           {
-            this.props.text.map(function(obj){
-                return <tspan x={xPos} dy="16">
+            this.props.text.map(function(obj,index){
+                return <tspan key={index} x={xPos} dy="16">
                   {obj}
                 </tspan>
           })}
@@ -529,13 +532,13 @@ var VisualizationTitle = React.createClass({
   },
   componentDidMount: function() {
     //console.log("progress loaded");
-    console.log(this.props.title)
+    //console.log(this.props.title)
   },
   render: function() {
     return (
       <g id="visualization-title">
       <text id="v-title" x="25" y="405">
-      {this.props.title.map(function(obj){return <tspan x="20" dy="28">{obj}</tspan>})}
+      {this.props.title.map(function(obj,index){return <tspan key={index} x="20" dy="28">{obj}</tspan>})}
       </text>
       </g>
     )
@@ -571,7 +574,7 @@ var App = React.createClass({
   componentDidUpdate: function(){
     this.state.slideData.update(this.state.dataset.data,this.state.dataset.domain);
     
-    console.log("newstate: "+this.state.slide);
+    //console.log("newstate: "+this.state.slide);
   },
   componentDidMount: function() {
     //console.log("app loaded");
@@ -602,7 +605,7 @@ var App = React.createClass({
   },
   render: function() {
     return (
-      <svg class="svg-master" width="100%" height="100%" viewBox="0 0 1280 720">
+      <svg className="svg-master" width="100%" height="100%" viewBox="0 0 1280 720">
             <SlideContainer counter={this.state.dataset.id} color={this.state.dataset.color}/>
             <TextContainer title={this.state.slideData.title} subtitle={this.state.slideData.subtitle} text={this.state.slideData.text} x={this.state.slideData.x} y={this.state.slideData.y} align={this.state.slideData.align}/>
             <VisualizationTitle title={["THE ACADEMY AWARDS","FOREIGN LANGUAGE FILMS"]}/>
