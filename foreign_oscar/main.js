@@ -187,6 +187,7 @@ var dataset =
                           .attr("d","M745 335 L745 435 L810 435")
                           .attr("fill","none")
                           .attr("stroke","#157A6E")
+                          .attr("stroke-opacity",0.7)
                           .attr("stroke-dasharray",200)
                           .attr("stroke-dashoffset",200);
                       });      
