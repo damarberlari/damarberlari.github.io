@@ -508,7 +508,7 @@ var axisTexts = d3.select(el).selectAll(className).selectAll("text")
       .append("tspan")
       .attr("x",function(d,m){return xScale(d.key)})
       .attr("y",h-60)
-      .attr("dy",17)
+      .attr("dy",32)
       .text(function(d,m){return d.name.toUpperCase()})
       .call(d3Chart._wrapText,xScale(1)-xScale(0),2);
       //
