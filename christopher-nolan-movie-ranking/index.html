@@ -58,9 +58,12 @@
     #app {
       display: block;
       width: 100%;
-      margin: 50px 0;
+      float:left;
+      margin: 20px 0;
       -webkit-overflow-scrolling: touch;
+      z-index: 99;
     }
+
 
     .svg-master {
       display: block;
@@ -77,7 +80,7 @@
     .axis-text,
     .movie-legend,
     .y-axis {
-      font-size: 11px;
+      font-size: 12px;
       font-family: 'Roboto', serif;
     }
 
@@ -111,17 +114,42 @@
       color: #404040;
     }
 
+    #storyline{
+      width: 100%;
+      float:right;
+    }
+
+    .resize{
+      font-size: 18px;
+      line-height: 26px;
+    }
+
+    .article{
+      font-family: "Playfair Display", serif;
+      font-weight: 300;
+      font-size: 22px;
+      line-height: 30px;
+      color: #101010;
+      overflow: hidden;
+    }
+
+    .caption-legend{
+      margin:0;
+      padding:0;
+      cursor: pointer;
+      opacity: 0.9
+    }
+
+    .caption-legend:hover{
+      opacity: 1
+    }
+
     .article p {
       width: 100%;
       max-width: 850px;
       margin: 20px auto;
       padding: 0 5%;
       box-sizing: border-box;
-      font-family: "Playfair Display", serif;
-      font-weight: 300;
-      font-size: 22px;
-      line-height: 30px;
-      color: #101010;
     }
 
     p.citation {
@@ -137,6 +165,15 @@
       color: #101010;
     }
 
+    .separator {
+      width: 30%;
+      height: 2px;
+      max-width: 200px;
+      margin: 40px auto 80px;
+      background: #101010;
+    }
+
+
     @media screen and (max-width: 430px) {
       .header {
         font-size: 36px;
@@ -148,7 +185,7 @@
         line-height: 14px;
       }
 
-      .article p {
+      .article p, #storyline {
         font-size: 18px;
         line-height: 26px;
       }
@@ -194,27 +231,35 @@
           desktop).
         </p>
       </div>
-      <div id="app">
-      </div>
+      <div class="separator"></div>
       <div class="article">
-        <p>
-          Some movies have similar ranks across different versions. The Dark Knight, which is my personal favorite, seems to also sits
-          on other people’s top list; its rank never slips below the top three. Its predecessor, Batman Begins, stays comfortably
-          in the middle of the list. Meanwhile, Nolan’s first movie Following never past the bottom three.
+        <div id="app">
+        </div>
+        <div id="storyline">
+        <p id="story-1">
+          Some movies have similar ranks across different versions. <a class="caption-legend">The Dark Knight</a>, which is my personal favorite, seems to also sits
+          on other people’s top list; its rank never slips below the top three. Its predecessor, <a class="caption-legend">Batman Begins</a>, stays comfortably
+          in the middle of the list. Meanwhile, Nolan’s first movie <a class="caption-legend">Following</a> never past the bottom three.
         </p>
-        <p>
-          Other movies, however, are not as consistent as those three. Interstellar and Inception, two movies which involves inter-dimensional
-          travels, jump up and down between the list (pretty sure it is not a correlation, let alone a causation). In addition
-          to this, I also find that people are not always agree with Rotten Tomatoes’ rating. The Prestige, for instance,
+        <p id="story-2">
+          Other movies, however, are not as consistent as those three. <a class="caption-legend">Interstellar</a> and <a class="caption-legend">Inception</a>, two movies which involves inter-dimensional
+          travels, jump up and down between the list (pretty sure it is not a correlation, let alone a causation). 
+        </p>
+        <p>In addition to this, I also find that people are not always agree with Rotten Tomatoes’ rating. <a class="caption-legend">The Prestige</a>, for instance,
           sits between second to forth spot on all the lists while having the second worst Rotten Tomatoes rating. On the
-          other hand, Insomnia sits low on all the lists despite having the third best Rotten Tomatoes rating.
+          other hand, <a class="caption-legend">Insomnia</a> sits low on all the lists despite having the third best Rotten Tomatoes rating.
         </p>
+        </div>
+      </div>
+      <div class="separator"></div>
+      <div class="article">
         <p>
           In conclusion, I think there will always be a personal taste in deciding whether a movie is good or not. Furthermore, going
           through the lists just make me realize that Nolan never made a bad movie before, which makes the job of ordering
           his movies difficult and might be unnecessary. And I’m sure wherever Dunkirk is placed on the list (I plan to watch
           it this weekend), I will not be disappointed.
           <p>
+        
             <p class="citation">
               <b>Source:</b> <br> Bailey, J. (2017, July 20). Flavorwire. <a href="http://flavorwire.com/608312/every-christopher-nolan-movie-ranked-and-updated">Every Christopher Nolan Movie, Ranked (and Updated).</a><br>              Chitwood, A. (2016, December 31). Collider. <a href="http://collider.com/christopher-nolan-movies-ranked-worst-to-best/">Christopher Nolan Films Ranked from Worst to Best.</a><br>              Ebiri, B. (2017, July 19). Vulture. <a href="http://www.vulture.com/article/christopher-nolan-movies-ranked.html">All 10 Christopher Nolan Movies, Ranked</a><br>              Guerrasio, J. (2017, July 18). Business Insider. <a href="http://www.businessinsider.sg/christopher-nolan-movies-ranked-worst-to-best-2017-7/">Every Christopher Nolan movie, ranked from worst to best.</a><br>              Humanick, R. (2017, July 18). Slant. <a href="http://www.slantmagazine.com/house/article/ranking-christopher-nolans-films-from-worst-to-best">Ranking Christopher Nolan’s Films: From Worst to Best.</a><br>              Hunter, R. (2017, July 17). Film School Rejects. <a href="https://filmschoolrejects.com/ranking-films-christopher-nolan/">Ranking the Films of Christopher Nolan.</a><br>              Tiffany, K. (2017, July 20). The Verge. <a href="https://www.theverge.com/tldr/2017/7/20/16005060/rank-christopher-nolan-movies-today">All of the Christopher Nolan movie rankings, ranked.</a><br>              Yaniz, R, Jr. (2017, July 14). The Cheat Sheet. <a href="http://www.cheatsheet.com/entertainment/the-best-and-worst-of-christopher-nolan-his-films-ranked.html">The Best (and Worst) of Christopher Nolan: His Films Ranked</a><br>
 
