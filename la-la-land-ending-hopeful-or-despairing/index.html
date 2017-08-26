@@ -1,0 +1,436 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd"
+    >
+<html lang="en">
+
+<head>
+  <script src='/assets/pace.min.js'></script>
+  <link href="/assets/pace.css" rel="stylesheet">
+  <link rel='shortcut icon' href='/assets/favicon.png' type='image/png' />
+  <link rel='apple-touch-icon' href='apple-touch-icon.png'>
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Merriweather:300,700|Crimson+Text|Abril+Fatface" rel="stylesheet">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="YTj_bechW64dx0UF6UeYwfOYS13Rt8fwM0VND-o0EA0" />
+  <meta property="og:title" content="Is La La Land's Ending Hopeful or Despairing?" />
+  <meta property="og:description" content="Visualizing La La Land's emotional roller coaster using Spotify data"/>
+  <meta property="og:image" content="thumbnail.png" />
+  <title>Is La La Land's Ending Hopeful or Despairing?</title>
+  <style>
+    html,
+    body {
+      /* height: 100%; */
+      padding: 0;
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    }
+
+    a{
+      color: #101010;
+      text-decoration: none;
+      border-bottom: 0.5px dashed ;
+      border-bottom-color: #515151;
+      transition: color 0.5s, border-bottom-color 0.5s;
+    }
+
+    a:hover {
+      color: rgb(128,57,128);
+      border-bottom: 0.5px dashed;
+      border-bottom-color: rgb(128,57,128);
+    }
+
+    #navigation {
+      width: 100%;
+      height: 40px;
+      position: relative;
+      padding-left: 20px;
+      box-sizing: border-box;
+    }
+
+    #main-logo {
+      cursor: pointer;
+      display: block;
+      float: left;
+    }
+
+    #wrapper {
+      display: block;
+      position: relative;
+      width: 100%;
+      /* height:100%; */
+      margin: 10px 0 0;
+    }
+
+    #main {
+      display: block;
+      position: relative;
+      right: 0;
+      width: 100%;
+      /* height: 100%; */
+    }
+
+    .separator {
+      width: 30%;
+      height: 1.1px;
+      max-width: 200px;
+      margin: 60px auto 150px;
+      background: #101010;
+      overflow: hidden;
+    }
+
+    #appcontainer {
+      display: block;
+      width: 100%;
+      /* height: 100%; */
+      background: #301746;
+      margin: 20px auto 0;
+      -webkit-overflow-scrolling: touch;
+      overflow: hidden;
+    }
+
+    #minichart {
+      display: block;
+      width: 100%;
+      max-width: 1000px;
+      /* height: 100%; */
+      margin: 40px auto;
+      -webkit-overflow-scrolling: touch;
+      overflow: hidden;
+    }
+
+    .svg-minichart{
+      background: #180C23;
+    }
+
+    .svg-master text{
+      font-family: "Roboto", serif;
+      font-weight: 300;
+      font-size: 17px;
+      fill: #FFFFFF;
+    }
+
+
+    #appwrapper {
+      display: block;
+      width: 100%;
+      /* height: 100%; */
+    }
+
+    #app {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+      float:left;
+      padding: 0px;
+      box-sizing: border-box;
+      -webkit-overflow-scrolling: touch;
+      z-index: 0;
+    }
+
+    .header {
+      width: 100%;
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 0 20px;
+      box-sizing: border-box;
+      font-family: "Abril Fatface", serif;
+      font-size: 62px;
+      line-height: 62px;
+      color: #212121;
+      overflow: hidden;
+    }
+
+    .subheader {
+      width: 100%;
+      max-width: 580px;
+      margin: 20px auto 20px;
+      padding: 0 20px;
+      box-sizing: border-box;
+      font-family: "Roboto", sans-serif;
+      font-size: 18px;
+      line-height: 29px;
+      font-weight: 300;
+      color: #212121;
+    }
+
+    .author {
+      width: 100%;
+      max-width: 580px;
+      margin: 75px auto 0;
+      padding: 0 20px;
+      box-sizing: border-box;
+      font-family: "Crimson Text", serif;
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 18px;
+      color: #606060;
+    }
+
+
+    #storyline{
+      position: relative;
+      width: 40%;
+      /* height: 100%; */
+      float:right;
+      font-family: "Crimson Text", serif;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 24px;
+      color: #FFFFFF;
+      z-index:1;
+      /* background: rgba(10,10,10,0.8) */
+    }
+
+
+    .story-wrapper{
+      width: 100%;
+      /* height: 100%; */
+      padding: 0;
+      margin: 0;
+      max-width: 280px;
+      padding: 0 0 6% 0;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .story-block{
+      width: 90%;
+      
+      /* height: 100%; */
+      
+      margin: 0 auto;
+      padding: 3% 6% 6%;
+      box-sizing: border-box;
+      overflow: hidden;
+      background: rgba(22,21,44,0.7)
+    }
+
+    img.story-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0 auto 7px;
+      box-sizing: border-box;
+    }
+
+    .track-number {
+      width: 100%;
+      margin: 0 auto 6px;
+      box-sizing: border-box;
+    }
+
+    .track-number p {
+      display: inline-block;
+      padding: 0 4px;
+      margin: 0;
+      font-family: "Merriweather", serif;
+      font-weight: 700;
+      font-size: 11px;
+      line-height: 15px;
+      background: #FFFFFF;
+      color: #101010;
+    }
+
+    p.track-title {
+      width: 100%;
+      margin: 7px auto 10px;
+      box-sizing: border-box;
+      font-family: "Merriweather", serif;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 26px;
+      color: #FFFFFF;
+    }
+
+    p.track-title::after{
+      content: "";
+      display: block;
+      height: 1px;
+      width: 40px;
+      background: #FFFFFF;
+      margin: 6px 0 15px;
+    }
+
+    p.story {
+      width: 100%;
+      margin: 10px auto 0;
+      box-sizing: border-box;
+    }
+
+    .article{
+      font-family: "Crimson Text", serif;
+      font-weight: 300;
+      font-size: 19px;
+      line-height: 27px;
+      color: #212121;
+      clear:both;
+    }
+
+    .caption-legend{
+      margin:0;
+      padding:0;
+      cursor: pointer;
+      opacity: 0.9
+    }
+
+    .caption-legend:hover{
+      opacity: 1
+    }
+
+    .article p {
+      width: 100%;
+      max-width: 580px;
+      margin: 30px auto;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+    .quote{
+      width: 100%;
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 20px 50px;
+      box-sizing: border-box;
+      font-style: italic;
+      font-family: 'Roboto', sans-serif;
+      font-size: 16px;
+      line-height: 24px;
+      color: #515151;
+    }
+
+    p.citation {
+      width: 100%;
+      max-width: 580px;
+      margin: 80px auto;
+      padding: 0 20px;
+      box-sizing: border-box;
+      font-family: "Crimson Text", serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 24px;
+      color: #101010;
+    }
+
+    #footer{
+      width: 100%;
+      height: 120px;
+      margin: 0;
+      background: #301746;
+    }
+
+    @media screen and (max-width: 800px) {
+
+      #app{
+        width: 100% !important;
+      }
+
+      #storyline{
+        width: 40%;
+      }
+
+    }
+
+    @media screen and (max-width: 500px) {
+      .header {
+        font-size: 50px;
+        line-height: 55px;
+      }
+
+
+      .article p{
+        font-size: 20px;
+        line-height: 27px;
+      }
+
+      #app{
+        width: 100% !important;
+      }
+
+      #storyline{
+        width: 45%;
+      }
+
+      p.story{
+        font-size: 13px;
+        line-height: 17px;
+      }
+    }
+
+    @media screen and (max-width: 365px) {
+      .header {
+        font-size: 42px;
+        line-height: 46px;
+      }
+
+      p.track-title {
+      font-size: 16px;
+      line-height: 23px;
+    }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navigation">
+    <svg version="1.1" id="main-logo" x="0px" y="0px" width="45%" height="100%" viewBox="0 0 146 50" preserveAspectRatio="xMinYMid"
+      cursor="pointer">
+      <g>
+        <g>
+          <polygon fill="#2A867B" points="106.114,39 111.462,28.308 116.809,39 		" />
+          <polygon fill="#3F9288" points="111.373,39 120.114,21.52 128.855,39 		" />
+          <polygon fill="#549E95" points="119.959,39 132.48,13.961 145.001,39 		" />
+        </g>
+        <text transform="matrix(1 0 0 1 4.882812e-04 38.4409)" fill="#212121" font-family="Roboto" font-size="18">damarberlari</text>
+      </g>
+    </svg>
+  </div>
+  <div id="wrapper">
+    <div id="main">
+      <div class="header">IS LA LA LAND'S ENDING HOPEFUL OR DESPAIRING?</div>
+      <div class="subheader">Visualizing La La Land's emotional roller coaster using Spotify data</div>
+      <div class="author">Damar Aji Pramudita - August 2017</div>
+      <div class="article">
+        <p>
+          If you think La La Land's ending is despairing, you are not alone. I watched the first half of the movie thinking that it is another too-good-to-be-true kind of movie, until the movie finale slapped me back to reality. It turned out that other people are also having a <a href="https://www.usatoday.com/story/life/movies/2017/02/21/spoilers-la-la-land-dream-sequence-ending-meaning/98164730/">debate over this issue</a>. Some think that it was realistic and inspiring, but others were upset that Mia and Sebastian chose to chase their dreams over romance.
+        </p>
+        <p>
+          Regardless of whatever emotional state you were by the end the movie, you must agree that La La Land has done a good job playing with the audiences' emotion. Furthermore, the ups and downs of Mia and Sebastian's relationship is nicely accompanied by the use of music throughout the movie. It was, afterall, nominated and won the Best Original Score in both the Golden Globe and the Academy Awards.
+        </p>
+        <p>
+          Since the nominees in the Best Original Score category are typically selected by how well the film scores assisting the story of a movie, I now wonder if we can use La La Land's scores to measure the happiness level of its ending. Well, we might be able to, but it surely leads to another question: how can we measure the happiness level of a song?
+        </p>
+        <p>
+          Luckily, Spotify provides a <a href="https://developer.spotify.com/web-api/get-audio-features/">web API</a> that allows you to pull audio features for a track, such as danceability, tempo, or energy. I have interest in one particular feature called valence, which I think might provide an answer to the question. Spotify defines this feature as
+        </p>
+        <div class="quote">
+          "A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry)".
+        </div>
+        <p>
+          While Spotify does not explicitly describe how they come up with such value, <a href="https://insights.spotify.com/us/2013/11/05/musics-emotion-over-time/">they mention</a> that it involves a manual classification by a music expert, followed by extending the classification rule to other songs using machine learning.
+        </p>
+        <p>
+          Following this, I collect the valence rating for <a href="https://open.spotify.com/album/3GU8BzFEAdFSRjc8jZkL3S">songs used in La La Land</a>, then plot each tracks' valence rating in a chronological order, the result of which you can see below. As you scroll down the page, you will observe changes in the emotional valence throughout the movie from  the beginning to the end. I am neither an expert in music nor machine learning, but I think the plotted graph quite representing the fluctuation of my emotional state when watching the movie. How about you? Keep scrolling down to experience it yourself.
+        </p>
+        <p>
+        (WARNING: CONTAIN MAJOR SPOILER)
+        </p>
+      </div>
+      <div class="separator"></div>
+      <div id="appcontainer">
+      </div>
+      <div class="separator"></div>
+      <div class="article">
+        <p>
+          Judging from merely the Spotify valence rating then, we can agree that in overall La La Land is pretty despairing. During Mia and Sebastian time together, only two moments are accompanied by a positive track: when they were discussing Jazz in the club (Herman's Habit) and during the summer, when they are officially together (Summer Montage). After that, things started to go downhill. As the final blow, in the movie final scenes we were briefly flashed a happy life together for Mia and Sebastian only to accept the fact that they are still not being together in the end. 
+        </p>
+        <p>  
+          However, if we look back from the beginning of the movie, La La Land is more about chasing dreams than chasing love. Mia has consistently showed her ambission to make it big in the show business, looking for 'Someone in the Crowd' that could lift her off the ground and take her where she want to go, not someone that she can just live happily ever after with. So while both the final scenes and the accompanying track may depress you (because apparently it goes <a href="https://genius.com/Justin-hurwitz-epilogue-annotated">as intended</a>), you have to admit that the decision allows them to fulfill their dreams and be a better person in the end.
+        </p>
+      </div>
+      <div class="separator"></div>
+  </div>
+  <div id="footer"></div>
+  <script src="bundle.js"></script>
+</body>
+
+</html>
