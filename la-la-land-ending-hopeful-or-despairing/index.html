@@ -8,7 +8,8 @@
   <link href="/assets/pace.css" rel="stylesheet">
   <link rel='shortcut icon' href='/assets/favicon.png' type='image/png' />
   <link rel='apple-touch-icon' href='apple-touch-icon.png'>
-  <link href="https://fonts.googleapis.com/css?family=Roboto|Merriweather:300,700|Crimson+Text|Abril+Fatface" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto|Merriweather:300,700|Crimson+Text|Abril+Fatface" rel="stylesheet">
+  <script src="/assets/smoothscroll.js"></script>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="YTj_bechW64dx0UF6UeYwfOYS13Rt8fwM0VND-o0EA0" />
@@ -19,11 +20,13 @@
   <style>
     html,
     body {
-      /* height: 100%; */
+      height: 100%;
       padding: 0;
       margin: 0;
       -webkit-font-smoothing: antialiased;
       -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+      background: #FDFDFD;
+      scroll-behavior: smooth;
     }
 
     a{
@@ -31,35 +34,130 @@
       text-decoration: none;
       border-bottom: 0.5px dashed ;
       border-bottom-color: #515151;
-      transition: color 0.5s, border-bottom-color 0.5s;
+      transition: color 0.2s, border-bottom-color 0.5s;
     }
 
     a:hover {
-      color: rgb(128,57,128);
+      color: #3F9288;
       border-bottom: 0.5px dashed;
-      border-bottom-color: rgb(128,57,128);
+      border-bottom-color: #3F9288;
     }
 
     #navigation {
       width: 100%;
-      height: 40px;
+      height: 50px;
       position: relative;
-      padding-left: 20px;
+      padding: 0 20px;
       box-sizing: border-box;
+      z-index: 2;
     }
 
-    #main-logo {
-      cursor: pointer;
+    #main-logo{
       display: block;
-      float: left;
+      position: relative;
+      top: 10%;
+    }
+
+    .header-wrapper {
+      width: 100%;
+      height: 100%;
+      min-height: 550px;
+      position: relative;
+      top: -50px;
+      background: #6a1b9a;
+      /* background: linear-gradient(to bottom, rgba(114,54,136,1) 0%, rgba(114,54,136,1) 15%, rgba(128,57,128,1) 100%); */
+    }
+
+    .arrow{
+      position: absolute;
+      bottom:15px;
+      left: 50%;
+      transform: translateY(0) rotate(-45deg);
+      transform-origin: bottom left;
+      border: solid white;
+      border-width: 0 0 2px 2px;
+      display: inline-block;
+      padding: 8px;
+      animation: movearrow 0.5s ease-out infinite alternate;
+      cursor: pointer;
+    }
+
+    @keyframes movearrow {
+    from {transform: translateY(-50%) rotate(-45deg);}
+    to {transform: translateY(0) rotate(-45deg);}
+    }
+
+    .header-container {
+      width: 100%;
+      max-width: 700px;
+      position: absolute;
+      top: 46%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      margin: 0 auto;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .header {
+      font-family: "Lato", serif;
+      font-size: 62px;
+      line-height: 87px;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .subheader {
+      margin: 20px 0;
+      font-family: "Roboto", sans-serif;
+      font-size: 18px;
+      line-height: 29px;
+      font-weight: 300;
+      color: #FFFFFF;
+    }
+
+    .header span {
+      background: #3F9288;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+      padding: 0px 5px;
+      position: relative;
+      border-bottom: 3px solid white;
+    }
+
+    .subheader span {
+      background: none;
+    }
+
+    @keyframes altemp {
+    from {transform: scaleX(0);}
+    to {transform: scaleX(1);}
+    }
+
+    .author {
+      width: 100%;
+      max-width: 700px;
+      padding: 20px;
+      box-sizing: border-box;
+      font-family: "Roboto", serif;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 18px;
+      color: #FFFFFF;
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     #wrapper {
       display: block;
       position: relative;
       width: 100%;
+      top: -50px;
       /* height:100%; */
-      margin: 10px 0 0;
+      scroll-behavior: smooth;
     }
 
     #main {
@@ -67,6 +165,7 @@
       position: relative;
       right: 0;
       width: 100%;
+      padding-top: 30px;
       /* height: 100%; */
     }
 
@@ -74,8 +173,8 @@
       width: 30%;
       height: 1.1px;
       max-width: 200px;
-      margin: 60px auto 150px;
-      background: #101010;
+      margin: 60px auto 100px;
+      background: #212121;
       overflow: hidden;
     }
 
@@ -83,7 +182,7 @@
       display: block;
       width: 100%;
       /* height: 100%; */
-      background: #301746;
+      background: #6a1b9a;
       margin: 20px auto 0;
       -webkit-overflow-scrolling: touch;
       overflow: hidden;
@@ -128,49 +227,38 @@
       z-index: 0;
     }
 
-    .header {
-      width: 100%;
-      max-width: 580px;
-      margin: 0 auto;
-      padding: 0 20px;
-      box-sizing: border-box;
-      font-family: "Abril Fatface", serif;
-      font-size: 62px;
-      line-height: 62px;
-      color: #212121;
-      overflow: hidden;
+    #chart-title-container{
+      width:45%;
+      height: 100%;
+      position: absolute;
+      top:0;
+      left:0;
     }
 
-    .subheader {
-      width: 100%;
-      max-width: 580px;
-      margin: 20px auto 20px;
-      padding: 0 20px;
-      box-sizing: border-box;
-      font-family: "Roboto", sans-serif;
-      font-size: 18px;
-      line-height: 29px;
-      font-weight: 300;
-      color: #212121;
+    .chart-title{
+      width: 80%;
+      font-family: "Lato", serif;
+      font-size: 28px;
+      line-height: 45px;
+      font-weight: 700;
+      color: #FFFFFF;
+      text-align: right;
+      position: absolute;
+      right:0;
     }
 
-    .author {
-      width: 100%;
-      max-width: 580px;
-      margin: 75px auto 0;
-      padding: 0 20px;
-      box-sizing: border-box;
-      font-family: "Crimson Text", serif;
-      font-weight: 300;
-      font-size: 18px;
-      line-height: 18px;
-      color: #606060;
+    .chart-title span {
+      background: #3F9288;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+      padding: 0px 5px;
+      position: relative;
+      border-bottom: 3px solid white;
     }
-
 
     #storyline{
       position: relative;
-      width: 40%;
+      width: 45%;
       /* height: 100%; */
       float:right;
       font-family: "Crimson Text", serif;
@@ -182,13 +270,12 @@
       /* background: rgba(10,10,10,0.8) */
     }
 
-
     .story-wrapper{
       width: 100%;
       /* height: 100%; */
       padding: 0;
       margin: 0;
-      max-width: 280px;
+      max-width: 260px;
       padding: 0 0 6% 0;
       box-sizing: border-box;
       overflow: hidden;
@@ -196,23 +283,48 @@
 
     .story-block{
       width: 90%;
-      
-      /* height: 100%; */
-      
       margin: 0 auto;
       padding: 3% 6% 6%;
       box-sizing: border-box;
       overflow: hidden;
-      background: rgba(22,21,44,0.7)
+      background: rgba(22,21,44,0.7);
+      
     }
 
     img.story-image {
       display: block;
       width: 100%;
       height: auto;
-      margin: 0 auto 7px;
+      margin: 12px auto;
       box-sizing: border-box;
     }
+
+    .img-link, .img-link:hover{
+      display: block;
+      position: relative;
+      color: white;
+      border-bottom: 0;
+      font-family: "Roboto", serif;
+      font-weight: 300;
+      font-size: 9px;
+      line-height: 9px;
+    }
+
+    .img-link::after{
+      content: "Source: giphy";
+      position: absolute;
+      bottom:0;
+      right:0;
+      padding:2px;
+      box-sizing: border-box;
+      background: #212121;
+      opacity: 0.6;
+    }
+
+    .img-link:hover::after{
+      opacity:1;
+    }
+
 
     .track-number {
       width: 100%;
@@ -222,21 +334,21 @@
 
     .track-number p {
       display: inline-block;
-      padding: 0 4px;
+      padding: 1px 4px;
       margin: 0;
-      font-family: "Merriweather", serif;
+      font-family: "Lato", serif;
       font-weight: 700;
       font-size: 11px;
       line-height: 15px;
-      background: #FFFFFF;
-      color: #101010;
+      background: #3F9288;
+      color: #FFF;
     }
 
     p.track-title {
       width: 100%;
-      margin: 7px auto 10px;
+      margin: 6px auto 24px;
       box-sizing: border-box;
-      font-family: "Merriweather", serif;
+      font-family: "Lato", serif;
       font-weight: 700;
       font-size: 18px;
       line-height: 26px;
@@ -249,20 +361,20 @@
       height: 1px;
       width: 40px;
       background: #FFFFFF;
-      margin: 6px 0 15px;
+      margin: 6px 0;
     }
 
     p.story {
       width: 100%;
-      margin: 10px auto 0;
+      margin: 12px auto 18px;
       box-sizing: border-box;
     }
 
     .article{
       font-family: "Crimson Text", serif;
       font-weight: 300;
-      font-size: 19px;
-      line-height: 27px;
+      font-size: 21px;
+      line-height: 29px;
       color: #212121;
       clear:both;
     }
@@ -280,11 +392,12 @@
 
     .article p {
       width: 100%;
-      max-width: 580px;
+      max-width: 600px;
       margin: 30px auto;
       padding: 0 20px;
       box-sizing: border-box;
     }
+
     .quote{
       width: 100%;
       max-width: 580px;
@@ -296,6 +409,7 @@
       font-size: 16px;
       line-height: 24px;
       color: #515151;
+      border-left: 3px solid #3F9288;
     }
 
     p.citation {
@@ -315,7 +429,25 @@
       width: 100%;
       height: 120px;
       margin: 0;
-      background: #301746;
+      background: #6a1b9a;
+    }
+
+    #footer p{
+      width: 100%;
+      max-width: 580px;
+      margin: auto;
+      padding: 0 20px;
+      box-sizing: border-box;
+      font-family: "Lato", serif;
+      font-weight: 300;
+      font-size: 12px;
+      line-height: 24px;
+      text-align: center;
+      color: #FFFFFF;
+      opacity: 0.85;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     @media screen and (max-width: 800px) {
@@ -325,15 +457,15 @@
       }
 
       #storyline{
-        width: 40%;
+        width: 45%;
       }
 
     }
 
     @media screen and (max-width: 500px) {
       .header {
-        font-size: 50px;
-        line-height: 55px;
+        font-size: 48px;
+        line-height: 70px;
       }
 
 
@@ -347,7 +479,7 @@
       }
 
       #storyline{
-        width: 45%;
+        width: 49%;
       }
 
       p.story{
@@ -358,8 +490,8 @@
 
     @media screen and (max-width: 365px) {
       .header {
-        font-size: 42px;
-        line-height: 46px;
+        font-size: 40px;
+        line-height: 60px;
       }
 
       p.track-title {
@@ -372,23 +504,30 @@
 
 <body>
   <div id="navigation">
-    <svg version="1.1" id="main-logo" x="0px" y="0px" width="45%" height="100%" viewBox="0 0 146 50" preserveAspectRatio="xMinYMid"
-      cursor="pointer">
+  <a href="../">
+    <svg version="1.1" id="main-logo" x="0px" y="0px" width="100%" height="90%" viewBox="0 0 146 50" preserveAspectRatio="xMidYMid" cursor="pointer">
       <g>
         <g>
-          <polygon fill="#2A867B" points="106.114,39 111.462,28.308 116.809,39 		" />
-          <polygon fill="#3F9288" points="111.373,39 120.114,21.52 128.855,39 		" />
-          <polygon fill="#549E95" points="119.959,39 132.48,13.961 145.001,39 		" />
+          <polygon fill="#2A867B" points="106.114,39 111.462,28.308 116.809,39 		"/>
+          <polygon fill="#3F9288" points="111.373,39 120.114,21.52 128.855,39 		"/>
+          <polygon fill="#549E95" points="119.959,39 132.48,13.961 145.001,39 		"/>
         </g>
-        <text transform="matrix(1 0 0 1 4.882812e-04 38.4409)" fill="#212121" font-family="Roboto" font-size="18">damarberlari</text>
+        <text transform="matrix(1 0 0 1 4.882812e-04 38.4409)" fill="#FFFFFF" font-family="Lato" font-size="19">datanibbl.es</text>
       </g>
     </svg>
+  </a>
+  </div>
+  <div class="header-wrapper">
+      <!-- <iframe src="https://www.youtube.com/embed/0pdqf4P9MB8?rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1&amp;loop=1" frameborder="0" allowfullscreen></iframe> -->
+      <div class="header-container">
+        <div class="header"><span>IS LA LA LAND'S ENDING HOPEFUL OR DESPAIRING?</span></div>
+        <div class="subheader"><span>Visualizing La La Land's emotional roller coaster using Spotify data</span></div>
+      </div>
+      <div class="author">by Damar Aji Pramudita - August 2017</div>
+      <div class="arrow"></div>
   </div>
   <div id="wrapper">
     <div id="main">
-      <div class="header">IS LA LA LAND'S ENDING HOPEFUL OR DESPAIRING?</div>
-      <div class="subheader">Visualizing La La Land's emotional roller coaster using Spotify data</div>
-      <div class="author">Damar Aji Pramudita - August 2017</div>
       <div class="article">
         <p>
           If you think La La Land's ending is despairing, you are not alone. I watched the first half of the movie thinking that it is another too-good-to-be-true kind of movie, until the movie finale slapped me back to reality. It turned out that other people are also having a <a href="https://www.usatoday.com/story/life/movies/2017/02/21/spoilers-la-la-land-dream-sequence-ending-meaning/98164730/">debate over this issue</a>. Some think that it was realistic and inspiring, but others were upset that Mia and Sebastian chose to chase their dreams over romance.
@@ -397,7 +536,7 @@
           Regardless of whatever emotional state you were by the end the movie, you must agree that La La Land has done a good job playing with the audiences' emotion. Furthermore, the ups and downs of Mia and Sebastian's relationship is nicely accompanied by the use of music throughout the movie. It was, afterall, nominated and won the Best Original Score in both the Golden Globe and the Academy Awards.
         </p>
         <p>
-          Since the nominees in the Best Original Score category are typically selected by how well the film scores assisting the story of a movie, I now wonder if we can use La La Land's scores to measure the happiness level of its ending. Well, we might be able to, but it surely leads to another question: how can we measure the happiness level of a song?
+          Since the nominees in the Best Original Score category are typically selected by how well the film scores assisting the story of a movie, I now wonder if we can use La La Land's scores to measure the happiness level of its ending. Well, we might be able to, but now we have another question: how can we measure the happiness level of a song?
         </p>
         <p>
           Luckily, Spotify provides a <a href="https://developer.spotify.com/web-api/get-audio-features/">web API</a> that allows you to pull audio features for a track, such as danceability, tempo, or energy. I have interest in one particular feature called valence, which I think might provide an answer to the question. Spotify defines this feature as
@@ -421,16 +560,25 @@
       <div class="separator"></div>
       <div class="article">
         <p>
-          Judging from merely the Spotify valence rating then, we can agree that in overall La La Land is pretty despairing. During Mia and Sebastian time together, only two moments are accompanied by a positive track: when they were discussing Jazz in the club (Herman's Habit) and during the summer, when they are officially together (Summer Montage). After that, things started to go downhill. As the final blow, in the movie final scenes we were briefly flashed a happy life together for Mia and Sebastian only to accept the fact that they are still not being together in the end. 
+          Judging from merely the Spotify valence rating then, we can agree that La La Land's ending is pretty despairing. In fact, almost all scenes were accompanied by despairing songs. During Mia and Sebastian's time together, only two moments were accompanied by positive tracks: when they were discussing Jazz in the club (Herman's Habit) and during the summer, when they are officially together (Summer Montage). After that, things started to go downhill until the ending.
         </p>
         <p>  
-          However, if we look back from the beginning of the movie, La La Land is more about chasing dreams than chasing love. Mia has consistently showed her ambission to make it big in the show business, looking for 'Someone in the Crowd' that could lift her off the ground and take her where she want to go, not someone that she can just live happily ever after with. So while both the final scenes and the accompanying track may depress you (because apparently it goes <a href="https://genius.com/Justin-hurwitz-epilogue-annotated">as intended</a>), you have to admit that the decision allows them to fulfill their dreams and be a better person in the end.
+          However, if we look back from the beginning of the movie, La La Land is more about chasing dreams than chasing love. Mia has consistently showed her ambission to make it big in the show business, looking for 'Someone in the Crowd' that could lift her off the ground and take her where she want to go, not someone that she can just live happily ever after with. So while both the final scenes and the accompanying track may depress you (because apparently it goes <a href="https://genius.com/Justin-hurwitz-epilogue-annotated">as intended</a>), you should be more hopeful knowing that the decision allows them to fulfill their dreams in the end.
+        </p>
+        <p>  
+          
         </p>
       </div>
       <div class="separator"></div>
   </div>
-  <div id="footer"></div>
+  <div id="footer"><p>datanibbl.es - 2017</p></div>
   <script src="bundle.js"></script>
+  <script>
+    document.querySelector('.arrow').addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: window.innerHeight, left: 0, behavior: 'smooth' })
+    });
+  </script>
 </body>
 
 </html>
